@@ -11,6 +11,7 @@
 // - Optional full-text search via Web Worker + prebuilt index (build/_fulltext.json)
 // - Responsive UI with mobile sidebar; overlay dims content only; hamburger last in <body>
 // - Robust stacking (sidebar z=1000 > overlay z=900 > content z=0; hamburger z=1100)
+// - NEW: per-page CSS override so images never overlap tables (fix for pages like 000000000006393.html)
 
 import fs from "fs/promises";
 import path from "path";
@@ -55,6 +56,21 @@ const EXCLUDE_FROM_NAV = [
 const SUSPICIOUS_SCRIPT = /activex|hhctrl|classid|createobject|ActiveXObject|mshta/i;
 const EVENT_ATTR_RE = /^on[a-z]+$/i;
 
+// --- CSS override injected into every processed page to fix image/table overlap ---
+const FIX_OVERLAY_CSS = `
+/* Honda legacy manual layout fixes (injected) */
+* { box-sizing: border-box; }
+img, svg, canvas, video { max-width: 100% !important; height: auto !important; }
+img {
+  display: block;
+  position: static !important;
+  float: none !important;
+  z-index: auto !important;
+}
+table { border-collapse: collapse; max-width: 100%; }
+td, th { vertical-align: top; }
+`;
+
 // ------------- utils -------------
 function toPosix(p){ return p.split(path.sep).join("/"); }
 function isHtml(p){ return HTML_EXTS.has(path.extname(p).toLowerCase()); }
@@ -92,6 +108,10 @@ function cleanBasicHtml(html, { keepScripts=false } = {}) {
 
   if ($("meta[charset]").length === 0) $("head").prepend('<meta charset="utf-8">');
   if ($("title").length === 0) $("head").append("<title></title>");
+
+  // Inject our layout fix CSS (after existing tags so it wins)
+  $("head").append(`<style>${FIX_OVERLAY_CSS}</style>`);
+
   return $;
 }
 
@@ -266,9 +286,10 @@ async function main() {
   .grid { display:grid; grid-template-columns: 360px 1fr; min-height: 100vh; }
   .pane { padding: 12px 16px; border-right:1px solid #eceff1; }
   .pane:last-child { border-right:0; }
-  img { max-width: 100%; height: auto; }
-  table { border-collapse: collapse; }
-  td, th { border: 1px solid #ddd; padding: 4px 6px; }
+  img, svg, canvas, video { max-width: 100% !important; height: auto !important; }
+  img { display:block; position:static !important; float:none !important; z-index:auto !important; }
+  table { border-collapse: collapse; max-width: 100%; }
+  td, th { border: 1px solid #ddd; padding: 4px 6px; vertical-align: top; }
   a { color: #0b63ce; text-decoration: none; }
   a:hover { text-decoration: underline; }
 </style>
@@ -458,7 +479,7 @@ async function writeIndexFlat(outDir, navItems) {
     `<li class="page${p.dup ? " dup" : ""}"><a href="#${encodeURIComponent(p.path)}" data-path="${p.path}" data-dup="${p.dup ? "1" : "0"}">${p.title}</a></li>`
   ).join("\n");
 
-  // ---- IMPORTANT: worker code as String.raw to avoid Node evaluating it at build time ----
+  // Worker code as String.raw so Node doesn't evaluate it at build time
   const WORKER_CODE = String.raw`
     let data = null;
     function norm(s){return (s||"").toLowerCase();}
