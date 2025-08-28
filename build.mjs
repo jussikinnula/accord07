@@ -3,9 +3,14 @@
 //
 // Usage: node build.mjs [srcDir=manual] [outDir=build]
 //
-// Copies legacy Honda manual, cleans HTML, builds flat nav from en/html/,
-// filters empty titles, marks duplicates, fast search, responsive UI.
-// Robust stacking: sidebar (z=1000) > overlay (z=900) > content (z=0); hamburger (z=1100).
+// Features:
+// - Copies assets, cleans legacy HTML (IE/ActiveX), merges frames
+// - Flat nav from en/html/, filters empty titles
+// - Duplicate detection (SimHash + Jaccard), UI can hide/dim duplicates
+// - Fast title search (150ms debounce + rAF chunking)
+// - NEW: Full-text search (optional) via Web Worker + prebuilt index (build/_fulltext.json)
+// - Responsive UI with mobile sidebar + overlay; hamburger last-in-body
+// - Robust stacking (sidebar above overlay); overlay doesn’t cover sidebar
 
 import fs from "fs/promises";
 import path from "path";
@@ -18,11 +23,19 @@ const __dirname = path.dirname(__filename);
 const DEFAULT_SRC = "manual";
 const DEFAULT_OUT = "build";
 
+// Duplicate thresholds
 const HAMMING_MAX = 3;
 const JACCARD_MIN = 0.98;
 
+// Nav scope
 const NAV_ROOT_PREFIX = "en/html/";
 
+// Fulltext index settings
+const FT_INDEX_FILE = "_fulltext.json";
+const FT_SNIPPET_CHARS = 400;     // snippet length per page
+const FT_MAX_TOKENS_PER_PAGE = 4000; // cap tokens/page to keep JSON small
+
+// File-type buckets
 const HTML_EXTS = new Set([".html", ".htm"]);
 const TEXT_EXTS = new Set([".css", ".js", ".json", ".txt", ".xml", ".csv"]);
 const BINARY_EXTS = new Set([
@@ -32,6 +45,7 @@ const BINARY_EXTS = new Set([
   ".pdf",".zip",".rar",".7z",".db",".exe",".inf"
 ]);
 
+// Exclusions
 const EXCLUDE_FROM_NAV = [
   /^_COM\//i,
   /\/ESMBLANK\.HTML$/i,
@@ -41,6 +55,7 @@ const EXCLUDE_FROM_NAV = [
 const SUSPICIOUS_SCRIPT = /activex|hhctrl|classid|createobject|ActiveXObject|mshta/i;
 const EVENT_ATTR_RE = /^on[a-z]+$/i;
 
+// ------------- utils -------------
 function toPosix(p){ return p.split(path.sep).join("/"); }
 function isHtml(p){ return HTML_EXTS.has(path.extname(p).toLowerCase()); }
 function isBinary(p){ return BINARY_EXTS.has(path.extname(p).toLowerCase()); }
@@ -80,8 +95,10 @@ function cleanBasicHtml(html, { keepScripts=false } = {}) {
   return $;
 }
 
+// Strictly read <title>
 function headTitleStrict($) { return ($("title").first().text() || ""); }
 
+// Normalize titles
 function normalizeTitle(str) {
   return (str || "")
     .replace(/[\u00A0\u1680\u2000-\u200A\u202F\u205F\u3000]/g, " ")
@@ -89,12 +106,12 @@ function normalizeTitle(str) {
     .replace(/\s+/g, " ")
     .trim();
 }
-
 function isMeaningfulTitle(str) {
   const t = normalizeTitle(str);
   return t.length > 0 && /[\p{L}\p{N}]/u.test(t);
 }
 
+// Display title to write back
 function displayTitle($, fallback="") {
   const raw = ($("title").first().text() || "").trim();
   if (raw) return raw;
@@ -132,6 +149,7 @@ function* candidateTargets(id) {
   yield `${id}_PR2.html`;
 }
 
+// Text normalization for compare/index
 function normalizeTextForCompare($) {
   $("script, style, noscript").remove();
   const txt = ($("body").text() || "")
@@ -144,6 +162,7 @@ function normalizeTextForCompare($) {
 }
 function tokenize(text) { return text.split(" ").filter(w => w.length > 2); }
 
+// Simhash helpers
 function fnv1a64(str) {
   let hash = 0xcbf29ce484222325n;
   const prime = 0x100000001b3n;
@@ -153,7 +172,6 @@ function fnv1a64(str) {
   }
   return hash;
 }
-
 function simhash64(tokens) {
   const bits = 64;
   const v = new Array(bits).fill(0);
@@ -181,6 +199,7 @@ function jaccard(aSet, bSet) {
   return union === 0 ? 1 : inter / union;
 }
 
+// ------------- main -------------
 async function main() {
   const srcDir = path.resolve(process.argv[2] || DEFAULT_SRC);
   const outDir = path.resolve(process.argv[3] || DEFAULT_OUT);
@@ -203,6 +222,7 @@ async function main() {
   }
 
   const candidates = [];
+  const fulltext = []; // {p,t,w,s}
 
   // Process HTML
   for (const rel of [...allPaths].filter(isHtml)) {
@@ -267,10 +287,20 @@ async function main() {
           const norm = normalizeTextForCompare($$);
           const toks = tokenize(norm);
           candidates.push({ path: rel, strictTitle, dispTitle, textLen: norm.length, simhash: simhash64(toks) });
+
+          // Fulltext entry (from both panes text)
+          const ftTokens = Array.from(new Set(toks)).slice(0, FT_MAX_TOKENS_PER_PAGE);
+          fulltext.push({
+            p: rel,
+            t: dispTitle,
+            w: ftTokens.join(" "),
+            s: norm.slice(0, FT_SNIPPET_CHARS)
+          });
         }
         continue;
       }
 
+      // Multi-frame fallback
       const strictTitle = normalizeTitle(headTitleStrict($));
       const dispTitle = displayTitle($, path.basename(rel));
       const list = frames.map(f => {
@@ -293,12 +323,16 @@ async function main() {
         const norm = normalizeTextForCompare($$);
         const toks = tokenize(norm);
         candidates.push({ path: rel, strictTitle, dispTitle, textLen: norm.length, simhash: simhash64(toks) });
+        const ftTokens = Array.from(new Set(toks)).slice(0, FT_MAX_TOKENS_PER_PAGE);
+        fulltext.push({ p: rel, t: dispTitle, w: ftTokens.join(" "), s: norm.slice(0, FT_SNIPPET_CHARS) });
       }
       continue;
     }
 
+    // Normal HTML
     const doc$ = cleanBasicHtml(raw, { keepScripts:true });
 
+    // Convert javascript:parent.* links
     doc$("a[href^='javascript:parent.']").each((_, el)=>{
       const js = doc$(el).attr("href") || "";
       let replaced = false;
@@ -330,13 +364,25 @@ async function main() {
 
     const strictTitle = normalizeTitle(headTitleStrict(doc$));
     const dispTitle = displayTitle(doc$, path.basename(rel));
+
+    // Write cleaned page
     doc$("title").first().text(dispTitle);
     await fs.writeFile(outAbs, doc$.html() ?? "", "utf8");
 
-    if (includeInFlatNav(rel, strictTitle)) {
+    // Add to nav + fulltext
+    const include = includeInFlatNav(rel, strictTitle);
+    if (include) {
       const norm = normalizeTextForCompare(doc$);
       const toks = tokenize(norm);
       candidates.push({ path: rel, strictTitle, dispTitle, textLen: norm.length, simhash: simhash64(toks) });
+
+      const ftTokens = Array.from(new Set(toks)).slice(0, FT_MAX_TOKENS_PER_PAGE);
+      fulltext.push({
+        p: rel,
+        t: dispTitle,
+        w: ftTokens.join(" "),
+        s: norm.slice(0, FT_SNIPPET_CHARS)
+      });
     }
   }
 
@@ -407,10 +453,14 @@ async function main() {
     "utf8"
   );
 
+  // Write fulltext index (only included pages)
+  await fs.writeFile(path.join(outDir, FT_INDEX_FILE), JSON.stringify(fulltext), "utf8");
+
   const filteredNavItems = navItems.filter(it => isMeaningfulTitle(it.title));
 
   await writeIndexFlat(outDir, filteredNavItems);
   console.log(`✅ Done. Open: ${path.join(outDir, "index.html")}`);
+  console.log(`🔎 Full-text index: ${path.join(outDir, FT_INDEX_FILE)} (${fulltext.length} entries)`);
   console.log(`ℹ️  Dedupe report: ${path.join(outDir, "_dedupe-report.json")}`);
 }
 
@@ -441,8 +491,8 @@ async function writeIndexFlat(outDir, navItems) {
     header { padding:12px; border-bottom:1px solid var(--muted); display:flex; align-items:center; gap:10px; }
     .brand { font-weight:600; flex:1; }
 
-    .toolbar { display:flex; align-items:center; gap:12px; padding:10px 12px 0; }
-    .toolbar label { display:flex; align-items:center; gap:8px; font-size:13px; color:var(--sub); user-select:none; cursor:pointer; }
+    .toolbar { display:flex; align-items:center; gap:12px; padding:10px 12px 0; flex-wrap: wrap; }
+    .toolbar label { display:flex; align-items:center; gap:8px; font-size:13px; color:var(--sub); user-select:none; cursor:pointer; white-space:nowrap; }
     .search { padding:10px 12px 12px; }
     .search input { width:100%; padding:10px 12px; border-radius:10px; border:1px solid var(--muted); background:#0e1117; color:var(--text); }
     nav { padding: 0 8px 16px; }
@@ -451,10 +501,12 @@ async function writeIndexFlat(outDir, navItems) {
     nav li.page a:hover { background: var(--muted); }
     nav li.page.dup a { color: var(--sub); background: var(--muted-2); }
     nav .count { color: var(--sub); font-size: 12px; padding: 0 12px 8px; }
+    .snippet { color: var(--sub); font-size: 12px; padding: 0 8px 8px; margin-top: -4px; white-space: normal; }
+    .badge { font-size: 11px; padding: 1px 6px; border:1px solid var(--muted); border-radius: 999px; color: var(--sub); margin-left: 6px; }
+
     iframe { width:100%; height:100%; border:0; background:#fff; }
     .hint { color: var(--sub); padding: 8px 12px; font-size:12px; }
 
-    /* Overlay BELOW sidebar, ABOVE content */
     .overlay {
       position: fixed;
       top: 0; right: 0; bottom: 0; left: 0;
@@ -466,28 +518,27 @@ async function writeIndexFlat(outDir, navItems) {
     body.sidebar-open .overlay {
       background: rgba(0,0,0,0.4);
       pointer-events: auto;
-      left: var(--sidebarW); /* keep sidebar clickable */
+      left: var(--sidebarW);
     }
 
-    /* Hamburger ABOVE everything */
     .hamburger {
       position: fixed;
       top: calc(env(safe-area-inset-top, 0px) + 10px);
       left: calc(env(safe-area-inset-left, 0px) + 10px);
       background: transparent;
       border: 0;
-      font-size: 34px;  /* +30% */
+      font-size: 34px;
       line-height: 1;
       width: 52px; height: 52px;
       cursor: pointer;
-      color: #000;      /* closed = black */
+      color: #000;
       -webkit-text-stroke: 2px rgba(255,255,255,0.95);
       text-shadow: 0 0 4px rgba(255,255,255,0.95), 0 0 8px rgba(255,255,255,0.75);
-      display: none;    /* desktop hidden */
+      display: none;
       z-index: 1100;
     }
     body.sidebar-open .hamburger {
-      color: #fff;      /* open = white */
+      color: #fff;
       -webkit-text-stroke: 2px rgba(0,0,0,0.8);
       text-shadow: 0 0 4px rgba(0,0,0,0.8), 0 0 8px rgba(0,0,0,0.6);
     }
@@ -521,10 +572,14 @@ async function writeIndexFlat(outDir, navItems) {
           <input type="checkbox" id="toggleHideDup" checked>
           Hide duplicates
         </label>
+        <label>
+          <input type="checkbox" id="toggleContent">
+          Search in content
+        </label>
       </div>
 
       <div class="search">
-        <input id="search" placeholder="Search titles (⌘/Ctrl+K)" autocomplete="off">
+        <input id="search" placeholder="Search titles or content (⌘/Ctrl+K)" autocomplete="off">
       </div>
 
       <nav id="nav">
@@ -541,10 +596,7 @@ ${listHtml}
     </main>
   </div>
 
-  <!-- Overlay BELOW sidebar -->
   <div class="overlay" id="overlay"></div>
-
-  <!-- Hamburger LAST and ABOVE all -->
   <button id="hamburger" class="hamburger" aria-label="Toggle navigation" aria-controls="sidebar" aria-expanded="false">☰</button>
 
   <script type="module">
@@ -556,6 +608,7 @@ ${listHtml}
     const resume = document.getElementById('resume');
     const count = document.getElementById('count');
     const toggleHideDup = document.getElementById('toggleHideDup');
+    const toggleContent = document.getElementById('toggleContent');
 
     const hamburger = document.getElementById('hamburger');
     const overlay = document.getElementById('overlay');
@@ -564,19 +617,21 @@ ${listHtml}
       document.body.classList.toggle('sidebar-open', open);
       hamburger?.setAttribute('aria-expanded', open ? 'true' : 'false');
     }
-
     hamburger?.addEventListener('click', (e) => {
       e.stopPropagation();
       const open = !document.body.classList.contains('sidebar-open');
       setSidebar(open);
     });
-
     overlay?.addEventListener('click', () => setSidebar(false));
     window.addEventListener('keydown', (e) => { if (e.key === 'Escape') setSidebar(false); });
 
-    const prefKey = 'accord:hideDup';
-    const savedPref = localStorage.getItem(prefKey);
-    toggleHideDup.checked = savedPref !== null ? (savedPref === '1') : true;
+    // Prefs
+    const prefDupKey = 'accord:hideDup';
+    const prefContentKey = 'accord:contentSearch';
+    const savedDup = localStorage.getItem(prefDupKey);
+    toggleHideDup.checked = savedDup !== null ? (savedDup === '1') : true;
+    const savedContent = localStorage.getItem(prefContentKey);
+    toggleContent.checked = savedContent === '1';
 
     count.textContent = navItems.length + " pages";
 
@@ -612,7 +667,7 @@ ${listHtml}
       openPath(last || (navItems[0] && navItems[0].path));
     });
 
-    // Fast filtering
+    // ----- Title filtering (fast) -----
     const items = (() => {
       const arr = [];
       const anchors = listEl.querySelectorAll('li.page a');
@@ -621,7 +676,8 @@ ${listHtml}
         arr.push({
           title: (a.textContent || '').toLowerCase(),
           el: a.parentElement,
-          isDup: a.getAttribute('data-dup') === '1'
+          isDup: a.getAttribute('data-dup') === '1',
+          path: a.getAttribute('data-path')
         });
       }
       return arr;
@@ -630,11 +686,8 @@ ${listHtml}
     let searchTimer = null;
     let searchSeq = 0;
 
-    function applyFiltersNow() {
+    function filterTitlesNow(q, hideDup) {
       const mySeq = ++searchSeq;
-      const q = (search.value || '').trim().toLowerCase();
-      const hideDup = !!toggleHideDup.checked;
-
       let i = 0;
       const CHUNK = 1500;
       function step() {
@@ -645,6 +698,8 @@ ${listHtml}
           const match = q ? title.includes(q) : true;
           const visible = match && (!hideDup || !isDup);
           el.style.display = visible ? '' : 'none';
+          // remove old snippets if any
+          const sn = el.querySelector('.snippet'); if (sn) sn.remove();
         }
         if (i < items.length) requestAnimationFrame(step);
       }
@@ -653,12 +708,107 @@ ${listHtml}
 
     function requestFilter() {
       if (searchTimer) clearTimeout(searchTimer);
-      searchTimer = setTimeout(applyFiltersNow, 150);
+      searchTimer = setTimeout(applySearch, 150);
+    }
+
+    // ----- Full-text (content) search via Web Worker -----
+    let ftWorker = null;
+    let ftLoaded = false;
+
+    async function ensureWorker() {
+      if (ftWorker) return;
+      const workerCode = `
+        let data = null;
+        function norm(s){return (s||"").toLowerCase();}
+        self.onmessage = async (e)=> {
+          const {type, payload} = e.data || {};
+          if (type === 'load') {
+            const url = payload.url;
+            const res = await fetch(url);
+            data = await res.json(); // [{p,t,w,s}]
+            self.postMessage({type:'loaded', count: data.length});
+          } else if (type === 'query') {
+            if (!data) { self.postMessage({type:'results', items: []}); return; }
+            const q = norm(payload.q || '').trim();
+            if (q.length < 2) { self.postMessage({type:'results', items: []}); return; }
+            const terms = q.split(/\\s+/).filter(x=>x.length>0);
+            const items = [];
+            for (let i=0;i<data.length;i++){
+              const it = data[i];
+              let ok = true, score=0;
+              for (const t of terms){
+                if (it.w.indexOf(t) === -1) { ok=false; break; }
+                else score++;
+              }
+              if (ok) items.push({p:it.p, t:it.t, s:it.s, score});
+            }
+            items.sort((a,b)=> b.score - a.score || a.t.localeCompare(b.t));
+            self.postMessage({type:'results', items: items.slice(0, 250)});
+          }
+        };
+      `;
+      const blob = new Blob([workerCode], { type: 'application/javascript' });
+      ftWorker = new Worker(URL.createObjectURL(blob));
+      ftWorker.onmessage = (e) => {
+        const {type, items} = e.data || {};
+        if (type === 'loaded') { ftLoaded = true; applySearch(); }
+        else if (type === 'results') { renderContentResults(items); }
+      };
+      ftWorker.postMessage({ type:'load', payload: { url: '${FT_INDEX_FILE}' }});
+    }
+
+    function renderContentResults(results) {
+      // First hide everything, then show only matched ones (respect hideDup by filtering DOM after)
+      const hideDup = !!toggleHideDup.checked;
+      const visiblePaths = new Set(results.map(r=>r.p));
+      items.forEach(({el, isDup, path})=>{
+        const vis = visiblePaths.has(path) && (!hideDup || !isDup);
+        el.style.display = vis ? '' : 'none';
+        // remove any old snippet
+        const old = el.querySelector('.snippet'); if (old) old.remove();
+        if (vis) {
+          const r = results.find(x=>x.p===path);
+          if (r && r.s) {
+            const sn = document.createElement('div');
+            sn.className = 'snippet';
+            sn.textContent = r.s + '…';
+            el.appendChild(sn);
+            // badge
+            const a = el.querySelector('a');
+            if (a && !a.querySelector('.badge')) {
+              const b = document.createElement('span');
+              b.className = 'badge';
+              b.textContent = 'content';
+              a.appendChild(b);
+            }
+          }
+        }
+      });
+    }
+
+    async function applySearch() {
+      const q = (search.value || '').trim().toLowerCase();
+      const hideDup = !!toggleHideDup.checked;
+      const useContent = !!toggleContent.checked;
+
+      // Title-only for short queries or when content search off
+      if (!useContent || q.length < 2) {
+        filterTitlesNow(q, hideDup);
+        return;
+      }
+      // Content search
+      await ensureWorker();
+      if (!ftLoaded) return; // will apply after load
+      ftWorker.postMessage({ type: 'query', payload: { q } });
     }
 
     search.addEventListener('input', requestFilter);
     toggleHideDup.addEventListener('change', () => {
-      localStorage.setItem(prefKey, toggleHideDup.checked ? '1' : '0');
+      localStorage.setItem(prefDupKey, toggleHideDup.checked ? '1' : '0');
+      requestFilter();
+    });
+    toggleContent.addEventListener('change', () => {
+      localStorage.setItem(prefContentKey, toggleContent.checked ? '1' : '0');
       requestFilter();
     });
 
@@ -668,7 +818,8 @@ ${listHtml}
       }
     });
 
-    applyFiltersNow();
+    // Initial
+    filterTitlesNow('', !!toggleHideDup.checked);
     handleHash();
     window.addEventListener('hashchange', handleHash);
   </script>
