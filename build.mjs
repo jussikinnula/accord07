@@ -10,8 +10,8 @@
 // - Duplicate detection by strict title (SimHash + Jaccard), UI can hide/dim duplicates
 // - Writes: outDir/index.html and outDir/_dedupe-report.json
 // - Fast search (150ms debounce + rAF chunking)
-// - Responsive UI: on small screens, sidebar slides in; hamburger is FIXED at top-left
-//   (outside the transformed sidebar to avoid containing-block issues)
+// - Responsive UI: on small screens, sidebar slides in; hamburger is fixed at top-left
+//   and is placed INSIDE the overlay layer (no z-index battles)
 
 import fs from "fs/promises";
 import path from "path";
@@ -96,9 +96,7 @@ function cleanBasicHtml(html, { keepScripts=false } = {}) {
 }
 
 // Strictly read the <title> text only (no fallbacks)
-function headTitleStrict($) {
-  return ( $("title").first().text() || "" );
-}
+function headTitleStrict($) { return ($("title").first().text() || ""); }
 
 // Normalize "empty-looking" titles: remove NBSP, zero-width, other format chars, collapse spaces
 function normalizeTitle(str) {
@@ -166,9 +164,7 @@ function normalizeTextForCompare($) {
   return txt;
 }
 
-function tokenize(text) {
-  return text.split(" ").filter(w => w.length > 2);
-}
+function tokenize(text) { return text.split(" ").filter(w => w.length > 2); }
 
 function fnv1a64(str) {
   let hash = 0xcbf29ce484222325n;
@@ -191,15 +187,12 @@ function simhash64(tokens) {
     }
   }
   let sig = 0n;
-  for (let i = 0; i < bits; i++) {
-    if (v[i] > 0) sig |= (1n << BigInt(i));
-  }
+  for (let i = 0; i < bits; i++) if (v[i] > 0) sig |= (1n << BigInt(i));
   return sig;
 }
 
 function hamming64(a, b) {
-  let x = a ^ b;
-  let count = 0;
+  let x = a ^ b, count = 0;
   while (x) { x &= (x - 1n); count++; }
   return count;
 }
@@ -207,10 +200,7 @@ function hamming64(a, b) {
 function jaccard(aSet, bSet) {
   let inter = 0;
   const seen = new Set(aSet);
-  for (const x of bSet) {
-    if (seen.has(x)) inter++;
-    seen.add(x);
-  }
+  for (const x of bSet) { if (seen.has(x)) inter++; seen.add(x); }
   const union = seen.size;
   return union === 0 ? 1 : inter / union;
 }
@@ -318,7 +308,7 @@ async function main() {
         continue;
       }
 
-      // 3+ frames → simple fallback page
+      // 3+ frames → fallback page
       const strictTitle = normalizeTitle(headTitleStrict($));
       const dispTitle = displayTitle($, path.basename(rel));
       const list = frames.map(f => {
@@ -500,32 +490,13 @@ async function writeIndexFlat(outDir, navItems) {
     body { margin:0; background:var(--bg); color:var(--text); font: 14px/1.5 system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; }
 
     .app { display:grid; grid-template-columns: 360px 1fr; height:100vh; overflow:hidden; }
-    aside { border-right:1px solid var(--muted); background:var(--panel); height:100vh; overflow:auto; position:relative; z-index:950; }
-    main { height:100vh; position:relative; z-index:1; }
+    aside { border-right:1px solid var(--muted); background:var(--panel); height:100vh; overflow:auto; position:relative; }
+    main { height:100vh; position:relative; }
 
     header { padding:12px; border-bottom:1px solid var(--muted); display:flex; align-items:center; gap:10px; }
     .brand { font-weight:600; flex:1; }
-    /* Hamburger is now OUTSIDE the sidebar to avoid transform containing-block issues */
-    .hamburger {
-      display:none;           /* hidden on desktop */
-      background:transparent; /* no background */
-      border:0;
-      font-size:26px;
-      line-height:1;
-      width:40px;
-      height:40px;
-      cursor:pointer;
-      color:#000;             /* closed = black */
-      -webkit-text-stroke: 1px rgba(255,255,255,0.8); /* contrast without background */
-      text-shadow: 0 0 2px rgba(255,255,255,0.75);
-    }
-    body.sidebar-open .hamburger {
-      color:#fff;             /* open = white */
-      -webkit-text-stroke: 1px rgba(0,0,0,0.75);
-      text-shadow: 0 0 2px rgba(0,0,0,0.7);
-    }
-    .hamburger:focus { outline:2px solid var(--accent); border-radius:8px; }
 
+    /* Toolbar & list */
     .toolbar { display:flex; align-items:center; gap:12px; padding:10px 12px 0; }
     .toolbar label { display:flex; align-items:center; gap:8px; font-size:13px; color:var(--sub); user-select:none; cursor:pointer; }
     .search { padding:10px 12px 12px; }
@@ -539,20 +510,55 @@ async function writeIndexFlat(outDir, navItems) {
     iframe { width:100%; height:100%; border:0; background:#fff; }
     .hint { color: var(--sub); padding: 8px 12px; font-size:12px; }
 
-    .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.4); opacity:0; visibility:hidden; transition: opacity .2s ease; z-index:900; }
+    /* Overlay layer that also hosts the hamburger */
+    .overlay {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-start;
+      padding-top: calc(env(safe-area-inset-top, 0px) + 10px);
+      padding-left: calc(env(safe-area-inset-left, 0px) + 10px);
+      background: rgba(0,0,0,0);       /* closed: fully transparent */
+      transition: background .2s ease;
+      /* Important: do not block clicks when closed, but keep button clickable */
+      pointer-events: none;
+    }
+    body.sidebar-open .overlay {
+      background: rgba(0,0,0,0.4);     /* open: dim background */
+      pointer-events: auto;            /* allow closing by tap */
+    }
+
+    /* Hamburger INSIDE overlay; 30% bigger than before (approx) */
+    .hamburger {
+      background: transparent;
+      border: 0;
+      font-size: 34px;     /* was 26px → +30% */
+      line-height: 1;
+      width: 52px;         /* was 40px → +30% */
+      height: 52px;        /* was 40px → +30% */
+      cursor: pointer;
+      color: #000;         /* closed = black */
+      /* Strong white halo so it won't blend with dark-on-light texts/images */
+      -webkit-text-stroke: 2px rgba(255,255,255,0.95);
+      text-shadow:
+        0 0 4px rgba(255,255,255,0.95),
+        0 0 8px rgba(255,255,255,0.75);
+      /* Make the button clickable even when overlay has pointer-events:none */
+      pointer-events: auto;
+      display: none;       /* hidden by default (desktop) */
+    }
+    body.sidebar-open .hamburger {
+      color: #fff;         /* open = white */
+      -webkit-text-stroke: 2px rgba(0,0,0,0.8);
+      text-shadow:
+        0 0 4px rgba(0,0,0,0.8),
+        0 0 8px rgba(0,0,0,0.6);
+    }
+    .hamburger:focus { outline:2px solid var(--accent); border-radius:8px; }
 
     @media (max-width: 900px) {
       .app { grid-template-columns: 1fr; }
-      /* Fixed hamburger at top-left on mobile (outside sidebar) */
-      .hamburger {
-        display:inline-flex;
-        align-items:center;
-        justify-content:center;
-        position: fixed;
-        top: calc(env(safe-area-inset-top, 0px) + 10px);
-        left: calc(env(safe-area-inset-left, 0px) + 10px);
-        z-index: 1000; /* above sidebar + overlay + iframe */
-      }
       aside {
         position: fixed;
         top: 0; left: 0; bottom: 0;
@@ -562,15 +568,11 @@ async function writeIndexFlat(outDir, navItems) {
         box-shadow: 0 0 40px rgba(0,0,0,0.35);
       }
       body.sidebar-open aside { transform: translateX(0); }
-      .overlay { visibility: visible; }
-      body.sidebar-open .overlay { opacity:1; }
+      .hamburger { display: inline-flex; align-items:center; justify-content:center; }
     }
   </style>
 </head>
 <body>
-  <!-- Hamburger moved OUTSIDE aside -->
-  <button id="hamburger" class="hamburger" aria-label="Toggle navigation" aria-controls="sidebar" aria-expanded="false">☰</button>
-
   <div class="app">
     <aside id="sidebar">
       <header>
@@ -603,7 +605,10 @@ ${listHtml}
     </main>
   </div>
 
-  <div class="overlay" id="overlay" hidden></div>
+  <!-- Overlay hosts the hamburger; stays transparent & non-blocking when closed -->
+  <div class="overlay" id="overlay">
+    <button id="hamburger" class="hamburger" aria-label="Toggle navigation" aria-controls="sidebar" aria-expanded="false">☰</button>
+  </div>
 
   <script type="module">
     const navItems = ${JSON.stringify(navItems, null, 2)};
@@ -622,18 +627,19 @@ ${listHtml}
     function setSidebar(open) {
       document.body.classList.toggle('sidebar-open', open);
       hamburger?.setAttribute('aria-expanded', open ? 'true' : 'false');
-      if (overlay) {
-        if (open) overlay.removeAttribute('hidden');
-        else overlay.setAttribute('hidden', '');
-      }
     }
 
-    hamburger?.addEventListener('click', () => {
+    hamburger?.addEventListener('click', (e) => {
+      e.stopPropagation();
       const open = !document.body.classList.contains('sidebar-open');
       setSidebar(open);
     });
 
-    overlay?.addEventListener('click', () => setSidebar(false));
+    // Close when tapping overlay background (but ignore clicks on the button itself)
+    overlay?.addEventListener('click', (e) => {
+      if (e.target === overlay) setSidebar(false);
+    });
+
     window.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') setSidebar(false);
     });
