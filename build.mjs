@@ -4,13 +4,13 @@
 // Usage: node build.mjs [srcDir=manual] [outDir=build]
 //
 // Features:
-// - Copies assets, cleans legacy HTML (IE/ActiveX), merges frames
-// - Flat nav from en/html/, filters empty titles
+// - Copies assets, cleans legacy HTML (IE/ActiveX), merges frames when 2 panes
+// - Flat nav only from en/html/, filters empty/meaningless <title>
 // - Duplicate detection (SimHash + Jaccard), UI can hide/dim duplicates
 // - Fast title search (150ms debounce + rAF chunking)
-// - NEW: Full-text search (optional) via Web Worker + prebuilt index (build/_fulltext.json)
-// - Responsive UI with mobile sidebar + overlay; hamburger last-in-body
-// - Robust stacking (sidebar above overlay); overlay doesn’t cover sidebar
+// - Optional full-text search via Web Worker + prebuilt index (build/_fulltext.json)
+// - Responsive UI with mobile sidebar; overlay dims content only; hamburger last in <body>
+// - Robust stacking (sidebar z=1000 > overlay z=900 > content z=0; hamburger z=1100)
 
 import fs from "fs/promises";
 import path from "path";
@@ -32,8 +32,8 @@ const NAV_ROOT_PREFIX = "en/html/";
 
 // Fulltext index settings
 const FT_INDEX_FILE = "_fulltext.json";
-const FT_SNIPPET_CHARS = 400;     // snippet length per page
-const FT_MAX_TOKENS_PER_PAGE = 4000; // cap tokens/page to keep JSON small
+const FT_SNIPPET_CHARS = 400;
+const FT_MAX_TOKENS_PER_PAGE = 4000;
 
 // File-type buckets
 const HTML_EXTS = new Set([".html", ".htm"]);
@@ -288,14 +288,8 @@ async function main() {
           const toks = tokenize(norm);
           candidates.push({ path: rel, strictTitle, dispTitle, textLen: norm.length, simhash: simhash64(toks) });
 
-          // Fulltext entry (from both panes text)
           const ftTokens = Array.from(new Set(toks)).slice(0, FT_MAX_TOKENS_PER_PAGE);
-          fulltext.push({
-            p: rel,
-            t: dispTitle,
-            w: ftTokens.join(" "),
-            s: norm.slice(0, FT_SNIPPET_CHARS)
-          });
+          fulltext.push({ p: rel, t: dispTitle, w: ftTokens.join(" "), s: norm.slice(0, FT_SNIPPET_CHARS) });
         }
         continue;
       }
@@ -377,12 +371,7 @@ async function main() {
       candidates.push({ path: rel, strictTitle, dispTitle, textLen: norm.length, simhash: simhash64(toks) });
 
       const ftTokens = Array.from(new Set(toks)).slice(0, FT_MAX_TOKENS_PER_PAGE);
-      fulltext.push({
-        p: rel,
-        t: dispTitle,
-        w: ftTokens.join(" "),
-        s: norm.slice(0, FT_SNIPPET_CHARS)
-      });
+      fulltext.push({ p: rel, t: dispTitle, w: ftTokens.join(" "), s: norm.slice(0, FT_SNIPPET_CHARS) });
     }
   }
 
@@ -453,7 +442,7 @@ async function main() {
     "utf8"
   );
 
-  // Write fulltext index (only included pages)
+  // Write fulltext index
   await fs.writeFile(path.join(outDir, FT_INDEX_FILE), JSON.stringify(fulltext), "utf8");
 
   const filteredNavItems = navItems.filter(it => isMeaningfulTitle(it.title));
@@ -468,6 +457,38 @@ async function writeIndexFlat(outDir, navItems) {
   const listHtml = navItems.map(p =>
     `<li class="page${p.dup ? " dup" : ""}"><a href="#${encodeURIComponent(p.path)}" data-path="${p.path}" data-dup="${p.dup ? "1" : "0"}">${p.title}</a></li>`
   ).join("\n");
+
+  // ---- IMPORTANT: worker code as String.raw to avoid Node evaluating it at build time ----
+  const WORKER_CODE = String.raw`
+    let data = null;
+    function norm(s){return (s||"").toLowerCase();}
+    self.onmessage = async (e)=> {
+      const {type, payload} = e.data || {};
+      if (type === 'load') {
+        const url = payload.url;
+        const res = await fetch(url);
+        data = await res.json(); // [{p,t,w,s}]
+        self.postMessage({type:'loaded', count: data.length});
+      } else if (type === 'query') {
+        if (!data) { self.postMessage({type:'results', items: []}); return; }
+        const q = norm(payload.q || '').trim();
+        if (q.length < 2) { self.postMessage({type:'results', items: []}); return; }
+        const terms = q.split(/\s+/).filter(x=>x.length>0);
+        const items = [];
+        for (let i=0;i<data.length;i++){
+          const it = data[i];
+          let ok = true, score=0;
+          for (const t of terms){
+            if (it.w.indexOf(t) === -1) { ok=false; break; }
+            else score++;
+          }
+          if (ok) items.push({p:it.p, t:it.t, s:it.s, score});
+        }
+        items.sort((a,b)=> b.score - a.score || a.t.localeCompare(b.t));
+        self.postMessage({type:'results', items: items.slice(0, 250)});
+      }
+    };
+  `;
 
   const html = `<!doctype html>
 <html lang="en">
@@ -507,6 +528,7 @@ async function writeIndexFlat(outDir, navItems) {
     iframe { width:100%; height:100%; border:0; background:#fff; }
     .hint { color: var(--sub); padding: 8px 12px; font-size:12px; }
 
+    /* Overlay BELOW sidebar */
     .overlay {
       position: fixed;
       top: 0; right: 0; bottom: 0; left: 0;
@@ -521,6 +543,7 @@ async function writeIndexFlat(outDir, navItems) {
       left: var(--sidebarW);
     }
 
+    /* Hamburger ABOVE all */
     .hamburger {
       position: fixed;
       top: calc(env(safe-area-inset-top, 0px) + 10px);
@@ -531,14 +554,14 @@ async function writeIndexFlat(outDir, navItems) {
       line-height: 1;
       width: 52px; height: 52px;
       cursor: pointer;
-      color: #000;
+      color: #000; /* closed */
       -webkit-text-stroke: 2px rgba(255,255,255,0.95);
       text-shadow: 0 0 4px rgba(255,255,255,0.95), 0 0 8px rgba(255,255,255,0.75);
       display: none;
       z-index: 1100;
     }
     body.sidebar-open .hamburger {
-      color: #fff;
+      color: #fff; /* open */
       -webkit-text-stroke: 2px rgba(0,0,0,0.8);
       text-shadow: 0 0 4px rgba(0,0,0,0.8), 0 0 8px rgba(0,0,0,0.6);
     }
@@ -698,8 +721,8 @@ ${listHtml}
           const match = q ? title.includes(q) : true;
           const visible = match && (!hideDup || !isDup);
           el.style.display = visible ? '' : 'none';
-          // remove old snippets if any
           const sn = el.querySelector('.snippet'); if (sn) sn.remove();
+          const badge = el.querySelector('.badge'); if (badge) badge.remove();
         }
         if (i < items.length) requestAnimationFrame(step);
       }
@@ -717,37 +740,7 @@ ${listHtml}
 
     async function ensureWorker() {
       if (ftWorker) return;
-      const workerCode = `
-        let data = null;
-        function norm(s){return (s||"").toLowerCase();}
-        self.onmessage = async (e)=> {
-          const {type, payload} = e.data || {};
-          if (type === 'load') {
-            const url = payload.url;
-            const res = await fetch(url);
-            data = await res.json(); // [{p,t,w,s}]
-            self.postMessage({type:'loaded', count: data.length});
-          } else if (type === 'query') {
-            if (!data) { self.postMessage({type:'results', items: []}); return; }
-            const q = norm(payload.q || '').trim();
-            if (q.length < 2) { self.postMessage({type:'results', items: []}); return; }
-            const terms = q.split(/\\s+/).filter(x=>x.length>0);
-            const items = [];
-            for (let i=0;i<data.length;i++){
-              const it = data[i];
-              let ok = true, score=0;
-              for (const t of terms){
-                if (it.w.indexOf(t) === -1) { ok=false; break; }
-                else score++;
-              }
-              if (ok) items.push({p:it.p, t:it.t, s:it.s, score});
-            }
-            items.sort((a,b)=> b.score - a.score || a.t.localeCompare(b.t));
-            self.postMessage({type:'results', items: items.slice(0, 250)});
-          }
-        };
-      `;
-      const blob = new Blob([workerCode], { type: 'application/javascript' });
+      const blob = new Blob([${JSON.stringify(String.raw`${WORKER_CODE}`)}], { type: 'application/javascript' });
       ftWorker = new Worker(URL.createObjectURL(blob));
       ftWorker.onmessage = (e) => {
         const {type, items} = e.data || {};
@@ -758,14 +751,13 @@ ${listHtml}
     }
 
     function renderContentResults(results) {
-      // First hide everything, then show only matched ones (respect hideDup by filtering DOM after)
       const hideDup = !!toggleHideDup.checked;
       const visiblePaths = new Set(results.map(r=>r.p));
       items.forEach(({el, isDup, path})=>{
         const vis = visiblePaths.has(path) && (!hideDup || !isDup);
         el.style.display = vis ? '' : 'none';
-        // remove any old snippet
         const old = el.querySelector('.snippet'); if (old) old.remove();
+        const bOld = el.querySelector('.badge'); if (bOld) bOld.remove();
         if (vis) {
           const r = results.find(x=>x.p===path);
           if (r && r.s) {
@@ -773,9 +765,8 @@ ${listHtml}
             sn.className = 'snippet';
             sn.textContent = r.s + '…';
             el.appendChild(sn);
-            // badge
             const a = el.querySelector('a');
-            if (a && !a.querySelector('.badge')) {
+            if (a) {
               const b = document.createElement('span');
               b.className = 'badge';
               b.textContent = 'content';
@@ -791,14 +782,12 @@ ${listHtml}
       const hideDup = !!toggleHideDup.checked;
       const useContent = !!toggleContent.checked;
 
-      // Title-only for short queries or when content search off
       if (!useContent || q.length < 2) {
         filterTitlesNow(q, hideDup);
         return;
       }
-      // Content search
       await ensureWorker();
-      if (!ftLoaded) return; // will apply after load
+      if (!ftLoaded) return;
       ftWorker.postMessage({ type: 'query', payload: { q } });
     }
 
