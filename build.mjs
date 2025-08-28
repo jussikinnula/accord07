@@ -11,9 +11,10 @@
 // - Builds a flat navigation ONLY from pages under "en/html/"
 // - Hides from nav: HONDAESM.HTML, ESMBLANK.HTML, pages with an empty/meaningless <title>
 // - Conservative duplicate detection among same-title pages (SimHash + Jaccard):
-//   Canonical is longest; duplicates are dimmed (can be hidden via checkbox)
+//   Canonical is longest; duplicates are dimmed (toggle via checkbox)
 // - Writes: outDir/index.html and outDir/_dedupe-report.json
 // - Left-pane search: 150ms debounce + requestAnimationFrame chunking
+// - Responsive UI: sidebar collapses on small screens with a hamburger toggle
 
 import fs from "fs/promises";
 import path from "path";
@@ -109,7 +110,7 @@ function normalizeTitle(str) {
     .replace(/[\u00A0\u1680\u2000-\u200A\u202F\u205F\u3000]/g, " ")
     // Remove zero-width and format control chars
     .replace(/[\u200B-\u200D\uFEFF\u2060\u00AD]/g, "")
-    // Collapse all whitespace sequences
+    // Collapse whitespace
     .replace(/\s+/g, " ")
     .trim();
   return s;
@@ -283,10 +284,8 @@ async function main() {
         const left = extractBodyInnerHtml($a);
         const right = extractBodyInnerHtml($b);
 
-        // read strict BEFORE any title mutation
-        const strictTitleRaw = headTitleStrict($);
-        const strictTitle = normalizeTitle(strictTitleRaw);
-
+        // Read strict BEFORE any title mutation
+        const strictTitle = normalizeTitle(headTitleStrict($));
         const dispTitle = displayTitle($, path.basename(rel));
 
         const merged = `<!doctype html>
@@ -316,14 +315,14 @@ async function main() {
 </html>`;
         await fs.writeFile(outAbs, merged, "utf8");
 
-        // Prepare dedupe signals from the merged HTML
+        // Prepare dedupe signals
         if (includeInFlatNav(rel, strictTitle)) {
           const $$ = cheerio.load(merged, { decodeEntities:false });
           const norm = normalizeTextForCompare($$);
           const toks = tokenize(norm);
           candidates.push({
             path: rel,
-            strictTitle: strictTitle,
+            strictTitle,
             dispTitle,
             textLen: norm.length,
             simhash: simhash64(toks),
@@ -333,8 +332,7 @@ async function main() {
       }
 
       // 3+ frames → simple fallback page
-      const strictTitleRaw = headTitleStrict($);
-      const strictTitle = normalizeTitle(strictTitleRaw);
+      const strictTitle = normalizeTitle(headTitleStrict($));
       const dispTitle = displayTitle($, path.basename(rel));
       const list = frames.map(f => {
         const href = f.src || "";
@@ -400,8 +398,7 @@ async function main() {
     });
 
     // IMPORTANT: read strict BEFORE mutating <title>
-    const strictTitleRaw = headTitleStrict(doc$);
-    const strictTitle = normalizeTitle(strictTitleRaw);
+    const strictTitle = normalizeTitle(headTitleStrict(doc$));
 
     const dispTitle = displayTitle(doc$, path.basename(rel));
     doc$("title").first().text(dispTitle);
@@ -495,13 +492,13 @@ async function main() {
   // Final guard: drop any items with non-meaningful titles (handles weird whitespace)
   const filteredNavItems = navItems.filter(it => isMeaningfulTitle(it.title));
 
-  // Build index with Hide Duplicates checkbox
+  // Build index with Hide Duplicates checkbox, responsive hamburger sidebar
   await writeIndexFlat(outDir, filteredNavItems);
   console.log(`✅ Done. Open: ${path.join(outDir, "index.html")}`);
   console.log(`ℹ️  Dedupe report: ${path.join(outDir, "_dedupe-report.json")}`);
 }
 
-// -------------------- index.html (flat) --------------------
+// -------------------- index.html (flat, responsive) --------------------
 async function writeIndexFlat(outDir, navItems) {
   const listHtml = navItems.map(p =>
     `<li class="page${p.dup ? " dup" : ""}"><a href="#${encodeURIComponent(p.path)}" data-path="${p.path}" data-dup="${p.dup ? "1" : "0"}">${p.title}</a></li>`
@@ -514,13 +511,21 @@ async function writeIndexFlat(outDir, navItems) {
   <title>Honda Accord 7 service manual</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
-    :root { --bg:#0b0c0f; --panel:#111319; --muted:#262a33; --muted-2:#1d2230; --text:#f4f6fb; --sub:#aab2c5; }
+    :root { --bg:#0b0c0f; --panel:#111319; --muted:#262a33; --muted-2:#1d2230; --text:#f4f6fb; --sub:#aab2c5; --accent:#0b63ce; }
     * { box-sizing: border-box; }
-    body { margin:0; background:var(--bg); color:var(--text); font: 14px/1.5 system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; height:100vh; display:grid; grid-template-columns: 360px 1fr; }
-    aside { border-right:1px solid var(--muted); background:var(--panel); height:100vh; overflow:auto; }
-    main { height:100vh; }
-    header { padding:12px; border-bottom:1px solid var(--muted); }
-    .brand { font-weight:600; }
+    html, body { height: 100%; }
+    body { margin:0; background:var(--bg); color:var(--text); font: 14px/1.5 system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; }
+
+    /* Layout container */
+    .app { display:grid; grid-template-columns: 360px 1fr; height:100vh; overflow:hidden; }
+    aside { border-right:1px solid var(--muted); background:var(--panel); height:100vh; overflow:auto; position:relative; z-index:3; }
+    main { height:100vh; position:relative; z-index:1; }
+
+    header { padding:12px; border-bottom:1px solid var(--muted); display:flex; align-items:center; gap:10px; }
+    .brand { font-weight:600; flex:1; }
+    .hamburger { display:none; background:transparent; border:0; color:var(--text); font-size:22px; line-height:1; width:36px; height:36px; border-radius:8px; cursor:pointer; }
+    .hamburger:focus { outline:2px solid var(--accent); }
+
     .toolbar { display:flex; align-items:center; gap:12px; padding:10px 12px 0; }
     .toolbar label { display:flex; align-items:center; gap:8px; font-size:13px; color:var(--sub); user-select:none; cursor:pointer; }
     .search { padding:10px 12px 12px; }
@@ -533,38 +538,63 @@ async function writeIndexFlat(outDir, navItems) {
     nav .count { color: var(--sub); font-size: 12px; padding: 0 12px 8px; }
     iframe { width:100%; height:100%; border:0; background:#fff; }
     .hint { color: var(--sub); padding: 8px 12px; font-size:12px; }
+
+    /* Overlay for mobile when sidebar open */
+    .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.4); opacity:0; visibility:hidden; transition: opacity .2s ease; z-index:2; }
+
+    /* Responsive: collapse sidebar on narrow screens */
+    @media (max-width: 900px) {
+      .app { grid-template-columns: 1fr; }
+      aside {
+        position: fixed;
+        top: 0; left: 0; bottom: 0;
+        width: 86vw; max-width: 420px;
+        transform: translateX(-100%);
+        transition: transform .2s ease;
+        box-shadow: 0 0 40px rgba(0,0,0,0.35);
+      }
+      body.sidebar-open aside { transform: translateX(0); }
+      .hamburger { display:inline-flex; align-items:center; justify-content:center; }
+      .overlay { visibility: visible; }
+      body.sidebar-open .overlay { opacity:1; }
+    }
   </style>
 </head>
 <body>
-  <aside>
-    <header>
-      <div class="brand">Honda Accord 7 – service manual</div>
-      <div class="count" id="count"></div>
-    </header>
+  <div class="app">
+    <aside id="sidebar">
+      <header>
+        <button id="hamburger" class="hamburger" aria-label="Toggle navigation" aria-controls="sidebar" aria-expanded="false">☰</button>
+        <div class="brand">Honda Accord 7 – service manual</div>
+        <div class="count" id="count"></div>
+      </header>
 
-    <div class="toolbar">
-      <label>
-        <input type="checkbox" id="toggleHideDup" checked>
-        Hide duplicates
-      </label>
-    </div>
+      <div class="toolbar">
+        <label>
+          <input type="checkbox" id="toggleHideDup" checked>
+          Hide duplicates
+        </label>
+      </div>
 
-    <div class="search">
-      <input id="search" placeholder="Search titles (⌘/Ctrl+K)" autocomplete="off">
-    </div>
+      <div class="search">
+        <input id="search" placeholder="Search titles (⌘/Ctrl+K)" autocomplete="off">
+      </div>
 
-    <nav id="nav">
-      <ul id="flat-list">
+      <nav id="nav">
+        <ul id="flat-list">
 ${listHtml}
-      </ul>
-    </nav>
+        </ul>
+      </nav>
 
-    <div class="hint">Tip: Open last page: <a id="resume" href="#">resume reading</a></div>
-  </aside>
+      <div class="hint">Tip: Open last page: <a id="resume" href="#">resume reading</a></div>
+    </aside>
 
-  <main>
-    <iframe id="content" src="about:blank" referrerpolicy="no-referrer"></iframe>
-  </main>
+    <main>
+      <iframe id="content" src="about:blank" referrerpolicy="no-referrer"></iframe>
+    </main>
+  </div>
+
+  <div class="overlay" id="overlay" hidden></div>
 
   <script type="module">
     const navItems = ${JSON.stringify(navItems, null, 2)};
@@ -575,6 +605,29 @@ ${listHtml}
     const resume = document.getElementById('resume');
     const count = document.getElementById('count');
     const toggleHideDup = document.getElementById('toggleHideDup');
+
+    // Sidebar controls (responsive)
+    const hamburger = document.getElementById('hamburger');
+    const overlay = document.getElementById('overlay');
+
+    function setSidebar(open) {
+      document.body.classList.toggle('sidebar-open', open);
+      hamburger?.setAttribute('aria-expanded', open ? 'true' : 'false');
+      if (overlay) {
+        if (open) overlay.removeAttribute('hidden');
+        else overlay.setAttribute('hidden', '');
+      }
+    }
+
+    hamburger?.addEventListener('click', () => {
+      const open = !document.body.classList.contains('sidebar-open');
+      setSidebar(open);
+    });
+
+    overlay?.addEventListener('click', () => setSidebar(false));
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') setSidebar(false);
+    });
 
     // Persist user preference for "Hide duplicates"
     const prefKey = 'accord:hideDup';
@@ -597,6 +650,8 @@ ${listHtml}
         a.style.background = '';
         if (a.getAttribute('data-path') === p) a.style.background = 'var(--muted)';
       });
+      // Auto-close sidebar on small screens after navigation
+      if (window.matchMedia('(max-width: 900px)').matches) setSidebar(false);
     }
 
     function handleHash() {
@@ -612,7 +667,7 @@ ${listHtml}
       openPath(a.getAttribute('data-path'));
     });
 
-    resume.addEventListener('click', (e) => {
+    resume?.addEventListener('click', (e) => {
       e.preventDefault();
       const last = localStorage.getItem('accord:last');
       openPath(last || (navItems[0] && navItems[0].path));
