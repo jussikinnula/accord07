@@ -498,7 +498,7 @@ async function main() {
   console.log(`ℹ️  Dedupe report: ${path.join(outDir, "_dedupe-report.json")}`);
 }
 
-// -------------------- index.html (flat, responsive) --------------------
+// -------------------- index.html
 async function writeIndexFlat(outDir, navItems) {
   const listHtml = navItems.map(p =>
     `<li class="page${p.dup ? " dup" : ""}"><a href="#${encodeURIComponent(p.path)}" data-path="${p.path}" data-dup="${p.dup ? "1" : "0"}">${p.title}</a></li>`
@@ -516,14 +516,27 @@ async function writeIndexFlat(outDir, navItems) {
     html, body { height: 100%; }
     body { margin:0; background:var(--bg); color:var(--text); font: 14px/1.5 system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; }
 
-    /* Layout container */
     .app { display:grid; grid-template-columns: 360px 1fr; height:100vh; overflow:hidden; }
     aside { border-right:1px solid var(--muted); background:var(--panel); height:100vh; overflow:auto; position:relative; z-index:3; }
     main { height:100vh; position:relative; z-index:1; }
 
     header { padding:12px; border-bottom:1px solid var(--muted); display:flex; align-items:center; gap:10px; }
     .brand { font-weight:600; flex:1; }
-    .hamburger { display:none; background:transparent; border:0; color:var(--text); font-size:22px; line-height:1; width:36px; height:36px; border-radius:8px; cursor:pointer; }
+    .hamburger { 
+      display:none;
+      background:transparent;
+      border:0;
+      font-size:26px;
+      line-height:1;
+      width:40px;
+      height:40px;
+      border-radius:8px;
+      cursor:pointer;
+      color:#000; /* default = black */
+    }
+    body.sidebar-open .hamburger {
+      color:#fff; /* menu open = white */
+    }
     .hamburger:focus { outline:2px solid var(--accent); }
 
     .toolbar { display:flex; align-items:center; gap:12px; padding:10px 12px 0; }
@@ -534,15 +547,13 @@ async function writeIndexFlat(outDir, navItems) {
     nav ul { list-style:none; padding-left:0; margin:6px 0; }
     nav li.page a { display:block; padding:6px 8px; border-radius:8px; color:var(--text); text-decoration:none; }
     nav li.page a:hover { background: var(--muted); }
-    nav li.page.dup a { color: var(--sub); background: var(--muted-2); } /* dim duplicates */
+    nav li.page.dup a { color: var(--sub); background: var(--muted-2); }
     nav .count { color: var(--sub); font-size: 12px; padding: 0 12px 8px; }
     iframe { width:100%; height:100%; border:0; background:#fff; }
     .hint { color: var(--sub); padding: 8px 12px; font-size:12px; }
 
-    /* Overlay for mobile when sidebar open */
     .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.4); opacity:0; visibility:hidden; transition: opacity .2s ease; z-index:2; }
 
-    /* Responsive: collapse sidebar on narrow screens */
     @media (max-width: 900px) {
       .app { grid-template-columns: 1fr; }
       aside {
@@ -568,7 +579,7 @@ async function writeIndexFlat(outDir, navItems) {
         <div class="brand">Honda Accord 7 – service manual</div>
         <div class="count" id="count"></div>
       </header>
-
+      
       <div class="toolbar">
         <label>
           <input type="checkbox" id="toggleHideDup" checked>
