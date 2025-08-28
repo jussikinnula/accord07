@@ -4,17 +4,14 @@
 // Usage: node build.mjs [srcDir=manual] [outDir=build]
 //
 // What this script does:
-// - Copies all assets from srcDir to outDir, processing HTML files:
-//   * Frame pages (2-pane) are merged into a single page
-//   * IE/frameset/inline event cruft removed
-//   * "javascript:parent.*" links converted to normal hrefs
-// - Builds a flat navigation ONLY from pages under "en/html/"
-// - Hides from nav: HONDAESM.HTML, ESMBLANK.HTML, pages with an empty/meaningless <title>
-// - Conservative duplicate detection among same-title pages (SimHash + Jaccard):
-//   Canonical is longest; duplicates are dimmed (toggle via checkbox)
+// - Copies all assets from srcDir to outDir, processing HTML files
+// - Flattens/cleans legacy HTML (frames, ActiveX-era JS, inline events)
+// - Builds a flat nav from en/html/ only; filters empty/meaningless titles
+// - Duplicate detection by strict title (SimHash + Jaccard), UI can hide/dim duplicates
 // - Writes: outDir/index.html and outDir/_dedupe-report.json
-// - Left-pane search: 150ms debounce + requestAnimationFrame chunking
-// - Responsive UI: on small screens, sidebar is hidden behind a hamburger (fixed, top-left)
+// - Fast search (150ms debounce + rAF chunking)
+// - Responsive UI: on small screens, sidebar slides in; hamburger is FIXED at top-left
+//   (outside the transformed sidebar to avoid containing-block issues)
 
 import fs from "fs/promises";
 import path from "path";
@@ -106,11 +103,8 @@ function headTitleStrict($) {
 // Normalize "empty-looking" titles: remove NBSP, zero-width, other format chars, collapse spaces
 function normalizeTitle(str) {
   const s = (str || "")
-    // Replace NBSP and other Unicode spaces with regular spaces
     .replace(/[\u00A0\u1680\u2000-\u200A\u202F\u205F\u3000]/g, " ")
-    // Remove zero-width and format control chars
     .replace(/[\u200B-\u200D\uFEFF\u2060\u00AD]/g, "")
-    // Collapse whitespace
     .replace(/\s+/g, " ")
     .trim();
   return s;
@@ -511,6 +505,7 @@ async function writeIndexFlat(outDir, navItems) {
 
     header { padding:12px; border-bottom:1px solid var(--muted); display:flex; align-items:center; gap:10px; }
     .brand { font-weight:600; flex:1; }
+    /* Hamburger is now OUTSIDE the sidebar to avoid transform containing-block issues */
     .hamburger {
       display:none;           /* hidden on desktop */
       background:transparent; /* no background */
@@ -519,12 +514,17 @@ async function writeIndexFlat(outDir, navItems) {
       line-height:1;
       width:40px;
       height:40px;
-      border-radius:8px;
       cursor:pointer;
       color:#000;             /* closed = black */
+      -webkit-text-stroke: 1px rgba(255,255,255,0.8); /* contrast without background */
+      text-shadow: 0 0 2px rgba(255,255,255,0.75);
     }
-    body.sidebar-open .hamburger { color:#fff; } /* open = white */
-    .hamburger:focus { outline:2px solid var(--accent); }
+    body.sidebar-open .hamburger {
+      color:#fff;             /* open = white */
+      -webkit-text-stroke: 1px rgba(0,0,0,0.75);
+      text-shadow: 0 0 2px rgba(0,0,0,0.7);
+    }
+    .hamburger:focus { outline:2px solid var(--accent); border-radius:8px; }
 
     .toolbar { display:flex; align-items:center; gap:12px; padding:10px 12px 0; }
     .toolbar label { display:flex; align-items:center; gap:8px; font-size:13px; color:var(--sub); user-select:none; cursor:pointer; }
@@ -543,14 +543,14 @@ async function writeIndexFlat(outDir, navItems) {
 
     @media (max-width: 900px) {
       .app { grid-template-columns: 1fr; }
-      /* Fixed hamburger at top-left on mobile, above everything */
+      /* Fixed hamburger at top-left on mobile (outside sidebar) */
       .hamburger {
         display:inline-flex;
         align-items:center;
         justify-content:center;
         position: fixed;
-        top: 10px;
-        left: 10px;
+        top: calc(env(safe-area-inset-top, 0px) + 10px);
+        left: calc(env(safe-area-inset-left, 0px) + 10px);
         z-index: 1000; /* above sidebar + overlay + iframe */
       }
       aside {
@@ -568,10 +568,12 @@ async function writeIndexFlat(outDir, navItems) {
   </style>
 </head>
 <body>
+  <!-- Hamburger moved OUTSIDE aside -->
+  <button id="hamburger" class="hamburger" aria-label="Toggle navigation" aria-controls="sidebar" aria-expanded="false">☰</button>
+
   <div class="app">
     <aside id="sidebar">
       <header>
-        <button id="hamburger" class="hamburger" aria-label="Toggle navigation" aria-controls="sidebar" aria-expanded="false">☰</button>
         <div class="brand">Honda Accord 7 – service manual</div>
         <div class="count" id="count"></div>
       </header>
