@@ -3,15 +3,9 @@
 //
 // Usage: node build.mjs [srcDir=manual] [outDir=build]
 //
-// What this script does:
-// - Copies all assets from srcDir to outDir, processing HTML files
-// - Flattens/cleans legacy HTML (frames, ActiveX-era JS, inline events)
-// - Builds a flat nav from en/html/ only; filters empty/meaningless titles
-// - Duplicate detection by strict title (SimHash + Jaccard); UI can dim/hide duplicates
-// - Writes: outDir/index.html and outDir/_dedupe-report.json
-// - Fast search (150ms debounce + rAF chunking)
-// - Responsive UI: on small screens, sidebar slides in; overlay dims only the content area;
-//   hamburger is a separate, fixed element placed LAST in <body> so it naturally stacks above overlay.
+// Copies legacy Honda manual, cleans HTML, builds flat nav from en/html/,
+// filters empty titles, marks duplicates, fast search, responsive UI.
+// Robust stacking: sidebar (z=1000) > overlay (z=900) > content (z=0); hamburger (z=1100).
 
 import fs from "fs/promises";
 import path from "path";
@@ -24,14 +18,11 @@ const __dirname = path.dirname(__filename);
 const DEFAULT_SRC = "manual";
 const DEFAULT_OUT = "build";
 
-// ---- Duplicate detection thresholds ----
-const HAMMING_MAX = 3;     // max bit differences (64-bit SimHash) to consider duplicate
-const JACCARD_MIN = 0.98;  // min Jaccard similarity to consider duplicate
+const HAMMING_MAX = 3;
+const JACCARD_MIN = 0.98;
 
-// Only include pages from this prefix in the flat nav:
 const NAV_ROOT_PREFIX = "en/html/";
 
-// File-type buckets
 const HTML_EXTS = new Set([".html", ".htm"]);
 const TEXT_EXTS = new Set([".css", ".js", ".json", ".txt", ".xml", ".csv"]);
 const BINARY_EXTS = new Set([
@@ -41,7 +32,6 @@ const BINARY_EXTS = new Set([
   ".pdf",".zip",".rar",".7z",".db",".exe",".inf"
 ]);
 
-// Paths/files to exclude from nav
 const EXCLUDE_FROM_NAV = [
   /^_COM\//i,
   /\/ESMBLANK\.HTML$/i,
@@ -51,7 +41,6 @@ const EXCLUDE_FROM_NAV = [
 const SUSPICIOUS_SCRIPT = /activex|hhctrl|classid|createobject|ActiveXObject|mshta/i;
 const EVENT_ATTR_RE = /^on[a-z]+$/i;
 
-// -------------------- utility --------------------
 function toPosix(p){ return p.split(path.sep).join("/"); }
 function isHtml(p){ return HTML_EXTS.has(path.extname(p).toLowerCase()); }
 function isBinary(p){ return BINARY_EXTS.has(path.extname(p).toLowerCase()); }
@@ -72,7 +61,6 @@ function cleanBasicHtml(html, { keepScripts=false } = {}) {
   const $ = cheerio.load(html, { decodeEntities:false });
   $("frameset, frame").remove();
 
-  // Remove suspicious scripts (IE/ActiveX-era stuff)
   if (!keepScripts) {
     $("script").each((_, el)=>{
       const src = $(el).attr("src") || "";
@@ -81,24 +69,19 @@ function cleanBasicHtml(html, { keepScripts=false } = {}) {
     });
   }
 
-  // Strip inline event handlers
   $("*").each((_, el)=>{
     for (const [k] of Object.entries(el.attribs || {})) {
       if (EVENT_ATTR_RE.test(k)) $(el).removeAttr(k);
     }
   });
 
-  // Ensure UTF-8 and a <title>
   if ($("meta[charset]").length === 0) $("head").prepend('<meta charset="utf-8">');
   if ($("title").length === 0) $("head").append("<title></title>");
-
   return $;
 }
 
-// Strictly read the <title> text only (no fallbacks)
 function headTitleStrict($) { return ($("title").first().text() || ""); }
 
-// Normalize "empty-looking" titles
 function normalizeTitle(str) {
   return (str || "")
     .replace(/[\u00A0\u1680\u2000-\u200A\u202F\u205F\u3000]/g, " ")
@@ -107,13 +90,11 @@ function normalizeTitle(str) {
     .trim();
 }
 
-// Non-empty and has at least one letter or digit
 function isMeaningfulTitle(str) {
   const t = normalizeTitle(str);
   return t.length > 0 && /[\p{L}\p{N}]/u.test(t);
 }
 
-// Display title to write back to HTML (fallbacks allowed)
 function displayTitle($, fallback="") {
   const raw = ($("title").first().text() || "").trim();
   if (raw) return raw;
@@ -151,7 +132,6 @@ function* candidateTargets(id) {
   yield `${id}_PR2.html`;
 }
 
-// -------------------- tokenization & simhash --------------------
 function normalizeTextForCompare($) {
   $("script, style, noscript").remove();
   const txt = ($("body").text() || "")
@@ -162,7 +142,6 @@ function normalizeTextForCompare($) {
     .trim();
   return txt;
 }
-
 function tokenize(text) { return text.split(" ").filter(w => w.length > 2); }
 
 function fnv1a64(str) {
@@ -189,13 +168,11 @@ function simhash64(tokens) {
   for (let i = 0; i < bits; i++) if (v[i] > 0) sig |= (1n << BigInt(i));
   return sig;
 }
-
 function hamming64(a, b) {
   let x = a ^ b, count = 0;
   while (x) { x &= (x - 1n); count++; }
   return count;
 }
-
 function jaccard(aSet, bSet) {
   let inter = 0;
   const seen = new Set(aSet);
@@ -204,7 +181,6 @@ function jaccard(aSet, bSet) {
   return union === 0 ? 1 : inter / union;
 }
 
-// -------------------- main --------------------
 async function main() {
   const srcDir = path.resolve(process.argv[2] || DEFAULT_SRC);
   const outDir = path.resolve(process.argv[3] || DEFAULT_OUT);
@@ -215,25 +191,20 @@ async function main() {
     allPaths.add(toPosix(path.relative(srcDir, abs)));
   }
 
-  // Pass 1: copy non-HTML files
+  // Copy non-HTML
   for (const rel of allPaths) {
     if (isHtml(rel)) continue;
     const srcAbs = path.join(srcDir, rel);
     const destAbs = path.join(outDir, rel);
     await ensureDir(path.dirname(destAbs));
-    if (isBinary(rel)) {
-      await fs.writeFile(destAbs, await fs.readFile(srcAbs));
-    } else if (isText(rel)) {
-      await fs.writeFile(destAbs, await readUtf8(srcAbs), "utf8");
-    } else {
-      await fs.writeFile(destAbs, await fs.readFile(srcAbs));
-    }
+    if (isBinary(rel)) await fs.writeFile(destAbs, await fs.readFile(srcAbs));
+    else if (isText(rel)) await fs.writeFile(destAbs, await readUtf8(srcAbs), "utf8");
+    else await fs.writeFile(destAbs, await fs.readFile(srcAbs));
   }
 
-  // Collect candidates for nav (with dedupe features)
   const candidates = [];
 
-  // Pass 2: process HTML files (and write them to outDir)
+  // Process HTML
   for (const rel of [...allPaths].filter(isHtml)) {
     const srcAbs = path.join(srcDir, rel);
     const outAbs = path.join(outDir, rel);
@@ -243,7 +214,6 @@ async function main() {
     const $ = cheerio.load(raw, { decodeEntities:false });
 
     if (looksLikeFrameset($)) {
-      // Merge 2-frame pages into a single static page
       const frames = [];
       $("frame").each((_, el)=>{
         const name = $(el).attr("name") || "";
@@ -296,18 +266,11 @@ async function main() {
           const $$ = cheerio.load(merged, { decodeEntities:false });
           const norm = normalizeTextForCompare($$);
           const toks = tokenize(norm);
-          candidates.push({
-            path: rel,
-            strictTitle,
-            dispTitle,
-            textLen: norm.length,
-            simhash: simhash64(toks),
-          });
+          candidates.push({ path: rel, strictTitle, dispTitle, textLen: norm.length, simhash: simhash64(toks) });
         }
         continue;
       }
 
-      // 3+ frames → fallback page
       const strictTitle = normalizeTitle(headTitleStrict($));
       const dispTitle = displayTitle($, path.basename(rel));
       const list = frames.map(f => {
@@ -329,21 +292,13 @@ async function main() {
         const $$ = cheerio.load(fallback, { decodeEntities:false });
         const norm = normalizeTextForCompare($$);
         const toks = tokenize(norm);
-        candidates.push({
-          path: rel,
-          strictTitle,
-          dispTitle,
-          textLen: norm.length,
-          simhash: simhash64(toks),
-        });
+        candidates.push({ path: rel, strictTitle, dispTitle, textLen: norm.length, simhash: simhash64(toks) });
       }
       continue;
     }
 
-    // Normal HTML page
     const doc$ = cleanBasicHtml(raw, { keepScripts:true });
 
-    // Convert "javascript:parent.*" hrefs to normal links
     doc$("a[href^='javascript:parent.']").each((_, el)=>{
       const js = doc$(el).attr("href") || "";
       let replaced = false;
@@ -373,9 +328,7 @@ async function main() {
       if (!replaced) doc$(el).attr("href", "#");
     });
 
-    // Strict title BEFORE mutation
     const strictTitle = normalizeTitle(headTitleStrict(doc$));
-
     const dispTitle = displayTitle(doc$, path.basename(rel));
     doc$("title").first().text(dispTitle);
     await fs.writeFile(outAbs, doc$.html() ?? "", "utf8");
@@ -383,17 +336,11 @@ async function main() {
     if (includeInFlatNav(rel, strictTitle)) {
       const norm = normalizeTextForCompare(doc$);
       const toks = tokenize(norm);
-      candidates.push({
-        path: rel,
-        strictTitle,
-        dispTitle,
-        textLen: norm.length,
-        simhash: simhash64(toks),
-      });
+      candidates.push({ path: rel, strictTitle, dispTitle, textLen: norm.length, simhash: simhash64(toks) });
     }
   }
 
-  // -------------------- Deduplicate by strict title --------------------
+  // Deduplicate by strict title
   const byTitle = new Map();
   for (const c of candidates) {
     if (!byTitle.has(c.strictTitle)) byTitle.set(c.strictTitle, []);
@@ -452,17 +399,14 @@ async function main() {
     }
   }
 
-  // Sort by title for stable nav
   navItems.sort((a,b)=> a.title.localeCompare(b.title, undefined, { sensitivity:"base" }));
 
-  // Write report
   await fs.writeFile(
     path.join(outDir, "_dedupe-report.json"),
     JSON.stringify({ thresholds: { HAMMING_MAX, JACCARD_MIN }, groups: dedupeReport }, null, 2),
     "utf8"
   );
 
-  // Final guard: drop any items with non-meaningful titles
   const filteredNavItems = navItems.filter(it => isMeaningfulTitle(it.title));
 
   await writeIndexFlat(outDir, filteredNavItems);
@@ -470,7 +414,6 @@ async function main() {
   console.log(`ℹ️  Dedupe report: ${path.join(outDir, "_dedupe-report.json")}`);
 }
 
-// -------------------- index.html (flat, responsive) --------------------
 async function writeIndexFlat(outDir, navItems) {
   const listHtml = navItems.map(p =>
     `<li class="page${p.dup ? " dup" : ""}"><a href="#${encodeURIComponent(p.path)}" data-path="${p.path}" data-dup="${p.dup ? "1" : "0"}">${p.title}</a></li>`
@@ -485,15 +428,15 @@ async function writeIndexFlat(outDir, navItems) {
   <style>
     :root {
       --bg:#0b0c0f; --panel:#111319; --muted:#262a33; --muted-2:#1d2230; --text:#f4f6fb; --sub:#aab2c5; --accent:#0b63ce;
-      --sidebarW: min(86vw, 420px); /* mobile sidebar width */
+      --sidebarW: min(86vw, 420px);
     }
     * { box-sizing: border-box; }
     html, body { height: 100%; }
     body { margin:0; background:var(--bg); color:var(--text); font: 14px/1.5 system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; }
 
     .app { display:grid; grid-template-columns: 360px 1fr; height:100vh; overflow:hidden; }
-    aside { border-right:1px solid var(--muted); background:var(--panel); height:100vh; overflow:auto; position:relative; }
-    main { height:100vh; position:relative; }
+    aside { border-right:1px solid var(--muted); background:var(--panel); height:100vh; overflow:auto; position:relative; z-index:1000; }
+    main { height:100vh; position:relative; z-index:0; }
 
     header { padding:12px; border-bottom:1px solid var(--muted); display:flex; align-items:center; gap:10px; }
     .brand { font-weight:600; flex:1; }
@@ -511,47 +454,42 @@ async function writeIndexFlat(outDir, navItems) {
     iframe { width:100%; height:100%; border:0; background:#fff; }
     .hint { color: var(--sub); padding: 8px 12px; font-size:12px; }
 
-    /* Overlay: closed = fully transparent & non-blocking; open = dim and clickable.
-       IMPORTANT: when open, start overlay from the right edge of the sidebar so the sidebar stays clickable. */
+    /* Overlay BELOW sidebar, ABOVE content */
     .overlay {
       position: fixed;
       top: 0; right: 0; bottom: 0; left: 0;
-      background: rgba(0,0,0,0);      /* closed: transparent */
+      background: rgba(0,0,0,0);
       transition: background .2s ease;
-      pointer-events: none;           /* closed: clicks pass through */
+      pointer-events: none;
+      z-index: 900;
     }
     body.sidebar-open .overlay {
-      background: rgba(0,0,0,0.4);    /* open: dim content area */
-      pointer-events: auto;           /* allow tap to close */
-      left: var(--sidebarW);          /* leave the sidebar area uncovered/clickable */
+      background: rgba(0,0,0,0.4);
+      pointer-events: auto;
+      left: var(--sidebarW); /* keep sidebar clickable */
     }
 
-    /* Hamburger: LAST in body → stacks above overlay without z-index.
-       30% bigger, black when closed (with strong white halo), white when open (dark halo). */
+    /* Hamburger ABOVE everything */
     .hamburger {
       position: fixed;
       top: calc(env(safe-area-inset-top, 0px) + 10px);
       left: calc(env(safe-area-inset-left, 0px) + 10px);
       background: transparent;
       border: 0;
-      font-size: 34px;   /* +30% */
+      font-size: 34px;  /* +30% */
       line-height: 1;
-      width: 52px;       /* +30% */
-      height: 52px;      /* +30% */
+      width: 52px; height: 52px;
       cursor: pointer;
-      color: #000;       /* closed = black */
+      color: #000;      /* closed = black */
       -webkit-text-stroke: 2px rgba(255,255,255,0.95);
-      text-shadow:
-        0 0 4px rgba(255,255,255,0.95),
-        0 0 8px rgba(255,255,255,0.75);
-      display: none;     /* desktop: hidden */
+      text-shadow: 0 0 4px rgba(255,255,255,0.95), 0 0 8px rgba(255,255,255,0.75);
+      display: none;    /* desktop hidden */
+      z-index: 1100;
     }
     body.sidebar-open .hamburger {
-      color: #fff;       /* open = white */
+      color: #fff;      /* open = white */
       -webkit-text-stroke: 2px rgba(0,0,0,0.8);
-      text-shadow:
-        0 0 4px rgba(0,0,0,0.8),
-        0 0 8px rgba(0,0,0,0.6);
+      text-shadow: 0 0 4px rgba(0,0,0,0.8), 0 0 8px rgba(0,0,0,0.6);
     }
     .hamburger:focus { outline:2px solid var(--accent); border-radius:8px; }
 
@@ -603,10 +541,10 @@ ${listHtml}
     </main>
   </div>
 
-  <!-- Overlay BEFORE hamburger; when open, starts from sidebar's right edge -->
+  <!-- Overlay BELOW sidebar -->
   <div class="overlay" id="overlay"></div>
 
-  <!-- Hamburger LAST in body → naturally above overlay -->
+  <!-- Hamburger LAST and ABOVE all -->
   <button id="hamburger" class="hamburger" aria-label="Toggle navigation" aria-controls="sidebar" aria-expanded="false">☰</button>
 
   <script type="module">
@@ -619,7 +557,6 @@ ${listHtml}
     const count = document.getElementById('count');
     const toggleHideDup = document.getElementById('toggleHideDup');
 
-    // Sidebar controls (responsive)
     const hamburger = document.getElementById('hamburger');
     const overlay = document.getElementById('overlay');
 
@@ -634,22 +571,12 @@ ${listHtml}
       setSidebar(open);
     });
 
-    // Tap overlay background to close (only when open; overlay then has pointer-events:auto)
     overlay?.addEventListener('click', () => setSidebar(false));
+    window.addEventListener('keydown', (e) => { if (e.key === 'Escape') setSidebar(false); });
 
-    // ESC closes
-    window.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') setSidebar(false);
-    });
-
-    // Persist user preference for "Hide duplicates"
     const prefKey = 'accord:hideDup';
     const savedPref = localStorage.getItem(prefKey);
-    if (savedPref !== null) {
-      toggleHideDup.checked = savedPref === '1';
-    } else {
-      toggleHideDup.checked = true; // default ON
-    }
+    toggleHideDup.checked = savedPref !== null ? (savedPref === '1') : true;
 
     count.textContent = navItems.length + " pages";
 
@@ -663,7 +590,6 @@ ${listHtml}
         a.style.background = '';
         if (a.getAttribute('data-path') === p) a.style.background = 'var(--muted)';
       });
-      // Auto-close sidebar on small screens after navigation
       if (window.matchMedia('(max-width: 900px)').matches) setSidebar(false);
     }
 
@@ -686,7 +612,7 @@ ${listHtml}
       openPath(last || (navItems[0] && navItems[0].path));
     });
 
-    // ----- FAST FILTERING: title index + 150ms debounce + rAF chunking -----
+    // Fast filtering
     const items = (() => {
       const arr = [];
       const anchors = listEl.querySelectorAll('li.page a');
@@ -742,7 +668,6 @@ ${listHtml}
       }
     });
 
-    // Initial render
     applyFiltersNow();
     handleHash();
     window.addEventListener('hashchange', handleHash);
