@@ -7,11 +7,11 @@
 // - Copies all assets from srcDir to outDir, processing HTML files
 // - Flattens/cleans legacy HTML (frames, ActiveX-era JS, inline events)
 // - Builds a flat nav from en/html/ only; filters empty/meaningless titles
-// - Duplicate detection by strict title (SimHash + Jaccard), UI can hide/dim duplicates
+// - Duplicate detection by strict title (SimHash + Jaccard); UI can dim/hide duplicates
 // - Writes: outDir/index.html and outDir/_dedupe-report.json
 // - Fast search (150ms debounce + rAF chunking)
-// - Responsive UI: on small screens, sidebar slides in; hamburger is fixed at top-left
-//   and is placed INSIDE the overlay layer (no z-index battles)
+// - Responsive UI: on small screens, sidebar slides in; overlay dims; hamburger is a separate,
+//   fixed element placed LAST in <body> so it naturally sits above overlay without z-index hacks.
 
 import fs from "fs/promises";
 import path from "path";
@@ -98,23 +98,22 @@ function cleanBasicHtml(html, { keepScripts=false } = {}) {
 // Strictly read the <title> text only (no fallbacks)
 function headTitleStrict($) { return ($("title").first().text() || ""); }
 
-// Normalize "empty-looking" titles: remove NBSP, zero-width, other format chars, collapse spaces
+// Normalize "empty-looking" titles
 function normalizeTitle(str) {
-  const s = (str || "")
+  return (str || "")
     .replace(/[\u00A0\u1680\u2000-\u200A\u202F\u205F\u3000]/g, " ")
     .replace(/[\u200B-\u200D\uFEFF\u2060\u00AD]/g, "")
     .replace(/\s+/g, " ")
     .trim();
-  return s;
 }
 
-// Title must be non-empty and contain at least one letter or digit
+// Non-empty and has at least one letter or digit
 function isMeaningfulTitle(str) {
   const t = normalizeTitle(str);
   return t.length > 0 && /[\p{L}\p{N}]/u.test(t);
 }
 
-// Display title used in the actual HTML page (may fallback to h1 or filename)
+// Display title to write back to HTML (fallbacks allowed)
 function displayTitle($, fallback="") {
   const raw = ($("title").first().text() || "").trim();
   if (raw) return raw;
@@ -374,7 +373,7 @@ async function main() {
       if (!replaced) doc$(el).attr("href", "#");
     });
 
-    // IMPORTANT: read strict BEFORE mutating <title>
+    // Strict title BEFORE mutation
     const strictTitle = normalizeTitle(headTitleStrict(doc$));
 
     const dispTitle = displayTitle(doc$, path.basename(rel));
@@ -496,7 +495,6 @@ async function writeIndexFlat(outDir, navItems) {
     header { padding:12px; border-bottom:1px solid var(--muted); display:flex; align-items:center; gap:10px; }
     .brand { font-weight:600; flex:1; }
 
-    /* Toolbar & list */
     .toolbar { display:flex; align-items:center; gap:12px; padding:10px 12px 0; }
     .toolbar label { display:flex; align-items:center; gap:8px; font-size:13px; color:var(--sub); user-select:none; cursor:pointer; }
     .search { padding:10px 12px 12px; }
@@ -510,46 +508,41 @@ async function writeIndexFlat(outDir, navItems) {
     iframe { width:100%; height:100%; border:0; background:#fff; }
     .hint { color: var(--sub); padding: 8px 12px; font-size:12px; }
 
-    /* Overlay layer that also hosts the hamburger */
+    /* Overlay: separate sibling (before hamburger in DOM) */
     .overlay {
       position: fixed;
       inset: 0;
-      display: flex;
-      align-items: flex-start;
-      justify-content: flex-start;
-      padding-top: calc(env(safe-area-inset-top, 0px) + 10px);
-      padding-left: calc(env(safe-area-inset-left, 0px) + 10px);
-      background: rgba(0,0,0,0);       /* closed: fully transparent */
+      background: rgba(0,0,0,0);   /* closed: fully transparent */
+      opacity: 1;                  /* keep at 1; we change background only */
       transition: background .2s ease;
-      /* Important: do not block clicks when closed, but keep button clickable */
-      pointer-events: none;
+      pointer-events: none;        /* closed: clicks pass through */
     }
     body.sidebar-open .overlay {
-      background: rgba(0,0,0,0.4);     /* open: dim background */
-      pointer-events: auto;            /* allow closing by tap */
+      background: rgba(0,0,0,0.4); /* open: dim */
+      pointer-events: auto;        /* allow tapping to close */
     }
 
-    /* Hamburger INSIDE overlay; 30% bigger than before (approx) */
+    /* Hamburger: separate LAST element in body → appears above overlay without z-index */
     .hamburger {
+      position: fixed;
+      top: calc(env(safe-area-inset-top, 0px) + 10px);
+      left: calc(env(safe-area-inset-left, 0px) + 10px);
       background: transparent;
       border: 0;
-      font-size: 34px;     /* was 26px → +30% */
+      font-size: 34px;   /* +30% */
       line-height: 1;
-      width: 52px;         /* was 40px → +30% */
-      height: 52px;        /* was 40px → +30% */
+      width: 52px;       /* +30% */
+      height: 52px;      /* +30% */
       cursor: pointer;
-      color: #000;         /* closed = black */
-      /* Strong white halo so it won't blend with dark-on-light texts/images */
+      color: #000;       /* closed = black */
       -webkit-text-stroke: 2px rgba(255,255,255,0.95);
       text-shadow:
         0 0 4px rgba(255,255,255,0.95),
         0 0 8px rgba(255,255,255,0.75);
-      /* Make the button clickable even when overlay has pointer-events:none */
-      pointer-events: auto;
-      display: none;       /* hidden by default (desktop) */
+      display: none;     /* desktop: hidden */
     }
     body.sidebar-open .hamburger {
-      color: #fff;         /* open = white */
+      color: #fff;       /* open = white */
       -webkit-text-stroke: 2px rgba(0,0,0,0.8);
       text-shadow:
         0 0 4px rgba(0,0,0,0.8),
@@ -605,10 +598,11 @@ ${listHtml}
     </main>
   </div>
 
-  <!-- Overlay hosts the hamburger; stays transparent & non-blocking when closed -->
-  <div class="overlay" id="overlay">
-    <button id="hamburger" class="hamburger" aria-label="Toggle navigation" aria-controls="sidebar" aria-expanded="false">☰</button>
-  </div>
+  <!-- Overlay BEFORE hamburger -->
+  <div class="overlay" id="overlay"></div>
+
+  <!-- Hamburger LAST in body → stacks above overlay without z-index -->
+  <button id="hamburger" class="hamburger" aria-label="Toggle navigation" aria-controls="sidebar" aria-expanded="false">☰</button>
 
   <script type="module">
     const navItems = ${JSON.stringify(navItems, null, 2)};
@@ -635,11 +629,10 @@ ${listHtml}
       setSidebar(open);
     });
 
-    // Close when tapping overlay background (but ignore clicks on the button itself)
-    overlay?.addEventListener('click', (e) => {
-      if (e.target === overlay) setSidebar(false);
-    });
+    // Tap overlay background to close (only when open; overlay then has pointer-events:auto)
+    overlay?.addEventListener('click', () => setSidebar(false));
 
+    // ESC closes
     window.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') setSidebar(false);
     });
