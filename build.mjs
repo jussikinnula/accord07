@@ -12,6 +12,7 @@
 // - Responsive UI with mobile sidebar; overlay dims content only; hamburger last in <body>
 // - Robust stacking (sidebar z=1000 > overlay z=900 > content z=0; hamburger z=1100)
 // - CSS fix so images don’t overlap tables
+// - Mobile: disable pinch/double-tap zoom + ensure inputs are >=16px to prevent focus zoom
 
 import fs from "fs/promises";
 import path from "path";
@@ -280,7 +281,7 @@ async function main() {
 <head>
 <meta charset="utf-8">
 <title>${dispTitle}</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
 <style>
   body { margin:0; background:#fff; color:#111; font: 14px/1.5 system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; }
   .grid { display:grid; grid-template-columns: 360px 1fr; min-height: 100vh; }
@@ -325,7 +326,7 @@ async function main() {
       }).join("\n");
       const fallback = `<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><title>${dispTitle}</title>
-<meta name="viewport" content="width=device-width, initial-scale=1"></head>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover"></head>
 <body>
 <h1>${dispTitle}</h1>
 <p>This page used frames. Choose a pane to open:</p>
@@ -484,7 +485,7 @@ async function writeIndexFlat(outDir, navItems) {
 <head>
   <meta charset="utf-8">
   <title>Honda Accord 7 service manual</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
   <style>
     :root {
       --bg:#0b0c0f; --panel:#111319; --muted:#262a33; --muted-2:#1d2230; --text:#f4f6fb; --sub:#aab2c5; --accent:#0b63ce;
@@ -504,7 +505,9 @@ async function writeIndexFlat(outDir, navItems) {
     .toolbar { display:flex; align-items:center; gap:12px; padding:10px 12px 0; flex-wrap: wrap; }
     .toolbar label { display:flex; align-items:center; gap:8px; font-size:13px; color:var(--sub); user-select:none; cursor:pointer; white-space:nowrap; }
     .search { padding:10px 12px 12px; }
-    .search input { width:100%; padding:10px 12px; border-radius:10px; border:1px solid var(--muted); background:#0e1117; color:var(--text); }
+    .search input { width:100%; padding:10px 12px; border-radius:10px; border:1px solid var(--muted); background:#0e1117; color:var(--text); font-size:16px; } /* prevent iOS focus zoom */
+    input, select, textarea, button { font-size:16px; } /* safety for other controls */
+
     nav { padding: 0 8px 16px; }
     nav ul { list-style:none; padding-left:0; margin:6px 0; }
     nav li.page a { display:block; padding:6px 8px; border-radius:8px; color:var(--text); text-decoration:none; }
