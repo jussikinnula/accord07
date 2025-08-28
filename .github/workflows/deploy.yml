@@ -1,0 +1,62 @@
+name: Build & Deploy Honda Manual
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - "build.mjs"
+      - "manual/**"
+      - "package.json"
+      - "package-lock.json"
+      - ".github/workflows/deploy.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Use Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install deps
+        run: npm ci || npm i
+
+      - name: Build site (manual -> build)
+        run: node build.mjs manual build
+
+      - name: "Guard: build/ must exist and have index.html"
+        run: |
+          test -d build || (echo "build/ puuttuu" && exit 1)
+          test -f build/index.html || (echo "build/index.html puuttuu" && exit 1)
+          du -sh build || true
+          find build -maxdepth 2 -type f | head -n 50 || true
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: build
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
