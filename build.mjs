@@ -9,12 +9,12 @@
 //   * IE/frameset/inline event cruft removed
 //   * "javascript:parent.*" links converted to normal hrefs
 // - Builds a flat navigation ONLY from pages under "en/html/"
-// - Hides from nav: HONDAESM.HTML, ESMBLANK.HTML, pages with empty <title>
-// - Performs conservative duplicate detection among same-title pages
-//   (SimHash + Jaccard), and exposes duplicates in the left nav:
+// - Hides from nav: HONDAESM.HTML, ESMBLANK.HTML, pages with an empty/meaningless <title>
+// - Performs conservative duplicate detection among same-title pages (SimHash + Jaccard)
+//   and exposes duplicates in the left nav:
 //     • Canonical items: normal style
-//     • Duplicates: dimmed style (toggle visibility via checkbox)
-// - Outputs a dedupe report to build/_dedupe-report.json
+//     • Duplicates: dimmed style (toggle via checkbox)
+// - Outputs a dedupe report to outDir/_dedupe-report.json
 // - Left pane search is fast: 150ms debounce + requestAnimationFrame chunking
 
 import fs from "fs/promises";
@@ -114,6 +114,12 @@ function displayTitle($, fallback="") {
   return t || fallback;
 }
 
+// Title must be non-empty and contain at least one letter or digit
+function isMeaningfulTitle(str) {
+  const t = (str || "").trim();
+  return t.length > 0 && /[\p{L}\p{N}]/u.test(t);
+}
+
 function extractBodyInnerHtml(doc$) {
   const body = doc$("body");
   return body.length ? (body.html() ?? "") : (doc$.root().html() ?? "");
@@ -123,13 +129,13 @@ function looksLikeFrameset($) { return $("frameset").length > 0 && $("frame").le
 function isExcludedFromNav(relPath) { return EXCLUDE_FROM_NAV.some(rx => rx.test(relPath)); }
 
 function includeInFlatNav(relPath, strictTitle) {
-  // Nav shows: only under NAV_ROOT_PREFIX, not PR1/PR2 panels, not excluded, and non-empty <title>
+  // Nav shows: only under NAV_ROOT_PREFIX, not PR1/PR2 panels, not excluded, and meaningful <title>
   const p = relPath.toLowerCase();
   return (
     p.startsWith(NAV_ROOT_PREFIX) &&
     !/_pr[12]\.html?$/.test(p) &&
     !isExcludedFromNav(relPath) &&
-    (strictTitle?.trim() ?? "") !== ""
+    isMeaningfulTitle(strictTitle)
   );
 }
 
@@ -300,7 +306,7 @@ async function main() {
 
         // Prepare dedupe signals from the merged HTML
         const $$ = cheerio.load(merged, { decodeEntities:false });
-        const strict = strictTitle.trim();
+        const strict = headTitleStrict($);
         if (includeInFlatNav(rel, strict)) {
           const norm = normalizeTextForCompare($$);
           const toks = tokenize(norm);
@@ -333,7 +339,7 @@ async function main() {
 </body></html>`;
       await fs.writeFile(outAbs, fallback, "utf8");
 
-      const strict = strictTitle.trim();
+      const strict = headTitleStrict($);
       if (includeInFlatNav(rel, strict)) {
         const $$ = cheerio.load(fallback, { decodeEntities:false });
         const norm = normalizeTextForCompare($$);
@@ -386,7 +392,7 @@ async function main() {
     doc$("title").first().text(dispTitle);
     await fs.writeFile(outAbs, doc$.html() ?? "", "utf8");
 
-    const strict = headTitleStrict(doc$).trim();
+    const strict = headTitleStrict(doc$);
     if (includeInFlatNav(rel, strict)) {
       const norm = normalizeTextForCompare(doc$);
       const toks = tokenize(norm);
@@ -413,7 +419,7 @@ async function main() {
 
   for (const [title, arr] of byTitle.entries()) {
     if (arr.length === 1) {
-      navItems.push({ title, path: arr[0].path, dup: false });
+      if (isMeaningfulTitle(title)) navItems.push({ title, path: arr[0].path, dup: false });
       continue;
     }
 
@@ -446,8 +452,8 @@ async function main() {
       else keep.push(cand);
     }
 
-    for (const k of keep) navItems.push({ title, path: k.path, dup: false });
-    for (const d of dupes) navItems.push({ title, path: d.path, dup: true });
+    for (const k of keep) if (isMeaningfulTitle(title)) navItems.push({ title, path: k.path, dup: false });
+    for (const d of dupes) if (isMeaningfulTitle(title)) navItems.push({ title, path: d.path, dup: true });
 
     if (dupes.length) {
       dedupeReport.push({
@@ -462,15 +468,18 @@ async function main() {
   // Sort by title for stable nav
   navItems.sort((a,b)=> a.title.localeCompare(b.title, undefined, { sensitivity:"base" }));
 
-  // Write report
+  // Write report (use the actual outDir, not the default)
   await fs.writeFile(
     path.join(outDir, "_dedupe-report.json"),
     JSON.stringify({ thresholds: { HAMMING_MAX, JACCARD_MIN }, groups: dedupeReport }, null, 2),
     "utf8"
   );
 
+  // Final guard: drop any items with non-meaningful titles (just in case)
+  const filteredNavItems = navItems.filter(it => isMeaningfulTitle(it.title));
+
   // Build index with Hide Duplicates checkbox
-  await writeIndexFlat(outDir, navItems);
+  await writeIndexFlat(outDir, filteredNavItems);
   console.log(`✅ Done. Open: ${path.join(outDir, "index.html")}`);
   console.log(`ℹ️  Dedupe report: ${path.join(outDir, "_dedupe-report.json")}`);
 }
