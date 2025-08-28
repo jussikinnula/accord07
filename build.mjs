@@ -10,12 +10,10 @@
 //   * "javascript:parent.*" links converted to normal hrefs
 // - Builds a flat navigation ONLY from pages under "en/html/"
 // - Hides from nav: HONDAESM.HTML, ESMBLANK.HTML, pages with an empty/meaningless <title>
-// - Performs conservative duplicate detection among same-title pages (SimHash + Jaccard)
-//   and exposes duplicates in the left nav:
-//     • Canonical items: normal style
-//     • Duplicates: dimmed style (toggle via checkbox)
-// - Outputs a dedupe report to outDir/_dedupe-report.json
-// - Left pane search is fast: 150ms debounce + requestAnimationFrame chunking
+// - Conservative duplicate detection among same-title pages (SimHash + Jaccard):
+//   Canonical is longest; duplicates are dimmed (can be hidden via checkbox)
+// - Writes: outDir/index.html and outDir/_dedupe-report.json
+// - Left-pane search: 150ms debounce + requestAnimationFrame chunking
 
 import fs from "fs/promises";
 import path from "path";
@@ -101,23 +99,34 @@ function cleanBasicHtml(html, { keepScripts=false } = {}) {
 
 // Strictly read the <title> text only (no fallbacks)
 function headTitleStrict($) {
-  return ( $("title").first().text() || "" ).trim();
+  return ( $("title").first().text() || "" );
 }
 
-// Display title used in the actual HTML page (may fallback to h1 or filename)
-function displayTitle($, fallback="") {
-  let t = ($("title").first().text() || "").trim();
-  if (!t) {
-    const h1 = $("h1").first().text().trim();
-    t = h1 || fallback;
-  }
-  return t || fallback;
+// Normalize "empty-looking" titles: remove NBSP, zero-width, other format chars, collapse spaces
+function normalizeTitle(str) {
+  const s = (str || "")
+    // Replace NBSP and other Unicode spaces with regular spaces
+    .replace(/[\u00A0\u1680\u2000-\u200A\u202F\u205F\u3000]/g, " ")
+    // Remove zero-width and format control chars
+    .replace(/[\u200B-\u200D\uFEFF\u2060\u00AD]/g, "")
+    // Collapse all whitespace sequences
+    .replace(/\s+/g, " ")
+    .trim();
+  return s;
 }
 
 // Title must be non-empty and contain at least one letter or digit
 function isMeaningfulTitle(str) {
-  const t = (str || "").trim();
+  const t = normalizeTitle(str);
   return t.length > 0 && /[\p{L}\p{N}]/u.test(t);
+}
+
+// Display title used in the actual HTML page (may fallback to h1 or filename)
+function displayTitle($, fallback="") {
+  const raw = ($("title").first().text() || "").trim();
+  if (raw) return raw;
+  const h1 = $("h1").first().text().trim();
+  return h1 || fallback;
 }
 
 function extractBodyInnerHtml(doc$) {
@@ -274,8 +283,11 @@ async function main() {
         const left = extractBodyInnerHtml($a);
         const right = extractBodyInnerHtml($b);
 
+        // read strict BEFORE any title mutation
+        const strictTitleRaw = headTitleStrict($);
+        const strictTitle = normalizeTitle(strictTitleRaw);
+
         const dispTitle = displayTitle($, path.basename(rel));
-        const strictTitle = headTitleStrict($);
 
         const merged = `<!doctype html>
 <html lang="en">
@@ -305,14 +317,13 @@ async function main() {
         await fs.writeFile(outAbs, merged, "utf8");
 
         // Prepare dedupe signals from the merged HTML
-        const $$ = cheerio.load(merged, { decodeEntities:false });
-        const strict = headTitleStrict($);
-        if (includeInFlatNav(rel, strict)) {
+        if (includeInFlatNav(rel, strictTitle)) {
+          const $$ = cheerio.load(merged, { decodeEntities:false });
           const norm = normalizeTextForCompare($$);
           const toks = tokenize(norm);
           candidates.push({
             path: rel,
-            strictTitle: strict,
+            strictTitle: strictTitle,
             dispTitle,
             textLen: norm.length,
             simhash: simhash64(toks),
@@ -322,8 +333,9 @@ async function main() {
       }
 
       // 3+ frames → simple fallback page
+      const strictTitleRaw = headTitleStrict($);
+      const strictTitle = normalizeTitle(strictTitleRaw);
       const dispTitle = displayTitle($, path.basename(rel));
-      const strictTitle = headTitleStrict($);
       const list = frames.map(f => {
         const href = f.src || "";
         const label = f.name || href || "frame";
@@ -339,14 +351,13 @@ async function main() {
 </body></html>`;
       await fs.writeFile(outAbs, fallback, "utf8");
 
-      const strict = headTitleStrict($);
-      if (includeInFlatNav(rel, strict)) {
+      if (includeInFlatNav(rel, strictTitle)) {
         const $$ = cheerio.load(fallback, { decodeEntities:false });
         const norm = normalizeTextForCompare($$);
         const toks = tokenize(norm);
         candidates.push({
           path: rel,
-          strictTitle: strict,
+          strictTitle,
           dispTitle,
           textLen: norm.length,
           simhash: simhash64(toks),
@@ -388,17 +399,20 @@ async function main() {
       if (!replaced) doc$(el).attr("href", "#");
     });
 
+    // IMPORTANT: read strict BEFORE mutating <title>
+    const strictTitleRaw = headTitleStrict(doc$);
+    const strictTitle = normalizeTitle(strictTitleRaw);
+
     const dispTitle = displayTitle(doc$, path.basename(rel));
     doc$("title").first().text(dispTitle);
     await fs.writeFile(outAbs, doc$.html() ?? "", "utf8");
 
-    const strict = headTitleStrict(doc$);
-    if (includeInFlatNav(rel, strict)) {
+    if (includeInFlatNav(rel, strictTitle)) {
       const norm = normalizeTextForCompare(doc$);
       const toks = tokenize(norm);
       candidates.push({
         path: rel,
-        strictTitle: strict,
+        strictTitle,
         dispTitle,
         textLen: norm.length,
         simhash: simhash64(toks),
@@ -417,9 +431,12 @@ async function main() {
   const navItems = []; // { title, path, dup: boolean }
   const dedupeReport = [];
 
-  for (const [title, arr] of byTitle.entries()) {
+  for (const [titleRaw, arr] of byTitle.entries()) {
+    const title = normalizeTitle(titleRaw);
+    if (!isMeaningfulTitle(title)) continue;
+
     if (arr.length === 1) {
-      if (isMeaningfulTitle(title)) navItems.push({ title, path: arr[0].path, dup: false });
+      navItems.push({ title, path: arr[0].path, dup: false });
       continue;
     }
 
@@ -452,8 +469,8 @@ async function main() {
       else keep.push(cand);
     }
 
-    for (const k of keep) if (isMeaningfulTitle(title)) navItems.push({ title, path: k.path, dup: false });
-    for (const d of dupes) if (isMeaningfulTitle(title)) navItems.push({ title, path: d.path, dup: true });
+    for (const k of keep) navItems.push({ title, path: k.path, dup: false });
+    for (const d of dupes) navItems.push({ title, path: d.path, dup: true });
 
     if (dupes.length) {
       dedupeReport.push({
@@ -468,14 +485,14 @@ async function main() {
   // Sort by title for stable nav
   navItems.sort((a,b)=> a.title.localeCompare(b.title, undefined, { sensitivity:"base" }));
 
-  // Write report (use the actual outDir, not the default)
+  // Write report
   await fs.writeFile(
     path.join(outDir, "_dedupe-report.json"),
     JSON.stringify({ thresholds: { HAMMING_MAX, JACCARD_MIN }, groups: dedupeReport }, null, 2),
     "utf8"
   );
 
-  // Final guard: drop any items with non-meaningful titles (just in case)
+  // Final guard: drop any items with non-meaningful titles (handles weird whitespace)
   const filteredNavItems = navItems.filter(it => isMeaningfulTitle(it.title));
 
   // Build index with Hide Duplicates checkbox
