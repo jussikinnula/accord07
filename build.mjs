@@ -10,8 +10,8 @@
 // - Duplicate detection by strict title (SimHash + Jaccard); UI can dim/hide duplicates
 // - Writes: outDir/index.html and outDir/_dedupe-report.json
 // - Fast search (150ms debounce + rAF chunking)
-// - Responsive UI: on small screens, sidebar slides in; overlay dims; hamburger is a separate,
-//   fixed element placed LAST in <body> so it naturally sits above overlay without z-index hacks.
+// - Responsive UI: on small screens, sidebar slides in; overlay dims only the content area;
+//   hamburger is a separate, fixed element placed LAST in <body> so it naturally stacks above overlay.
 
 import fs from "fs/promises";
 import path from "path";
@@ -483,7 +483,10 @@ async function writeIndexFlat(outDir, navItems) {
   <title>Honda Accord 7 service manual</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
-    :root { --bg:#0b0c0f; --panel:#111319; --muted:#262a33; --muted-2:#1d2230; --text:#f4f6fb; --sub:#aab2c5; --accent:#0b63ce; }
+    :root {
+      --bg:#0b0c0f; --panel:#111319; --muted:#262a33; --muted-2:#1d2230; --text:#f4f6fb; --sub:#aab2c5; --accent:#0b63ce;
+      --sidebarW: min(86vw, 420px); /* mobile sidebar width */
+    }
     * { box-sizing: border-box; }
     html, body { height: 100%; }
     body { margin:0; background:var(--bg); color:var(--text); font: 14px/1.5 system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; }
@@ -508,21 +511,23 @@ async function writeIndexFlat(outDir, navItems) {
     iframe { width:100%; height:100%; border:0; background:#fff; }
     .hint { color: var(--sub); padding: 8px 12px; font-size:12px; }
 
-    /* Overlay: separate sibling (before hamburger in DOM) */
+    /* Overlay: closed = fully transparent & non-blocking; open = dim and clickable.
+       IMPORTANT: when open, start overlay from the right edge of the sidebar so the sidebar stays clickable. */
     .overlay {
       position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0);   /* closed: fully transparent */
-      opacity: 1;                  /* keep at 1; we change background only */
+      top: 0; right: 0; bottom: 0; left: 0;
+      background: rgba(0,0,0,0);      /* closed: transparent */
       transition: background .2s ease;
-      pointer-events: none;        /* closed: clicks pass through */
+      pointer-events: none;           /* closed: clicks pass through */
     }
     body.sidebar-open .overlay {
-      background: rgba(0,0,0,0.4); /* open: dim */
-      pointer-events: auto;        /* allow tapping to close */
+      background: rgba(0,0,0,0.4);    /* open: dim content area */
+      pointer-events: auto;           /* allow tap to close */
+      left: var(--sidebarW);          /* leave the sidebar area uncovered/clickable */
     }
 
-    /* Hamburger: separate LAST element in body → appears above overlay without z-index */
+    /* Hamburger: LAST in body → stacks above overlay without z-index.
+       30% bigger, black when closed (with strong white halo), white when open (dark halo). */
     .hamburger {
       position: fixed;
       top: calc(env(safe-area-inset-top, 0px) + 10px);
@@ -555,7 +560,7 @@ async function writeIndexFlat(outDir, navItems) {
       aside {
         position: fixed;
         top: 0; left: 0; bottom: 0;
-        width: 86vw; max-width: 420px;
+        width: var(--sidebarW);
         transform: translateX(-100%);
         transition: transform .2s ease;
         box-shadow: 0 0 40px rgba(0,0,0,0.35);
@@ -598,10 +603,10 @@ ${listHtml}
     </main>
   </div>
 
-  <!-- Overlay BEFORE hamburger -->
+  <!-- Overlay BEFORE hamburger; when open, starts from sidebar's right edge -->
   <div class="overlay" id="overlay"></div>
 
-  <!-- Hamburger LAST in body → stacks above overlay without z-index -->
+  <!-- Hamburger LAST in body → naturally above overlay -->
   <button id="hamburger" class="hamburger" aria-label="Toggle navigation" aria-controls="sidebar" aria-expanded="false">☰</button>
 
   <script type="module">
