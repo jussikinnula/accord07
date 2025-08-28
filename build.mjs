@@ -1,7 +1,7 @@
 // build.mjs
 // Node 18+
 //
-// Usage: node build.mjs [srcDir=manual] [outDir=fixed]
+// Usage: node build.mjs [srcDir=manual] [outDir=build]
 //
 // What this script does:
 // - Copies all assets from srcDir to outDir, processing HTML files:
@@ -14,7 +14,7 @@
 //   (SimHash + Jaccard), and exposes duplicates in the left nav:
 //     • Canonical items: normal style
 //     • Duplicates: dimmed style (toggle visibility via checkbox)
-// - Outputs a dedupe report to fixed/_dedupe-report.json
+// - Outputs a dedupe report to build/_dedupe-report.json
 // - Left pane search is fast: 150ms debounce + requestAnimationFrame chunking
 
 import fs from "fs/promises";
@@ -26,7 +26,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const DEFAULT_SRC = "manual";
-const DEFAULT_OUT = "fixed";
+const DEFAULT_OUT = "build";
 
 // ---- Duplicate detection thresholds ----
 const HAMMING_MAX = 3;     // max bit differences (64-bit SimHash) to consider duplicate
@@ -407,8 +407,7 @@ async function main() {
     byTitle.get(c.strictTitle).push(c);
   }
 
-  // For the index we will include BOTH canonical and duplicates,
-  // marking duplicates so the UI can dim/hide them.
+  // Include BOTH canonical and duplicates; mark duplicates so UI can dim/hide them.
   const navItems = []; // { title, path, dup: boolean }
   const dedupeReport = [];
 
@@ -447,7 +446,6 @@ async function main() {
       else keep.push(cand);
     }
 
-    // Include canonical & keepers as non-dup, duplicates as dup:true
     for (const k of keep) navItems.push({ title, path: k.path, dup: false });
     for (const d of dupes) navItems.push({ title, path: d.path, dup: true });
 
@@ -487,7 +485,7 @@ async function writeIndexFlat(outDir, navItems) {
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Honda Accord 7 service manual</title>
+  <title>Honda Accord 7 - service manual</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
     :root { --bg:#0b0c0f; --panel:#111319; --muted:#262a33; --muted-2:#1d2230; --text:#f4f6fb; --sub:#aab2c5; }
@@ -514,7 +512,7 @@ async function writeIndexFlat(outDir, navItems) {
 <body>
   <aside>
     <header>
-      <div class="brand">Honda Accord – käyttöohje</div>
+      <div class="brand">Honda Accord 7 – service manual</div>
       <div class="count" id="count"></div>
     </header>
 
