@@ -432,8 +432,8 @@ async function main() {
         isDup = true;
       } else {
         // Fallback: compute Jaccard over tokens (read from already written outDir pages)
-        const canHtml = await readUtf8(path.join(DEFAULT_OUT, canonical.path));
-        const cHtml = await readUtf8(path.join(DEFAULT_OUT, cand.path));
+        const canHtml = await readUtf8(path.join(outDir, canonical.path));
+        const cHtml = await readUtf8(path.join(outDir, cand.path));
         const $$a = cheerio.load(canHtml, { decodeEntities:false });
         const $$b = cheerio.load(cHtml, { decodeEntities:false });
         const setA = new Set(tokenize(normalizeTextForCompare($$a)));
@@ -464,7 +464,7 @@ async function main() {
 
   // Write report
   await fs.writeFile(
-    path.join(DEFAULT_OUT, "_dedupe-report.json"),
+    path.join(outDir, "_dedupe-report.json"),
     JSON.stringify({ thresholds: { HAMMING_MAX, JACCARD_MIN }, groups: dedupeReport }, null, 2),
     "utf8"
   );
@@ -485,7 +485,7 @@ async function writeIndexFlat(outDir, navItems) {
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Honda Accord 7 - service manual</title>
+  <title>Honda Accord 7 service manual</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
     :root { --bg:#0b0c0f; --panel:#111319; --muted:#262a33; --muted-2:#1d2230; --text:#f4f6fb; --sub:#aab2c5; }
