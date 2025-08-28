@@ -7,6 +7,7 @@
 // - Kopioi muun datan
 // - Luo index.html jossa vasemman laidan navigaatio on FLAT-lista vain polusta "en/html/" (ei kansiopuita)
 // - HONDAESM.HTML piilotetaan navista
+// - Tyhjän <title></title> omaavat sivut jätetään pois navista
 // - Haku: 150 ms debounce, rAF-chunkkaus (sujuva isoilla listoilla)
 
 import fs from "fs/promises";
@@ -32,7 +33,7 @@ const BINARY_EXTS = new Set([
 // Navissa näytetään vain tämän polun alla olevat HTML-sivut (flat-listana)
 const NAV_ROOT_PREFIX = "en/html/";
 
-// Piilotettavat polut navista
+// Piilotettavat polut/nav-sivut
 const EXCLUDE_FROM_NAV = [
   /^_COM\//i,               // ESM yleissivut
   /\/ESMBLANK\.HTML$/i,     // tyhjä sivu
@@ -101,10 +102,16 @@ function titleOf($, fallback="") {
 function isExcludedFromNav(relPath) {
   return EXCLUDE_FROM_NAV.some(rx => rx.test(relPath));
 }
-function includeInFlatNav(relPath) {
-  // Näytetään navissa vain NAV_ROOT_PREFIX -polun alla olevat "pääsivut" (ei PR1/PR2)
+function includeInFlatNav(relPath, title) {
+  // Näytetään navissa vain NAV_ROOT_PREFIX -polun alla olevat "pääsivut"
+  // joilla on EI-tyhjä title ja jotka eivät ole PR1/PR2
   const p = relPath.toLowerCase();
-  return p.startsWith(NAV_ROOT_PREFIX) && !/_pr[12]\.html?$/.test(p) && !isExcludedFromNav(relPath);
+  return (
+    p.startsWith(NAV_ROOT_PREFIX) &&
+    !/_pr[12]\.html?$/.test(p) &&
+    !isExcludedFromNav(relPath) &&
+    (title?.trim() ?? "") !== ""
+  );
 }
 
 function* candidateTargets(id) {
@@ -207,12 +214,13 @@ async function main() {
 </html>`;
         await fs.writeFile(outAbs, merged, "utf8");
 
-        // Frameset-sivuja ei lisätä navin FLAT-listaan ellei se ole NAV_ROOT_PREFIXin alla
-        if (includeInFlatNav(rel)) manifest.push({ title, path: rel });
+        if (includeInFlatNav(rel, title)) {
+          manifest.push({ title, path: rel });
+        }
         continue;
       }
 
-      // 3+ framea → fallback-lista (ei nav-listaan, ellei kuulu NAV_ROOT_PREFIXiin)
+      // 3+ framea → fallback-lista
       const title = titleOf($, path.basename(rel));
       const list = frames.map(f => {
         const href = f.src || "";
@@ -228,7 +236,10 @@ async function main() {
 <ul>${list}</ul>
 </body></html>`;
       await fs.writeFile(outAbs, fallback, "utf8");
-      if (includeInFlatNav(rel)) manifest.push({ title, path: rel });
+
+      if (includeInFlatNav(rel, title)) {
+        manifest.push({ title, path: rel });
+      }
       continue;
     }
 
@@ -272,8 +283,8 @@ async function main() {
     const title = titleOf(doc$, path.basename(rel));
     await fs.writeFile(outAbs, doc$.html() ?? "", "utf8");
 
-    // Lisää navin FLAT-listaan vain en/html -polusta, ei PR1/PR2, ei EXCLUDE
-    if (includeInFlatNav(rel)) {
+    // Lisää navin FLAT-listaan vain en/html -polusta, ei PR1/PR2, ei EXCLUDE, ja vain jos title ei ole tyhjä
+    if (includeInFlatNav(rel, title)) {
       manifest.push({ title, path: rel });
     }
   }
