@@ -3,17 +3,11 @@
 //
 // Käyttö: node build.mjs [srcDir=manual] [outDir=fixed]
 //
-// Tekee:
-// - Skannaa srcDir:n
-// - Kopioi binäärit ja tekstitiedostot sellaisenaan (UTF-8 teks­teihin)
-// - Prosessoi HTML-tiedostot:
-//   * framesetit -> yhdistää PR1/PR2 sisällöt yhdeksi normaaliksi sivuksi
-//   * poistaa IE/frameset-roippeet, on*-attribuutit
-//   * korjaa javascript:parent.Prt/Cts/Jmp -linkit tavallisiksi href-linkeiksi
-// - Kirjoittaa kaiken outDir:iin samaan hakemistorakenteeseen
-// - Luo juureen index.html:in navigaatiolla ja haulla
-//   * Haku: 150 ms debounce, lukee aina ajantasaisen input-arvon,
-//           ja chunkkaa filtteröinnin rAF:illa ettei UI töki isoilla listoilla.
+// - Prosessoi HTML:t (framesetit -> yhdistää PR1/PR2 yhteen sivuun; siivoaa IE-roippeet; korjaa javascript:parent.* -linkit)
+// - Kopioi muun datan
+// - Luo index.html jossa vasemman laidan navigaatio on FLAT-lista vain polusta "en/html/" (ei kansiopuita)
+// - HONDAESM.HTML piilotetaan navista
+// - Haku: 150 ms debounce, rAF-chunkkaus (sujuva isoilla listoilla)
 
 import fs from "fs/promises";
 import path from "path";
@@ -35,9 +29,14 @@ const BINARY_EXTS = new Set([
   ".pdf",".zip",".rar",".7z",".db",".exe",".inf"
 ]);
 
+// Navissa näytetään vain tämän polun alla olevat HTML-sivut (flat-listana)
+const NAV_ROOT_PREFIX = "en/html/";
+
+// Piilotettavat polut navista
 const EXCLUDE_FROM_NAV = [
-  /^_COM\//i,
-  /\/ESMBLANK\.HTML$/i
+  /^_COM\//i,               // ESM yleissivut
+  /\/ESMBLANK\.HTML$/i,     // tyhjä sivu
+  /^HONDAESM\.HTML$/i       // ylimmän tason frameset, turha navissa
 ];
 
 const SUSPICIOUS_SCRIPT = /activex|hhctrl|classid|createobject|ActiveXObject|mshta/i;
@@ -99,8 +98,13 @@ function titleOf($, fallback="") {
   return t || fallback;
 }
 
-function shouldHideFromNav(relPath) {
+function isExcludedFromNav(relPath) {
   return EXCLUDE_FROM_NAV.some(rx => rx.test(relPath));
+}
+function includeInFlatNav(relPath) {
+  // Näytetään navissa vain NAV_ROOT_PREFIX -polun alla olevat "pääsivut" (ei PR1/PR2)
+  const p = relPath.toLowerCase();
+  return p.startsWith(NAV_ROOT_PREFIX) && !/_pr[12]\.html?$/.test(p) && !isExcludedFromNav(relPath);
 }
 
 function* candidateTargets(id) {
@@ -202,10 +206,13 @@ async function main() {
 </body>
 </html>`;
         await fs.writeFile(outAbs, merged, "utf8");
-        if (!shouldHideFromNav(rel)) manifest.push({ title, path: rel });
+
+        // Frameset-sivuja ei lisätä navin FLAT-listaan ellei se ole NAV_ROOT_PREFIXin alla
+        if (includeInFlatNav(rel)) manifest.push({ title, path: rel });
         continue;
       }
 
+      // 3+ framea → fallback-lista (ei nav-listaan, ellei kuulu NAV_ROOT_PREFIXiin)
       const title = titleOf($, path.basename(rel));
       const list = frames.map(f => {
         const href = f.src || "";
@@ -221,7 +228,7 @@ async function main() {
 <ul>${list}</ul>
 </body></html>`;
       await fs.writeFile(outAbs, fallback, "utf8");
-      if (!shouldHideFromNav(rel)) manifest.push({ title, path: rel });
+      if (includeInFlatNav(rel)) manifest.push({ title, path: rel });
       continue;
     }
 
@@ -264,51 +271,25 @@ async function main() {
 
     const title = titleOf(doc$, path.basename(rel));
     await fs.writeFile(outAbs, doc$.html() ?? "", "utf8");
-    if (!shouldHideFromNav(rel) && !/_PR[12]\.html?$/i.test(rel)) {
+
+    // Lisää navin FLAT-listaan vain en/html -polusta, ei PR1/PR2, ei EXCLUDE
+    if (includeInFlatNav(rel)) {
       manifest.push({ title, path: rel });
     }
   }
 
+  // Lajittele otsikon mukaan
   manifest.sort((a,b)=> a.title.localeCompare(b.title, undefined, { sensitivity:"base" }));
-  await writeIndex(outDir, manifest);
+
+  // Luo index ilman hakemistorakennetta (FLAT-lista)
+  await writeIndexFlat(outDir, manifest);
   console.log(`✅ Valmis! Avaa: ${path.join(outDir, "index.html")}`);
 }
 
-function buildTree(manifest) {
-  const root = { name: "", children: new Map(), pages: [] };
-  for (const item of manifest) {
-    const parts = item.path.split("/").filter(Boolean);
-    let node = root;
-    for (let i=0;i<parts.length-1;i++){
-      const seg = parts[i];
-      if (!node.children.has(seg)) node.children.set(seg, { name: seg, children: new Map(), pages: [] });
-      node = node.children.get(seg);
-    }
-    node.pages.push(item);
-  }
-  return root;
-}
-
-function treeToHtml(node, level=0) {
-  const indent = "  ".repeat(level);
-  let html = `${indent}<ul>\n`;
-  const dirs = Array.from(node.children.values()).sort((a,b)=>a.name.localeCompare(b.name));
-  for (const dir of dirs) {
-    html += `${indent}  <li class="dir"><span>${dir.name}</span>\n`;
-    html += treeToHtml(dir, level+2);
-    html += `${indent}  </li>\n`;
-  }
-  const pages = node.pages.slice().sort((a,b)=>a.title.localeCompare(b.title));
-  for (const p of pages) {
-    html += `${indent}  <li class="page"><a href="#${encodeURIComponent(p.path)}" data-path="${p.path}">${p.title}</a></li>\n`;
-  }
-  html += `${indent}</ul>\n`;
-  return html;
-}
-
-async function writeIndex(outDir, manifest) {
-  const tree = buildTree(manifest);
-  const navHtml = treeToHtml(tree);
+async function writeIndexFlat(outDir, manifest) {
+  const listHtml = manifest.map(p =>
+    `<li class="page"><a href="#${encodeURIComponent(p.path)}" data-path="${p.path}">${p.title}</a></li>`
+  ).join("\n");
 
   const html = `<!doctype html>
 <html lang="fi">
@@ -319,7 +300,7 @@ async function writeIndex(outDir, manifest) {
   <style>
     :root { --bg:#0b0c0f; --panel:#111319; --muted:#262a33; --text:#f4f6fb; --sub:#aab2c5; }
     * { box-sizing: border-box; }
-    body { margin:0; background:var(--bg); color:var(--text); font: 14px/1.5 system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; height:100vh; display:grid; grid-template-columns: 320px 1fr; }
+    body { margin:0; background:var(--bg); color:var(--text); font: 14px/1.5 system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; height:100vh; display:grid; grid-template-columns: 360px 1fr; }
     aside { border-right:1px solid var(--muted); background:var(--panel); height:100vh; overflow:auto; }
     main { height:100vh; }
     header { padding:12px; border-bottom:1px solid var(--muted); }
@@ -327,20 +308,25 @@ async function writeIndex(outDir, manifest) {
     .search { padding:12px; }
     .search input { width:100%; padding:10px 12px; border-radius:10px; border:1px solid var(--muted); background:#0e1117; color:var(--text); }
     nav { padding: 0 8px 16px; }
-    nav ul { list-style:none; padding-left:14px; margin:6px 0; }
-    nav li.dir > span { color: var(--sub); font-weight:600; display:block; margin-top:8px; }
-    nav li.page a { display:block; padding:6px 6px; border-radius:8px; color:var(--text); text-decoration:none; }
+    nav ul { list-style:none; padding-left:0; margin:6px 0; }
+    nav li.page a { display:block; padding:6px 8px; border-radius:8px; color:var(--text); text-decoration:none; }
     nav li.page a:hover { background: var(--muted); }
+    nav .count { color: var(--sub); font-size: 12px; padding: 4px 12px 8px; }
     iframe { width:100%; height:100%; border:0; background:#fff; }
     .hint { color: var(--sub); padding: 8px 12px; font-size:12px; }
   </style>
 </head>
 <body>
   <aside>
-    <header><div class="brand">Honda Accord – käyttöohje</div></header>
+    <header>
+      <div class="brand">Honda Accord – käyttöohje</div>
+      <div class="count" id="count"></div>
+    </header>
     <div class="search"><input id="search" placeholder="Hae otsikosta (⌘/Ctrl+K)" autocomplete="off"></div>
     <nav id="nav">
-${navHtml.trim()}
+      <ul id="flat-list">
+${listHtml}
+      </ul>
     </nav>
     <div class="hint">Vinkki: Avaa viimeisin sivu: <a id="resume" href="#">jatka lukemista</a></div>
   </aside>
@@ -350,9 +336,13 @@ ${navHtml.trim()}
   <script type="module">
     const manifest = ${JSON.stringify(manifest, null, 2)};
     const nav = document.getElementById('nav');
+    const listEl = document.getElementById('flat-list');
     const frame = document.getElementById('content');
     const search = document.getElementById('search');
     const resume = document.getElementById('resume');
+    const count = document.getElementById('count');
+
+    count.textContent = manifest.length + " sivua";
 
     function openPath(p) {
       frame.src = p;
@@ -385,11 +375,10 @@ ${navHtml.trim()}
       openPath(last || (manifest[0] && manifest[0].path));
     });
 
-    // --- NOPEA HAKU: 150 ms debounce + rAF-chunkkaus ---
-    // Esilaskettu indeksi: ei DOM-kyselyitä jokaisella painalluksella
+    // --- HAKU: 150 ms debounce + rAF-chunkkaus (FLAT-lista) ---
     const items = (() => {
       const arr = [];
-      const anchors = nav.querySelectorAll('li.page a');
+      const anchors = listEl.querySelectorAll('li.page a');
       for (let i = 0; i < anchors.length; i++) {
         const a = anchors[i];
         arr.push({ title: (a.textContent || '').toLowerCase(), el: a.parentElement });
@@ -398,30 +387,26 @@ ${navHtml.trim()}
     })();
 
     let searchTimer = null;
-    let searchSeq = 0; // kasvaa aina kun uusi haku käynnistetään → peruu vanhat chunkit
+    let searchSeq = 0;
 
     function runSearchNow() {
-      const mySeq = ++searchSeq; // leimaa tämä haku
+      const mySeq = ++searchSeq;
       const q = (search.value || '').trim().toLowerCase();
 
-      // Tyhjä haku: näytä kaikki kevyesti chunkattuna
       let i = 0;
-      const CHUNK = 1500; // kuinka monta itemiä per frame (säätövaraa)
+      const CHUNK = 1500;
       function step() {
-        if (mySeq !== searchSeq) return; // uudempi haku alkoi → keskeytä
+        if (mySeq !== searchSeq) return;
         const end = Math.min(i + CHUNK, items.length);
         for (; i < end; i++) {
           const { title, el } = items[i];
           el.style.display = q ? (title.includes(q) ? '' : 'none') : '';
         }
-        if (i < items.length) {
-          requestAnimationFrame(step);
-        }
+        if (i < items.length) requestAnimationFrame(step);
       }
       requestAnimationFrame(step);
     }
 
-    // Debounce: kirjoitus käynnistää 150 ms timerin; uusi painallus resetoi
     search.addEventListener('input', () => {
       if (searchTimer) clearTimeout(searchTimer);
       searchTimer = setTimeout(runSearchNow, 150);
