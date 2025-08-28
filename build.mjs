@@ -7,7 +7,7 @@
 // - Kopioi muun datan
 // - Luo index.html jossa vasemman laidan navigaatio on FLAT-lista vain polusta "en/html/" (ei kansiopuita)
 // - HONDAESM.HTML piilotetaan navista
-// - Tyhjän <title></title> omaavat sivut jätetään pois navista
+// - Navissa näytetään vain sivut, joiden <title> on OIKEASTI ei-tyhjä (ei fallbackeja)
 // - Haku: 150 ms debounce, rAF-chunkkaus (sujuva isoilla listoilla)
 
 import fs from "fs/promises";
@@ -81,6 +81,22 @@ function cleanBasicHtml(html, { keepScripts=false } = {}) {
   return $;
 }
 
+// Palauttaa VAIN <title>-tagin tekstin (trim). Ei h1:stä, ei fallbackeja.
+function headTitleStrict($) {
+  return ( $("title").first().text() || "" ).trim();
+}
+
+// Tämä on vain sivun sisäiseen <title>-tagiin (saattaa käyttää fallbackia visuaalisesti),
+// mutta NAVIA EI rakenneta tämän perusteella:
+function displayTitle($, fallback="") {
+  let t = ($("title").first().text() || "").trim();
+  if (!t) {
+    const h1 = $("h1").first().text().trim();
+    t = h1 || fallback;
+  }
+  return t || fallback;
+}
+
 function extractBodyInnerHtml(doc$) {
   const body = doc$("body");
   return body.length ? body.html() ?? "" : doc$.root().html() ?? "";
@@ -90,27 +106,19 @@ function looksLikeFrameset($) {
   return $("frameset").length > 0 && $("frame").length > 0;
 }
 
-function titleOf($, fallback="") {
-  let t = ($("title").first().text() || "").trim();
-  if (!t) {
-    const h1 = $("h1").first().text().trim();
-    t = h1 || fallback;
-  }
-  return t || fallback;
-}
-
 function isExcludedFromNav(relPath) {
   return EXCLUDE_FROM_NAV.some(rx => rx.test(relPath));
 }
-function includeInFlatNav(relPath, title) {
+
+function includeInFlatNav(relPath, strictTitle) {
   // Näytetään navissa vain NAV_ROOT_PREFIX -polun alla olevat "pääsivut"
-  // joilla on EI-tyhjä title ja jotka eivät ole PR1/PR2
+  // joilla on OIKEASTI ei-tyhjä <title>, eivät ole PR1/PR2, eivätkä exclude-listalla
   const p = relPath.toLowerCase();
   return (
     p.startsWith(NAV_ROOT_PREFIX) &&
     !/_pr[12]\.html?$/.test(p) &&
     !isExcludedFromNav(relPath) &&
-    (title?.trim() ?? "") !== ""
+    (strictTitle?.trim() ?? "") !== ""
   );
 }
 
@@ -185,13 +193,17 @@ async function main() {
         const $b = cleanBasicHtml(bHtml);
         const left = extractBodyInnerHtml($a);
         const right = extractBodyInnerHtml($b);
-        const title = titleOf($, path.basename(rel));
+
+        // Näyttöön käytettävä (saattaa käyttää fallbackia), NAVIIN ei
+        const dispTitle = displayTitle($, path.basename(rel));
+        // NAVIIN käytettävä tiukka otsikko
+        const strictTitle = headTitleStrict($);
 
         const merged = `<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>${title}</title>
+<title>${dispTitle}</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
   body { margin:0; background:#fff; color:#111; font: 14px/1.5 system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; }
@@ -214,31 +226,32 @@ async function main() {
 </html>`;
         await fs.writeFile(outAbs, merged, "utf8");
 
-        if (includeInFlatNav(rel, title)) {
-          manifest.push({ title, path: rel });
+        if (includeInFlatNav(rel, strictTitle)) {
+          manifest.push({ title: strictTitle, path: rel });
         }
         continue;
       }
 
       // 3+ framea → fallback-lista
-      const title = titleOf($, path.basename(rel));
+      const dispTitle = displayTitle($, path.basename(rel));
+      const strictTitle = headTitleStrict($);
       const list = frames.map(f => {
         const href = f.src || "";
         const label = f.name || href || "frame";
         return `<li><a href="${href}">${label}</a></li>`;
       }).join("\n");
       const fallback = `<!doctype html>
-<html lang="en"><head><meta charset="utf-8"><title>${title}</title>
+<html lang="en"><head><meta charset="utf-8"><title>${dispTitle}</title>
 <meta name="viewport" content="width=device-width, initial-scale=1"></head>
 <body>
-<h1>${title}</h1>
+<h1>${dispTitle}</h1>
 <p>This page used frames. Choose a pane to open:</p>
 <ul>${list}</ul>
 </body></html>`;
       await fs.writeFile(outAbs, fallback, "utf8");
 
-      if (includeInFlatNav(rel, title)) {
-        manifest.push({ title, path: rel });
+      if (includeInFlatNav(rel, strictTitle)) {
+        manifest.push({ title: strictTitle, path: rel });
       }
       continue;
     }
@@ -280,12 +293,19 @@ async function main() {
       if (!replaced) doc$(el).attr("href", "#");
     });
 
-    const title = titleOf(doc$, path.basename(rel));
+    // Sivun omaan <title>:iin voi laittaa fallbackin
+    const dispTitle = displayTitle(doc$, path.basename(rel));
+    // NAVIIN kelpaa vain tiukka otsikko
+    const strictTitle = headTitleStrict(doc$);
+
+    // Päivitä dokumentin <title> varmuuden vuoksi (näkyy selaimen välilehdessä)
+    doc$("title").first().text(dispTitle);
+
     await fs.writeFile(outAbs, doc$.html() ?? "", "utf8");
 
-    // Lisää navin FLAT-listaan vain en/html -polusta, ei PR1/PR2, ei EXCLUDE, ja vain jos title ei ole tyhjä
-    if (includeInFlatNav(rel, title)) {
-      manifest.push({ title, path: rel });
+    // Lisää navin FLAT-listaan vain en/html -polusta, ei PR1/PR2, ei EXCLUDE, ja vain jos <title> ei ole tyhjä
+    if (includeInFlatNav(rel, strictTitle)) {
+      manifest.push({ title: strictTitle, path: rel });
     }
   }
 
