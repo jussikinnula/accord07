@@ -14,7 +14,7 @@
 //   Canonical is longest; duplicates are dimmed (toggle via checkbox)
 // - Writes: outDir/index.html and outDir/_dedupe-report.json
 // - Left-pane search: 150ms debounce + requestAnimationFrame chunking
-// - Responsive UI: sidebar collapses on small screens with a hamburger toggle
+// - Responsive UI: on small screens, sidebar is hidden behind a hamburger (fixed, top-left)
 
 import fs from "fs/promises";
 import path from "path";
@@ -139,7 +139,6 @@ function looksLikeFrameset($) { return $("frameset").length > 0 && $("frame").le
 function isExcludedFromNav(relPath) { return EXCLUDE_FROM_NAV.some(rx => rx.test(relPath)); }
 
 function includeInFlatNav(relPath, strictTitle) {
-  // Nav shows: only under NAV_ROOT_PREFIX, not PR1/PR2 panels, not excluded, and meaningful <title>
   const p = relPath.toLowerCase();
   return (
     p.startsWith(NAV_ROOT_PREFIX) &&
@@ -163,7 +162,6 @@ function* candidateTargets(id) {
 
 // -------------------- tokenization & simhash --------------------
 function normalizeTextForCompare($) {
-  // Extract body text only; lower-case; strip control chars & punctuation; squeeze whitespace
   $("script, style, noscript").remove();
   const txt = ($("body").text() || "")
     .toLowerCase()
@@ -175,12 +173,10 @@ function normalizeTextForCompare($) {
 }
 
 function tokenize(text) {
-  // Basic word tokens; drop very short tokens (<=2) to reduce noise
   return text.split(" ").filter(w => w.length > 2);
 }
 
 function fnv1a64(str) {
-  // FNV-1a 64-bit (BigInt)
   let hash = 0xcbf29ce484222325n;
   const prime = 0x100000001b3n;
   for (let i = 0; i < str.length; i++) {
@@ -252,7 +248,6 @@ async function main() {
   }
 
   // Collect candidates for nav (with dedupe features)
-  // Each: { path, strictTitle, dispTitle, textLen, simhash }
   const candidates = [];
 
   // Pass 2: process HTML files (and write them to outDir)
@@ -284,7 +279,6 @@ async function main() {
         const left = extractBodyInnerHtml($a);
         const right = extractBodyInnerHtml($b);
 
-        // Read strict BEFORE any title mutation
         const strictTitle = normalizeTitle(headTitleStrict($));
         const dispTitle = displayTitle($, path.basename(rel));
 
@@ -315,7 +309,6 @@ async function main() {
 </html>`;
         await fs.writeFile(outAbs, merged, "utf8");
 
-        // Prepare dedupe signals
         if (includeInFlatNav(rel, strictTitle)) {
           const $$ = cheerio.load(merged, { decodeEntities:false });
           const norm = normalizeTextForCompare($$);
@@ -418,14 +411,13 @@ async function main() {
   }
 
   // -------------------- Deduplicate by strict title --------------------
-  const byTitle = new Map(); // strictTitle -> array of candidates
+  const byTitle = new Map();
   for (const c of candidates) {
     if (!byTitle.has(c.strictTitle)) byTitle.set(c.strictTitle, []);
     byTitle.get(c.strictTitle).push(c);
   }
 
-  // Include BOTH canonical and duplicates; mark duplicates so UI can dim/hide them.
-  const navItems = []; // { title, path, dup: boolean }
+  const navItems = [];
   const dedupeReport = [];
 
   for (const [titleRaw, arr] of byTitle.entries()) {
@@ -437,7 +429,6 @@ async function main() {
       continue;
     }
 
-    // Choose canonical = longest text
     arr.sort((a,b)=> b.textLen - a.textLen);
     const canonical = arr[0];
     const keep = [canonical];
@@ -451,7 +442,6 @@ async function main() {
       if (ham <= HAMMING_MAX) {
         isDup = true;
       } else {
-        // Fallback: compute Jaccard over tokens (read from already written outDir pages)
         const canHtml = await readUtf8(path.join(outDir, canonical.path));
         const cHtml = await readUtf8(path.join(outDir, cand.path));
         const $$a = cheerio.load(canHtml, { decodeEntities:false });
@@ -489,16 +479,15 @@ async function main() {
     "utf8"
   );
 
-  // Final guard: drop any items with non-meaningful titles (handles weird whitespace)
+  // Final guard: drop any items with non-meaningful titles
   const filteredNavItems = navItems.filter(it => isMeaningfulTitle(it.title));
 
-  // Build index with Hide Duplicates checkbox, responsive hamburger sidebar
   await writeIndexFlat(outDir, filteredNavItems);
   console.log(`✅ Done. Open: ${path.join(outDir, "index.html")}`);
   console.log(`ℹ️  Dedupe report: ${path.join(outDir, "_dedupe-report.json")}`);
 }
 
-// -------------------- index.html
+// -------------------- index.html (flat, responsive) --------------------
 async function writeIndexFlat(outDir, navItems) {
   const listHtml = navItems.map(p =>
     `<li class="page${p.dup ? " dup" : ""}"><a href="#${encodeURIComponent(p.path)}" data-path="${p.path}" data-dup="${p.dup ? "1" : "0"}">${p.title}</a></li>`
@@ -517,14 +506,14 @@ async function writeIndexFlat(outDir, navItems) {
     body { margin:0; background:var(--bg); color:var(--text); font: 14px/1.5 system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; }
 
     .app { display:grid; grid-template-columns: 360px 1fr; height:100vh; overflow:hidden; }
-    aside { border-right:1px solid var(--muted); background:var(--panel); height:100vh; overflow:auto; position:relative; z-index:3; }
+    aside { border-right:1px solid var(--muted); background:var(--panel); height:100vh; overflow:auto; position:relative; z-index:950; }
     main { height:100vh; position:relative; z-index:1; }
 
     header { padding:12px; border-bottom:1px solid var(--muted); display:flex; align-items:center; gap:10px; }
     .brand { font-weight:600; flex:1; }
-    .hamburger { 
-      display:none;
-      background:transparent;
+    .hamburger {
+      display:none;           /* hidden on desktop */
+      background:transparent; /* no background */
       border:0;
       font-size:26px;
       line-height:1;
@@ -532,11 +521,9 @@ async function writeIndexFlat(outDir, navItems) {
       height:40px;
       border-radius:8px;
       cursor:pointer;
-      color:#000; /* default = black */
+      color:#000;             /* closed = black */
     }
-    body.sidebar-open .hamburger {
-      color:#fff; /* menu open = white */
-    }
+    body.sidebar-open .hamburger { color:#fff; } /* open = white */
     .hamburger:focus { outline:2px solid var(--accent); }
 
     .toolbar { display:flex; align-items:center; gap:12px; padding:10px 12px 0; }
@@ -552,10 +539,20 @@ async function writeIndexFlat(outDir, navItems) {
     iframe { width:100%; height:100%; border:0; background:#fff; }
     .hint { color: var(--sub); padding: 8px 12px; font-size:12px; }
 
-    .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.4); opacity:0; visibility:hidden; transition: opacity .2s ease; z-index:2; }
+    .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.4); opacity:0; visibility:hidden; transition: opacity .2s ease; z-index:900; }
 
     @media (max-width: 900px) {
       .app { grid-template-columns: 1fr; }
+      /* Fixed hamburger at top-left on mobile, above everything */
+      .hamburger {
+        display:inline-flex;
+        align-items:center;
+        justify-content:center;
+        position: fixed;
+        top: 10px;
+        left: 10px;
+        z-index: 1000; /* above sidebar + overlay + iframe */
+      }
       aside {
         position: fixed;
         top: 0; left: 0; bottom: 0;
@@ -565,7 +562,6 @@ async function writeIndexFlat(outDir, navItems) {
         box-shadow: 0 0 40px rgba(0,0,0,0.35);
       }
       body.sidebar-open aside { transform: translateX(0); }
-      .hamburger { display:inline-flex; align-items:center; justify-content:center; }
       .overlay { visibility: visible; }
       body.sidebar-open .overlay { opacity:1; }
     }
@@ -579,7 +575,7 @@ async function writeIndexFlat(outDir, navItems) {
         <div class="brand">Honda Accord 7 – service manual</div>
         <div class="count" id="count"></div>
       </header>
-      
+
       <div class="toolbar">
         <label>
           <input type="checkbox" id="toggleHideDup" checked>
@@ -692,7 +688,7 @@ ${listHtml}
         const a = anchors[i];
         arr.push({
           title: (a.textContent || '').toLowerCase(),
-          el: a.parentElement,                 // <li>
+          el: a.parentElement,
           isDup: a.getAttribute('data-dup') === '1'
         });
       }
@@ -728,16 +724,12 @@ ${listHtml}
       searchTimer = setTimeout(applyFiltersNow, 150);
     }
 
-    // Re-apply when search changes
     search.addEventListener('input', requestFilter);
-
-    // Re-apply when "Hide duplicates" toggled
     toggleHideDup.addEventListener('change', () => {
       localStorage.setItem(prefKey, toggleHideDup.checked ? '1' : '0');
       requestFilter();
     });
 
-    // Keyboard focus shortcut
     window.addEventListener('keydown', (e) => {
       if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
         e.preventDefault(); search.focus(); search.select();
