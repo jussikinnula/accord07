@@ -11,7 +11,9 @@
 //   * poistaa IE/frameset-roippeet, on*-attribuutit
 //   * korjaa javascript:parent.Prt/Cts/Jmp -linkit tavallisiksi href-linkeiksi
 // - Kirjoittaa kaiken outDir:iin samaan hakemistorakenteeseen
-// - Luo juureen index.html:in navigaatiolla ja haulla (nopea: indeksi + debounce)
+// - Luo juureen index.html:in navigaatiolla ja haulla
+//   * Haku: 150 ms debounce, lukee aina ajantasaisen input-arvon,
+//           ja chunkkaa filtteröinnin rAF:illa ettei UI töki isoilla listoilla.
 
 import fs from "fs/promises";
 import path from "path";
@@ -383,43 +385,47 @@ ${navHtml.trim()}
       openPath(last || (manifest[0] && manifest[0].path));
     });
 
-    // --- NOPEA HAKU: esilaskettu indeksi + debounce ---
-    // Rakenna hakuindeksi kerran DOMista (ei iterointia jokaisella painalluksella)
-    const items = (()=>{
+    // --- NOPEA HAKU: 150 ms debounce + rAF-chunkkaus ---
+    // Esilaskettu indeksi: ei DOM-kyselyitä jokaisella painalluksella
+    const items = (() => {
       const arr = [];
       const anchors = nav.querySelectorAll('li.page a');
-      for (let i=0;i<anchors.length;i++){
+      for (let i = 0; i < anchors.length; i++) {
         const a = anchors[i];
-        // talleta viittaus li-elementtiin, jota näytetään/piilotetaan
-        arr.push({ title: a.textContent.toLowerCase(), el: a.parentElement });
+        arr.push({ title: (a.textContent || '').toLowerCase(), el: a.parentElement });
       }
       return arr;
     })();
 
-    function doSearch(qLower) {
-      // piilota/näytä ilman DOM-uudelleenhakua
-      for (let i=0;i<items.length;i++) {
-        const { title, el } = items[i];
-        el.style.display = title.includes(qLower) ? '' : 'none';
+    let searchTimer = null;
+    let searchSeq = 0; // kasvaa aina kun uusi haku käynnistetään → peruu vanhat chunkit
+
+    function runSearchNow() {
+      const mySeq = ++searchSeq; // leimaa tämä haku
+      const q = (search.value || '').trim().toLowerCase();
+
+      // Tyhjä haku: näytä kaikki kevyesti chunkattuna
+      let i = 0;
+      const CHUNK = 1500; // kuinka monta itemiä per frame (säätövaraa)
+      function step() {
+        if (mySeq !== searchSeq) return; // uudempi haku alkoi → keskeytä
+        const end = Math.min(i + CHUNK, items.length);
+        for (; i < end; i++) {
+          const { title, el } = items[i];
+          el.style.display = q ? (title.includes(q) ? '' : 'none') : '';
+        }
+        if (i < items.length) {
+          requestAnimationFrame(step);
+        }
       }
+      requestAnimationFrame(step);
     }
 
-    function debounce(fn, ms) {
-      let t;
-      return (...args) => { clearTimeout(t); t = setTimeout(() => fn(...args), ms); };
-    }
-
-    const runSearch = debounce((val) => {
-      const q = val.trim().toLowerCase();
-      if (!q) {
-        // tyhjä haku -> näytä kaikki
-        for (let i=0;i<items.length;i++) items[i].el.style.display = '';
-        return;
-      }
-      doSearch(q);
-    }, 200);
-
-    search.addEventListener('input', () => runSearch(search.value));
+    // Debounce: kirjoitus käynnistää 150 ms timerin; uusi painallus resetoi
+    search.addEventListener('input', () => {
+      if (searchTimer) clearTimeout(searchTimer);
+      searchTimer = setTimeout(runSearchNow, 150);
+    });
 
     // ⌘/Ctrl+K fokus
     window.addEventListener('keydown', (e) => {
