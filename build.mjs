@@ -4,14 +4,14 @@
 // Usage: node build.mjs [srcDir=manual] [outDir=build]
 //
 // Features:
-// - Copies assets, cleans legacy HTML (IE/ActiveX), merges frames when 2 panes
+// - Copies assets, cleans legacy HTML (IE/ActiveX), merges 2-frame pages
 // - Flat nav only from en/html/, filters empty/meaningless <title>
 // - Duplicate detection (SimHash + Jaccard), UI can hide/dim duplicates
 // - Fast title search (150ms debounce + rAF chunking)
-// - Optional full-text search via Web Worker + prebuilt index (build/_fulltext.json)
+// - OPTIONAL full-text search (no web worker): lazy-load _fulltext.json, chunked processing
 // - Responsive UI with mobile sidebar; overlay dims content only; hamburger last in <body>
 // - Robust stacking (sidebar z=1000 > overlay z=900 > content z=0; hamburger z=1100)
-// - NEW: per-page CSS override so images never overlap tables (fix for pages like 000000000006393.html)
+// - CSS fix so images don’t overlap tables
 
 import fs from "fs/promises";
 import path from "path";
@@ -109,7 +109,7 @@ function cleanBasicHtml(html, { keepScripts=false } = {}) {
   if ($("meta[charset]").length === 0) $("head").prepend('<meta charset="utf-8">');
   if ($("title").length === 0) $("head").append("<title></title>");
 
-  // Inject our layout fix CSS (after existing tags so it wins)
+  // Inject layout fix CSS
   $("head").append(`<style>${FIX_OVERLAY_CSS}</style>`);
 
   return $;
@@ -479,38 +479,6 @@ async function writeIndexFlat(outDir, navItems) {
     `<li class="page${p.dup ? " dup" : ""}"><a href="#${encodeURIComponent(p.path)}" data-path="${p.path}" data-dup="${p.dup ? "1" : "0"}">${p.title}</a></li>`
   ).join("\n");
 
-  // Worker code as String.raw so Node doesn't evaluate it at build time
-  const WORKER_CODE = String.raw`
-    let data = null;
-    function norm(s){return (s||"").toLowerCase();}
-    self.onmessage = async (e)=> {
-      const {type, payload} = e.data || {};
-      if (type === 'load') {
-        const url = payload.url;
-        const res = await fetch(url);
-        data = await res.json(); // [{p,t,w,s}]
-        self.postMessage({type:'loaded', count: data.length});
-      } else if (type === 'query') {
-        if (!data) { self.postMessage({type:'results', items: []}); return; }
-        const q = norm(payload.q || '').trim();
-        if (q.length < 2) { self.postMessage({type:'results', items: []}); return; }
-        const terms = q.split(/\s+/).filter(x=>x.length>0);
-        const items = [];
-        for (let i=0;i<data.length;i++){
-          const it = data[i];
-          let ok = true, score=0;
-          for (const t of terms){
-            if (it.w.indexOf(t) === -1) { ok=false; break; }
-            else score++;
-          }
-          if (ok) items.push({p:it.p, t:it.t, s:it.s, score});
-        }
-        items.sort((a,b)=> b.score - a.score || a.t.localeCompare(b.t));
-        self.postMessage({type:'results', items: items.slice(0, 250)});
-      }
-    };
-  `;
-
   const html = `<!doctype html>
 <html lang="en">
 <head>
@@ -711,7 +679,7 @@ ${listHtml}
       openPath(last || (navItems[0] && navItems[0].path));
     });
 
-    // ----- Title filtering (fast) -----
+    // ----- Title list cache -----
     const items = (() => {
       const arr = [];
       const anchors = listEl.querySelectorAll('li.page a');
@@ -727,6 +695,7 @@ ${listHtml}
       return arr;
     })();
 
+    // ----- Search (debounced) -----
     let searchTimer = null;
     let searchSeq = 0;
 
@@ -750,25 +719,22 @@ ${listHtml}
       requestAnimationFrame(step);
     }
 
-    function requestFilter() {
-      if (searchTimer) clearTimeout(searchTimer);
-      searchTimer = setTimeout(applySearch, 150);
-    }
+    // ----- Content search (no worker) -----
+    let ftIndex = null; // [{p,t,w,s}]
+    let ftLoading = false;
 
-    // ----- Full-text (content) search via Web Worker -----
-    let ftWorker = null;
-    let ftLoaded = false;
-
-    async function ensureWorker() {
-      if (ftWorker) return;
-      const blob = new Blob([${JSON.stringify(String.raw`${WORKER_CODE}`)}], { type: 'application/javascript' });
-      ftWorker = new Worker(URL.createObjectURL(blob));
-      ftWorker.onmessage = (e) => {
-        const {type, items} = e.data || {};
-        if (type === 'loaded') { ftLoaded = true; applySearch(); }
-        else if (type === 'results') { renderContentResults(items); }
-      };
-      ftWorker.postMessage({ type:'load', payload: { url: '${FT_INDEX_FILE}' }});
+    async function ensureFulltextLoaded() {
+      if (ftIndex || ftLoading) return;
+      ftLoading = true;
+      try {
+        const res = await fetch('${FT_INDEX_FILE}', { cache: 'force-cache' });
+        ftIndex = await res.json();
+      } catch (e) {
+        console.error('Fulltext index load failed', e);
+        ftIndex = [];
+      } finally {
+        ftLoading = false;
+      }
     }
 
     function renderContentResults(results) {
@@ -798,6 +764,39 @@ ${listHtml}
       });
     }
 
+    async function contentSearch(q) {
+      await ensureFulltextLoaded();
+      if (!ftIndex || !ftIndex.length) { renderContentResults([]); return; }
+
+      const terms = q.split(/\s+/).filter(Boolean);
+      const results = [];
+      let i = 0;
+      const CHUNK = 1200;
+
+      return new Promise(resolve => {
+        function step() {
+          const end = Math.min(i + CHUNK, ftIndex.length);
+          for (; i < end; i++) {
+            const it = ftIndex[i];
+            let ok = true, score = 0;
+            for (const t of terms) {
+              if (it.w.indexOf(t) === -1) { ok = false; break; }
+              score++;
+            }
+            if (ok) results.push({ p: it.p, t: it.t, s: it.s, score });
+          }
+          if (i < ftIndex.length) {
+            requestAnimationFrame(step);
+          } else {
+            results.sort((a,b)=> b.score - a.score || a.t.localeCompare(b.t));
+            renderContentResults(results.slice(0, 250));
+            resolve();
+          }
+        }
+        requestAnimationFrame(step);
+      });
+    }
+
     async function applySearch() {
       const q = (search.value || '').trim().toLowerCase();
       const hideDup = !!toggleHideDup.checked;
@@ -807,9 +806,12 @@ ${listHtml}
         filterTitlesNow(q, hideDup);
         return;
       }
-      await ensureWorker();
-      if (!ftLoaded) return;
-      ftWorker.postMessage({ type: 'query', payload: { q } });
+      await contentSearch(q);
+    }
+
+    function requestFilter() {
+      if (searchTimer) clearTimeout(searchTimer);
+      searchTimer = setTimeout(applySearch, 150);
     }
 
     search.addEventListener('input', requestFilter);
