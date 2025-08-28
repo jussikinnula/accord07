@@ -5,13 +5,13 @@
 //
 // Tekee:
 // - Skannaa srcDir:n
-// - Kopioi binäärit ja tekstitiedostot sellaisenaan (UTF-8-dekoodaus teks­teihin)
+// - Kopioi binäärit ja tekstitiedostot sellaisenaan (UTF-8 teks­teihin)
 // - Prosessoi HTML-tiedostot:
 //   * framesetit -> yhdistää PR1/PR2 sisällöt yhdeksi normaaliksi sivuksi
-//   * poistaa IE/ActiveX/frameset-roippeet, on*-attribuutit
+//   * poistaa IE/frameset-roippeet, on*-attribuutit
 //   * korjaa javascript:parent.Prt/Cts/Jmp -linkit tavallisiksi href-linkeiksi
 // - Kirjoittaa kaiken outDir:iin samaan hakemistorakenteeseen
-// - Luo juureen index.html:in navigaatiolla ja haulla
+// - Luo juureen index.html:in navigaatiolla ja haulla (nopea: indeksi + debounce)
 
 import fs from "fs/promises";
 import path from "path";
@@ -21,7 +21,6 @@ import * as cheerio from "cheerio";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// ---------- asetukset ----------
 const DEFAULT_SRC = "manual";
 const DEFAULT_OUT = "fixed";
 
@@ -35,19 +34,17 @@ const BINARY_EXTS = new Set([
 ]);
 
 const EXCLUDE_FROM_NAV = [
-  /^_COM\//i, // Honda ESM sisäiset yleissivut
+  /^_COM\//i,
   /\/ESMBLANK\.HTML$/i
 ];
 
 const SUSPICIOUS_SCRIPT = /activex|hhctrl|classid|createobject|ActiveXObject|mshta/i;
 const EVENT_ATTR_RE = /^on[a-z]+$/i;
 
-// ---------- utilit ----------
 function toPosix(p){ return p.split(path.sep).join("/"); }
 function isHtml(p){ return HTML_EXTS.has(path.extname(p).toLowerCase()); }
 function isBinary(p){ return BINARY_EXTS.has(path.extname(p).toLowerCase()); }
 function isText(p){ return TEXT_EXTS.has(path.extname(p).toLowerCase()); }
-
 async function ensureDir(p){ await fs.mkdir(p, { recursive: true }); }
 
 async function* walk(dir) {
@@ -59,17 +56,12 @@ async function* walk(dir) {
 }
 
 async function readUtf8(abs) {
-  // Manuaali on raportin mukaan UTF-8:aa → luetaan suoraan
   return await fs.readFile(abs, "utf8");
 }
 
 function cleanBasicHtml(html, { keepScripts=false } = {}) {
   const $ = cheerio.load(html, { decodeEntities:false });
-
-  // Poista framesetit kokonaan tässä peruspolussa (framesetit käsitellään erikseen)
   $("frameset, frame").remove();
-
-  // Poista ActiveX/IE-epäilyttävät scriptit
   if (!keepScripts) {
     $("script").each((_, el)=>{
       const src = $(el).attr("src") || "";
@@ -77,23 +69,17 @@ function cleanBasicHtml(html, { keepScripts=false } = {}) {
       if (SUSPICIOUS_SCRIPT.test(src) || SUSPICIOUS_SCRIPT.test(code)) $(el).remove();
     });
   }
-
-  // Poista on*-attribuutit
   $("*").each((_, el)=>{
     for (const [k] of Object.entries(el.attribs || {})) {
       if (EVENT_ATTR_RE.test(k)) $(el).removeAttr(k);
     }
   });
-
-  // Varmista UTF-8 & title
   if ($("meta[charset]").length === 0) $("head").prepend('<meta charset="utf-8">');
   if ($("title").length === 0) $("head").append("<title></title>");
-
   return $;
 }
 
 function extractBodyInnerHtml(doc$) {
-  // Palauta body:n sisä-HTML (ilman <body>-tagia)
   const body = doc$("body");
   return body.length ? body.html() ?? "" : doc$.root().html() ?? "";
 }
@@ -115,44 +101,28 @@ function shouldHideFromNav(relPath) {
   return EXCLUDE_FROM_NAV.some(rx => rx.test(relPath));
 }
 
-// Yritä päätellä linkkikohde id:stä (esim. 'ZOOM000000000015226' → ZOOM…_PR.html ensisijaisesti)
 function* candidateTargets(id) {
-  // Päätä järjestys:
-  // 1) id + ".html"
-  // 2) id + "_PR.html"
-  // 3) id + "_PR1.html"
-  // 4) id + "_PR2.html"
-  // (monissa tapauksissa id on jo "…_PR")
   yield `${id}.html`;
   yield `${id}_PR.html`;
   yield `${id}_PR1.html`;
   yield `${id}_PR2.html`;
 }
 
-// ---------- pääprosessi ----------
 async function main() {
   const srcDir = path.resolve(process.argv[2] || DEFAULT_SRC);
   const outDir = path.resolve(process.argv[3] || DEFAULT_OUT);
-
   await ensureDir(outDir);
 
-  // Kerää kaikki polut settiin nopeaa exists-tarkastusta varten
   const allPaths = new Set();
   for await (const abs of walk(srcDir)) {
     allPaths.add(toPosix(path.relative(srcDir, abs)));
   }
 
-  async function existsRel(rel) {
-    const p = path.join(srcDir, rel);
-    try { await fs.access(p); return true; } catch { return false; }
-  }
-
-  // Manifest navigointia varten
   const manifest = [];
 
-  // Ensimmäinen pass: kopioi kaikki ei-HTML:t sellaisenaan (tekstit UTF-8:na)
+  // Pass 1: kopioi ei-HTML
   for (const rel of allPaths) {
-    if (isHtml(rel)) continue; // html hoidetaan toisessa passissa
+    if (isHtml(rel)) continue;
     const srcAbs = path.join(srcDir, rel);
     const destAbs = path.join(outDir, rel);
     await ensureDir(path.dirname(destAbs));
@@ -164,20 +134,18 @@ async function main() {
       const txt = await readUtf8(srcAbs);
       await fs.writeFile(destAbs, txt, "utf8");
     } else {
-      // tuntematon – kopioi binäärinä
       const buf = await fs.readFile(srcAbs);
       await fs.writeFile(destAbs, buf);
     }
   }
 
-  // Auttaa linkkien korjaamisessa: nopea resolveri suhteellisille poluille
   function resolveRelative(fromRel, hrefRel) {
     const baseDir = path.posix.dirname(fromRel);
     const joined = toPosix(path.posix.normalize(path.posix.join(baseDir, hrefRel)));
     return joined;
   }
 
-  // HTML-pass: prosessoi & kirjoita
+  // Pass 2: HTML
   for (const rel of [...allPaths].filter(isHtml)) {
     const srcAbs = path.join(srcDir, rel);
     const outAbs = path.join(outDir, rel);
@@ -186,9 +154,7 @@ async function main() {
     const raw = await readUtf8(srcAbs);
     const $ = cheerio.load(raw, { decodeEntities:false });
 
-    // 1) Framesetit → yhdistä PR-sivut
     if (looksLikeFrameset($)) {
-      // Etsi framejen src:t
       const frames = [];
       $("frame").each((_, el)=>{
         const name = $(el).attr("name") || "";
@@ -196,7 +162,6 @@ async function main() {
         if (src) frames.push({ name, src });
       });
 
-      // Erikoistapaus: 2-framen PR-sivut (vasen/ylempi + oikea/ale mpi)
       if (frames.length === 2) {
         const aRel = resolveRelative(rel, frames[0].src);
         const bRel = resolveRelative(rel, frames[1].src);
@@ -207,7 +172,6 @@ async function main() {
         const $b = cleanBasicHtml(bHtml);
         const left = extractBodyInnerHtml($a);
         const right = extractBodyInnerHtml($b);
-
         const title = titleOf($, path.basename(rel));
 
         const merged = `<!doctype html>
@@ -217,14 +181,13 @@ async function main() {
 <title>${title}</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
-  :root { --bg:#0b0c0f; --panel:#111319; --muted:#262a33; --text:#f4f6fb; }
   body { margin:0; background:#fff; color:#111; font: 14px/1.5 system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; }
-  .grid { display:grid; grid-template-columns: 360px 1fr; gap: 0; min-height: 100vh; }
+  .grid { display:grid; grid-template-columns: 360px 1fr; min-height: 100vh; }
   .pane { padding: 12px 16px; border-right:1px solid #eceff1; }
   .pane:last-child { border-right:0; }
-  .pane img { max-width: 100%; height: auto; }
-  .pane table { border-collapse: collapse; }
-  .pane table td, .pane table th { border: 1px solid #ddd; padding: 4px 6px; }
+  img { max-width: 100%; height: auto; }
+  table { border-collapse: collapse; }
+  td, th { border: 1px solid #ddd; padding: 4px 6px; }
   a { color: #0b63ce; text-decoration: none; }
   a:hover { text-decoration: underline; }
 </style>
@@ -236,14 +199,11 @@ async function main() {
   </div>
 </body>
 </html>`;
-
         await fs.writeFile(outAbs, merged, "utf8");
-        // lisää navigaatioon (mutta piilota jos kuuluu exclude-listaan)
         if (!shouldHideFromNav(rel)) manifest.push({ title, path: rel });
         continue;
       }
 
-      // 3+ framea → tee yksinkertainen fallback-linkkilista
       const title = titleOf($, path.basename(rel));
       const list = frames.map(f => {
         const href = f.src || "";
@@ -263,30 +223,23 @@ async function main() {
       continue;
     }
 
-    // 2) Tavallinen HTML → siivoa + korjaa javascript:parent.* linkit
     const doc$ = cleanBasicHtml(raw, { keepScripts:true });
 
-    // Korvaa <a href="javascript:parent.…"> linkeiksi
+    // Korvaa javascript:parent.* linkit
     doc$("a[href^='javascript:parent.']").each((_, el)=>{
       const js = doc$(el).attr("href") || "";
       let replaced = false;
-
-      // Prt('ID','1')
       let m = js.match(/parent\.Prt\(\s*'([^']+)'\s*(?:,\s*'?\d'?)?\s*\)/i);
       if (m) {
         const id = m[1];
-        // Kokeile ehdokkaita samassa kansiossa
         for (const cand of candidateTargets(id)) {
           const candidateRel = resolveRelative(rel, cand);
           if (allPaths.has(candidateRel)) {
             doc$(el).attr("href", cand);
-            replaced = true;
-            break;
+            replaced = true; break;
           }
         }
       }
-
-      // Cts('ID','i000')
       if (!replaced) {
         m = js.match(/parent\.Cts\(\s*'([^']+)'/i);
         if (m) {
@@ -295,48 +248,30 @@ async function main() {
             const candidateRel = resolveRelative(rel, cand);
             if (allPaths.has(candidateRel)) {
               doc$(el).attr("href", cand);
-              replaced = true;
-              break;
+              replaced = true; break;
             }
           }
         }
       }
-
-      // Jmp('i220') → ei tiedetä dokkaria → tee ankkuri tai # (parempi kuin rikkinäinen)
       if (!replaced) {
         m = js.match(/parent\.Jmp\(\s*'([^']+)'\s*\)/i);
-        if (m) {
-          doc$(el).attr("href", "#");
-          replaced = true;
-        }
+        if (m) { doc$(el).attr("href", "#"); replaced = true; }
       }
-
-      if (!replaced) {
-        // yleinen fallback
-        doc$(el).attr("href", "#");
-      }
+      if (!replaced) doc$(el).attr("href", "#");
     });
 
     const title = titleOf(doc$, path.basename(rel));
     await fs.writeFile(outAbs, doc$.html() ?? "", "utf8");
-    if (!shouldHideFromNav(rel)) {
-      // Älä lisää välisivuja, kuten PR1/PR2
-      if (!/_PR[12]\.html?$/i.test(rel)) {
-        manifest.push({ title, path: rel });
-      }
+    if (!shouldHideFromNav(rel) && !/_PR[12]\.html?$/i.test(rel)) {
+      manifest.push({ title, path: rel });
     }
   }
 
-  // Lajittele manifest otsikon mukaan
   manifest.sort((a,b)=> a.title.localeCompare(b.title, undefined, { sensitivity:"base" }));
-
-  // Luo index.html
   await writeIndex(outDir, manifest);
-
   console.log(`✅ Valmis! Avaa: ${path.join(outDir, "index.html")}`);
 }
 
-// ---------- index.html generaattori ----------
 function buildTree(manifest) {
   const root = { name: "", children: new Map(), pages: [] };
   for (const item of manifest) {
@@ -448,15 +383,45 @@ ${navHtml.trim()}
       openPath(last || (manifest[0] && manifest[0].path));
     });
 
-    search.addEventListener('input', () => {
-      const q = search.value.trim().toLowerCase();
-      const items = nav.querySelectorAll('li.page a');
-      items.forEach(a => {
-        const show = a.textContent.toLowerCase().includes(q);
-        a.parentElement.style.display = show ? '' : 'none';
-      });
-    });
+    // --- NOPEA HAKU: esilaskettu indeksi + debounce ---
+    // Rakenna hakuindeksi kerran DOMista (ei iterointia jokaisella painalluksella)
+    const items = (()=>{
+      const arr = [];
+      const anchors = nav.querySelectorAll('li.page a');
+      for (let i=0;i<anchors.length;i++){
+        const a = anchors[i];
+        // talleta viittaus li-elementtiin, jota näytetään/piilotetaan
+        arr.push({ title: a.textContent.toLowerCase(), el: a.parentElement });
+      }
+      return arr;
+    })();
 
+    function doSearch(qLower) {
+      // piilota/näytä ilman DOM-uudelleenhakua
+      for (let i=0;i<items.length;i++) {
+        const { title, el } = items[i];
+        el.style.display = title.includes(qLower) ? '' : 'none';
+      }
+    }
+
+    function debounce(fn, ms) {
+      let t;
+      return (...args) => { clearTimeout(t); t = setTimeout(() => fn(...args), ms); };
+    }
+
+    const runSearch = debounce((val) => {
+      const q = val.trim().toLowerCase();
+      if (!q) {
+        // tyhjä haku -> näytä kaikki
+        for (let i=0;i<items.length;i++) items[i].el.style.display = '';
+        return;
+      }
+      doSearch(q);
+    }, 200);
+
+    search.addEventListener('input', () => runSearch(search.value));
+
+    // ⌘/Ctrl+K fokus
     window.addEventListener('keydown', (e) => {
       if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
         e.preventDefault(); search.focus(); search.select();
@@ -468,11 +433,9 @@ ${navHtml.trim()}
   </script>
 </body>
 </html>`;
-
   await fs.writeFile(path.join(outDir, "index.html"), html, "utf8");
 }
 
-// ---
 main().catch(err => {
   console.error(err);
   process.exit(1);
