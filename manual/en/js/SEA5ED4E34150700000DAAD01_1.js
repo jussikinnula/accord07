@@ -1,0 +1,31 @@
+with(document) {
+write("<v:group id=\"group1\" class=\"drag\" style=\"position:relative; width:950px; height:927px;\" coordsize=\"950,927\">");
+write("<v:rect id=\"rect1\"class=\"drag\"  style=\"width:950px;height:927px;\">");
+write("<img id=\"img1\" src=\"../img/SEA5ED4E34150700000DAAD01.PNG\" border=\"1\" class=\"drag\" style=\"position:absolute;left:0px;top:0px;width:950px;height:927px;border-color:#ffffff\">");
+write("<p id=\"p1_1\" class=\"drag\" style=\"position:absolute;left:587px;top:413px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>DIFFERENTIAL ASSEMBLY<br><a href=\"javascript:parent.Cts('000000000003416','i000')\"></b>Backlash Inspection,</a><br></nobr>");
+write("</p>");
+write("<p id=\"p1_2\" class=\"drag\" style=\"position:absolute;left:510px;top:838px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>46 x 80 x 1 mm SPACER<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_3\" class=\"drag\" style=\"position:absolute;left:510px;top:772px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>45 x 80 x 21 mm BEARING OUTER RACE<br><a href=\"javascript:parent.Cts('000000000003417','i000')\"></b>Replacement,</a><br></nobr>");
+write("</p>");
+write("<p id=\"p1_4\" class=\"drag\" style=\"position:absolute;left:510px;top:666px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>45 x 80 x 21 mm CARRIER BEARING<br><a href=\"javascript:parent.Cts('000000000003419','i000')\"></b>Replacement,</a><br><a href=\"javascript:parent.Cts('000000000003418','i000')\">Preload Adjustment,</a><br></nobr>");
+write("</p>");
+write("<p id=\"p1_5\" class=\"drag\" style=\"position:absolute;left:516px;top:21px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>81 mm SHIM<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_6\" class=\"drag\" style=\"position:absolute;left:516px;top:70px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>46 x 81 x 1 mm SPACER<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_7\" class=\"drag\" style=\"position:absolute;left:512px;top:260px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>45 x 81 x 18 mm CARRIER BEARING<br><a href=\"javascript:parent.Cts('000000000003419','i000')\"></b>Replacement,</a><br><a href=\"javascript:parent.Cts('000000000003418','i000')\">Preload Adjustment,</a><br></nobr>");
+write("</p>");
+write("<p id=\"p1_8\" class=\"drag\" style=\"position:absolute;left:512px;top:141px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>45 x 81 x 18 mm BEARING OUTER RACE<br><a href=\"javascript:parent.Cts('000000000003417','i000')\"></b>Replacement,</a><br></nobr>");
+write("</p>");
+write("</v:rect>");
+write("</v:group>");
+}

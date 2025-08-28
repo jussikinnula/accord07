@@ -1,0 +1,31 @@
+with(document) {
+write("<v:group id=\"group1\" class=\"drag\" style=\"position:relative; width:950px; height:655px;\" coordsize=\"950,655\">");
+write("<v:rect id=\"rect1\"class=\"drag\"  style=\"width:950px;height:655px;\">");
+write("<img id=\"img1\" src=\"../img/SEA6EJ4K76300000000BBAD02.PNG\" border=\"1\" class=\"drag\" style=\"position:absolute;left:0px;top:0px;width:950px;height:655px;border-color:#ffffff\">");
+write("<p id=\"p1_1\" class=\"drag\" style=\"position:absolute;left:522px;top:319px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>OFF<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_2\" class=\"drag\" style=\"position:absolute;left:682px;top:381px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>2 sec.<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_3\" class=\"drag\" style=\"position:absolute;left:841px;top:145px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>0.2 sec.<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_4\" class=\"drag\" style=\"position:absolute;left:885px;top:368px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>0.2 sec.<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_5\" class=\"drag\" style=\"position:absolute;left:522px;top:193px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>ON<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_6\" class=\"drag\" style=\"position:absolute;left:462px;top:266px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>A<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_7\" class=\"drag\" style=\"position:absolute;left:300px;top:18px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>B<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_8\" class=\"drag\" style=\"position:absolute;left:522px;top:82px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>MODE 1: Ceiling light and ignition key light<br></b></nobr>");
+write("</p>");
+write("</v:rect>");
+write("</v:group>");
+}

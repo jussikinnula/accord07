@@ -1,0 +1,178 @@
+﻿<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<html lang="en">
+<head>
+<script src="../scripts/common.js"></script>
+<title>ESM - Maintenance and Repair Information System</title>
+<script language="JavaScript1.2">
+<!--
+  var win = "";
+  var win2 = "";
+  path = "";
+
+function init() 
+{
+  var hashParam = new Array();
+  var tmp = location.href.split("?");
+  if(tmp.length > 1){
+    var params = tmp[1].split("&");
+    for(var i=0; i<params.length; i++){
+      tmp = params[i].split("=");
+      hashParam[tmp[0]] = (tmp.length > 1) ? unescape(tmp[1]) : "";
+    }
+  }
+  path = tmp[0].substring(0,tmp[0].lastIndexOf("/"));
+  var url = path + hashParam["url"];
+  BASE.location = url;
+}
+
+function prSetTitle(pTitle) 
+{
+  top.document.title=pTitle;
+}
+
+function prClose()
+{
+  if(win != ""){
+    win.close();
+  }
+  if(win2 != ""){
+    win2.close();
+  }
+}
+
+function Old(obj)
+{
+  if(!obj || obj ==""){
+    alert("Old()関数にオブジェクトが渡されていません。");
+    return;
+  }
+  else{
+    if (obj.name !="BASE"){
+      alert("詳細画面のOld()関数は使用できません。");
+      return;
+    }
+  }
+  var title = obj.document.title;
+  if(obj.document.title==""){title=document.title;}
+  prSetTitle(title);
+  return "";
+}
+
+function Tsl(key,sct,sc,sys,comp,sitq)
+{
+  alert("Tsl()はこの画面では使用できません。");
+  return "";
+}
+
+function Cts(key,anc)
+{
+  if(!key){
+    key = "";
+  }
+  if(!anc){
+    anc = "";
+  }
+  if(key ==""){
+    alert("Cts()関数にコンテンツキーが渡されていません。");
+    return;
+  }
+  var str = "";
+  if(anc != ""){
+    str = "#"
+  }
+
+  if(win != ""){
+    win.close();
+  }
+
+  var url = path + key +".html" + str + anc;
+  BASE.location.href = url;
+  return;
+}
+
+function Jmp(anc)
+{
+  if(!anc){
+    anc = "";
+  }
+  if(anc ==""){
+    alert("Jmp()関数にアンカーが渡されていません。");
+    return;
+  }
+  BASE.location.hash = anc;
+  prClose();
+}
+
+
+function Prt(key,anc)
+{
+  if(!key){
+    key = "";
+  }
+  if(key ==""){
+    alert("Prt()関数にコンテンツキーが渡されていません。");
+    return;
+  }
+  if(!anc){
+    anc = "";
+  }
+  var dir = ".";
+  var str = "";
+  if(anc != ""){
+    str = "#"
+  }
+  var w = 1024;
+  var h = 668;
+  var t = (screen.AvailHeight- h)/2;
+  var l = (screen.AvailWidth - w)/2;
+  h -= 28;
+  win = window.open(key + ".html"+str+anc,"ESM_LOCAL_PRINT","top="+t+",left="+l+",width="+w+",height="+h+",menubar=no,status=yes,scrollbars=yes,resizable=yes");
+  win.resizeTo(w,h);
+  win.moveTo(l,t);
+  win.focus();
+
+}
+
+function Scl(sys,comp)
+{
+  if(!sys){
+    sys = "";
+  }
+  if(!comp){
+    comp = "";
+  }
+  var msg="";
+  if(sys==""){msg = "「SYSコード」";}
+  if(comp==""){msg = msg + "「COMPコード」";}
+  if(msg!=""){alert("Scl()関数に" + msg + "が渡されていません。");}
+  var w = 800;
+  var h = 600;
+  var t = (screen.AvailHeight- h)/2;
+  var l = (screen.AvailWidth - w)/2;
+  var url = window.location.href.split("?");
+  win2 = window.open(url[0] + "./EsmSysComponent.html?sys="+sys+"&comp="+comp,"ESM_LOCAL_SYSCOMP","top="+t+",left="+l+",width="+w+",height="+h+",menubar=no,status=no,scrollbars=no,resizable=yes");
+  win2.resizeTo(w,h);
+  win2.moveTo(l,t);
+  win2.focus();
+}
+
+function prPrint()
+{
+  if(window.BASE.Apf != null){
+    window.BASE.Apf();
+  }
+  else {
+    window.BASE.focus()
+    window.BASE.print();
+  }	
+}
+
+//-->
+</script>
+</head>
+  <frameset rows="40,*" border="0" frameborder="no" framespacing="0" onLoad="init();" onUnload="prClose();">
+    <frame src="./ESMManualHead.html" name="HEAD"  noresize scrolling="no" marginwidth="0" marginheight="0" frameborder="no" >
+    <frame src="about:blank" name="BASE" noresize>
+  </frameset>
+  <noframes></noframes>
+</html>

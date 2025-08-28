@@ -1,0 +1,37 @@
+with(document) {
+write("<v:group id=\"group1\" class=\"drag\" style=\"position:relative; width:950px; height:1039px;\" coordsize=\"950,1039\">");
+write("<v:rect id=\"rect1\"class=\"drag\"  style=\"width:950px;height:1039px;\">");
+write("<img id=\"img1\" src=\"../img/SEA5E44A18300000000DAAD01.PNG\" border=\"1\" class=\"drag\" style=\"position:absolute;left:0px;top:0px;width:950px;height:1039px;border-color:#ffffff\">");
+write("<p id=\"p1_1\" class=\"drag\" style=\"position:absolute;left:565px;top:15px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>BAFFLE PLATE<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_2\" class=\"drag\" style=\"position:absolute;left:667px;top:115px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>LOWER BLOCK<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_3\" class=\"drag\" style=\"position:absolute;left:727px;top:289px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>CRANKSHAFT OIL SEAL,<br>TRANSMISSION END<br><a href=\"javascript:parent.Cts('000000000001982','i210')\"></b>Installation,<br></a><br></nobr>");
+write("</p>");
+write("<p id=\"p1_4\" class=\"drag\" style=\"position:absolute;left:754px;top:741px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>FLYWHEEL<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_5\" class=\"drag\" style=\"position:absolute;left:635px;top:843px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>THRUST WASHERS<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_6\" class=\"drag\" style=\"position:absolute;left:485px;top:933px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>CRANKSHAFT<br><a href=\"javascript:parent.Cts('000000000001978','i000')\"></b>End Play,</a><br><a href=\"javascript:parent.Cts('000000000001983','iT02')\">Runout,</a><br><a href=\"javascript:parent.Cts('000000000001983','iT01')\">Out-of-Round,</a><br><a href=\"javascript:parent.Cts('000000000001981','i000')\">Removal,</a><br><a href=\"javascript:parent.Cts('000000000001982','i000')\">Installation,</a><br></nobr>");
+write("</p>");
+write("<p id=\"p1_7\" class=\"drag\" style=\"position:absolute;left:37px;top:916px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>MAIN BEARINGS<br><a href=\"javascript:parent.Cts('000000000001984','iR01')\"></b>Oil Clearance,</a><br><a href=\"javascript:parent.Cts('000000000001984','iR02')\">Selection,</a><br></nobr>");
+write("</p>");
+write("<p id=\"p1_8\" class=\"drag\" style=\"position:absolute;left:24px;top:680px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>CKP PULSE PLATE<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_9\" class=\"drag\" style=\"position:absolute;left:157px;top:424px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>DOWEL PINS<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_10\" class=\"drag\" style=\"position:absolute;left:21px;top:56px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>CRANKSHAFT POSITION<br>(CKP) SENSOR<br></b></nobr>");
+write("</p>");
+write("</v:rect>");
+write("</v:group>");
+}

@@ -1,0 +1,355 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN"
+                      "http://www.w3.org/TR/html4/frameset.dtd">
+<html>
+<head>
+<meta name="author" content="HONDA MOTOR Co.,Ltd.">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<title>Shop Manual&nbsp;(HONDA MOTOR Co.,Ltd.)</title>
+<script src="./_COM/HONDAESM.JS"></script>
+<script src="./_COM/MESSAGE.JS"></script>
+<script src="./_COM/LANGINFO.JS"></script>
+<script>
+<!--
+if (!CheckEnvironment()) {                                            
+  close();                                                            
+}                                                                     
+var gESM, gLng, gMSG, gModelInfo, fn;
+var fStart    = (GetCookie("EsmStart") == "true")? false:true;
+if (fStart || !document.referrer) {
+  
+  gESM  = new Array;                    
+  gLng  = new Array;                    
+  gMSG  = new Array;                    
+  gModelInfo   = new Array;             
+  fn    = new Array;                    
+
+  
+  gESM.Lng      = gLng;                 
+  
+  gESM.lngSel   = -1;                   
+  gESM.MsgC     = gMSG;                 
+  gESM.ModelInfo       = gModelInfo;   
+  gESM.mySel    = -1;                   
+  gESM.mcSel    = -1;                   
+  gESM.subSel   =  0;                   
+  gESM.subUse=0;
+  gESM.mdlSel   =  0;                   
+  gESM.manTyp   = 'SM';                 
+  gESM.smFlag   = -1;
+  gESM.brmFlag  = -1;
+  document.ESM  = gESM;                 
+  SetLang();                            
+  
+
+  gESM.Key = "";         
+  gESM.Sct = "";         
+  gESM.Sc  = "";         
+  gESM.Sys = "";         
+  gESM.Comp = "";        
+  gESM.Sitq = "";        
+  gESM.Keyword = "";     
+
+  
+  fn.GetCookie  = GetCookie;            
+  fn.SetCookie  = SetCookie;            
+  fn.FormatStr  = FormatStr;            
+  fn.ChangeLang = ChangeLang;           
+  gESM.fn=fn;                           
+}
+else {
+  
+  document.ESM  = parent.document.ESM;  
+  gESM = document.ESM;
+  gLng = gESM.Lng;
+  gMSG = gESM.MsgC;
+  gModelInfo = gESM.ModelInfo;
+  fn   = gESM.fn;
+}
+fn.SetCookie("EsmStart","true", true);
+function CheckEnvironment()
+{
+  var nPos;
+
+  with (navigator) {
+    if (appName.charAt(0) != "M") {
+      alert("Execute the Microsoft Internet Explorer(R).");
+      return(false);
+    }
+    if (appVersion.charAt(0) < "4") {
+      alert("Execute the Microsoft Internet Explorer(R); Version more than 5.0.");
+      return(false);
+    }
+    nPos = appVersion.indexOf("MSIE ");
+    if (nPos > 0) {
+      if (appVersion.charAt(nPos+5) < "4") {
+        alert("Execute the Microsoft Internet Explorer(R); Version more than 5.0.");
+        return(false);
+      }
+    }
+    if (platform != "Win32") {
+      alert("Execute under the Microsoft Windows(R) only.");
+      return(false);
+    }
+  }
+  return(true);
+}
+function Initialize()
+{
+  var strLang, strYear, strCode, strData;
+  var i;
+
+  
+  var w = screen.AvailWidth;
+  var h = screen.AvailHeight;
+  var t = 0;
+  var l = 0;
+  window.resizeTo(w,h);
+  window.moveTo(t,l);
+
+  
+  if (gESM.Lng.length <= 0) {
+    alert("Not found Language Information.");
+    close();
+  }
+
+  
+  if (fStart || (gESM.lngSel < 0)) {
+    
+    strLang = GetCookie("EsmLang");
+    if (strLang.length > 0) {
+      strLang.toUpperCase();
+      gESM.subSel = strLang.substr(strLang.length,1);
+      strLang=strLang.substr(0,strLang.length-1);
+      gESM.lngSel = -1;
+      for (i=0; i < gESM.Lng.length; ++i) {
+        strCode = gESM.Lng[i].Code;
+        strCode.toUpperCase();
+        if (strLang == strCode) {
+          gESM.lngSel = i;
+          break;
+        }
+      }
+    }
+  }
+  if (fStart || (gESM.mySel < 0)) {
+    strYear = GetCookie("EsmYear");
+    if(strYear.length > 0) {
+      strYear.toUpperCase();
+      gESM.mySel = -1;
+      for (i=0; i < gESM.ModelInfo.length; ++i) {
+        strData = gESM.ModelInfo[i].Year;
+        strData.toUpperCase();
+        if (strYear == strData) {
+          gESM.mySel = i;
+          break;
+        }
+      }
+    }
+    if((gESM.mySel >= 0) && (gESM.mcSel < 0)) {
+      strCode = GetCookie("EsmCode");
+      if(strCode.length > 0) {
+        strCode.toUpperCase();
+        gESM.mcSel = -1;
+        for (i=0; i < gESM.ModelInfo[gESM.mySel].CodeList.length; ++i) {
+          strData = gESM.ModelInfo[gESM.mySel].CodeList[i].Code;
+          strData.toUpperCase();
+          if (strCode == strData) {
+            gESM.mcSel = i;
+            break;
+          }
+        }
+      }
+    }
+  }
+
+  
+  if (gESM.lngSel < 0) {
+    gESM.lngSel = 0;
+  }
+  if (gESM.mySel < 0) {
+    gESM.mySel = 0;
+  }
+  if (gESM.mcSel < 0) {
+    gESM.mcSel = 0;
+  }
+}
+function Old(obj){
+  if(obj == null){
+    
+    return;
+  }
+  obj.Fsl(gESM.Key,gESM.Sct,gESM.Sc,gESM.Sys,gESM.Comp,gESM.Sitq,gESM.Keyword);
+
+  obj.Chh(obj.document.body.clientHeight);
+}
+function Tsl(key,sct,sc,sys,comp,sitq){
+ 
+  gESM.Key = key;
+  gESM.Sct = sct;
+  gESM.Sc = sc;
+  gESM.Sys = sys;
+  gESM.Comp = comp;
+  gESM.Sitq = sitq;
+
+}
+
+function Cts(key,anc){
+  var path = "";
+  var dir = window.location.href.substring(0,window.location.href.lastIndexOf("/")) + "/" +gESM.Lng[gESM.lngSel].Code+"/html/";
+  if(!anc){
+    anc = "";
+  }
+  else{
+    anc = "#" + anc;
+  }
+  var url =  key +".html" + anc;
+  jsShopPopUpHistWindow(url,key,anc);
+}
+
+function Jmp(anc){
+  
+}
+
+function Prt(key){
+  
+}
+
+function Scl(sys,comp){
+  
+}
+var win = null;
+
+function jsShopPopUpHistWindow(url,key,anc)
+{
+  var w;
+  var h;
+  w = 1024;
+  h = 668;
+
+  var t = (screen.AvailHeight- h)/2;
+  var l = (screen.AvailWidth - w)/2;
+  var newUrl = window.location.href.substring(0,window.location.href.lastIndexOf("/")) + "/" +gESM.Lng[gESM.lngSel].Code+"/html/"+"ESMManualMain.html?url="+escape(url)+"&key="+key+"&anc="+anc;
+  if(win == null || win.closed){
+		
+    win = jsDispPopup(w, h, "toolbar=yes,menubar=yes,status=yes,scrollbars=no,resizable=yes,top="+t+",left="+l, newUrl, true);
+  }
+  else {
+    win.location.href = newUrl;
+  }
+  win.resizeTo(w,h);
+  win.moveTo(l,t);
+  win.focus();
+}
+
+function jsDispPopup(pwidth, pheight, poption, purl, focusflg) 
+{
+  var wmargin = 50;
+  var ww = screen.availWidth;
+  var wh = screen.availHeight;
+  if (window.event != null) {
+    var wx = window.event.screenX;
+    var wy = window.event.screenY;
+  }
+  else{
+    var wx = ww/2-pwidth/2;
+    var wy = wh/2-pheight/2;
+  }
+  if (pwidth != null || pheight != null) {
+    if (wx <= ww - pwidth - wmargin) {
+      wleft = wx;
+    }
+    else {
+      wleft = wx - pwidth;
+    }
+    if (wy <= wh - pheight - wmargin) {
+      wtop = wy;
+    }
+    else {
+      wtop = wy - pheight;
+    }
+    if ((wleft < wmargin) || (wtop < wmargin)) {
+      wleft = wmargin;
+      wtop = wmargin;
+    }
+  }
+  var wattr = poption
+  if (pwidth != null || pheight != null) {
+    wattr = wattr + ", width=" + pwidth + ", height=" + pheight + ", left=" + wleft + ", top=" + wtop;
+  }
+  var wpopup = window.open(purl,"ESM",wattr);
+  if ( wpopup == null ) {
+    maxRetryOpenWindow = 10000;
+    for (i=0;i<maxRetryOpenWindow;i++) {
+      wpopup = window.open(purl,"ESM",wattr);
+      if ( wpopup != null ) {
+        break;
+      }
+    }
+    if ( i == maxRetryOpenWindow ) {
+      return wpopup;
+    }
+  }
+  if (pwidth != null || pheight != null) {
+    wpopup.resizeTo(pwidth,pheight);
+    wpopup.moveTo(wleft,wtop);
+  }
+  return wpopup;
+}
+
+function jsClosePopup(pWinName){
+}
+
+function OnLoad()
+{
+  var nNdx;                                                         
+     
+    if(gESM.subSel==0){
+      gESM.subSel=1;
+    }
+    if(gESM.subSel==1){
+      if((gESM.subUse&1)==0){
+        gESM.subSel=2;
+      }
+    }
+    if(gESM.subSel==2){
+      if((gESM.subUse&2)==0){
+        gESM.subSel=1;
+      }
+    }
+    ChangeLang(false);
+}
+                                             
+                                                               
+function OnUnload()
+{
+  F10.src="./_COM/ESMTITLE.HTML";
+  F11.src="./_COM/ESMSELCT.HTML";
+  F12.src="./_COM/ESMBLANK.HTML";
+}
+
+
+function OnResizeProc()
+{
+   if(F12.Chh){
+      F12.Chh(F12.document.body.clientHeight);
+   }
+}
+
+Initialize();
+window.onload=OnLoad;
+//-->
+</script>
+<noscript>
+<p>Execute the Microsoft Internet Explorer&#x00AE; Version more than 5.0.</p>
+</noscript>
+</head>
+<frameset id="F01" rows="71,*" frameborder="0" framespacing="0">
+  <frame id="F10" src="./_COM/ESMTITLE.HTML" noresize scrolling="no">
+  <frameset id="F02" cols="370,*">
+    <frame id="F11" src="./_COM/ESMSELCT.HTML">
+    <frame id="F12" src="./_COM/ESMBLANK.HTML" onResize="OnResizeProc();">
+  </frameset>
+</frameset>
+</html>

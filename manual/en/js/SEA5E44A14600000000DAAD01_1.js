@@ -1,0 +1,37 @@
+with(document) {
+write("<v:group id=\"group1\" class=\"drag\" style=\"position:relative; width:950px; height:1087px;\" coordsize=\"950,1087\">");
+write("<v:rect id=\"rect1\"class=\"drag\"  style=\"width:950px;height:1087px;\">");
+write("<img id=\"img1\" src=\"../img/SEA5E44A14600000000DAAD01.PNG\" border=\"1\" class=\"drag\" style=\"position:absolute;left:0px;top:0px;width:950px;height:1087px;border-color:#ffffff\">");
+write("<p id=\"p1_1\" class=\"drag\" style=\"position:absolute;left:688px;top:19px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>CYLINDER HEAD COVER<br><a href=\"javascript:parent.Cts('000000000001943','i000')\"></b>Removal,</a><br><a href=\"javascript:parent.Cts('000000000001944','i000')\">Installation,</a><br></nobr>");
+write("</p>");
+write("<p id=\"p1_2\" class=\"drag\" style=\"position:absolute;left:684px;top:222px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>CAM CHAIN<br><a href=\"javascript:parent.Cts('000000000001953','i000')\"></b>Removal,</a><br><a href=\"javascript:parent.Cts('000000000001954','i000')\">Installation,</a><br></nobr>");
+write("</p>");
+write("<p id=\"p1_3\" class=\"drag\" style=\"position:absolute;left:699px;top:865px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>CAM CHAIN GUIDE A<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_4\" class=\"drag\" style=\"position:absolute;left:647px;top:926px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>TENSIONER ARM<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_5\" class=\"drag\" style=\"position:absolute;left:568px;top:988px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>AUTO-TENSIONER<br><a href=\"javascript:parent.Cts('000000000001956','i000')\"></b>Replacement,</a><br></nobr>");
+write("</p>");
+write("<p id=\"p1_6\" class=\"drag\" style=\"position:absolute;left:364px;top:1042px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>CRANKSHAFT PULLEY<br><a href=\"javascript:parent.Cts('000000000001955','i000')\"></b>Replacement,</a><br></nobr>");
+write("</p>");
+write("<p id=\"p1_7\" class=\"drag\" style=\"position:absolute;left:23px;top:1042px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>CRANKSHAFT PULLEY BOLT<br><a href=\"javascript:parent.Cts('000000000001955','i000')\"></b>Replacement,</a><br></nobr>");
+write("</p>");
+write("<p id=\"p1_8\" class=\"drag\" style=\"position:absolute;left:12px;top:744px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>CHAIN CASE<br>COVER<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_9\" class=\"drag\" style=\"position:absolute;left:80px;top:451px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>CHAIN CASE<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_10\" class=\"drag\" style=\"position:absolute;left:221px;top:363px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>CAM CHAIN GUIDE B<br></b></nobr>");
+write("</p>");
+write("</v:rect>");
+write("</v:group>");
+}

@@ -1,0 +1,125 @@
+<html lang="en">
+<head>
+<meta name="author" content="HONDA MOTOR Co.,Ltd.">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<title>SEA7ET3000000000000JCAT12</title>
+<link href="../css/ViewerStyle.css" rel="stylesheet">
+<script>
+<!--
+function prOptionStruct(disString, contNum) {
+	var	data = new Array;
+	data.disString		= disString;
+	data.contNum		= contNum;
+	return(data);
+}
+var kmOption = new Array;
+var mlOption = new Array;
+var selectContNum = "";
+kmOption[0]=prOptionStruct("20,000km/1year","000000000007266");
+kmOption[1]=prOptionStruct("40,000km/2year","000000000007267");
+kmOption[2]=prOptionStruct("60,000km/3year","000000000007268");
+kmOption[3]=prOptionStruct("80,000km/4year","000000000007269");
+kmOption[4]=prOptionStruct("100,000km/5year","000000000007270");
+kmOption[5]=prOptionStruct("120,000km/6year","000000000007271");
+kmOption[6]=prOptionStruct("140,000km/7year","000000000007272");
+kmOption[7]=prOptionStruct("160,000km/8year","000000000007273");
+kmOption[8]=prOptionStruct("180,000km/9year","000000000007274");
+kmOption[9]=prOptionStruct("200,000km/10year","000000000007275");
+kmOption[10]=prOptionStruct("220,000km/11year","000000000007276");
+kmOption[11]=prOptionStruct("240,000km/12year","000000000007277");
+mlOption[0]=prOptionStruct("12,000miles/1year","000000000007278");
+mlOption[1]=prOptionStruct("25,000miles/2year","000000000007279");
+mlOption[2]=prOptionStruct("37,000miles/3year","000000000007280");
+mlOption[3]=prOptionStruct("50,000miles/4year","000000000007281");
+mlOption[4]=prOptionStruct("62,000miles/5year","000000000007282");
+mlOption[5]=prOptionStruct("75,000miles/6year","000000000007283");
+mlOption[6]=prOptionStruct("87,000miles/7year","000000000007284");
+mlOption[7]=prOptionStruct("100,000miles/8year","000000000007285");
+mlOption[8]=prOptionStruct("112,000miles/9year","000000000007286");
+mlOption[9]=prOptionStruct("125,000miles/10year","000000000007287");
+mlOption[10]=prOptionStruct("137,000miles/11year","000000000007288");
+mlOption[11]=prOptionStruct("150,000miles/12year","000000000007289");
+function prOnLoadProc() {
+	CreateKiloMeterList();
+	parent.Old(this);
+	return;
+}
+function SelectModeClicked(index) {
+	if(index == 0){
+		CreateKiloMeterList();
+	} else {
+		CreateMilesList();
+	}
+	ListSelected();
+	return;
+}
+function CreateKiloMeterList() {
+	fomMain.cmbList.length = kmOption.length;
+	for ( var i = 0; i < kmOption.length; i++ ) {
+		fomMain.cmbList.options[i].value	= kmOption[i].contNum;
+		fomMain.cmbList.options[i].text		= kmOption[i].disString;
+	}
+	fomMain.cmbList.options.selectedIndex = 0;
+	selectContNum = fomMain.cmbList.options[0].value;
+	return;
+}
+function CreateMilesList() {
+	fomMain.cmbList.length = mlOption.length;
+	for ( var i = 0; i < mlOption.length; i++ ) {
+		fomMain.cmbList.options[i].value	= mlOption[i].contNum;
+		fomMain.cmbList.options[i].text		= mlOption[i].disString;
+	}
+	fomMain.cmbList.options.selectedIndex = 0;
+	selectContNum = fomMain.cmbList.options[0].value;
+	return;
+}
+function ListSelected() {
+	var index = fomMain.cmbList.options.selectedIndex;
+	if(index < 0){
+		return;
+	}
+	if(index >= fomMain.cmbList.options.length){
+		return;
+	}
+	selectContNum = fomMain.cmbList.options[index].value;
+	return;
+}
+function SearchButtonClicked() {
+	parent.Cts(selectContNum);
+}
+//-->
+</script>
+</head>
+<body onLoad="prOnLoadProc()" style="font-family:sans-serif;">
+<form name="fomMain">
+<table width="100%" border="0"><tr>
+<td width="0"></td>
+<td align="left">
+<a href="#" onClick="SearchButtonClicked();"><img src="../img/GL_SEARCH.PNG" border="0" alt="Search"></a>
+</td>
+</tr></table>
+<table width="100%" border="0"><tr>
+<td width="10"><img src="../img/LABELPNT.PNG" width="16" height="16"></td>
+<td colspan="2">Mileage&nbsp;/&nbsp;Year</td>
+</tr></table>
+<table border="0"><tr>
+<td width="20"></td>
+<td>
+<input type="radio" name="km_miles" value="km" checked="" onClick="SelectModeClicked(0)"> km
+</td>
+<td>
+<input type="radio" name="km_miles" value="ms" onClick="SelectModeClicked(1)"> mile
+</td>
+</tr></table>
+<table width="100%" border="0" align="center">
+<tr><td width="20"></td>
+<td colspan="2">
+<select name="cmbList" size="1" onChange="ListSelected()">
+<option></option>
+</select></td></tr>
+</table>
+</form>
+</body>
+</html>

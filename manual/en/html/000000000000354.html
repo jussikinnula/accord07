@@ -1,0 +1,372 @@
+<html lang="en" xmlns:v="urn:schemas-microsoft-com:vml">
+<head>
+<meta name="author" content="HONDA MOTOR Co.,Ltd.">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<title>SEA5E00K73200000000BBAT00</title>
+<link href="../css/ViewerStyle.css" rel="stylesheet">
+<style>
+	v\:*	{ behavior: url(#default#VML); }
+	.drag	{ position: relative; cursor:   hand; }
+</style>
+</head>
+<script>
+<!--
+-->
+</script>
+<body onload="javascript:parent.Old(this)" style="font-family:sans-serif;">
+<div xmlns:v="urn:schemas-microsoft-com:vml">
+<div class="top_title">
+How to Troubleshoot Gauges and Indicators
+</div>
+<div>
+</div>
+<hr width="100%" size="2" color="gray">
+<table width="100%" class="Viewer">
+<tr>
+<td width="80%" class="ViewerTD" id="textTd" valign="top">
+<div>
+Before troubleshooting the gauge system, 
+<a href="javascript:parent.Cts('000000000002801','i000')">
+refer to multiplex integrated control system test mode A troubleshooting.
+</a>
+</div>
+<div>
+The gauge control module has a self-diagnosis function.
+</div>
+<ul type="disc">
+<li>
+<div>
+The beeper drive circuit check
+</div>
+</li>
+<li>
+<div>
+The indicator drive circuit check
+</div>
+</li>
+<li>
+<div>
+The LCD segments check
+</div>
+</li>
+<li>
+<div>
+The gauges drive circuit check (Speedometer, Tachometer, Fuel gauge, Coolant temperature gauge)
+</div>
+</li>
+<li>
+<div>
+The communication line check (the body-controller area network (B-CAN) communicational line, and the frame-controller area network (F-CAN) communication line between the gauges
+</div>
+</li>
+</ul>
+<div>
+NOTE: Indicators are also controlled via the communication line.
+</div>
+<a name="iG01">
+</a>
+<div class="servinfosub_title">
+<b>
+Entering the self-diagnosis function
+</b>
+</div>
+<div>
+Before doing the self-diagnosis function, check the No. 7 (10 A) fuse and the No. 21 (7.5 A) fuse in the under-dash fuse/relay box.
+</div>
+<a name="i010">
+</a>
+<ol>
+<li value="1">
+<div>
+Push and hold the trip/reset button.
+</div>
+</li>
+</ol>
+<a name="i020">
+</a>
+<ol>
+<li value="2">
+<div>
+Turn the lighting switch ON.
+</div>
+</li>
+</ol>
+<a name="i030">
+</a>
+<ol>
+<li value="3">
+<div>
+Turn the ignition switch ON (II).
+</div>
+</li>
+</ol>
+<a name="i040">
+</a>
+<ol>
+<li value="4">
+<div>
+Within 5 sec., turn the lighting switch OFF, then ON and OFF again.
+</div>
+</li>
+</ol>
+<a name="i050">
+</a>
+<ol>
+<li value="5">
+<div>
+Within 5 sec., release the trip/reset button, then push and release the button three times repeatedly.
+</div>
+</li>
+</ol>
+<div>
+NOTE:
+</div>
+<ul type="disc">
+<li>
+<div>
+While in the self-diagnosis mode, the dash lights brightness controller operates normally.
+</div>
+</li>
+<li>
+<div>
+While in the self-diagnosis mode, the trip/reset button is used to start the Beeper Drive Circuit Test and the Gauge Drive Circuit Check.
+</div>
+</li>
+<li>
+<div>
+ If the vehicle speed exceeds 2 km/h (1.2 mph) or the ignition switch is turned OFF, the self-diagnosis mode ends.
+</div>
+</li>
+</ul>
+</td>
+<td width="20%" class="ViewerTD" id="graphTd" valign="top">
+<span style="display:none" id="imgId1">
+<div style="page-break-after:always;">
+</div>
+</span>
+<div>
+<a href="javascript:parent.Prt('ZOOM000000000000898','1');">
+<img src="../tn/SEA5E00K73200000000BBAD01.png">
+</a>
+</div>
+</td>
+</tr>
+</table>
+<hr width="100%" size="2" color="gray">
+<table width="100%" class="Viewer">
+<tr>
+<td width="80%" class="ViewerTD" id="textTd" valign="top">
+<a name="iG02">
+</a>
+<div class="servinfosub_title">
+<b>
+The Beeper Drive Circuit Check
+</b>
+</div>
+<div>
+When entering the self-diagnosis mode, the beeper sounds five times.
+</div>
+</td>
+<td width="20%" class="ViewerTD" id="graphTd" valign="top">
+</td>
+</tr>
+</table>
+<hr width="100%" size="2" color="gray">
+<table width="100%" class="Viewer">
+<tr>
+<td width="80%" class="ViewerTD" id="textTd" valign="top">
+<a name="iG03">
+</a>
+<div class="servinfosub_title">
+<b>
+The Indicator Drive Circuit Check
+</b>
+</div>
+<div>
+When entering the self-diagnosis mode, the indicator lights blink.
+</div>
+<div>
+The following indicators blink:
+</div>
+<div>
+Seat belt indicator light, Charging system light, Low fuel indicator light, Maintenance required indicator light, Security indicator light, High beam indicator light, Lights on indicator light, Malfunction indicator lamp (MIL), A/T gear position indicator lights, ABS indicator light, Cruise main indicator light, Safety indicator lights.
+</div>
+</td>
+<td width="20%" class="ViewerTD" id="graphTd" valign="top">
+</td>
+</tr>
+</table>
+<hr width="100%" size="2" color="gray">
+<table width="100%" class="Viewer">
+<tr>
+<td width="80%" class="ViewerTD" id="textTd" valign="top">
+<a name="iG04">
+</a>
+<div class="servinfosub_title">
+<b>
+Switch Input Check
+</b>
+</div>
+<div>
+After the intermittent beeper sounds at the initial stage of self-diagnosis, a beeper sounds continuously while any of the following switch inputs are switched from OFF to ON.
+</div>
+<div>
+The following switches cause the beeper sounds:
+</div>
+<div>
+Cruise control main switch, parking brake switch.
+</div>
+</td>
+<td width="20%" class="ViewerTD" id="graphTd" valign="top">
+</td>
+</tr>
+</table>
+<hr width="100%" size="2" color="gray">
+<table width="100%" class="Viewer">
+<tr>
+<td width="80%" class="ViewerTD" id="textTd" valign="top">
+<a name="iG05">
+</a>
+<div class="servinfosub_title">
+<b>
+The LCD Segment Check
+</b>
+</div>
+<div>
+When entering the self-diagnosis mode, the odo/trip segments and outside air temperature segment blink five times.
+</div>
+</td>
+<td width="20%" class="ViewerTD" id="graphTd" valign="top">
+</td>
+</tr>
+</table>
+<hr width="100%" size="2" color="gray">
+<table width="100%" class="Viewer">
+<tr>
+<td width="80%" class="ViewerTD" id="textTd" valign="top">
+<a name="iG06">
+</a>
+<div class="servinfosub_title">
+<b>
+The Gauge Drive Circuit Check
+</b>
+</div>
+<div>
+When entering the self-diagnosis mode, the speedometer, the tachometer, the fuel gauge, and the coolant temperature gauge needles sweep from the minimum position to maximum position, then return to the minimum position.
+</div>
+<div>
+NOTE:
+</div>
+<div>
+After the beeper stops sounding and the gauge needles return to the minimum position, pushing the trip/reset button starts the Beeper Drive Circuit Check (one beep) and the Gauge Drive Circuit Check again.
+</div>
+<div>
+The check cannot be started again until the gauge needles return to the minimum position.
+</div>
+<div>
+If a needle fails to sweep or the beeper does not sound, replace the gauge control module.
+</div>
+</td>
+<td width="20%" class="ViewerTD" id="graphTd" valign="top">
+<span style="display:none" id="imgId1">
+<div style="page-break-after:always;">
+</div>
+</span>
+<div>
+<a href="javascript:parent.Prt('ZOOM000000000000903','1');">
+<img src="../tn/SEA5E00K73200000000BBAD02.png">
+</a>
+</div>
+</td>
+</tr>
+</table>
+<hr width="100%" size="2" color="gray">
+<table width="100%" class="Viewer">
+<tr>
+<td width="80%" class="ViewerTD" id="textTd" valign="top">
+<a name="iG07">
+</a>
+<div class="servinfosub_title">
+<b>
+The Communication Line Check
+</b>
+</div>
+<div>
+In the self-diagnosis mode, after the odo/trip LCD Segments Check, the self-diagnosis starts the Communication Line Check.
+</div>
+<div>
+If all segments comes on, the communication line is OK.
+</div>
+<ul type="disc">
+<li>
+<div>
+If the word ‘‘Error 1'' is indicated, there is a malfunction in the communication line between the gauge control module and the frame-controller area network (F-CAN). Check for DTCs in the ECM/PCM. If no DTCs are found, 
+<a href="javascript:parent.Cts('000000000002801','i000')">
+go to MICS test mode A.
+</a>
+</div>
+</li>
+<li>
+<div>
+If the word ‘‘Error 2'' is indicated, there is a malfunction in the communication line between the gauge control module and the body-controller area network (B-CAN). Check for DTCs in the ECM/PCM. If no DTCs are found, 
+<a href="javascript:parent.Cts('000000000002801','i000')">
+go to MICS test mode A.
+</a>
+</div>
+</li>
+<li>
+<div>
+If the word ‘‘Error 3'' is indicated, there is a malfunction in the communication line between the gauge control module and the body-controller area network (B-CAN) and the frame-controller area network (F-CAN). Check for DTCs in the ECM/PCM. If no DTCs are found, 
+<a href="javascript:parent.Cts('000000000002801','i000')">
+go to MICS test mode A.
+</a>
+</div>
+</li>
+</ul>
+<div>
+If any communication line errors are found, 
+<a href="javascript:parent.Cts('000000000002801','i000')">
+go to MICS test mode A.
+</a>
+</div>
+</td>
+<td width="20%" class="ViewerTD" id="graphTd" valign="top">
+<span style="display:none" id="imgId1">
+<div style="page-break-after:always;">
+</div>
+</span>
+<div>
+<a href="javascript:parent.Prt('ZOOM000000000000904','1');">
+<img src="../tn/SEA5E00K73200000000BBAD03.png">
+</a>
+</div>
+</td>
+</tr>
+</table>
+<hr width="100%" size="2" color="gray">
+<table width="100%" class="Viewer">
+<tr>
+<td width="80%" class="ViewerTD" id="textTd" valign="top">
+<a name="iG08">
+</a>
+<div class="servinfosub_title">
+<b>
+Ending the self-diagnosis function
+</b>
+</div>
+<div>
+Turn the ignition switch OFF.
+</div>
+<div>
+NOTE: If the vehicle speed exceeds 2 km/h (1.2 mph), the self-diagnosis function ends.
+</div>
+</td>
+<td width="20%" class="ViewerTD" id="graphTd" valign="top">
+</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

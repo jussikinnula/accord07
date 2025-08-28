@@ -1,0 +1,37 @@
+with(document) {
+write("<v:group id=\"group1\" class=\"drag\" style=\"position:relative; width:475px; height:320px;\" coordsize=\"475,320\">");
+write("<v:rect id=\"rect1\"class=\"drag\"  style=\"width:475px;height:320px;\">");
+write("<img id=\"img1\" src=\"../img/SEA6EJ4J36200000000BBAD23.PNG\" border=\"1\" class=\"drag\" style=\"position:absolute;left:0px;top:0px;width:475px;height:320px;border-color:#ffffff\">");
+write("<p id=\"p1_1\" class=\"drag\" style=\"position:absolute;left:118px;top:77px;font-weight:normal;font-size:10.9pt;\">");
+write("<nobr><b>GPS Information<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_2\" class=\"drag\" style=\"position:absolute;left:340px;top:75px;font-weight:normal;font-size:9.6pt;\">");
+write("<nobr><b>Return<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_3\" class=\"drag\" style=\"position:absolute;left:58px;top:109px;font-weight:normal;font-size:9.6pt;\">");
+write("<nobr><b>Number of Satellites<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_4\" class=\"drag\" style=\"position:absolute;left:375px;top:217px;font-weight:normal;font-size:7.0pt;\">");
+write("<nobr><b>In Use<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_5\" class=\"drag\" style=\"position:absolute;left:375px;top:231px;font-weight:normal;font-size:7.0pt;\">");
+write("<nobr><b>Search<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_6\" class=\"drag\" style=\"position:absolute;left:63px;top:152px;font-weight:normal;font-size:9.6pt;\">");
+write("<nobr><b>Current Position<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_7\" class=\"drag\" style=\"position:absolute;left:78px;top:171px;font-weight:normal;font-size:9.6pt;\">");
+write("<nobr><b>Latitude: Nxx°xx'xx”<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_8\" class=\"drag\" style=\"position:absolute;left:78px;top:208px;font-weight:normal;font-size:9.6pt;\">");
+write("<nobr><b>Elevation: 0 feet<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_9\" class=\"drag\" style=\"position:absolute;left:78px;top:190px;font-weight:normal;font-size:9.6pt;\">");
+write("<nobr><b>Longitude: Exxx°xx'xx”<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_10\" class=\"drag\" style=\"position:absolute;left:78px;top:228px;font-weight:normal;font-size:9.6pt;\">");
+write("<nobr><b>xxxx.xx.xx  xx:xx:xx<br></b></nobr>");
+write("</p>");
+write("</v:rect>");
+write("</v:group>");
+}

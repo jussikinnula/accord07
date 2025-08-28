@@ -1,0 +1,31 @@
+with(document) {
+write("<v:group id=\"group1\" class=\"drag\" style=\"position:relative; width:950px; height:767px;\" coordsize=\"950,767\">");
+write("<v:rect id=\"rect1\"class=\"drag\"  style=\"width:950px;height:767px;\">");
+write("<img id=\"img1\" src=\"../img/SEA5E44D14300014751MAAD01.PNG\" border=\"1\" class=\"drag\" style=\"position:absolute;left:0px;top:0px;width:950px;height:767px;border-color:#ffffff\">");
+write("<p id=\"p1_1\" class=\"drag\" style=\"position:absolute;left:616px;top:40px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>BRAKE LINE-to-BRAKE HOSE<br>15 N·m (1.5 kgf·m, 11 lbf·ft)<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_2\" class=\"drag\" style=\"position:absolute;left:54px;top:131px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>BRAKE LINE-to-BRAKE HOSE<br>15 N·m (1.5 kgf·m, 11 lbf·ft)<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_3\" class=\"drag\" style=\"position:absolute;left:252px;top:16px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>MASTER CYLINDER-to-BRAKE LINES<br>ABS: 15 N·m (1.5 kgf·m, 11 lbf·ft)<br>VSA: 22 N·m (2.2 kgf·m, 16 lbf·ft)<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_4\" class=\"drag\" style=\"position:absolute;left:656px;top:430px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>BRAKE HOSE-to-CALIPER<br>(BANJO BOLT)<br>34 N·m (3.5 kgf·m, 25 lbf·ft)<br>BLEEDER SCREW<br>9 N·m (0.9 kgf·m, 7 lbf·ft)<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_5\" class=\"drag\" style=\"position:absolute;left:606px;top:571px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>BRAKE HOSE-to-CALIPER<br>(BANJO BOLT)<br>34 N·m (3.5 kgf·m, 25 lbf·ft)<br>BLEEDER SCREW<br>9.8 N·m (1.0 kgf·m, 7.2 lbf·ft)<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_6\" class=\"drag\" style=\"position:absolute;left:126px;top:494px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>BRAKE HOSE-to-CALIPER<br>(BANJO BOLT)<br>34 N·m (3.5 kgf·m, 25 lbf·ft)<br>BLEEDER SCREW<br>9.8 N·m (1.0 kgf·m, 7.2 lbf·ft)<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_7\" class=\"drag\" style=\"position:absolute;left:316px;top:649px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>BRAKE LINE-to-BRAKE HOSE<br>15 N·m (1.5 kgf·m, 11 lbf·ft)<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_8\" class=\"drag\" style=\"position:absolute;left:8px;top:589px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>ABS MODULATOR-CONTROL UNIT<br>-to-BRAKE LINES<br>15 N·m (1.5 kgf·m, 11 lbf·ft)<br>VSA MODULATOR-CONTROL UNIT<br>-to-BRAKE LINES<br>10 x 1.0 mm FLARE NUTS:<br>15 N·m (1.5 kgf·m, 11 lbf·ft)<br>12 x 1.0 mm FLARE NUTS:<br>22 N·m (2.2 kgf·m, 16 lbf·ft)<br></b></nobr>");
+write("</p>");
+write("</v:rect>");
+write("</v:group>");
+}

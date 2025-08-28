@@ -1,0 +1,34 @@
+with(document) {
+write("<v:group id=\"group1\" class=\"drag\" style=\"position:relative; width:950px; height:415px;\" coordsize=\"950,415\">");
+write("<v:rect id=\"rect1\"class=\"drag\"  style=\"width:950px;height:415px;\">");
+write("<img id=\"img1\" src=\"../img/SEA5E24J26346141951FCAD01.PNG\" border=\"1\" class=\"drag\" style=\"position:absolute;left:0px;top:0px;width:950px;height:415px;border-color:#ffffff\">");
+write("<p id=\"p1_1\" class=\"drag\" style=\"position:absolute;left:314px;top:18px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>UNDER-DASH FUSE/RELAY BOX CONNECTOR F (14P)<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_2\" class=\"drag\" style=\"position:absolute;left:609px;top:172px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>BLU/RED<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_3\" class=\"drag\" style=\"position:absolute;left:324px;top:209px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>UNDER-DASH FUSE/RELAY BOX CONNECTOR P (30P)<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_4\" class=\"drag\" style=\"position:absolute;left:188px;top:245px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>BRN*<sup>1</sup><br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_5\" class=\"drag\" style=\"position:absolute;left:709px;top:232px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>RED/WHT*<sup>1</sup><br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_6\" class=\"drag\" style=\"position:absolute;left:803px;top:257px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>BRN*<sup>2</sup><br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_7\" class=\"drag\" style=\"position:absolute;left:269px;top:244px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>RED/WHT*<sup>2</sup><br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_8\" class=\"drag\" style=\"position:absolute;left:16px;top:364px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>*1: LHD type<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_9\" class=\"drag\" style=\"position:absolute;left:16px;top:384px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>*2: RHD type<br></b></nobr>");
+write("</p>");
+write("</v:rect>");
+write("</v:group>");
+}

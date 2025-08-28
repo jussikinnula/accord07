@@ -1,0 +1,31 @@
+with(document) {
+write("<v:group id=\"group1\" class=\"drag\" style=\"position:relative; width:950px; height:1119px;\" coordsize=\"950,1119\">");
+write("<v:rect id=\"rect1\"class=\"drag\"  style=\"width:950px;height:1119px;\">");
+write("<img id=\"img1\" src=\"../img/SEA5E24J46636200000DAAD01.PNG\" border=\"1\" class=\"drag\" style=\"position:absolute;left:0px;top:0px;width:950px;height:1119px;border-color:#ffffff\">");
+write("<p id=\"p1_1\" class=\"drag\" style=\"position:absolute;left:676px;top:593px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>ECM<br><a href=\"javascript:parent.Cts('000000000001509','iG08')\"></b>Replacement,</a><br><a href=\"javascript:parent.Cts('000000000001509','iG11')\">Substitute known-good for testing,<br></a><br></nobr>");
+write("</p>");
+write("<p id=\"p1_2\" class=\"drag\" style=\"position:absolute;left:80px;top:969px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>IGNITION  KEY<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_3\" class=\"drag\" style=\"position:absolute;left:464px;top:693px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>TRANSPONDER<br>(Built into the ignition key)<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_4\" class=\"drag\" style=\"position:absolute;left:107px;top:17px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>IMMOBILIZER INDICATOR LIGHT<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_5\" class=\"drag\" style=\"position:absolute;left:1px;top:1019px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b></b>This key is similar in appearance to other models, but it is a rolling code<br>type. Only a key with a R on the shank can be used.<br></nobr>");
+write("</p>");
+write("<p id=\"p1_6\" class=\"drag\" style=\"position:absolute;left:601px;top:444px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>IMOES UNIT<br><a href=\"javascript:parent.Cts('000000000001466','i000')\"></b>Input Test,<br></a><br></nobr>");
+write("</p>");
+write("<p id=\"p1_7\" class=\"drag\" style=\"position:absolute;left:472px;top:47px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>IMMOBILIZER CONTROL UNIT-RECEIVER<br><a href=\"javascript:parent.Cts('000000000001464','i000')\"></b>Troubleshooting,</a><br><a href=\"javascript:parent.Cts('000000000001465','i000')\">Replacement,</a><br></nobr>");
+write("</p>");
+write("<p id=\"p1_8\" class=\"drag\" style=\"position:absolute;left:0px;top:1090px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b></b>LHD type is shown, RHD type is similar.<br></nobr>");
+write("</p>");
+write("</v:rect>");
+write("</v:group>");
+}

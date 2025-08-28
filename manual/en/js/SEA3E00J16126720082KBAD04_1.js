@@ -1,0 +1,31 @@
+with(document) {
+write("<v:group id=\"group4\" class=\"drag\" style=\"position:relative; width:950px; height:367px;\" coordsize=\"950,367\">");
+write("<v:rect id=\"rect4\"class=\"drag\"  style=\"width:950px;height:367px;\">");
+write("<img id=\"img4\" src=\"../img/SEA3E00J16126720082KBAD04.PNG\" border=\"1\" class=\"drag\" style=\"position:absolute;left:0px;top:0px;width:950px;height:367px;border-color:#ffffff\">");
+write("<p id=\"p4_1\" class=\"drag\" style=\"position:absolute;left:461px;top:336px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>4 mm (0.16 in.)<br></b></nobr>");
+write("</p>");
+write("<p id=\"p4_2\" class=\"drag\" style=\"position:absolute;left:227px;top:298px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>DOOR INNER CHANNEL TAPE<br></b></nobr>");
+write("</p>");
+write("<p id=\"p4_3\" class=\"drag\" style=\"position:absolute;left:434px;top:264px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>(1)<br></b></nobr>");
+write("</p>");
+write("<p id=\"p4_4\" class=\"drag\" style=\"position:absolute;left:325px;top:243px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>(2)<br></b></nobr>");
+write("</p>");
+write("<p id=\"p4_5\" class=\"drag\" style=\"position:absolute;left:296px;top:168px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>(3)<br></b></nobr>");
+write("</p>");
+write("<p id=\"p4_6\" class=\"drag\" style=\"position:absolute;left:316px;top:96px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>(4)<br></b></nobr>");
+write("</p>");
+write("<p id=\"p4_7\" class=\"drag\" style=\"position:absolute;left:400px;top:57px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>(5)<br></b></nobr>");
+write("</p>");
+write("<p id=\"p4_8\" class=\"drag\" style=\"position:absolute;left:0px;top:16px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b></b>NOTE: Press in numbered sequence.<br></nobr>");
+write("</p>");
+write("</v:rect>");
+write("</v:group>");
+}

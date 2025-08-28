@@ -1,0 +1,1582 @@
+<html lang="en" xmlns:v="urn:schemas-microsoft-com:vml">
+<head>
+<meta name="author" content="HONDA MOTOR Co.,Ltd.">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<title>SEA8EX3000000000000JCAT30</title>
+<link href="../css/ViewerStyle.css" rel="stylesheet">
+<style>
+	v\:*	{ behavior: url(#default#VML); }
+	.drag	{ position: relative; cursor:   hand; }
+</style>
+</head>
+<script>
+<!--
+-->
+</script>
+<script>
+<!--
+function jsResetImage() {
+	_prResetPosition();
+	_prResetImage();
+	return;
+}
+function jsResizeImage(rate) {
+	_prResizeImage(rate);
+	return;
+}
+var z,x,y;
+var gImageGroupList_	= new Array;
+var gIdx_				= 0;
+function _prImageGroupStruct(group_size,rect_size,img_size,p_tag,tp_obj,bl_obj,ul_obj) {
+	this.group		= group_size;
+	this.rect		= rect_size;
+	this.img		= img_size;
+	this.p			= p_tag;
+	this.tp			= tp_obj;
+	this.bl			= bl_obj;
+	this.ul			= ul_obj;
+}
+function _prSizeStruct(newObj,newWidth,newHeight) {
+	this.obj		= newObj;
+	this.width		= newWidth;
+	this.height		= newHeight;
+}
+function _prPTagStruct(newObj,newLeft,newTop,newFontSize) {
+	this.obj		= newObj;
+	this.left		= newLeft;
+	this.top		= newTop;
+	this.fontsize	= newFontSize;
+}
+function _prLineTagStruct(newObj,newFromx,newFromy, newTox, newToy) {
+	this.obj			= newObj;
+	this.fromx		= newFromx;
+	this.fromy		= newFromy;
+	this.tox		= newTox;
+	this.toy		= newToy;
+}
+function _prTPTagStruct(newObj,newFontSize) {
+	this.obj		= newObj;
+	this.fontsize	= newFontSize;
+}
+function _prInitImageInfo(rate) {
+	var endFlag = false;
+	gDefaultRate_ = rate;
+	gIdx_ = 0;
+	var save_i;
+	var iii = 100;
+	for(var i = 1; !endFlag; i++){
+		save_i = i;
+		var groupObject = document.getElementById("group" + i);
+		if(groupObject == null){
+			groupObject = document.getElementById("group" + iii);
+			if(groupObject == null){
+				groupObject = document.getElementById("group" + i + "_noresize");
+				if(groupObject == null){
+					endFlag = true;	
+					break;
+				}
+				continue;
+			}
+			else {
+				i = iii
+				iii++;
+			}
+		}
+		var groupWidth	= _prRemoveUnit(groupObject.style.width);
+		var groupHeight	= _prRemoveUnit(groupObject.style.height);
+		var rectObject	= document.getElementById("rect" + i);
+		var rectWidth	= null;
+		var rectHeight	= null;
+		if(rectObject != null){
+			rectWidth	= _prRemoveUnit(rectObject.style.width);
+			rectHeight	= _prRemoveUnit(rectObject.style.height);
+		}
+		var imgObject	= document.getElementById("img" + i);
+		var imgWidth	= null;
+		var imgHeight	= null;
+		if(imgObject != null){
+			imgWidth	= _prRemoveUnit(imgObject.style.width);
+			imgHeight	= _prRemoveUnit(imgObject.style.height);
+		}
+		var pObject		= null;
+		for(var j = 1; !endFlag; j++){
+			var pTag = document.getElementById("p" + i + "_" + j);
+			if(pTag == null){
+				if(j == 1){
+					endFlag = true;
+				}
+				break;
+			}
+			if(j == 1){
+				pObject		= new Array();
+			}
+			pObject[j-1] = new _prPTagStruct(
+									pTag,
+									_prRemoveUnit(pTag.style.left),
+									_prRemoveUnit(pTag.style.top),
+									_prRemoveUnit(pTag.style.fontSize)
+								);
+		}
+		endFlag = false;
+		var tpObject		= null;
+		for(var j = 1; !endFlag; j++){
+			var tpTag = document.getElementById("tp" + i + "_" + j);
+			if(tpTag == null){
+				if(j == 1){
+					endFlag = true;  
+				}
+				break;
+			}
+			if(j == 1){
+				tpObject		= new Array();
+			}
+			tpObject[j-1] = new _prTPTagStruct(
+									tpTag,
+									_prRemoveUnit(tpTag.style.fontSize)
+								);
+		}
+		endFlag = false;
+		var blObject		= null;
+		for(var j = 1; !endFlag; j++){
+			var baseline = document.getElementById("bl" + i + "_" + j);
+			if(baseline == null){
+				if(j == 1){
+					endFlag = true;  
+				}
+				break;
+			}
+			if(j == 1){
+				blObject		= new Array();
+			}
+			blObject[j-1] = new _prLineTagStruct(
+									baseline,
+									(baseline.from+'').substring(0,(baseline.from+'').indexOf(",")),
+									(baseline.from+'').substring((baseline.from+'').indexOf(",")+1,(baseline.from+'').length),
+									(baseline.to+'').substring(0,(baseline.to+'').indexOf(",")),
+									(baseline.to+'').substring((baseline.to+'').indexOf(",")+1, (baseline.to+'').length)
+								);
+		}
+		endFlag = false;
+		var ulObject		= null;
+		for(var j = 1; !endFlag; j++){
+			var underline = document.getElementById("ul" + i + "_" + j);
+			if(underline == null){
+				if(j == 1){
+					endFlag = true;  
+				}
+				break;
+			}
+			if(j == 1){
+				ulObject		= new Array();
+			}
+			ulObject[j-1] = new _prLineTagStruct(
+									underline,
+									(underline.from+'').substring(0,(underline.from+'').indexOf(",",0)),
+									(underline.from+'').substring((underline.from+'').indexOf(",")+1,(underline.from+'').length),
+									(underline.to+'').substring(0,(underline.to+'').indexOf(",")),
+									(underline.to+'').substring((underline.to+'').indexOf(",")+1, (underline.to+'').length)
+								);
+		}
+		endFlag = false;
+		gImageGroupList_[gIdx_] = new _prImageGroupStruct (
+			new _prSizeStruct(groupObject,groupWidth,groupHeight),
+			new _prSizeStruct(rectObject,rectWidth,rectHeight),
+			new _prSizeStruct(imgObject,imgWidth,imgHeight),
+			pObject,
+			tpObject,
+			blObject,
+			ulObject
+		);
+		gIdx_++;
+		i = save_i;
+	}
+	return ;
+}
+function _prResizeImage(rate) {
+	var  hei = 0;
+	for(var i=0; i<gImageGroupList_.length; i++){
+		if(gImageGroupList_[i].group != null){
+			var obj = gImageGroupList_[i].group;
+			obj.obj.style.width = (obj.width * rate) + 'px';
+			obj.obj.style.height = (obj.height * rate) + 'px';
+			obj.obj.coordsize = (obj.width * rate) + ',' + (obj.height * rate);
+			hei = obj.height * rate
+		}
+		if(gImageGroupList_[i].rect != null){
+			var obj = gImageGroupList_[i].rect;
+			obj.obj.style.width = (obj.width * rate) + 'px';
+			obj.obj.style.height = (obj.height * rate) + 'px';
+		}
+		if(gImageGroupList_[i].img != null){
+			var obj = gImageGroupList_[i].img;
+			obj.obj.style.width = (obj.width * rate) + 'px';
+			obj.obj.style.height = (obj.height * rate) + 'px';
+		}
+		if(gImageGroupList_[i].p != null){
+			var obj = gImageGroupList_[i].p;
+			for(var j=0; j<obj.length; j++){
+				var p = obj[j];
+				if(p.left != ""){
+					p.obj.style.left		= (p.left * rate) + 'px';
+				}
+				if(p.top != ""){
+					p.obj.style.top			= (p.top * rate) + 'px';
+				}
+				if(p.fontsize != ""){
+					p.obj.style.fontSize	= (p.fontsize * rate) + 'pt';
+				}
+			}
+		}
+		if(gImageGroupList_[i].tp != null){
+			var obj = gImageGroupList_[i].tp;
+			for(var j=0; j<obj.length; j++){
+				var tp = obj[j];
+				if(tp.fontsize != ""){
+					if(tp.fontsize*rate < 5.5){
+						tp.obj.style.fontSize	= '5.5pt';
+					}
+					else{
+						tp.obj.style.fontSize	= (tp.fontsize * rate) + 'pt';
+					}
+				}
+			}
+		}
+		if(gImageGroupList_[i].bl != null){
+			var obj = gImageGroupList_[i].bl;
+			for(var j=0; j<obj.length; j++){
+				var bl = obj[j];
+				var fromx,tox;
+				if(bl.fromx != ""){
+					fromx = bl.fromx * rate;
+					bl.obj.from	= fromx + "," + (bl.fromy * rate);
+				}
+				if(bl.tox != ""){
+					tox = bl.tox * rate;
+					if((0 >=tox-fromx) && (fromx-tox) < 1) {
+						tox = tox-1;
+					}
+					if((0 <= tox-fromx) && (tox-fromx) < 1) {
+						tox = tox+1;
+					}
+					bl.obj.to	= tox + "," + (bl.toy * rate);
+				}
+			}
+		}
+		if(gImageGroupList_[i].ul != null){
+			var obj = gImageGroupList_[i].ul;
+			for(var j=0; j<obj.length; j++){
+				var ul = obj[j];
+				if(ul.fromx != ""){
+					ul.obj.from	= (ul.fromx * rate) + "," + (ul.fromy * rate);
+				}
+				if(ul.tox != ""){
+					ul.obj.to	= (ul.tox * rate) + "," + (ul.toy * rate);
+				}
+			}
+		}
+	}
+	return hei;
+}
+function _prResizeImageAt(idx,rate) {
+	var  hei = 0;
+		if(gImageGroupList_[idx].group != null){
+			var obj = gImageGroupList_[idx].group;
+			obj.obj.style.width = (obj.width * rate) + 'px';
+			obj.obj.style.height = (obj.height * rate) + 'px';
+			obj.obj.coordsize = (obj.width * rate) + ',' + (obj.height * rate);
+			hei = obj.height * rate
+		}
+		if(gImageGroupList_[idx].rect != null){
+			var obj = gImageGroupList_[idx].rect;
+			obj.obj.style.width = (obj.width * rate) + 'px';
+			obj.obj.style.height = (obj.height * rate) + 'px';
+		}
+		if(gImageGroupList_[idx].img != null){
+			var obj = gImageGroupList_[idx].img;
+			obj.obj.style.width = (obj.width * rate) + 'px';
+			obj.obj.style.height = (obj.height * rate) + 'px';
+		}
+		if(gImageGroupList_[idx].p != null){
+			var obj = gImageGroupList_[idx].p;
+			for(var j=0; j<obj.length; j++){
+				var p = obj[j];
+				if(p.left != ""){
+					p.obj.style.left		= (p.left * rate) + 'px';
+				}
+				if(p.top != ""){
+					p.obj.style.top			= (p.top * rate) + 'px';
+				}
+				if(p.fontsize != ""){
+					p.obj.style.fontSize	= (p.fontsize * rate) + 'pt';
+				}
+			}
+		}
+		if(gImageGroupList_[idx].tp != null){
+			var obj = gImageGroupList_[idx].tp;
+			for(var j=0; j<obj.length; j++){
+				var tp = obj[j];
+				if(tp.fontsize != ""){
+					if(tp.fontsize*rate < 5.5){
+						tp.obj.style.fontSize	= '5.5pt';
+					}
+					else{
+						tp.obj.style.fontSize	= (tp.fontsize * rate) + 'pt';
+					}
+				}
+			}
+		}
+		if(gImageGroupList_[idx].bl != null){
+			var obj = gImageGroupList_[idx].bl;
+			for(var j=0; j<obj.length; j++){
+				var bl = obj[j];
+				var fromx,tox;
+				if(bl.fromx != ""){
+					fromx = bl.fromx * rate;
+					bl.obj.from	= fromx + "," + (bl.fromy * rate);
+				}
+				if(bl.tox != ""){
+					tox = bl.tox * rate;
+					if((0 >=tox-fromx) && (fromx-tox) < 1) {
+						tox = tox-1;
+					}
+					if((0 <= tox-fromx) && (tox-fromx) < 1) {
+						tox = tox+1;
+					}
+					bl.obj.to	= tox + "," + (bl.toy * rate);
+				}
+			}
+		}
+		if(gImageGroupList_[idx].ul != null){
+			var obj = gImageGroupList_[idx].ul;
+			for(var j=0; j<obj.length; j++){
+				var ul = obj[j];
+				if(ul.fromx != ""){
+					ul.obj.from	= (ul.fromx * rate) + "," + (ul.fromy * rate);
+				}
+				if(ul.tox != ""){
+					ul.obj.to	= (ul.tox * rate) + "," + (ul.toy * rate);
+				}
+			}
+		}
+	return hei;
+}
+function _prRemoveUnit(src){
+	var dst = src.substring(0,src.length-2);
+	return dst;
+}
+-->
+</script>
+<script>
+<!--
+function Apf() {
+   _prInitImageInfo(100);
+   window.focus();
+   if(gImageGroupList_.length == 0) {
+      window.print();
+   }
+   else {
+      divBody.style.display = "none";
+      var  img_pos,img_hei;
+      var  img_rate = 1.0;
+      var  i;
+      var  obj;
+      var  paper_wid,paper_hei,paper_len;
+      paper_wid = 640.0;
+      paper_hei = 950.0;
+      paper_len = 980.0;
+      for(i=0; i<gImageGroupList_.length; i++){
+         if(gImageGroupList_[i].group != null){
+           obj = gImageGroupList_[i].group;
+         }
+      }
+      if(paper_wid > paper_hei) {
+         alert("For best printing result, select 'landscape' layout from the print menu.");
+      }
+      for(i=0; i<gImageGroupList_.length; i++){
+         if(gImageGroupList_[i].group != null){
+            obj = gImageGroupList_[i].group;
+            if(img_rate > paper_wid/obj.width) {
+               img_rate =  paper_wid/obj.width;
+            }
+            if(img_rate > paper_hei/obj.height) {
+               img_rate =  paper_hei/obj.height;
+            }
+         }
+      }
+      _prResizeImage(img_rate);
+      window.scrollTo(0,10000);
+      var totalHei = document.body.scrollTop+document.body.clientHeight-img_hei;
+      divBody.style.display = "block";
+      var  idObj;
+      var groupObject = document.getElementById("group" + i);
+      var   beforeOffset = 0;
+      var   current_pos;
+      var   img_pos = img_dis = 0;
+      for(i=0; i<gImageGroupList_.length; i++){
+         idObj =document.getElementById("imgId" + (i+1));
+         if(idObj != null) {
+            idObj.style.display = "block";
+            current_pos = idObj.offsetTop;
+            if(gImageGroupList_[i].group != null){
+               obj = gImageGroupList_[i].group;
+               img_dis = current_pos - beforeOffset;
+               if(i == 0) {
+                  var pageCnt = Math.floor(current_pos/paper_hei);
+                  img_dis = img_dis - paper_hei*pageCnt;
+               }
+               img_hei = obj.height*img_rate;
+               img_pos += parseInt(img_dis);
+               if(parseInt(img_pos) > paper_len) {
+                  img_pos = img_pos - paper_len;
+               }
+               img_pos += parseInt(img_hei);
+               idObj.style.display = "none";
+               if(parseInt(img_pos) > paper_len) {
+                  idObj.style.display = "block";
+                  img_pos = parseInt(img_hei) + 50;
+               }
+               beforeOffset = current_pos + parseInt(img_hei);
+            }
+         }
+      }
+      window.print();
+      divBody.style.display = "none";
+      _prResizeImage(100/100);
+      divBody.style.display = "block";
+      window.scrollTo(0,0);
+   }
+}
+-->
+</script>
+<body onload="javascript:parent.Old(this)" style="font-family:sans-serif;">
+<div id="divBody" style="display:block">
+<div xmlns:v="urn:schemas-microsoft-com:vml">
+<div class="top_title">
+Maintenance Schedule for Normal and Severe Conditions - Except EU, Australia, and New Zealand
+</div>
+<div align="right">160,000km(8year)
+</div>
+<hr width="100%" size="2" color="gray">
+<div>
+This Maintenance Schedule outlines the minimum required maintenance that you should perform to ensure the trouble-free operation of vehicle. Due to regional and climatic difference, some additional service may be required. Please consult the warranty booklet for a more detailed description.
+</div>
+<div>
+The following items must be used for ‘‘severe conditions'' indicated on schedule, if the vehicle is driven MAINLY under the specified conditions A to E.
+</div>
+<ul type="disc">
+<li>
+<div>
+Engine oil and engine oil filter: A/B/C/D/E
+</div>
+</li>
+<li>
+<div>
+Transmission fluid: B/D
+</div>
+</li>
+</ul>
+<div>
+A: Driving less than 8 km (5 miles) per trip or, in freezing temperatures, driving less than 16 km (10 miles) per trip.
+</div>
+<div>
+B: Driving in extremely hot over 35 °C (95 °F) conditions.
+</div>
+<div>
+C: Extensive idling, or long periods of stop-and-go driving.
+</div>
+<div>
+D: Trailer towing, driving with a loaded roof rack, or driving in mountainous conditions.
+</div>
+<div>
+E: Driving on muddy, dusty, or de-iced roads.
+</div>
+<div>
+<table width="100%" class="Viewer" frame="void" style="table-layout:fixed;">
+<col width="3%">
+<col width="96%">
+<tbody>
+<tr>
+<td class="ViewerTD" style="border-left-style:none;border-right-style:none;border-bottom-style:none;border-top-style:none;" align="left">
+<div>
+</div>
+</td>
+<td class="ViewerTD" style="border-left-style:none;border-right-style:none;border-bottom-style:none;border-top-style:none;" align="left">
+<div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="ViewerTD" style="border-left-style:none;border-right-style:none;border-bottom-style:none;border-top-style:none;" align="left">
+<div>
+</div>
+</td>
+<td class="ViewerTD" style="border-left-style:none;border-right-style:none;border-bottom-style:none;border-top-style:none;" align="left">
+<div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="ViewerTD" style="border-left-style:none;border-right-style:none;border-bottom-style:none;border-top-style:none;" align="left">
+<div>
+</div>
+</td>
+<td class="ViewerTD" style="border-left-style:none;border-right-style:none;border-bottom-style:none;border-top-style:none;" align="left">
+<div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="ViewerTD" style="border-left-style:none;border-right-style:none;border-bottom-style:none;border-top-style:none;" align="left">
+<div>
+</div>
+</td>
+<td class="ViewerTD" style="border-left-style:none;border-right-style:none;border-bottom-style:none;border-top-style:none;" align="left">
+<div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<br>
+<br>
+<b>
+<div>
+Service at the indicated distance or time whichever comes first
+</div>
+</b>
+<table width="100%" class="Viewer" border="0" cellpadding="0" cellspacing="0">
+<tr>
+<td class="ViewerTD">
+<table class="Viewer" border="0">
+<tr>
+<td class="ViewerTD">
+<img src="../img/MARKLINE_1.PNG">
+</td>
+<td class="ViewerTD">
+<div class="mentenance_item_title">
+<a href="javascript:parent.Cts('000000000000612','i000')">
+Replace engine oil filter
+</a>
+ 
+</div>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="ViewerTD">
+</td>
+</tr>
+</table>
+<table width="100%" class="Viewer" border="0" cellpadding="0" cellspacing="0">
+<tr>
+<td class="ViewerTD">
+<table class="Viewer" border="0">
+<tr>
+<td class="ViewerTD">
+<img src="../img/MARKLINE_1.PNG">
+</td>
+<td class="ViewerTD">
+<div class="mentenance_item_title">
+<a href="javascript:parent.Cts('000000000001145','i000')">
+Replace fuel filter
+</a>
+</div>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="ViewerTD">
+<div>
+  If the fuel suspected to be contaminated with dust, every 40,000 km   (25,000 miles) or 2 years.
+</div>
+</td>
+</tr>
+<tr>
+<td class="ViewerTD">
+</td>
+</tr>
+</table>
+<table width="100%" class="Viewer" border="0" cellpadding="0" cellspacing="0">
+<tr>
+<td class="ViewerTD">
+<table class="Viewer" border="0">
+<tr>
+<td class="ViewerTD">
+<img src="../img/MARKLINE_1.PNG">
+</td>
+<td class="ViewerTD">
+<div class="mentenance_item_title">
+<a href="javascript:parent.Cts('000000000000499','i000')">
+Inspect drive belt
+</a>
+</div>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="ViewerTD">
+<div>
+  Check for cracks and damage.
+</div>
+</td>
+</tr>
+<tr>
+<td class="ViewerTD">
+</td>
+</tr>
+</table>
+<table width="100%" class="Viewer" border="0" cellpadding="0" cellspacing="0">
+<tr>
+<td class="ViewerTD">
+<table class="Viewer" border="0">
+<tr>
+<td class="ViewerTD">
+<img src="../img/MARKLINE_1.PNG">
+</td>
+<td class="ViewerTD">
+<div class="mentenance_item_title">
+<a href="javascript:parent.Cts('000000000001010','i000')">
+Check parking brake adjustment
+</a>
+</div>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="ViewerTD">
+<div>
+  Check the parking brake operation.
+</div>
+</td>
+</tr>
+<tr>
+<td class="ViewerTD">
+</td>
+</tr>
+</table>
+<table width="100%" class="Viewer" border="0" cellpadding="0" cellspacing="0">
+<tr>
+<td class="ViewerTD">
+<table class="Viewer" border="0">
+<tr>
+<td class="ViewerTD">
+<img src="../img/MARKLINE_1.PNG">
+</td>
+<td class="ViewerTD">
+<div class="mentenance_item_title">
+<a href="javascript:parent.Cts('000000000000112','i000')">
+Replace dust and pollen filter
+</a>
+</div>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="ViewerTD">
+</td>
+</tr>
+</table>
+<table width="100%" class="Viewer" border="0" cellpadding="0" cellspacing="0">
+<tr>
+<td class="ViewerTD">
+<table class="Viewer" border="0">
+<tr>
+<td class="ViewerTD">
+<div class="dis_mentenance_item_title">
+<b>
+Visually inspect the following items:
+</b>
+</div>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="ViewerTD">
+<table class="Viewer" border="0">
+<tr>
+<td class="ViewerTD">
+<br>
+</td>
+<td class="ViewerTD">
+<img style="margin-left:15px;" src="../img/MARKLINE_2.PNG">
+</td>
+<td class="ViewerTD">
+<div>
+Check for correct installation and position, check for cracks, deterioration, rust, and leaks.
+</div>
+</td>
+</tr>
+<tr>
+<td class="ViewerTD">
+<br>
+</td>
+<td class="ViewerTD">
+<img style="margin-left:15px;" src="../img/MARKLINE_2.PNG">
+</td>
+<td class="ViewerTD">
+<div>
+Check tightness of screws, nuts, and joints. If necessary, retighten.
+</div>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+<table width="100%" class="Viewer" border="0" cellpadding="0" cellspacing="0">
+<tr>
+<td class="ViewerTD">
+<table class="Viewer" border="0">
+<tr>
+<td class="ViewerTD">
+<img src="../img/MARKLINE_1.PNG">
+</td>
+<td class="ViewerTD">
+<div class="mentenance_item_title">
+<a href="javascript:parent.Cts('000000000003646','i000')">
+Brake hoses and lines (including ABS lines)
+</a>
+</div>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="ViewerTD">
+<div>
+  Check master cylinder and ABS modulator control-unit and leakage.
+</div>
+</td>
+</tr>
+<tr>
+<td class="ViewerTD">
+</td>
+</tr>
+</table>
+<table width="100%" class="Viewer" border="0" cellpadding="0" cellspacing="0">
+<tr>
+<td class="ViewerTD">
+<table class="Viewer" border="0">
+<tr>
+<td class="ViewerTD">
+<img src="../img/MARKLINE_1.PNG">
+</td>
+<td class="ViewerTD">
+<div class="mentenance_item_title">
+All fluid level and check for leak
+</div>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="ViewerTD">
+<div>
+  Check levels and check for leaks. If necessary, add.
+</div>
+</td>
+</tr>
+<tr>
+<td class="ViewerTD">
+<table class="Viewer" border="0">
+<tr>
+<td class="ViewerTD">
+<br>
+</td>
+<td class="ViewerTD">
+<img style="margin-left:15px;" src="../img/MARKLINE_2.PNG">
+</td>
+<td class="ViewerTD">
+<div>
+<a href="javascript:parent.Cts('000000000002686','i000')">
+Engine coolant
+</a>
+</div>
+</td>
+</tr>
+<tr>
+<td class="ViewerTD">
+<br>
+</td>
+<td class="ViewerTD">
+<img style="margin-left:15px;" src="../img/MARKLINE_2.PNG">
+</td>
+<td class="ViewerTD">
+<div>
+<a href="javascript:parent.Cts('000000000000759','i000')">
+MTF
+</a>
+</div>
+</td>
+</tr>
+<tr>
+<td class="ViewerTD">
+<br>
+</td>
+<td class="ViewerTD">
+<img style="margin-left:15px;" src="../img/MARKLINE_2.PNG">
+</td>
+<td class="ViewerTD">
+<div>
+<a href="javascript:parent.Cts('000000000003546','i000')">
+ATF
+</a>
+</div>
+</td>
+</tr>
+<tr>
+<td class="ViewerTD">
+<br>
+</td>
+<td class="ViewerTD">
+<img style="margin-left:15px;" src="../img/MARKLINE_2.PNG">
+</td>
+<td class="ViewerTD">
+<div>
+<a href="javascript:parent.Cts('000000000000057','i000')">
+Power steering fluid
+</a>
+</div>
+</td>
+</tr>
+<tr>
+<td class="ViewerTD">
+<br>
+</td>
+<td class="ViewerTD">
+<img style="margin-left:15px;" src="../img/MARKLINE_2.PNG">
+</td>
+<td class="ViewerTD">
+<div>
+<a href="javascript:parent.Cts('000000000000021','i000')">
+Brake fluid
+</a>
+</div>
+</td>
+</tr>
+<tr>
+<td class="ViewerTD">
+<br>
+</td>
+<td class="ViewerTD">
+<img style="margin-left:15px;" src="../img/MARKLINE_2.PNG">
+</td>
+<td class="ViewerTD">
+<div>
+<a href="javascript:parent.Cts('000000000000294','i000')">
+Windshield fluid
+</a>
+</div>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="ViewerTD">
+</td>
+</tr>
+</table>
+<table width="100%" class="Viewer" border="0" cellpadding="0" cellspacing="0">
+<tr>
+<td class="ViewerTD">
+<table class="Viewer" border="0">
+<tr>
+<td class="ViewerTD">
+<img src="../img/MARKLINE_1.PNG">
+</td>
+<td class="ViewerTD">
+<div class="mentenance_item_title">
+<a href="javascript:parent.Cts('000000000003564','i000')">
+Exhaust system
+</a>
+</div>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="ViewerTD">
+<div>
+  Check the exhaust pipe and muffler for damage, leaks, and tightness.
+</div>
+</td>
+</tr>
+<tr>
+<td class="ViewerTD">
+</td>
+</tr>
+</table>
+<table width="100%" class="Viewer" border="0" cellpadding="0" cellspacing="0">
+<tr>
+<td class="ViewerTD">
+<table class="Viewer" border="0">
+<tr>
+<td class="ViewerTD">
+<img src="../img/MARKLINE_1.PNG">
+</td>
+<td class="ViewerTD">
+<div class="mentenance_item_title">
+<a href="javascript:parent.Cts('000000000001150','i000')">
+Fuel lines and connections
+</a>
+</div>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="ViewerTD">
+<table class="Viewer" border="0">
+<tr>
+<td class="ViewerTD">
+<br>
+</td>
+<td class="ViewerTD">
+<img style="margin-left:15px;" src="../img/MARKLINE_2.PNG">
+</td>
+<td class="ViewerTD">
+<div>
+Check fuel lines for loose connections, cracks, and deterioration.
+</div>
+</td>
+</tr>
+<tr>
+<td class="ViewerTD">
+<br>
+</td>
+<td class="ViewerTD">
+<img style="margin-left:15px;" src="../img/MARKLINE_2.PNG">
+</td>
+<td class="ViewerTD">
+<div>
+Retighten loose connections and replace any damage parts.
+</div>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="ViewerTD">
+</td>
+</tr>
+</table>
+<hr width="100%" size="2" color="gray">
+<br>
+<b>Every 10,000 km (6,250 miles) or 1 year
+</b>
+<table width="100%" class="Viewer" border="0" cellpadding="0" cellspacing="0">
+<tr>
+<td class="ViewerTD">
+<table class="Viewer" border="0">
+<tr>
+<td class="ViewerTD">
+<img src="../img/MARKLINE_1.PNG">
+</td>
+<td class="ViewerTD">
+<div class="mentenance_item_title">
+<a href="javascript:parent.Cts('000000000000615','i000')">
+Replace engine oil
+</a>
+ 
+</div>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="ViewerTD">
+</td>
+</tr>
+</table>
+<b>Every 5,000 km (3,125 miles) or 6 months
+</b>
+<table width="100%" class="Viewer" border="0" cellpadding="0" cellspacing="0">
+<tr>
+<td class="ViewerTD">
+<table class="Viewer" border="0">
+<tr>
+<td class="ViewerTD">
+<img src="../img/MARKLINE_1.PNG">
+</td>
+<td class="ViewerTD">
+<div class="mentenance_item_title">
+<a href="javascript:parent.Cts('000000000000615','i000')">
+Replace engine oil
+</a>
+ 
+</div>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="ViewerTD">
+</td>
+</tr>
+</table>
+<b>Every 10,000 km (6,250 miles) or 6 months
+</b>
+<table width="100%" class="Viewer" border="0" cellpadding="0" cellspacing="0">
+<tr>
+<td class="ViewerTD">
+<table class="Viewer" border="0">
+<tr>
+<td class="ViewerTD">
+<img src="../img/MARKLINE_1.PNG">
+</td>
+<td class="ViewerTD">
+<div class="mentenance_item_title">
+<a href="javascript:parent.Cts('000000000000612','i000')">
+Replace engine oil filter
+</a>
+ 
+</div>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="ViewerTD">
+</td>
+</tr>
+</table>
+<table width="100%" class="Viewer" border="0" cellpadding="0" cellspacing="0">
+<tr>
+<td class="ViewerTD">
+<table class="Viewer" border="0">
+<tr>
+<td class="ViewerTD">
+<img src="../img/MARKLINE_1.PNG">
+</td>
+<td class="ViewerTD">
+<div class="mentenance_item_title">
+<a href="javascript:parent.Cts('000000000000018','i000')">
+Check front and rear brakes
+</a>
+</div>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="ViewerTD">
+<table class="Viewer" border="0">
+<tr>
+<td class="ViewerTD">
+<br>
+</td>
+<td class="ViewerTD">
+<img style="margin-left:15px;" src="../img/MARKLINE_2.PNG">
+</td>
+<td class="ViewerTD">
+<div>
+Check the brake pad and disc thickness. Check for damage or cracks.
+</div>
+</td>
+</tr>
+<tr>
+<td class="ViewerTD">
+<br>
+</td>
+<td class="ViewerTD">
+<img style="margin-left:15px;" src="../img/MARKLINE_2.PNG">
+</td>
+<td class="ViewerTD">
+<div>
+Check the calipers for damage, leaks, and tightness.
+</div>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="ViewerTD">
+</td>
+</tr>
+</table>
+<table width="100%" class="Viewer" border="0" cellpadding="0" cellspacing="0">
+<tr>
+<td class="ViewerTD">
+<table class="Viewer" border="0">
+<tr>
+<td class="ViewerTD">
+<div class="com_mentenance_item_title">
+<b>
+Visually inspect the following items:
+</b>
+</div>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+<table width="100%" class="Viewer" border="0" cellpadding="0" cellspacing="0">
+<tr>
+<td class="ViewerTD">
+<table class="Viewer" border="0">
+<tr>
+<td class="ViewerTD">
+<img src="../img/MARKLINE_1.PNG">
+</td>
+<td class="ViewerTD">
+<div class="mentenance_item_title">
+<a href="javascript:parent.Cts('000000000000064','i000')">
+Tie-rod ends, steering gearbox, and boots
+</a>
+</div>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="ViewerTD">
+<div>
+  Check rack grease and steering linkage. Check the boot for damage and   leaking grease.
+</div>
+</td>
+</tr>
+<tr>
+<td class="ViewerTD">
+</td>
+</tr>
+</table>
+<table width="100%" class="Viewer" border="0" cellpadding="0" cellspacing="0">
+<tr>
+<td class="ViewerTD">
+<table class="Viewer" border="0">
+<tr>
+<td class="ViewerTD">
+<img src="../img/MARKLINE_1.PNG">
+</td>
+<td class="ViewerTD">
+<div class="mentenance_item_title">
+<a href="javascript:parent.Cts('000000000000004','i000')">
+Suspension components
+</a>
+</div>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="ViewerTD">
+<table class="Viewer" border="0">
+<tr>
+<td class="ViewerTD">
+<br>
+</td>
+<td class="ViewerTD">
+<img style="margin-left:15px;" src="../img/MARKLINE_2.PNG">
+</td>
+<td class="ViewerTD">
+<div>
+Check the bolts for tightness.
+</div>
+</td>
+</tr>
+<tr>
+<td class="ViewerTD">
+<br>
+</td>
+<td class="ViewerTD">
+<img style="margin-left:15px;" src="../img/MARKLINE_2.PNG">
+</td>
+<td class="ViewerTD">
+<div>
+Check all dust cover for deterioration and damage.
+</div>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="ViewerTD">
+</td>
+</tr>
+</table>
+<table width="100%" class="Viewer" border="0" cellpadding="0" cellspacing="0">
+<tr>
+<td class="ViewerTD">
+<table class="Viewer" border="0">
+<tr>
+<td class="ViewerTD">
+<img src="../img/MARKLINE_1.PNG">
+</td>
+<td class="ViewerTD">
+<div class="mentenance_item_title">
+<a href="javascript:parent.Cts('000000000001161','i000')">
+Driveshaft boots
+</a>
+</div>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="ViewerTD">
+<table class="Viewer" border="0">
+<tr>
+<td class="ViewerTD">
+<br>
+</td>
+<td class="ViewerTD">
+<img style="margin-left:15px;" src="../img/MARKLINE_2.PNG">
+</td>
+<td class="ViewerTD">
+<div>
+Check the boot and boot band for cracks.
+</div>
+</td>
+</tr>
+<tr>
+<td class="ViewerTD">
+<br>
+</td>
+<td class="ViewerTD">
+<img style="margin-left:15px;" src="../img/MARKLINE_2.PNG">
+</td>
+<td class="ViewerTD">
+<div>
+Check rack grease.
+</div>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="ViewerTD">
+</td>
+</tr>
+</table>
+<b>Every 10,000 km (6,250 miles)
+</b>
+<table width="100%" class="Viewer" border="0" cellpadding="0" cellspacing="0">
+<tr>
+<td class="ViewerTD">
+<table class="Viewer" border="0">
+<tr>
+<td class="ViewerTD">
+<img src="../img/MARKLINE_1.PNG">
+</td>
+<td class="ViewerTD">
+<div class="mentenance_item_title">
+<a href="javascript:parent.Cts('000000000000598','i000')">
+Clean air cleaner element
+</a>
+</div>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="ViewerTD">
+</td>
+</tr>
+</table>
+<table width="100%" class="Viewer" border="0" cellpadding="0" cellspacing="0">
+<tr>
+<td class="ViewerTD">
+<table class="Viewer" border="0">
+<tr>
+<td class="ViewerTD">
+<img src="../img/MARKLINE_1.PNG">
+</td>
+<td class="ViewerTD">
+<div class="mentenance_item_title">
+Rotate tyres
+</div>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="ViewerTD">
+<div>
+  Check tyre inflation at least once per month.
+</div>
+</td>
+</tr>
+<tr>
+<td class="ViewerTD">
+</td>
+</tr>
+</table>
+<b>Every 20,000 km (12,500 miles)
+</b>
+<table width="100%" class="Viewer" border="0" cellpadding="0" cellspacing="0">
+<tr>
+<td class="ViewerTD">
+<table class="Viewer" border="0">
+<tr>
+<td class="ViewerTD">
+<img src="../img/MARKLINE_1.PNG">
+</td>
+<td class="ViewerTD">
+<div class="mentenance_item_title">
+<a href="javascript:parent.Cts('000000000000598','i000')">
+Replace air cleaner element
+</a>
+</div>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="ViewerTD">
+</td>
+</tr>
+</table>
+<b>Every 40,000 km (25,500 miles)
+</b>
+<table width="100%" class="Viewer" border="0" cellpadding="0" cellspacing="0">
+<tr>
+<td class="ViewerTD">
+<table class="Viewer" border="0">
+<tr>
+<td class="ViewerTD">
+<img src="../img/MARKLINE_1.PNG">
+</td>
+<td class="ViewerTD">
+<div class="mentenance_item_title">
+Inspect valve clearance
+</div>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="ViewerTD">
+<div>
+  
+<a href="javascript:parent.Cts('000000000003580','i000')">
+Check valve clearance
+</a>
+</div>
+</td>
+</tr>
+<tr>
+<td class="ViewerTD">
+</td>
+</tr>
+</table>
+<b>Every 40,000 km (25,000 miles)
+</b>
+<table width="100%" class="Viewer" border="0" cellpadding="0" cellspacing="0">
+<tr>
+<td class="ViewerTD">
+<table class="Viewer" border="0">
+<tr>
+<td class="ViewerTD">
+<img src="../img/MARKLINE_1.PNG">
+</td>
+<td class="ViewerTD">
+<div class="mentenance_item_title">
+<a href="javascript:parent.Cts('000000000003566','i000')">
+Replace spark plugs
+</a>
+</div>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="ViewerTD">
+</td>
+</tr>
+</table>
+<b>Every 100,000 km (62,500 miles)
+</b>
+<table width="100%" class="Viewer" border="0" cellpadding="0" cellspacing="0">
+<tr>
+<td class="ViewerTD">
+<table class="Viewer" border="0">
+<tr>
+<td class="ViewerTD">
+<img src="../img/MARKLINE_1.PNG">
+</td>
+<td class="ViewerTD">
+<div class="mentenance_item_title">
+<a href="javascript:parent.Cts('000000000003566','i000')">
+Replace spark plugs
+</a>
+</div>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="ViewerTD">
+</td>
+</tr>
+</table>
+<b>At 200,000 km (125,000 miles) or 10 years, then every 100,000 km (60,000 miles) or 5 years
+</b>
+<table width="100%" class="Viewer" border="0" cellpadding="0" cellspacing="0">
+<tr>
+<td class="ViewerTD">
+<table class="Viewer" border="0">
+<tr>
+<td class="ViewerTD">
+<img src="../img/MARKLINE_1.PNG">
+</td>
+<td class="ViewerTD">
+<div class="mentenance_item_title">
+<a href="javascript:parent.Cts('000000000003573','i000')">
+Replace engine coolant
+</a>
+</div>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="ViewerTD">
+<div>
+  Use genuine Honda All Season Antifreeze/Coolant Type 2.
+</div>
+</td>
+</tr>
+<tr>
+<td class="ViewerTD">
+</td>
+</tr>
+</table>
+<b>Every 3 years
+</b>
+<table width="100%" class="Viewer" border="0" cellpadding="0" cellspacing="0">
+<tr>
+<td class="ViewerTD">
+<table class="Viewer" border="0">
+<tr>
+<td class="ViewerTD">
+<img src="../img/MARKLINE_1.PNG">
+</td>
+<td class="ViewerTD">
+<div class="mentenance_item_title">
+<a href="javascript:parent.Cts('000000000000021','i000')">
+Replace brake fluid
+</a>
+</div>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="ViewerTD">
+<table class="Viewer" border="0">
+<tr>
+<td class="ViewerTD">
+<br>
+</td>
+<td class="ViewerTD">
+<img style="margin-left:15px;" src="../img/MARKLINE_2.PNG">
+</td>
+<td class="ViewerTD">
+<div>
+Use only DOT 3 or DOT 4 brake fluid. We recommend genuine Honda Brake Fluid.
+</div>
+</td>
+</tr>
+<tr>
+<td class="ViewerTD">
+<br>
+</td>
+<td class="ViewerTD">
+<img style="margin-left:15px;" src="../img/MARKLINE_2.PNG">
+</td>
+<td class="ViewerTD">
+<div>
+Check that brake fluid level is between upper and lower marks on the reservoir.
+</div>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="ViewerTD">
+</td>
+</tr>
+</table>
+<div>
+<table width="100%" class="Viewer" frame="void" style="table-layout:fixed;">
+<col width="3%">
+<col width="96%">
+<tbody>
+<tr>
+<td class="ViewerTD" style="border-left-style:none;border-right-style:none;border-bottom-style:none;border-top-style:none;" align="left">
+<div>
+</div>
+</td>
+<td class="ViewerTD" style="border-left-style:none;border-right-style:none;border-bottom-style:none;border-top-style:none;" align="left">
+<div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="ViewerTD" style="border-left-style:none;border-right-style:none;border-bottom-style:none;border-top-style:none;" align="left">
+<div>
+</div>
+</td>
+<td class="ViewerTD" style="border-left-style:none;border-right-style:none;border-bottom-style:none;border-top-style:none;" align="left">
+<div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="ViewerTD" style="border-left-style:none;border-right-style:none;border-bottom-style:none;border-top-style:none;" align="left">
+<div>
+</div>
+</td>
+<td class="ViewerTD" style="border-left-style:none;border-right-style:none;border-bottom-style:none;border-top-style:none;" align="left">
+<div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<br>
+</div></div>
+</body>
+</html>

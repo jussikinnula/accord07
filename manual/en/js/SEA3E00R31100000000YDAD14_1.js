@@ -1,0 +1,34 @@
+with(document) {
+write("<v:group id=\"group4\" class=\"drag\" style=\"position:relative; width:950px; height:895px;\" coordsize=\"950,895\">");
+write("<v:rect id=\"rect4\"class=\"drag\"  style=\"width:950px;height:895px;\">");
+write("<img id=\"img4\" src=\"../img/SEA3E00R31100000000YDAD14.PNG\" border=\"1\" class=\"drag\" style=\"position:absolute;left:0px;top:0px;width:950px;height:895px;border-color:#ffffff\">");
+write("<p id=\"p4_1\" class=\"drag\" style=\"position:absolute;left:601px;top:523px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>WHEELHOUSE<br>UPPER EXTENSION<br></b></nobr>");
+write("</p>");
+write("<p id=\"p4_2\" class=\"drag\" style=\"position:absolute;left:670px;top:18px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>DASHBOARD UPPER SIDE<br>MEMBER EXTENSION<br></b></nobr>");
+write("</p>");
+write("<p id=\"p4_3\" class=\"drag\" style=\"position:absolute;left:363px;top:85px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>DAMPER HOUSING<br></b></nobr>");
+write("</p>");
+write("<p id=\"p4_4\" class=\"drag\" style=\"position:absolute;left:32px;top:107px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>DASHBOARD<br>LOWER<br></b></nobr>");
+write("</p>");
+write("<p id=\"p4_5\" class=\"drag\" style=\"position:absolute;left:385px;top:381px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>DASHBOARD UPPER<br>SIDE MEMBER<br></b></nobr>");
+write("</p>");
+write("<p id=\"p4_6\" class=\"drag\" style=\"position:absolute;left:665px;top:634px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>WHEELHOUSE<br>UPPER EXTENSION<br></b></nobr>");
+write("</p>");
+write("<p id=\"p4_7\" class=\"drag\" style=\"position:absolute;left:349px;top:865px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>DAMPER HOUSING<br></b></nobr>");
+write("</p>");
+write("<p id=\"p4_8\" class=\"drag\" style=\"position:absolute;left:588px;top:810px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>FRONT WHEELHOUSE<br></b></nobr>");
+write("</p>");
+write("<p id=\"p4_9\" class=\"drag\" style=\"position:absolute;left:198px;top:851px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>FRONT SIDE<br>FRAME<br></b></nobr>");
+write("</p>");
+write("</v:rect>");
+write("</v:group>");
+}

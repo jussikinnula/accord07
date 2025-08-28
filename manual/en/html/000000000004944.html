@@ -1,0 +1,426 @@
+<html lang="en" xmlns:v="urn:schemas-microsoft-com:vml">
+<head>
+<meta name="author" content="HONDA MOTOR Co.,Ltd.">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<title>SEA6EL8K75100081310FAAT00</title>
+<link href="../css/ViewerStyle.css" rel="stylesheet">
+<style>
+	v\:*	{ behavior: url(#default#VML); }
+	.drag	{ position: relative; cursor:   hand; }
+</style>
+</head>
+<script>
+<!--
+-->
+</script>
+<body onload="javascript:parent.Old(this)" style="font-family:sans-serif;">
+<div xmlns:v="urn:schemas-microsoft-com:vml">
+<div class="top_title">
+DTC Troubleshooting: 31
+</div>
+<hr width="100%" size="2" color="gray">
+<table width="100%" class="Viewer">
+<tr>
+<td width="80%" class="ViewerTD" id="textTd" valign="top">
+<b>
+LKAS Control Unit DTC 31:
+</b>
+<div>
+ System Structure Error
+</div>
+<div>
+NOTE: The adaptive cruise control (ACC)/LKAS system malfunction is detected when the control unit of different specification is installed at the following units replacing.
+</div>
+<ul type="disc">
+<li>
+<div>
+LKAS control unit
+</div>
+</li>
+<li>
+<div>
+Adaptive cruise control (ACC) unit
+</div>
+</li>
+<li>
+<div>
+EPS (LKAS) control unit
+</div>
+</li>
+<li>
+<div>
+LKAS camera
+</div>
+</li>
+</ul>
+<a name="i010">
+</a>
+<ol>
+<li value="1">
+<div>
+Clear the DTCs with the HDS.
+</div>
+</li>
+</ol>
+<a name="i020">
+</a>
+<ol>
+<li value="2">
+<div>
+Turn the ignition switch ON (II).
+</div>
+</li>
+</ol>
+<a name="i030">
+</a>
+<ol>
+<li value="3">
+<div>
+Select ‘‘LKAS'' on the HDS, and check the ECU ID No. 5 from the data list.
+</div>
+</li>
+</ol>
+<div style="text-indent:40px;">
+<i>
+Is ‘‘01'' indicated?
+</i>
+</div>
+<table class="Viewer" frame="void" style="margin-left:50px;">
+<tr>
+<td width="30" class="ViewerTD">
+<b>
+YES
+</b>
+</td>
+<td width="10" class="ViewerTD" align="center">-
+</td>
+<td class="ViewerTD">
+<div>
+The LKAS control unit is matcing the specification. Go to 
+<a href="javascript:parent.Jmp('i040')">Step 4
+</a>
+.
+</div>
+</td>
+</tr>
+<tr>
+<td width="30" class="ViewerTD">
+<b>
+NO
+</b>
+</td>
+<td width="10" class="ViewerTD" align="center">-
+</td>
+<td class="ViewerTD">
+<div>
+The LKAS control unit is different specification, check the part number and 
+<a href="javascript:parent.Cts('000000000004880','i000')">
+replace the LKAS control unit with the correct specification one.
+</a>
+■
+</div>
+</td>
+</tr>
+</table>
+<a name="i040">
+</a>
+<ol>
+<li value="4">
+<div>
+Select ‘‘ACC'' on the HDS, and check the ECU ID No. 3 from the data list.
+</div>
+</li>
+</ol>
+<div style="text-indent:40px;">
+<i>
+Is ‘‘04'' indicated?
+</i>
+</div>
+<table class="Viewer" frame="void" style="margin-left:50px;">
+<tr>
+<td width="30" class="ViewerTD">
+<b>
+YES
+</b>
+</td>
+<td width="10" class="ViewerTD" align="center">-
+</td>
+<td class="ViewerTD">
+<div>
+The adaptive cruise control (ACC) unit is matcing the specification. Go to 
+<a href="javascript:parent.Jmp('i050')">Step 5
+</a>
+.
+</div>
+</td>
+</tr>
+<tr>
+<td width="30" class="ViewerTD">
+<b>
+NO
+</b>
+</td>
+<td width="10" class="ViewerTD" align="center">-
+</td>
+<td class="ViewerTD">
+<ul type="disc">
+<li>
+<div>
+The adaptive cruise control (ACC) unit is different in the specification, check the part number and 
+<a href="javascript:parent.Cts('000000000004875','i000')">
+replace the adaptive cruise control (ACC) unit with the correct specification one.
+</a>
+</div>
+</li>
+<li>
+<div>
+After the replacement, do the adaptive cruise control (ACC) unit initialization (DTC 100).■
+</div>
+</li>
+</ul>
+</td>
+</tr>
+</table>
+<a name="i050">
+</a>
+<ol>
+<li value="5">
+<div>
+Select ‘‘ACC'' on the HDS, and check the ECU ID No. 7 from the data list.
+</div>
+</li>
+</ol>
+<div style="text-indent:40px;">
+<i>
+Is ‘‘01'' indicated?
+</i>
+</div>
+<table class="Viewer" frame="void" style="margin-left:50px;">
+<tr>
+<td width="30" class="ViewerTD">
+<b>
+YES
+</b>
+</td>
+<td width="10" class="ViewerTD" align="center">-
+</td>
+<td class="ViewerTD">
+<div>
+The adaptive cruise control (ACC) unit is matcing the specification. Go to 
+<a href="javascript:parent.Jmp('i060')">Step 6
+</a>
+.
+</div>
+</td>
+</tr>
+<tr>
+<td width="30" class="ViewerTD">
+<b>
+NO
+</b>
+</td>
+<td width="10" class="ViewerTD" align="center">-
+</td>
+<td class="ViewerTD">
+<ul type="disc">
+<li>
+<div>
+The adaptive cruise control (ACC) unit is different in the specification, check the part number and 
+<a href="javascript:parent.Cts('000000000004875','i000')">
+replace the adaptive cruise control (ACC) unit with the correct specification one.
+</a>
+</div>
+</li>
+<li>
+<div>
+After the replacement, do the adaptive cruise control (ACC) unit initialization (DTC 100).■
+</div>
+</li>
+</ul>
+</td>
+</tr>
+</table>
+<a name="i060">
+</a>
+<ol>
+<li value="6">
+<div>
+Select ‘‘EPS'' on the HDS, and check the ECU ID No. 5 from the data list.
+</div>
+</li>
+</ol>
+<div style="text-indent:40px;">
+<i>
+Is ‘‘64'' indicated?
+</i>
+</div>
+<table class="Viewer" frame="void" style="margin-left:50px;">
+<tr>
+<td width="30" class="ViewerTD">
+<b>
+YES
+</b>
+</td>
+<td width="10" class="ViewerTD" align="center">-
+</td>
+<td class="ViewerTD">
+<div>
+The EPS (LKAS) control unit is matcing the specification. Go to 
+<a href="javascript:parent.Jmp('i070')">Step 7
+</a>
+.
+</div>
+</td>
+</tr>
+<tr>
+<td width="30" class="ViewerTD">
+<b>
+NO
+</b>
+</td>
+<td width="10" class="ViewerTD" align="center">-
+</td>
+<td class="ViewerTD">
+<div>
+The EPS (LKAS) control unit is different specification, check the part number and 
+<a href="javascript:parent.Cts('000000000000076','i000')">
+replace the EPS (LKAS) control unit with the correct specification one.
+</a>
+■
+</div>
+</td>
+</tr>
+</table>
+<a name="i070">
+</a>
+<ol>
+<li value="7">
+<div>
+Select ‘‘LKAS Camera'' on the HDS, and check the ECU ID No. 1 from the data list.
+</div>
+</li>
+</ol>
+<div style="text-indent:40px;">
+<i>
+Is ‘‘01'' indicated?
+</i>
+</div>
+<table class="Viewer" frame="void" style="margin-left:50px;">
+<tr>
+<td width="30" class="ViewerTD">
+<b>
+YES
+</b>
+</td>
+<td width="10" class="ViewerTD" align="center">-
+</td>
+<td class="ViewerTD">
+<div>
+The LKAS camera is matcing the specification. Go to 
+<a href="javascript:parent.Jmp('i080')">Step 8
+</a>
+.
+</div>
+</td>
+</tr>
+<tr>
+<td width="30" class="ViewerTD">
+<b>
+NO
+</b>
+</td>
+<td width="10" class="ViewerTD" align="center">-
+</td>
+<td class="ViewerTD">
+<ul type="disc">
+<li>
+<div>
+The LKAS camera is different in the specification, check the part number and 
+<a href="javascript:parent.Cts('000000000004878','i000')">
+replace the LKAS camera with the correct specification one.
+</a>
+</div>
+</li>
+<li>
+<div>
+After the replacement, 
+<a href="javascript:parent.Cts('000000000004879','i000')">
+do the LKAS camera adjustment (aiming).
+</a>
+■
+</div>
+</li>
+</ul>
+</td>
+</tr>
+</table>
+<a name="i080">
+</a>
+<ol>
+<li value="8">
+<div>
+Select ‘‘LKAS Camera'' on the HDS, and check the ECU ID No. 5 from the data list.
+</div>
+</li>
+</ol>
+<div style="text-indent:40px;">
+<i>
+Is ‘‘02'' indicated?
+</i>
+</div>
+<table class="Viewer" frame="void" style="margin-left:50px;">
+<tr>
+<td width="30" class="ViewerTD">
+<b>
+YES
+</b>
+</td>
+<td width="10" class="ViewerTD" align="center">-
+</td>
+<td class="ViewerTD">
+<div>
+The LKAS camera is matcing the specification.■
+</div>
+</td>
+</tr>
+<tr>
+<td width="30" class="ViewerTD">
+<b>
+NO
+</b>
+</td>
+<td width="10" class="ViewerTD" align="center">-
+</td>
+<td class="ViewerTD">
+<ul type="disc">
+<li>
+<div>
+The LKAS camera is different in the specification, check the part number and 
+<a href="javascript:parent.Cts('000000000004878','i000')">
+replace the LKAS camera with the correct specification one.
+</a>
+</div>
+</li>
+<li>
+<div>
+After the replacement, 
+<a href="javascript:parent.Cts('000000000004879','i000')">
+do the LKAS camera adjustment (aiming).
+</a>
+■
+</div>
+</li>
+</ul>
+</td>
+</tr>
+</table>
+</td>
+<td width="20%" class="ViewerTD" id="graphTd" valign="top">
+</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

@@ -1,0 +1,34 @@
+with(document) {
+write("<v:group id=\"group1\" class=\"drag\" style=\"position:relative; width:475px; height:353px;\" coordsize=\"475,353\">");
+write("<v:rect id=\"rect1\"class=\"drag\"  style=\"width:475px;height:353px;\">");
+write("<img id=\"img1\" src=\"../img/SEA5E23K80100081270FAAD06.PNG\" border=\"1\" class=\"drag\" style=\"position:absolute;left:0px;top:0px;width:475px;height:353px;border-color:#ffffff\">");
+write("<p id=\"p1_1\" class=\"drag\" style=\"position:absolute;left:139px;top:322px;font-weight:normal;font-size:8.7pt;\">");
+write("<nobr><b></b>Wire side of female terminals<br></nobr>");
+write("</p>");
+write("<p id=\"p1_2\" class=\"drag\" style=\"position:absolute;left:101px;top:14px;font-weight:normal;font-size:9.2pt;\">");
+write("<nobr><b>VSA CONTROL UNIT 47P CONNECTOR<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_3\" class=\"drag\" style=\"position:absolute;left:77px;top:204px;font-weight:normal;font-size:9.2pt;\">");
+write("<nobr><b>STEERING ANGLE<br>SENSOR<br>5P CONNECTOR<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_4\" class=\"drag\" style=\"position:absolute;left:216px;top:46px;font-weight:normal;font-size:9.2pt;\">");
+write("<nobr><b>STR-A (BLU)<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_5\" class=\"drag\" style=\"position:absolute;left:334px;top:46px;font-weight:normal;font-size:9.2pt;\">");
+write("<nobr><b>STR-D (BLU/GRN)<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_6\" class=\"drag\" style=\"position:absolute;left:311px;top:154px;font-weight:normal;font-size:9.2pt;\">");
+write("<nobr><b>STR-B<br>(BLU/YEL)<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_7\" class=\"drag\" style=\"position:absolute;left:265px;top:234px;font-weight:normal;font-size:9.2pt;\">");
+write("<nobr><b>(WHT)*<sup>1</sup><br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_8\" class=\"drag\" style=\"position:absolute;left:359px;top:309px;font-weight:normal;font-size:9.2pt;\">");
+write("<nobr><b>*1: LH model<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_9\" class=\"drag\" style=\"position:absolute;left:240px;top:286px;font-weight:normal;font-size:9.2pt;\">");
+write("<nobr><b>(GRY)*<sup>1</sup><br></b></nobr>");
+write("</p>");
+write("</v:rect>");
+write("</v:group>");
+}

@@ -1,0 +1,31 @@
+with(document) {
+write("<v:group id=\"group1\" class=\"drag\" style=\"position:relative; width:950px; height:1087px;\" coordsize=\"950,1087\">");
+write("<v:rect id=\"rect1\"class=\"drag\"  style=\"width:950px;height:1087px;\">");
+write("<img id=\"img1\" src=\"../img/SEA3E40R31100000000YDAD01.PNG\" border=\"1\" class=\"drag\" style=\"position:absolute;left:0px;top:0px;width:950px;height:1087px;border-color:#ffffff\">");
+write("<p id=\"p1_1\" class=\"drag\" style=\"position:absolute;left:404px;top:770px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>OUTER PANEL<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_2\" class=\"drag\" style=\"position:absolute;left:407px;top:923px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>TAILGATE OPEN<br>STAY BRACKET<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_3\" class=\"drag\" style=\"position:absolute;left:418px;top:1043px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>REAR PILLAR<br>GUTTER UPPER<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_4\" class=\"drag\" style=\"position:absolute;left:487px;top:566px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>ROOF PANEL<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_5\" class=\"drag\" style=\"position:absolute;left:719px;top:872px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>REAR ROOF RAIL<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_6\" class=\"drag\" style=\"position:absolute;left:423px;top:638px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>(23)<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_7\" class=\"drag\" style=\"position:absolute;left:480px;top:493px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>(21)<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_8\" class=\"drag\" style=\"position:absolute;left:204px;top:95px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>Roof panel removed:<br></b></nobr>");
+write("</p>");
+write("</v:rect>");
+write("</v:group>");
+}

@@ -1,0 +1,31 @@
+with(document) {
+write("<v:group id=\"group3\" class=\"drag\" style=\"position:relative; width:475px; height:625px;\" coordsize=\"475,625\">");
+write("<v:rect id=\"rect3\"class=\"drag\"  style=\"width:475px;height:625px;\">");
+write("<img id=\"img3\" src=\"../img/SEA5ED40000000K0031BAAD02.PNG\" border=\"1\" class=\"drag\" style=\"position:absolute;left:0px;top:0px;width:475px;height:625px;border-color:#ffffff\">");
+write("<p id=\"p3_1\" class=\"drag\" style=\"position:absolute;left:310px;top:45px;font-weight:normal;font-size:9.2pt;\">");
+write("<nobr><b>PASSENGER AIRBAG<br>CHILD SEAT CAUTION<br></b></nobr>");
+write("</p>");
+write("<p id=\"p3_2\" class=\"drag\" style=\"position:absolute;left:182px;top:79px;font-weight:normal;font-size:9.2pt;\">");
+write("<nobr><b>SRS WARNING<br>INFORMATION<br></b></nobr>");
+write("</p>");
+write("<p id=\"p3_3\" class=\"drag\" style=\"position:absolute;left:15px;top:135px;font-weight:normal;font-size:9.2pt;\">");
+write("<nobr><b>FRONT PASSENGER<br>MODULE DANGER<br></b></nobr>");
+write("</p>");
+write("<p id=\"p3_4\" class=\"drag\" style=\"position:absolute;left:0px;top:509px;font-weight:normal;font-size:9.2pt;\">");
+write("<nobr><b>STEERING<br>COLUMN<br>NOTICE<br></b></nobr>");
+write("</p>");
+write("<p id=\"p3_5\" class=\"drag\" style=\"position:absolute;left:103px;top:557px;font-weight:normal;font-size:9.2pt;\">");
+write("<nobr><b>MONITOR<br>NOTICE<br></b></nobr>");
+write("</p>");
+write("<p id=\"p3_6\" class=\"drag\" style=\"position:absolute;left:204px;top:575px;font-weight:normal;font-size:9.2pt;\">");
+write("<nobr><b>SIDE MODULE<br>DANGER<br></b></nobr>");
+write("</p>");
+write("<p id=\"p3_7\" class=\"drag\" style=\"position:absolute;left:376px;top:543px;font-weight:normal;font-size:9.2pt;\">");
+write("<nobr><b>FRONT<br>SEAT BELT<br>TENSIONER<br>CAUTION<br></b></nobr>");
+write("</p>");
+write("<p id=\"p3_8\" class=\"drag\" style=\"position:absolute;left:0px;top:16px;font-weight:normal;font-size:9.2pt;\">");
+write("<nobr><b></b>NOTE: The illustration shows the LHD model; RHD model is<br>symmetrical.<br></nobr>");
+write("</p>");
+write("</v:rect>");
+write("</v:group>");
+}

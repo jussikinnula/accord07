@@ -1,0 +1,34 @@
+with(document) {
+write("<v:group id=\"group1\" class=\"drag\" style=\"position:relative; width:950px; height:655px;\" coordsize=\"950,655\">");
+write("<v:rect id=\"rect1\"class=\"drag\"  style=\"width:950px;height:655px;\">");
+write("<img id=\"img1\" src=\"../img/SEA4E0AA20300000000CAAD23.PNG\" border=\"1\" class=\"drag\" style=\"position:absolute;left:0px;top:0px;width:950px;height:655px;border-color:#ffffff\">");
+write("<p id=\"p1_1\" class=\"drag\" style=\"position:absolute;left:31px;top:354px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>EGR<br>VALVE<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_2\" class=\"drag\" style=\"position:absolute;left:332px;top:228px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>EGR COOLER<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_3\" class=\"drag\" style=\"position:absolute;left:646px;top:316px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>ECM<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_4\" class=\"drag\" style=\"position:absolute;left:650px;top:474px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>BLK<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_5\" class=\"drag\" style=\"position:absolute;left:854px;top:311px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>VARIOUS<br>SENSORS<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_6\" class=\"drag\" style=\"position:absolute;left:361px;top:40px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>YEL/BLK<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_7\" class=\"drag\" style=\"position:absolute;left:736px;top:17px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>From<br>PGM-FI<br>MAIN<br>RELAY 2<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_8\" class=\"drag\" style=\"position:absolute;left:324px;top:98px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>WHT<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_9\" class=\"drag\" style=\"position:absolute;left:427px;top:98px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>PNK<br></b></nobr>");
+write("</p>");
+write("</v:rect>");
+write("</v:group>");
+}

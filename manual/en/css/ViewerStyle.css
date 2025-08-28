@@ -1,0 +1,553 @@
+BODY{
+  font-size       : 80%;
+  background-color: white;
+  margin-top:5px;    
+  margin-left:5px; 
+}
+
+BASEFONT{
+font-size:10pt;
+}
+
+/*---------------------------*/
+/* メインボディー             */
+/*---------------------------*/
+.MainBody {
+  font-size       : 80%;
+  background-color: white;
+  margin-top:5px;    
+  margin-left:5px; 
+}
+
+
+.MainBody A:link    {color:#000000; text-decoration:none; font-weight:normal;}
+.MainBody A:visited {color:#800080; text-decoration:none; font-weight:normal;}
+.MainBody A:active  {color:#0000CC; text-decoration:underline; font-weight:normal;}
+.MainBody A:hover   {color:#CC0000; text-decoration:underline; font-weight:normal;}
+
+TABLE.Viewer{
+border-collapse:collapse;
+border-color:black;
+empty-cells:show;
+}
+
+TH.ViewerTH{
+border-color:black;
+border-width:1pt;
+font-weight:normal;
+font-size:10pt;
+vertical-align:top;
+}
+TD.ViewerTD{
+border-color:black;
+border-width:1pt;
+font-weight:normal;
+font-size:10pt;
+vertical-align:top;
+}
+
+/* サブタイトル */
+TABLE.SubTitle {
+  border          : 0 outset;
+  border-width    : 0px;
+  padding         : 0px;
+  border-collapse : collapse;
+  width           : 100%;
+  height          : 24;
+  margin-Top      : 8px; 
+  margin-Bottom   : 3px; 
+  color           : #000000;
+  background-color: #CCCCCC;
+}
+TD.SubTitle-L {
+  width           : 13px;
+  color           : #000000;
+  background-color: #CCCCCC;
+  background-image: url(../img/TITLEBER_C.PNG);
+  background-position:left bottom;
+  background-repeat:no-repeat;
+}
+TD.SubTitle {
+  font-size:12pt;
+  font-weight     : bold;
+  text-align      : left;
+  background-color: #CCCCCC;
+  color           : #000000;
+  vertical-align:middle;
+}
+TD.SubTitleComment {
+  text-align      : left;
+  text-valign     : bottom;
+  width           : 70%;
+  background-color: #CCCCCC;
+  color           : #000000;
+}
+TD.SubTitle-R {
+  text-align      : right;
+  width           : 7px;
+  height          : 19px;
+}
+
+/*---------------------------*/
+/* 表テーブル部分             */
+/*---------------------------*/
+.TableLayout {
+  margin-left    : 20px; 
+  background-color: "";
+  border-style: none;
+ /* vertical-align: top;*/
+}
+.TableLayout td {
+	  vertical-align: top;
+}
+/* 表テーブルのタイトル */
+.TableTite {
+  color           : #FFFFFF;
+  background-color: #FF00FF;
+}
+/* 表テーブルの表題 */
+.TableColumnTitle {
+  color           : #FFFFFF;
+  text-align      : left;
+  background-color: #999999;
+  white-space     : nowrap;
+  text-align      : center;
+}
+
+
+/* 表テーブルのデータ部 */
+.TableData {
+  color           : #000000;
+  background-color: #FFFFFF;
+  text-align      : left;
+  white-space     : nowrap;
+  font-weight     : normal;
+}
+
+
+/********************************************************/
+/*****                 タイトル定義                 *****/
+/********************************************************/
+.top_title{
+font-size:12pt;
+font-weight:bold;
+font-family:'Arial';
+}
+
+.link_title{
+font-size:11pt;
+font-weight:bold;
+padding-top:3px;
+padding-left:5px;
+font-family:'Arial';
+}
+
+.figure_title{
+font-size:11pt;
+font-weight:bold;
+padding-top:3px;
+padding-left:5px;
+font-family:'Arial';
+}
+
+.list1_title{
+font-size:11pt;
+font-weight:bold;
+padding-top:3px;
+padding-left:5px;
+font-family:'Arial';
+}
+
+.table_title{
+font-size:11pt;
+font-weight:bold;
+padding-top:3px;
+padding-left:5px;
+font-family:'Arial';
+}
+
+.tool_list_title{
+font-size:11pt;
+font-weight:bold;
+padding-top:3px;
+padding-left:5px;
+font-family:'Arial';
+}
+
+.test_procedure_title{
+font-size:11pt;
+font-weight:bold;
+padding-top:3px;
+padding-left:5px;
+font-family:'Arial';
+}
+
+.book_title{
+font-size:11pt;
+font-weight:bold;
+padding-top:3px;
+padding-left:5px;
+font-family:'Arial';
+}
+
+.exploded_view_title{
+font-size:11pt;
+font-weight:bold;
+padding-top:3px;
+padding-left:5px;
+font-family:'Arial';
+}
+
+.procedure_topic_title{
+font-size:11pt;
+font-weight:bold;
+padding-top:3px;
+padding-left:5px;
+font-family:'Arial';
+}
+
+.servinfosub_title{
+font-size:11pt;
+font-weight:bold;
+padding-top:3px;
+padding-left:5px;
+font-family:'Arial';
+}
+
+.procedure_sub_title{
+font-size:11pt;
+font-weight:bold;
+padding-top:3px;
+padding-left:5px;
+font-family:'Arial';
+}
+
+.system_desc_sub_title{
+font-size:11pt;
+font-weight:bold;
+padding-top:3px;
+padding-left:5px;
+font-family:'Arial';
+}
+
+.topic_title{
+font-size:11pt;
+font-weight:bold;
+padding-top:3px;
+padding-left:5px;
+font-family:'Arial';
+}
+
+.mentenance_item_title{
+font-size:11pt;
+font-weight:bold;
+padding-top:3px;
+padding-left:5px;
+font-family:'Arial';
+}
+
+.dis_mentenance_item_title{
+font-size:11pt;
+font-weight:bold;
+padding-top:3px;
+padding-left:5px;
+font-family:'Arial';
+}
+
+.com_mentenance_item_title{
+font-style:italic;
+font-size:11pt;
+font-weight:bold;
+padding-top:3px;
+padding-left:5px;
+font-family:'Arial';
+}
+
+.zoom_title{
+font-size:11pt;
+font-weight:bold;
+padding-top:3px;
+padding-left:5px;
+font-family:'Arial';
+}
+/********************************************************/
+/*****               タグスタイル定義               *****/
+/********************************************************/
+
+.list1{
+list-style-position:outside;
+padding-top:3px;
+padding-bottom:3px;
+padding-left:10px;
+}
+
+.list2{
+list-style-position:outside;
+padding-top:0px;
+padding-bottom:0px;
+padding-left:10px;
+}
+
+.warning_head{
+background-color:#F9A13A;
+text-align:center;
+vertical-align:middle;
+color:white;
+}
+
+.warning_body{
+}
+
+.caution_head{
+background-color:#FFE153;
+text-align:center;
+vertical-align:middle;
+color:white;
+}
+
+.caution_body{
+}
+.expcolelem      {padding:2.5pt 2.5pt 2.5pt 2.5pt;}
+.expcolelemtitle {font-size:11pt;
+                  font-weight:bold;
+                  padding-top:3pt;}
+.expcolpart      {display:block;
+                  padding:10pt 2.5pt 2.5pt 2.5pt;}
+.s1cont          {padding-left:30px;
+                  padding-top:5px;
+                  padding-bottom:5px;}
+.s1              {line-height: 16px;
+                  text-indent: -30px;
+                  text-align: right;
+                  position:relative;
+                  top:0px;
+                  left:0px;
+                  width:30px;}
+.s2cont          {padding-left:30px;
+                  padding-top:0px;
+                  padding-bottom:0px;}
+.s2              {line-height: 16px;
+                  text-indent: -30px;
+                  text-align: right;
+                  position:relative;
+                  top:0px;
+                  left:0px;
+                  width:30px;}
+.question        {padding-left:47px;
+                  padding-top:15px;
+                  padding-bottom:1px;}
+.resactcont      {padding-left:65px;
+                  padding-top:1px;
+                  padding-bottom:1px;}
+.dtc             {font-size:11pt;}
+.dtc-desc        {padding-top:10px;
+                  padding-bottom:5px;
+                  padding-left:7px;}
+
+.tool            {padding-top:0px;
+                  padding-bottom:0px;
+                  padding-left:10px;}
+.toolbull        {line-height: 16px;
+                  text-indent: -10px;
+                  text-align: right;
+                  position:relative;
+                  top:0px;
+                  left:0px;
+                  width:10px;}
+.attention       {padding-top:2px;
+                  padding-bottom:2px;}
+.ti-procedure-title {font-size:11pt;
+                  padding-top:3px;
+                  padding-left:5px;
+                  font-family:'Arial';}
+.ti-procedurecont {padding-left:30px;}
+.ti-procedure    {line-height: 16px;
+                  text-indent: -30px;
+                  text-align: right;
+                  position:relative;
+                  top:0px;
+                  left:0px;
+                  width:30px;}
+.ti-check-title   {font-size:11pt;
+                  padding-top:3px;
+                  padding-left:5px;
+                  font-family:'Arial';}
+.ti-checkcont    {padding-left:30px;}
+.ti-check        {line-height: 16px;
+                  text-indent: -30px;
+                  text-align: right;
+                  position:relative;
+                  top:0px;
+                  left:0px;
+                  width:30px;}
+.figtitle        {font-size:10pt;
+                  font-weight:bold;
+                  padding-top:3px;
+                  padding-left:8px;}
+.ptxt01          {padding-left: 5px;}
+.ptxt02          {padding-left: 10px;}
+.ptxt03          {padding-left: 15px;}
+.ptxt04          {padding-left: 20px;}
+.ptxt05          {padding-left: 25px;}
+.ptxt06          {padding-left: 30px;}
+.ptxt07          {padding-left: 35px;}
+.ptxt08          {padding-left: 40px;}
+.ptxt09          {padding-left: 45px;}
+.ptxt10          {padding-left: 50px;}
+.commonitem      {padding-top:0px;
+                 padding-bottom:0px;
+                 padding-left:10px;}
+.maintenanceitem {padding-top:0px;
+                  padding-bottom:0px;
+                  padding-left:10px;}
+.subtitle  		 {padding-top:0px;
+                  padding-bottom:0px;
+                  text-align: center;
+ 				  font-weight:bold;}
+.distancetitle	 {font-size:13pt;
+				  text-align: right;
+				  font-weight:bold;}
+.sysdescindexList{padding-left: 10px;
+                  text-weight:bold;}
+
+.entry_border_0{
+border-top-style:none;
+border-bottom-style:none;
+border-left-style:none;
+border-right-style:none;
+padding-right:10px;
+padding-left:10px;
+}
+
+.entry_border_1{
+border-top-style:none;
+border-bottom-style:none;
+border-left-style:none;
+border-right-style:solid;
+padding-right:10px;
+padding-left:10px;
+}
+
+.entry_border_2{
+border-top-style:none;
+border-bottom-style:none;
+border-left-style:solid;
+border-right-style:none;
+padding-right:10px;
+padding-left:10px;
+}
+
+.entry_border_3{
+border-top-style:none;
+border-bottom-style:none;
+border-left-style:solid;
+border-right-style:solid;
+padding-right:10px;
+padding-left:10px;
+}
+
+.entry_border_4{
+border-top-style:none;
+border-bottom-style:solid;
+border-left-style:none;
+border-right-style:none;
+padding-right:10px;
+padding-left:10px;
+}
+
+.entry_border_5{
+border-top-style:none;
+border-bottom-style:solid;
+border-left-style:none;
+border-right-style:solid;
+padding-right:10px;
+padding-left:10px;
+}
+
+.entry_border_6{
+border-top-style:none;
+border-bottom-style:solid;
+border-left-style:solid;
+border-right-style:none;
+padding-right:10px;
+padding-left:10px;
+}
+
+.entry_border_7{
+border-top-style:none;
+border-bottom-style:solid;
+border-left-style:solid;
+border-right-style:solid;
+padding-right:10px;
+padding-left:10px;
+}
+
+.entry_border_8{
+border-top-style:solid;
+border-bottom-style:none;
+border-left-style:none;
+border-right-style:none;
+padding-right:10px;
+padding-left:10px;
+}
+
+.entry_border_9{
+border-top-style:solid;
+border-bottom-style:none;
+border-left-style:none;
+border-right-style:solid;
+padding-right:10px;
+padding-left:10px;
+}
+
+.entry_border_10{
+border-top-style:solid;
+border-bottom-style:none;
+border-left-style:solid;
+border-right-style:none;
+padding-right:10px;
+padding-left:10px;
+}
+
+.entry_border_11{
+border-top-style:solid;
+border-bottom-style:none;
+border-left-style:solid;
+border-right-style:solid;
+}
+
+.entry_border_12{
+border-top-style:solid;
+border-bottom-style:solid;
+border-left-style:none;
+border-right-style:none;
+padding-right:10px;
+padding-left:10px;
+}
+
+.entry_border_13{
+border-top-style:solid;
+border-bottom-style:solid;
+border-left-style:none;
+border-right-style:solid;
+padding-right:10px;
+padding-left:10px;
+}
+
+.entry_border_14{
+border-top-style:solid;
+border-bottom-style:solid;
+border-left-style:solid;
+border-right-style:none;
+padding-right:10px;
+padding-left:10px;
+}
+
+.entry_border_15{
+border-top-style:solid;
+border-bottom-style:solid;
+border-left-style:solid;
+border-right-style:solid;
+padding-right:10px;
+padding-left:10px;
+}

@@ -1,0 +1,37 @@
+with(document) {
+write("<v:group id=\"group1\" class=\"drag\" style=\"position:relative; width:950px; height:319px;\" coordsize=\"950,319\">");
+write("<v:rect id=\"rect1\"class=\"drag\"  style=\"width:950px;height:319px;\">");
+write("<img id=\"img1\" src=\"../img/SEA5E23D52100000000CAAD04.PNG\" border=\"1\" class=\"drag\" style=\"position:absolute;left:0px;top:0px;width:950px;height:319px;border-color:#ffffff\">");
+write("<p id=\"p1_1\" class=\"drag\" style=\"position:absolute;left:49px;top:120px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>Rear wheel<br>brake pressure<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_2\" class=\"drag\" style=\"position:absolute;left:528px;top:102px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>Brake pressure<br>up using EBD<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_3\" class=\"drag\" style=\"position:absolute;left:438px;top:217px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>Without EBD<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_4\" class=\"drag\" style=\"position:absolute;left:404px;top:250px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>(fixed f/r distribution)<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_5\" class=\"drag\" style=\"position:absolute;left:193px;top:79px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>Best distribution<br>under light load<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_6\" class=\"drag\" style=\"position:absolute;left:198px;top:41px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>Best distribution under heavy load<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_7\" class=\"drag\" style=\"position:absolute;left:610px;top:160px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>Under light load<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_8\" class=\"drag\" style=\"position:absolute;left:609px;top:38px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>Under heavy load<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_9\" class=\"drag\" style=\"position:absolute;left:703px;top:103px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>EBD range of action<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_10\" class=\"drag\" style=\"position:absolute;left:293px;top:286px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>Front wheel brake pressure<br></b></nobr>");
+write("</p>");
+write("</v:rect>");
+write("</v:group>");
+}

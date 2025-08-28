@@ -1,0 +1,34 @@
+with(document) {
+write("<v:group id=\"group1\" class=\"drag\" style=\"position:relative; width:950px; height:735px;\" coordsize=\"950,735\">");
+write("<v:rect id=\"rect1\"class=\"drag\"  style=\"width:950px;height:735px;\">");
+write("<img id=\"img1\" src=\"../img/SEA5E13G10500000000DAAD01.PNG\" border=\"1\" class=\"drag\" style=\"position:absolute;left:0px;top:0px;width:950px;height:735px;border-color:#ffffff\">");
+write("<p id=\"p1_1\" class=\"drag\" style=\"position:absolute;left:706px;top:346px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>RADIATOR FAN RELAY<br><a href=\"javascript:parent.Cts('000000000002908','i000')\"></b>Test,</a><br></nobr>");
+write("</p>");
+write("<p id=\"p1_2\" class=\"drag\" style=\"position:absolute;left:267px;top:702px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>A/C PRESSURE SWITCH<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_3\" class=\"drag\" style=\"position:absolute;left:639px;top:590px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>RADIATOR FAN<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_4\" class=\"drag\" style=\"position:absolute;left:478px;top:672px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>A/C CONDENSER FAN<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_5\" class=\"drag\" style=\"position:absolute;left:589px;top:617px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>OUTSIDE AIR TEMPERATURE SENSOR<br><a href=\"javascript:parent.Cts('000000000000088','i000')\"></b>Test,</a><br><a href=\"javascript:parent.Cts('000000000000089','i000')\">Replacement,</a><br></nobr>");
+write("</p>");
+write("<p id=\"p1_6\" class=\"drag\" style=\"position:absolute;left:650px;top:20px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>BLOWER MOTOR RELAY<br><a href=\"javascript:parent.Cts('000000000002908','i000')\"></b>Test,</a><br></nobr>");
+write("</p>");
+write("<p id=\"p1_7\" class=\"drag\" style=\"position:absolute;left:663px;top:71px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>A/C COMPRESSOR CLUTCH RELAY<br><a href=\"javascript:parent.Cts('000000000002908','i000')\"></b>Test,</a><br></nobr>");
+write("</p>");
+write("<p id=\"p1_8\" class=\"drag\" style=\"position:absolute;left:684px;top:120px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>UNDER-HOOD FUSE/RELAY BOX<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_9\" class=\"drag\" style=\"position:absolute;left:682px;top:389px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>A/C CONDENSER FAN RELAY<br><a href=\"javascript:parent.Cts('000000000002908','i000')\"></b>Test,</a><br></nobr>");
+write("</p>");
+write("</v:rect>");
+write("</v:group>");
+}

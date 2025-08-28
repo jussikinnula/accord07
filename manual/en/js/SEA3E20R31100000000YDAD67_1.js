@@ -1,0 +1,31 @@
+with(document) {
+write("<v:group id=\"group1\" class=\"drag\" style=\"position:relative; width:950px; height:1087px;\" coordsize=\"950,1087\">");
+write("<v:rect id=\"rect1\"class=\"drag\"  style=\"width:950px;height:1087px;\">");
+write("<img id=\"img1\" src=\"../img/SEA3E20R31100000000YDAD67.PNG\" border=\"1\" class=\"drag\" style=\"position:absolute;left:0px;top:0px;width:950px;height:1087px;border-color:#ffffff\">");
+write("<p id=\"p1_1\" class=\"drag\" style=\"position:absolute;left:715px;top:17px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>REAR PANEL<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_2\" class=\"drag\" style=\"position:absolute;left:351px;top:129px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>REAR COMBINATION STIFFENER<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_3\" class=\"drag\" style=\"position:absolute;left:352px;top:231px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>REAR PANEL GUSSET<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_4\" class=\"drag\" style=\"position:absolute;left:707px;top:476px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>[VIEW: X]<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_5\" class=\"drag\" style=\"position:absolute;left:333px;top:527px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>REAR PANEL GUSSET<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_6\" class=\"drag\" style=\"position:absolute;left:405px;top:814px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>JACK-UP<br>STIFFENER<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_7\" class=\"drag\" style=\"position:absolute;left:226px;top:568px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>[X]<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_8\" class=\"drag\" style=\"position:absolute;left:802px;top:1058px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>REAR PANEL<br></b></nobr>");
+write("</p>");
+write("</v:rect>");
+write("</v:group>");
+}

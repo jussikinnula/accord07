@@ -1,0 +1,34 @@
+with(document) {
+write("<v:group id=\"group5\" class=\"drag\" style=\"position:relative; width:475px; height:353px;\" coordsize=\"475,353\">");
+write("<v:rect id=\"rect5\"class=\"drag\"  style=\"width:475px;height:353px;\">");
+write("<img id=\"img5\" src=\"../img/SEA3E00J46127053501KBAD19.PNG\" border=\"1\" class=\"drag\" style=\"position:absolute;left:0px;top:0px;width:475px;height:353px;border-color:#ffffff\">");
+write("<p id=\"p5_1\" class=\"drag\" style=\"position:absolute;left:233px;top:16px;font-weight:normal;font-size:9.2pt;\">");
+write("<nobr><b>A<br></b></nobr>");
+write("</p>");
+write("<p id=\"p5_2\" class=\"drag\" style=\"position:absolute;left:393px;top:84px;font-weight:normal;font-size:9.2pt;\">");
+write("<nobr><b>E<br></b></nobr>");
+write("</p>");
+write("<p id=\"p5_3\" class=\"drag\" style=\"position:absolute;left:395px;top:124px;font-weight:normal;font-size:9.2pt;\">");
+write("<nobr><b>C<br></b></nobr>");
+write("</p>");
+write("<p id=\"p5_4\" class=\"drag\" style=\"position:absolute;left:395px;top:181px;font-weight:normal;font-size:9.2pt;\">");
+write("<nobr><b>H<br></b></nobr>");
+write("</p>");
+write("<p id=\"p5_5\" class=\"drag\" style=\"position:absolute;left:395px;top:210px;font-weight:normal;font-size:9.2pt;\">");
+write("<nobr><b>I<br></b></nobr>");
+write("</p>");
+write("<p id=\"p5_6\" class=\"drag\" style=\"position:absolute;left:396px;top:295px;font-weight:normal;font-size:9.2pt;\">");
+write("<nobr><b>G<br></b></nobr>");
+write("</p>");
+write("<p id=\"p5_7\" class=\"drag\" style=\"position:absolute;left:87px;top:177px;font-weight:normal;font-size:9.2pt;\">");
+write("<nobr><b>I<br></b></nobr>");
+write("</p>");
+write("<p id=\"p5_8\" class=\"drag\" style=\"position:absolute;left:88px;top:95px;font-weight:normal;font-size:9.2pt;\">");
+write("<nobr><b>E<br></b></nobr>");
+write("</p>");
+write("<p id=\"p5_9\" class=\"drag\" style=\"position:absolute;left:92px;top:44px;font-weight:normal;font-size:9.2pt;\">");
+write("<nobr><b>B<br></b></nobr>");
+write("</p>");
+write("</v:rect>");
+write("</v:group>");
+}

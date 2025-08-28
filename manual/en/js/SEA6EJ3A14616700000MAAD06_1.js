@@ -1,0 +1,37 @@
+with(document) {
+write("<v:group id=\"group2\" class=\"drag\" style=\"position:relative; width:475px; height:320px;\" coordsize=\"475,320\">");
+write("<v:rect id=\"rect2\"class=\"drag\"  style=\"width:475px;height:320px;\">");
+write("<img id=\"img2\" src=\"../img/SEA6EJ3A14616700000MAAD06.PNG\" border=\"1\" class=\"drag\" style=\"position:absolute;left:0px;top:0px;width:475px;height:320px;border-color:#ffffff\">");
+write("<p id=\"p2_1\" class=\"drag\" style=\"position:absolute;left:103px;top:68px;font-weight:normal;font-size:9.2pt;\">");
+write("<nobr><b>INTAKE<br></b></nobr>");
+write("</p>");
+write("<p id=\"p2_2\" class=\"drag\" style=\"position:absolute;left:294px;top:68px;font-weight:normal;font-size:9.2pt;\">");
+write("<nobr><b>EXHAUST<br></b></nobr>");
+write("</p>");
+write("<p id=\"p2_3\" class=\"drag\" style=\"position:absolute;left:74px;top:104px;font-weight:normal;font-size:9.2pt;\">");
+write("<nobr><b>PRI<br></b></nobr>");
+write("</p>");
+write("<p id=\"p2_4\" class=\"drag\" style=\"position:absolute;left:117px;top:104px;font-weight:normal;font-size:9.2pt;\">");
+write("<nobr><b>MID<br></b></nobr>");
+write("</p>");
+write("<p id=\"p2_5\" class=\"drag\" style=\"position:absolute;left:163px;top:104px;font-weight:normal;font-size:9.2pt;\">");
+write("<nobr><b>SEC<br></b></nobr>");
+write("</p>");
+write("<p id=\"p2_6\" class=\"drag\" style=\"position:absolute;left:271px;top:104px;font-weight:normal;font-size:9.2pt;\">");
+write("<nobr><b>SEC<br></b></nobr>");
+write("</p>");
+write("<p id=\"p2_7\" class=\"drag\" style=\"position:absolute;left:317px;top:104px;font-weight:normal;font-size:9.2pt;\">");
+write("<nobr><b>MID<br></b></nobr>");
+write("</p>");
+write("<p id=\"p2_8\" class=\"drag\" style=\"position:absolute;left:366px;top:104px;font-weight:normal;font-size:9.2pt;\">");
+write("<nobr><b>PRI<br></b></nobr>");
+write("</p>");
+write("<p id=\"p2_9\" class=\"drag\" style=\"position:absolute;left:40px;top:217px;font-weight:normal;font-size:9.2pt;\">");
+write("<nobr><b>C/C<br>←<br></b></nobr>");
+write("</p>");
+write("<p id=\"p2_10\" class=\"drag\" style=\"position:absolute;left:237px;top:216px;font-weight:normal;font-size:9.2pt;\">");
+write("<nobr><b>C/C<br>←<br></b></nobr>");
+write("</p>");
+write("</v:rect>");
+write("</v:group>");
+}

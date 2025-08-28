@@ -1,0 +1,34 @@
+with(document) {
+write("<v:group id=\"group1\" class=\"drag\" style=\"position:relative; width:950px; height:751px;\" coordsize=\"950,751\">");
+write("<v:rect id=\"rect1\"class=\"drag\"  style=\"width:950px;height:751px;\">");
+write("<img id=\"img1\" src=\"../img/SEA5E00B20200000000DAAD01.PNG\" border=\"1\" class=\"drag\" style=\"position:absolute;left:0px;top:0px;width:950px;height:751px;border-color:#ffffff\">");
+write("<p id=\"p1_1\" class=\"drag\" style=\"position:absolute;left:548px;top:17px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>FRONT DAMPER<br><a href=\"javascript:parent.Cts('000000000000007','iR01')\"></b>Removal,</a><br><a href=\"javascript:parent.Cts('000000000000007','iR02')\">Disassembly/Inspection,</a><br><a href=\"javascript:parent.Cts('000000000000007','iR03')\">Reassembly,</a><br><a href=\"javascript:parent.Cts('000000000000007','iR04')\">Installation,</a><br></nobr>");
+write("</p>");
+write("<p id=\"p1_2\" class=\"drag\" style=\"position:absolute;left:606px;top:116px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>UPPER ARM<br><a href=\"javascript:parent.Cts('000000000000013','i000')\"></b>Replacement,</a><br></nobr>");
+write("</p>");
+write("<p id=\"p1_3\" class=\"drag\" style=\"position:absolute;left:15px;top:688px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>LOWER ARM<br><a href=\"javascript:parent.Cts('000000000000010','i000')\"></b>Removal/Installation,</a><br></nobr>");
+write("</p>");
+write("<p id=\"p1_4\" class=\"drag\" style=\"position:absolute;left:620px;top:268px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>BALL JOINT BOOT<br><a href=\"javascript:parent.Cts('000000000000006','i000')\"></b>Replacement,</a><br></nobr>");
+write("</p>");
+write("<p id=\"p1_5\" class=\"drag\" style=\"position:absolute;left:620px;top:189px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>KNUCKLE/<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_6\" class=\"drag\" style=\"position:absolute;left:620px;top:204px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>HUB/<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_7\" class=\"drag\" style=\"position:absolute;left:620px;top:219px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>WHEEL BEARING<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_8\" class=\"drag\" style=\"position:absolute;left:620px;top:234px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b><a href=\"javascript:parent.Cts('000000000000009','iR01')\"></b>Knuckle/Hub Replacement,</a><br></nobr>");
+write("</p>");
+write("<p id=\"p1_9\" class=\"drag\" style=\"position:absolute;left:620px;top:249px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b><a href=\"javascript:parent.Cts('000000000000009','iR02')\"></b>Wheel Bearing Replacement,</a><br></nobr>");
+write("</p>");
+write("</v:rect>");
+write("</v:group>");
+}

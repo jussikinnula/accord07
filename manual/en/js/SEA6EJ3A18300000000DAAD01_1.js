@@ -1,0 +1,37 @@
+with(document) {
+write("<v:group id=\"group1\" class=\"drag\" style=\"position:relative; width:950px; height:1055px;\" coordsize=\"950,1055\">");
+write("<v:rect id=\"rect1\"class=\"drag\"  style=\"width:950px;height:1055px;\">");
+write("<img id=\"img1\" src=\"../img/SEA6EJ3A18300000000DAAD01.PNG\" border=\"1\" class=\"drag\" style=\"position:absolute;left:0px;top:0px;width:950px;height:1055px;border-color:#ffffff\">");
+write("<p id=\"p1_1\" class=\"drag\" style=\"position:absolute;left:649px;top:935px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>CRANKSHAFT OIL SEAL,<br>TRANSMISSION END<br><a href=\"javascript:parent.Cts('000000000003588','i200')\"></b>Installation,</a><br></nobr>");
+write("</p>");
+write("<p id=\"p1_2\" class=\"drag\" style=\"position:absolute;left:547px;top:1017px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>THRUST WASHERS<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_3\" class=\"drag\" style=\"position:absolute;left:17px;top:663px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>MAIN BEARINGS<br><a href=\"javascript:parent.Cts('000000000003589','iR01')\"></b>Oil Clearance,</a><br><a href=\"javascript:parent.Cts('000000000003589','iR02')\">Selection,</a><br></nobr>");
+write("</p>");
+write("<p id=\"p1_4\" class=\"drag\" style=\"position:absolute;left:107px;top:541px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>DOWEL PINS<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_5\" class=\"drag\" style=\"position:absolute;left:597px;top:16px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>BAFFLE PLATE<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_6\" class=\"drag\" style=\"position:absolute;left:633px;top:190px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>LOWER BLOCK<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_7\" class=\"drag\" style=\"position:absolute;left:16px;top:861px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>CRANKSHAFT<br><a href=\"javascript:parent.Cts('000000000000567','i000')\"></b>End Play,</a><br> in the Shop Manual, P/N 62SEA02A<br><a href=\"javascript:parent.Cts('000000000000570','iT02')\">Runout,</a><br> in the Shop Manual, P/N 62SEA02A<br><a href=\"javascript:parent.Cts('000000000000570','iT01')\">Out-of-Round,</a><br> in the Shop Manual, P/N 62SEA02A<br><a href=\"javascript:parent.Cts('000000000000569','i000')\">Removal,</a><br> in the Shop Manual, P/N 62SEA02A<br><a href=\"javascript:parent.Cts('000000000003588','i000')\">Installation,</a><br></nobr>");
+write("</p>");
+write("<p id=\"p1_8\" class=\"drag\" style=\"position:absolute;left:786px;top:294px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>DRIVE PLATE (A/T)<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_9\" class=\"drag\" style=\"position:absolute;left:742px;top:865px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>FLYWHEEL (M/T)<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_10\" class=\"drag\" style=\"position:absolute;left:184px;top:35px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>BAFFLE PLATE<br></b></nobr>");
+write("</p>");
+write("</v:rect>");
+write("</v:group>");
+}

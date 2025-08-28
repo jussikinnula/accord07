@@ -1,0 +1,34 @@
+with(document) {
+write("<v:group id=\"group1\" class=\"drag\" style=\"position:relative; width:950px; height:975px;\" coordsize=\"950,975\">");
+write("<v:rect id=\"rect1\"class=\"drag\"  style=\"width:950px;height:975px;\">");
+write("<img id=\"img1\" src=\"../img/SEA5EA3J54200000000DEAD02.PNG\" border=\"1\" class=\"drag\" style=\"position:absolute;left:0px;top:0px;width:950px;height:975px;border-color:#ffffff\">");
+write("<p id=\"p1_1\" class=\"drag\" style=\"position:absolute;left:288px;top:753px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>SRS UNIT<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_2\" class=\"drag\" style=\"position:absolute;left:386px;top:711px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>ECM/PCM<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_3\" class=\"drag\" style=\"position:absolute;left:759px;top:203px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>IMOES UNIT<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_4\" class=\"drag\" style=\"position:absolute;left:672px;top:29px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>SEAT HEATER RELAY<br></b>Wire colors: RED/BLK, BRN,<br>BLK and WHT<br></nobr>");
+write("</p>");
+write("<p id=\"p1_5\" class=\"drag\" style=\"position:absolute;left:670px;top:79px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>THROTTLE ACTUATOR CONTROL <br>MODULE RELAY<br></b>Wire colors: PNK, YEL/GRN,<br>BRN and YEL/BLK<br></nobr>");
+write("</p>");
+write("<p id=\"p1_6\" class=\"drag\" style=\"position:absolute;left:555px;top:790px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>SECURITY HAZARD WARNING LIGHT RELAY (Right)<br></b>Wire colors: WHT/BLK, BRN,<br>WHT/GRN and WHT/BLK<br></nobr>");
+write("</p>");
+write("<p id=\"p1_7\" class=\"drag\" style=\"position:absolute;left:555px;top:840px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>SECURITY HAZARD WARNING LIGHT RELAY (Left)<br></b>Wire colors: WHT/BLK, RED/BLU,<br>WHT/GRN and WHT/BLK<br></nobr>");
+write("</p>");
+write("<p id=\"p1_8\" class=\"drag\" style=\"position:absolute;left:-1px;top:23px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b></b>NOTE: LHD type is shown, RHD type is similar.<br></nobr>");
+write("</p>");
+write("<p id=\"p1_9\" class=\"drag\" style=\"position:absolute;left:520px;top:908px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>ACCESSORY POWER SOCKET RELAY ('05 KE model)<br></b>Wire colors: GRN, RED/YEL,<br>BLK and RED<br></nobr>");
+write("</p>");
+write("</v:rect>");
+write("</v:group>");
+}

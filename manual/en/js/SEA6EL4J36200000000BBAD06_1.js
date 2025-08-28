@@ -1,0 +1,37 @@
+with(document) {
+write("<v:group id=\"group1\" class=\"drag\" style=\"position:relative; width:475px; height:320px;\" coordsize=\"475,320\">");
+write("<v:rect id=\"rect1\"class=\"drag\"  style=\"width:475px;height:320px;\">");
+write("<img id=\"img1\" src=\"../img/SEA6EL4J36200000000BBAD06.PNG\" border=\"1\" class=\"drag\" style=\"position:absolute;left:0px;top:0px;width:475px;height:320px;border-color:#ffffff\">");
+write("<p id=\"p1_1\" class=\"drag\" style=\"position:absolute;left:134px;top:63px;font-weight:normal;font-size:8.9pt;\">");
+write("<nobr><b>Monitor Check <br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_2\" class=\"drag\" style=\"position:absolute;left:343px;top:62px;font-weight:normal;font-size:8.9pt;\">");
+write("<nobr><b>Return<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_3\" class=\"drag\" style=\"position:absolute;left:115px;top:98px;font-weight:normal;font-size:7.7pt;\">");
+write("<nobr><b>RGB Color<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_4\" class=\"drag\" style=\"position:absolute;left:116px;top:121px;font-weight:normal;font-size:7.7pt;\">");
+write("<nobr><b>Gray Tone<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_5\" class=\"drag\" style=\"position:absolute;left:106px;top:145px;font-weight:normal;font-size:7.7pt;\">");
+write("<nobr><b>White Raster<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_6\" class=\"drag\" style=\"position:absolute;left:108px;top:169px;font-weight:normal;font-size:7.7pt;\">");
+write("<nobr><b>Black Raster<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_7\" class=\"drag\" style=\"position:absolute;left:279px;top:98px;font-weight:normal;font-size:7.7pt;\">");
+write("<nobr><b>Color Pattern<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_8\" class=\"drag\" style=\"position:absolute;left:256px;top:121px;font-weight:normal;font-size:7.7pt;\">");
+write("<nobr><b>Monitor Adjustment <br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_9\" class=\"drag\" style=\"position:absolute;left:262px;top:145px;font-weight:normal;font-size:7.7pt;\">");
+write("<nobr><b>Touch Panel Check<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_10\" class=\"drag\" style=\"position:absolute;left:283px;top:174px;font-weight:normal;font-size:7.7pt;\">");
+write("<nobr><b>Touch Panel<br>Calibration <br></b></nobr>");
+write("</p>");
+write("</v:rect>");
+write("</v:group>");
+}

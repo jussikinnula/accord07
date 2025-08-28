@@ -1,0 +1,31 @@
+with(document) {
+write("<v:group id=\"group1\" class=\"drag\" style=\"position:relative; width:950px; height:831px;\" coordsize=\"950,831\">");
+write("<v:rect id=\"rect1\"class=\"drag\"  style=\"width:950px;height:831px;\">");
+write("<img id=\"img1\" src=\"../img/SEA6EJ6J36200000000DAAD01.PNG\" border=\"1\" class=\"drag\" style=\"position:absolute;left:0px;top:0px;width:950px;height:831px;border-color:#ffffff\">");
+write("<p id=\"p1_1\" class=\"drag\" style=\"position:absolute;left:662px;top:300px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>GPS ANTENNA<br><a href=\"javascript:parent.Cts('000000000004033','i000')\"></b>Removal/Installation,</a><br></nobr>");
+write("</p>");
+write("<p id=\"p1_2\" class=\"drag\" style=\"position:absolute;left:731px;top:492px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>ROOF CONSOLE<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_3\" class=\"drag\" style=\"position:absolute;left:647px;top:710px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>MICROPHONE<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_4\" class=\"drag\" style=\"position:absolute;left:61px;top:778px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>NAVIGATION UNIT<br><a href=\"javascript:parent.Cts('000000000004034','i000')\"></b>Removal/Installation,</a><br></nobr>");
+write("</p>");
+write("<p id=\"p1_5\" class=\"drag\" style=\"position:absolute;left:70px;top:501px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>VOICE CONTROL SWITCH<br><a href=\"javascript:parent.Cts('000000000004036','i000')\"></b>Removal/Installation,<br></a><br></nobr>");
+write("</p>");
+write("<p id=\"p1_6\" class=\"drag\" style=\"position:absolute;left:9px;top:298px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>DISPLAY UNIT<br>(Built-in the audio-HVAC display module)<br><a href=\"javascript:parent.Cts('000000000000132','i000')\"></b>Removal/Installation,</a><br> in the Shop Manual, P/N 62SEA02B<br></nobr>");
+write("</p>");
+write("<p id=\"p1_7\" class=\"drag\" style=\"position:absolute;left:601px;top:18px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>NAVIGATION SERVICE CHECK CONNECTOR<br><a href=\"javascript:parent.Cts('000000000003983','i000')\"></b>Forced starting of display,</a><br></nobr>");
+write("</p>");
+write("<p id=\"p1_8\" class=\"drag\" style=\"position:absolute;left:678px;top:378px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>SUBDISPLAY<br><a href=\"javascript:parent.Cts('000000000000181','i000')\"></b>Removal,</a><br> in the Shop Manual, P/N 62SEA02B<br></nobr>");
+write("</p>");
+write("</v:rect>");
+write("</v:group>");
+}

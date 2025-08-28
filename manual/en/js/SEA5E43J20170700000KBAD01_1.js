@@ -1,0 +1,31 @@
+with(document) {
+write("<v:group id=\"group1\" class=\"drag\" style=\"position:relative; width:950px; height:1039px;\" coordsize=\"950,1039\">");
+write("<v:rect id=\"rect1\"class=\"drag\"  style=\"width:950px;height:1039px;\">");
+write("<img id=\"img1\" src=\"../img/SEA5E43J20170700000KBAD01.PNG\" border=\"1\" class=\"drag\" style=\"position:absolute;left:0px;top:0px;width:950px;height:1039px;border-color:#ffffff\">");
+write("<p id=\"p1_1\" class=\"drag\" style=\"position:absolute;left:637px;top:255px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>REAR SUSPENSION<br>SUBFRAME<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_2\" class=\"drag\" style=\"position:absolute;left:556px;top:357px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>GUIDE PINS<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_3\" class=\"drag\" style=\"position:absolute;left:306px;top:796px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>REAR SUSPENSION<br>SUBFRAME<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_4\" class=\"drag\" style=\"position:absolute;left:290px;top:371px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>To body<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_5\" class=\"drag\" style=\"position:absolute;left:760px;top:947px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>SPECIAL BOLTS<br>14 x 1.5 mm<br>103 N·m<br>(10.5 kgf·m, 76 lbf·ft)<br></b>Replace.<br></nobr>");
+write("</p>");
+write("<p id=\"p1_6\" class=\"drag\" style=\"position:absolute;left:630px;top:527px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>To body<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_7\" class=\"drag\" style=\"position:absolute;left:705px;top:459px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>To body<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_8\" class=\"drag\" style=\"position:absolute;left:749px;top:515px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>To body<br></b></nobr>");
+write("</p>");
+write("</v:rect>");
+write("</v:group>");
+}

@@ -1,0 +1,31 @@
+with(document) {
+write("<v:group id=\"group3\" class=\"drag\" style=\"position:relative; width:950px; height:959px;\" coordsize=\"950,959\">");
+write("<v:rect id=\"rect3\"class=\"drag\"  style=\"width:950px;height:959px;\">");
+write("<img id=\"img3\" src=\"../img/SEA3E00R31100000000YDAD13.PNG\" border=\"1\" class=\"drag\" style=\"position:absolute;left:0px;top:0px;width:950px;height:959px;border-color:#ffffff\">");
+write("<p id=\"p3_1\" class=\"drag\" style=\"position:absolute;left:517px;top:16px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>DASHBOARD UPPER<br>SIDE MEMBER<br></b></nobr>");
+write("</p>");
+write("<p id=\"p3_2\" class=\"drag\" style=\"position:absolute;left:258px;top:44px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>WHEELHOUSE UPPER<br>MEMBER SEPARATOR<br></b></nobr>");
+write("</p>");
+write("<p id=\"p3_3\" class=\"drag\" style=\"position:absolute;left:84px;top:91px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>DAMPER HOUSING<br></b></nobr>");
+write("</p>");
+write("<p id=\"p3_4\" class=\"drag\" style=\"position:absolute;left:128px;top:546px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>WHEELHOUSE<br>UPPER EXTENSION<br></b></nobr>");
+write("</p>");
+write("<p id=\"p3_5\" class=\"drag\" style=\"position:absolute;left:395px;top:542px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>WHEELHOUSE UPPER<br>MEMBER STIFFENER<br></b></nobr>");
+write("</p>");
+write("<p id=\"p3_6\" class=\"drag\" style=\"position:absolute;left:741px;top:165px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>WHEELHOUSE<br>UPPER MEMBER<br></b></nobr>");
+write("</p>");
+write("<p id=\"p3_7\" class=\"drag\" style=\"position:absolute;left:256px;top:826px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>WHEELHOUSE<br>UPPER EXTENSION<br></b></nobr>");
+write("</p>");
+write("<p id=\"p3_8\" class=\"drag\" style=\"position:absolute;left:409px;top:915px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>WHEELHOUSE UPPER<br>MEMBER EXTENSION<br></b></nobr>");
+write("</p>");
+write("</v:rect>");
+write("</v:group>");
+}

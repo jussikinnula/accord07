@@ -1,0 +1,31 @@
+with(document) {
+write("<v:group id=\"group2\" class=\"drag\" style=\"position:relative; width:475px; height:320px;\" coordsize=\"475,320\">");
+write("<v:rect id=\"rect2\"class=\"drag\"  style=\"width:475px;height:320px;\">");
+write("<img id=\"img2\" src=\"../img/SEA3EK0H46200053401KBAD06.PNG\" border=\"1\" class=\"drag\" style=\"position:absolute;left:0px;top:0px;width:475px;height:320px;border-color:#ffffff\">");
+write("<p id=\"p2_1\" class=\"drag\" style=\"position:absolute;left:143px;top:75px;font-weight:normal;font-size:9.2pt;\">");
+write("<nobr><b>COLLAR<br></b></nobr>");
+write("</p>");
+write("<p id=\"p2_2\" class=\"drag\" style=\"position:absolute;left:12px;top:75px;font-weight:normal;font-size:9.2pt;\">");
+write("<nobr><b>COLLAR<br></b></nobr>");
+write("</p>");
+write("<p id=\"p2_3\" class=\"drag\" style=\"position:absolute;left:66px;top:32px;font-weight:normal;font-size:9.2pt;\">");
+write("<nobr><b>SPRING<br>WASHER<br></b></nobr>");
+write("</p>");
+write("<p id=\"p2_4\" class=\"drag\" style=\"position:absolute;left:12px;top:256px;font-weight:normal;font-size:9.2pt;\">");
+write("<nobr><b>TOOTHED<br>LOCK WASHER<br></b></nobr>");
+write("</p>");
+write("<p id=\"p2_5\" class=\"drag\" style=\"position:absolute;left:137px;top:260px;font-weight:normal;font-size:9.2pt;\">");
+write("<nobr><b>WASHER<br></b></nobr>");
+write("</p>");
+write("<p id=\"p2_6\" class=\"drag\" style=\"position:absolute;left:322px;top:233px;font-weight:normal;font-size:9.2pt;\">");
+write("<nobr><b>BUSHING<br></b></nobr>");
+write("</p>");
+write("<p id=\"p2_7\" class=\"drag\" style=\"position:absolute;left:235px;top:260px;font-weight:normal;font-size:9.2pt;\">");
+write("<nobr><b>LOWER ANCHOR<br></b></nobr>");
+write("</p>");
+write("<p id=\"p2_8\" class=\"drag\" style=\"position:absolute;left:334px;top:50px;font-weight:normal;font-size:9.2pt;\">");
+write("<nobr><b>LOWER ANCHOR<br>BOLT<br></b></nobr>");
+write("</p>");
+write("</v:rect>");
+write("</v:group>");
+}

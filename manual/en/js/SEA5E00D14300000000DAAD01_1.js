@@ -1,0 +1,37 @@
+with(document) {
+write("<v:group id=\"group1\" class=\"drag\" style=\"position:relative; width:950px; height:1007px;\" coordsize=\"950,1007\">");
+write("<v:rect id=\"rect1\"class=\"drag\"  style=\"width:950px;height:1007px;\">");
+write("<img id=\"img1\" src=\"../img/SEA5E00D14300000000DAAD01.PNG\" border=\"1\" class=\"drag\" style=\"position:absolute;left:0px;top:0px;width:950px;height:1007px;border-color:#ffffff\">");
+write("<p id=\"p1_1\" class=\"drag\" style=\"position:absolute;left:528px;top:16px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>BRAKE BOOSTER<br><a href=\"javascript:parent.Cts('000000000000634','i000')\"></b>Inspection,</a><br><a href=\"javascript:parent.Cts('000000000000633','i000')\">Replacement,</a><br></nobr>");
+write("</p>");
+write("<p id=\"p1_2\" class=\"drag\" style=\"position:absolute;left:647px;top:177px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>BRAKE PEDAL<br></b>Brake Pedal and Brake Pedal Position<br><a href=\"javascript:parent.Cts('000000000000029','i000')\"> Switch Adjustment,</a><br><a href=\"javascript:parent.Cts('000000000000028','i000')\">Replacement,</a><br></nobr>");
+write("</p>");
+write("<p id=\"p1_3\" class=\"drag\" style=\"position:absolute;left:701px;top:251px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>PARKING BRAKE CABLE<br><a href=\"javascript:parent.Cts('000000000001011','i000')\"></b>Replacement,</a><br></nobr>");
+write("</p>");
+write("<p id=\"p1_4\" class=\"drag\" style=\"position:absolute;left:353px;top:887px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>PARKING BRAKE LEVER<br></b>Parking Brake<br><a href=\"javascript:parent.Cts('000000000001010','i000')\"> Check and Adjustment,</a><br></nobr>");
+write("</p>");
+write("<p id=\"p1_5\" class=\"drag\" style=\"position:absolute;left:2px;top:663px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>BRAKE HOSE and LINE<br><a href=\"javascript:parent.Cts('000000000002730','i000')\"></b>Inspection,</a><br>Brake Hose<br><a href=\"javascript:parent.Cts('000000000000024','i000')\"> Replacement,</a><br></nobr>");
+write("</p>");
+write("<p id=\"p1_6\" class=\"drag\" style=\"position:absolute;left:64px;top:805px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>MASTER CYLINDER<br><a href=\"javascript:parent.Cts('000000000000021','i000')\"></b>Brake System Bleeding,</a><br>Brake Fluid Level Switch<br><a href=\"javascript:parent.Cts('000000000000030','i000')\"> Test,</a><br><a href=\"javascript:parent.Cts('000000000000635','i000')\">Replacement,</a><br><a href=\"javascript:parent.Cts('000000000000025','i000')\">Disassembly,</a><br><a href=\"javascript:parent.Cts('000000000000026','i000')\">Reassembly,</a><br></nobr>");
+write("</p>");
+write("<p id=\"p1_7\" class=\"drag\" style=\"position:absolute;left:427px;top:754px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>FRONT BRAKE<br></b>Pad Inspection and<br><a href=\"javascript:parent.Cts('000000000000027','i000')\"> Replacement,</a><br><a href=\"javascript:parent.Cts('000000000000023','i000')\">Disc Inspection,</a><br><a href=\"javascript:parent.Cts('000000000000022','i000')\">Caliper Overhaul,</a><br></nobr>");
+write("</p>");
+write("<p id=\"p1_8\" class=\"drag\" style=\"position:absolute;left:686px;top:790px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>REAR BRAKE<br></b>Pad Inspection and<br><a href=\"javascript:parent.Cts('000000000001015','i000')\"> Replacement,</a><br><a href=\"javascript:parent.Cts('000000000001014','i000')\">Disc Inspection,</a><br><a href=\"javascript:parent.Cts('000000000001013','i000')\">Caliper Overhaul,</a><br></nobr>");
+write("</p>");
+write("<p id=\"p1_9\" class=\"drag\" style=\"position:absolute;left:592px;top:73px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>BRAKE SYSTEM INDICATOR<br><a href=\"javascript:parent.Cts('000000000000636','i000')\"></b>Circuit Diagram,</a><br>Parking Brake Switch<br><a href=\"javascript:parent.Cts('000000000000031','i000')\"> Test,</a><br>Brake Fluid Level Switch<br><a href=\"javascript:parent.Cts('000000000000030','i000')\"> Test,</a><br></nobr>");
+write("</p>");
+write("<p id=\"p1_10\" class=\"drag\" style=\"position:absolute;left:1px;top:974px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b></b>The illustration shows LHD model, RHD model is symmetrical.<br></nobr>");
+write("</p>");
+write("</v:rect>");
+write("</v:group>");
+}

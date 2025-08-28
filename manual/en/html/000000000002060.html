@@ -1,0 +1,526 @@
+<html lang="en" xmlns:v="urn:schemas-microsoft-com:vml">
+<head>
+<meta name="author" content="HONDA MOTOR Co.,Ltd.">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<title>SEA5E44A46500000000FAAT00</title>
+<link href="../css/ViewerStyle.css" rel="stylesheet">
+<style>
+	v\:*	{ behavior: url(#default#VML); }
+	.drag	{ position: relative; cursor:   hand; }
+</style>
+</head>
+<script>
+<!--
+-->
+</script>
+<body onload="javascript:parent.Old(this)" style="font-family:sans-serif;">
+<div xmlns:v="urn:schemas-microsoft-com:vml">
+<div class="top_title">
+Starter Circuit Troubleshooting
+</div>
+<hr width="100%" size="2" color="gray">
+<table width="100%" class="Viewer">
+<tr>
+<td width="80%" class="ViewerTD" id="textTd" valign="top">
+<div>
+NOTE:
+</div>
+<ul type="disc">
+<li>
+<div>
+Air temperature must be between 15 and 38 °C (59 and 100 °F) during this procedure.
+</div>
+</li>
+<li>
+<div>
+After this inspection, you must reset the engine control module (ECM), 
+<a href="javascript:parent.Cts('000000000002324','iG06')">
+using the Honda Diagnostic System (HDS),
+</a>
+ otherwise the ECM will continue to stop the fuel injectors.
+</div>
+</li>
+<li>
+<div>
+The battery must be in good condition and fully charged.
+</div>
+</li>
+</ul>
+<div>
+Recommended Procedure:
+</div>
+<ul type="disc">
+<li>
+<div>
+Use a starter system tester.
+</div>
+</li>
+<li>
+<div>
+Connect and operate the equipment in accordance with the manufacturer's instructions.
+</div>
+</li>
+</ul>
+<div class="test_procedure_title">
+<b>
+Alternate Procedure
+</b>
+</div>
+<a name="i010">
+</a>
+<ol>
+<li value="1">
+<div>
+Hook up the following equipment:
+</div>
+<ul type="disc">
+<li>
+<div>
+Ammeter, 0−400 A
+</div>
+</li>
+<li>
+<div>
+Voltmeter, 0−20 V (accurate within 0.1 V)
+</div>
+</li>
+</ul>
+</li>
+</ol>
+<a name="i020">
+</a>
+<ol>
+<li value="2">
+<div>
+<a href="javascript:parent.Cts('000000000002324','i010')">
+Connect the HDS to the data link connector (DLC).
+</a>
+</div>
+</li>
+</ol>
+<a name="i030">
+</a>
+<ol>
+<li value="3">
+<div>
+Select PGM-FI, INSPECTION, and then ALL INJECTORS OFF function on the HDS.
+</div>
+</li>
+</ol>
+<a name="i040">
+</a>
+<ol>
+<li value="4">
+<div>
+Turn the ignition switch to START (III).
+</div>
+</li>
+</ol>
+<div style="text-indent:40px;">
+<i>
+Did the starter crank the engine normally?
+</i>
+</div>
+<table class="Viewer" frame="void" style="margin-left:50px;">
+<tr>
+<td width="30" class="ViewerTD">
+<b>
+YES
+</b>
+</td>
+<td width="10" class="ViewerTD" align="center">-
+</td>
+<td class="ViewerTD">
+<div>
+The starting system is OK. Go to 
+<a href="javascript:parent.Jmp('i110')">Step 11
+</a>
+.
+</div>
+</td>
+</tr>
+<tr>
+<td width="30" class="ViewerTD">
+<b>
+NO
+</b>
+</td>
+<td width="10" class="ViewerTD" align="center">-
+</td>
+<td class="ViewerTD">
+<div>
+Go to 
+<a href="javascript:parent.Jmp('i050')">Step 5
+</a>
+.
+</div>
+</td>
+</tr>
+</table>
+<a name="i050">
+</a>
+<ol>
+<li value="5">
+<div>
+Check the battery condition. Check electrical connections at the battery, the negative battery cable to body, the engine ground cables and the starter for looseness and corrosion. Then try cranking the engine again.
+</div>
+</li>
+</ol>
+<div style="text-indent:40px;">
+<i>
+Did the starter crank the engine?
+</i>
+</div>
+<table class="Viewer" frame="void" style="margin-left:50px;">
+<tr>
+<td width="30" class="ViewerTD">
+<b>
+YES
+</b>
+</td>
+<td width="10" class="ViewerTD" align="center">-
+</td>
+<td class="ViewerTD">
+<div>
+Repairing the loose connection corrected the problem. The starting system is OK. Go to 
+<a href="javascript:parent.Jmp('i110')">Step 11
+</a>
+.
+</div>
+</td>
+</tr>
+<tr>
+<td width="30" class="ViewerTD">
+<b>
+NO
+</b>
+</td>
+<td width="10" class="ViewerTD" align="center">-
+</td>
+<td class="ViewerTD">
+<div>
+Check the following:
+</div>
+<ul type="disc">
+<li>
+<div>
+If the starter will not crank the engine at all, go to 
+<a href="javascript:parent.Jmp('i060')">Step 6
+</a>
+.
+</div>
+</li>
+<li>
+<div>
+If it cranks the engine erratically or too slowly, go to 
+<a href="javascript:parent.Jmp('i080')">Step 8
+</a>
+.
+</div>
+</li>
+<li>
+<div>
+If it won't disengage from the flywheel ring gear when you release the key, check the following:
+</div>
+</li>
+<table class="Viewer">
+<tr>
+<td width="10" class="ViewerTD" align="right">-
+</td>
+<td class="ViewerTD">
+<div>
+Solenoid plunger and switch malfunction
+</div>
+</td>
+</tr>
+<tr>
+<td width="10" class="ViewerTD" align="right">-
+</td>
+<td class="ViewerTD">
+<div>
+Dirty drive gear or damaged overrunning clutch
+</div>
+</td>
+</tr>
+</table>
+</ul>
+</td>
+</tr>
+</table>
+</td>
+<td width="20%" class="ViewerTD" id="graphTd" valign="top">
+<span style="display:none" id="imgId1">
+<div style="page-break-after:always;">
+</div>
+</span>
+<div>
+<a href="javascript:parent.Prt('ZOOM000000000005450','1');">
+<img src="../tn/SEA4E0AA46500000000FAAD01.png">
+</a>
+</div>
+</td>
+</tr>
+</table>
+<hr width="100%" size="2" color="gray">
+<table width="100%" class="Viewer">
+<tr>
+<td width="80%" class="ViewerTD" id="textTd" valign="top">
+<a name="i060">
+</a>
+<ol>
+<li value="6">
+<div>
+Make sure the transmission is in Neutral, then disconnect the BLK/WHT wire from the starter solenoid S terminal. Connect a jumper wire from the battery positive terminal to the solenoid terminal.
+</div>
+</li>
+</ol>
+<div style="text-indent:40px;">
+<i>
+Did the starter crank the engine?
+</i>
+</div>
+<table class="Viewer" frame="void" style="margin-left:50px;">
+<tr>
+<td width="30" class="ViewerTD">
+<b>
+YES
+</b>
+</td>
+<td width="10" class="ViewerTD" align="center">-
+</td>
+<td class="ViewerTD">
+<div>
+Go to 
+<a href="javascript:parent.Jmp('i070')">Step 7
+</a>
+.
+</div>
+</td>
+</tr>
+<tr>
+<td width="30" class="ViewerTD">
+<b>
+NO
+</b>
+</td>
+<td width="10" class="ViewerTD" align="center">-
+</td>
+<td class="ViewerTD">
+<div>
+Remove the starter, and repair or replace as necessary.■
+</div>
+</td>
+</tr>
+</table>
+<a name="i070">
+</a>
+<ol>
+<li value="7">
+<div>
+Check the following items in the order listed until you find the open circuit:■
+</div>
+<ul type="disc">
+<li>
+<div>
+The BLK/WHT wire and connectors between the under-dash fuse/relay box and the ignition switch, and between the under-dash fuse/relay box and the starter.
+</div>
+</li>
+<li>
+<div>
+<a href="javascript:parent.Cts('000000000000284','i000')">
+The ignition switch.
+</a>
+</div>
+</li>
+<li>
+<div>
+<a href="javascript:parent.Cts('000000000003437','i000')">
+The starter cut relay.
+</a>
+</div>
+</li>
+</ul>
+</li>
+</ol>
+<a name="i080">
+</a>
+<ol>
+<li value="8">
+<div>
+While cranking the engine, check the cranking voltage and current draw.
+</div>
+</li>
+</ol>
+<div style="text-indent:40px;">
+<i>
+Is the cranking voltage greater than or equal to 7.7 V and the current draw less than or equal to 400 A?
+</i>
+</div>
+<table class="Viewer" frame="void" style="margin-left:50px;">
+<tr>
+<td width="30" class="ViewerTD">
+<b>
+YES
+</b>
+</td>
+<td width="10" class="ViewerTD" align="center">-
+</td>
+<td class="ViewerTD">
+<div>
+Go to 
+<a href="javascript:parent.Jmp('i090')">Step 9
+</a>
+.
+</div>
+</td>
+</tr>
+<tr>
+<td width="30" class="ViewerTD">
+<b>
+NO
+</b>
+</td>
+<td width="10" class="ViewerTD" align="center">-
+</td>
+<td class="ViewerTD">
+<div>
+Replace the starter, or remove and disassemble it, and check the following:■
+</div>
+<ul type="disc">
+<li>
+<div>
+Drag in the starter armature
+</div>
+</li>
+<li>
+<div>
+Shorted armature winding
+</div>
+</li>
+<li>
+<div>
+Excessive drag in the engine
+</div>
+</li>
+</ul>
+</td>
+</tr>
+</table>
+<a name="i090">
+</a>
+<ol>
+<li value="9">
+<div>
+Check the engine speed while cranking the engine.
+</div>
+</li>
+</ol>
+<div style="text-indent:40px;">
+<i>
+Is the engine speed above 100 rpm (min
+<sup>
+−1
+</sup>
+)?
+</i>
+</div>
+<table class="Viewer" frame="void" style="margin-left:50px;">
+<tr>
+<td width="30" class="ViewerTD">
+<b>
+YES
+</b>
+</td>
+<td width="10" class="ViewerTD" align="center">-
+</td>
+<td class="ViewerTD">
+<div>
+Go to 
+<a href="javascript:parent.Jmp('i100')">Step 10
+</a>
+.
+</div>
+</td>
+</tr>
+<tr>
+<td width="30" class="ViewerTD">
+<b>
+NO
+</b>
+</td>
+<td width="10" class="ViewerTD" align="center">-
+</td>
+<td class="ViewerTD">
+<div>
+Replace the starter, or remove and disassemble it, and check the following:■
+</div>
+<ul type="disc">
+<li>
+<div>
+Open circuit in starter armature commutator segments
+</div>
+</li>
+<li>
+<div>
+Excessively worn starter brushes
+</div>
+</li>
+<li>
+<div>
+Open circuit in commutator brushes
+</div>
+</li>
+<li>
+<div>
+Dirty or damaged helical splines or drive gear
+</div>
+</li>
+<li>
+<div>
+Faulty drive gear clutch
+</div>
+</li>
+</ul>
+</td>
+</tr>
+</table>
+<a name="i100">
+</a>
+<ol>
+<li value="10">
+<div>
+Remove the starter, and inspect its drive gear and the flywheel ring gear for damage. Replace any damaged parts.
+</div>
+</li>
+</ol>
+<a name="i110">
+</a>
+<ol>
+<li value="11">
+<div>
+<a href="javascript:parent.Cts('000000000002324','iG06')">
+Select ECM reset
+</a>
+ to cancel the ALL INJECTORS OFF function on the HDS.■
+</div>
+</li>
+</ol>
+</td>
+<td width="20%" class="ViewerTD" id="graphTd" valign="top">
+<span style="display:none" id="imgId1">
+<div style="page-break-after:always;">
+</div>
+</span>
+<div>
+<a href="javascript:parent.Prt('ZOOM000000000005451','1');">
+<img src="../tn/SEA4E0AA46500000000FAAD02.png">
+</a>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

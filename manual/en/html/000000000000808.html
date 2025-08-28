@@ -1,0 +1,876 @@
+<html lang="en" xmlns:v="urn:schemas-microsoft-com:vml">
+<head>
+<meta name="author" content="HONDA MOTOR Co.,Ltd.">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<title>SEA5E1DK72100090300FAAT00</title>
+<link href="../css/ViewerStyle.css" rel="stylesheet">
+<style>
+	v\:*	{ behavior: url(#default#VML); }
+	.drag	{ position: relative; cursor:   hand; }
+</style>
+</head>
+<script>
+<!--
+-->
+</script>
+<body onload="javascript:parent.Old(this)" style="font-family:sans-serif;">
+<div xmlns:v="urn:schemas-microsoft-com:vml">
+<div class="top_title">
+DTC Troubleshooting: P0300 (75) and some of P0301 (71), P0302 (72), P0303 (73), P0304 (74)
+</div>
+<hr width="100%" size="2" color="gray">
+<table width="100%" class="Viewer">
+<tr>
+<td width="80%" class="ViewerTD" id="textTd" valign="top">
+<b>
+DTC P0300:
+</b>
+<div>
+ Random Misfire and Any Combination of the Following:
+</div>
+<b>
+DTC P0301:
+</b>
+<div>
+ No. 1 Cylinder Misfire Detected
+</div>
+<b>
+DTC P0302:
+</b>
+<div>
+ No. 2 Cylinder Misfire Detected
+</div>
+<b>
+DTC P0303:
+</b>
+<div>
+ No. 3 Cylinder Misfire Detected
+</div>
+<b>
+DTC P0304:
+</b>
+<div>
+ No. 4 Cylinder Misfire Detected
+</div>
+<div class="tool_list_title">
+<b>
+Special Tools Required
+</b>
+</div>
+<a href="javascript:parent.Prt('ZOOM000000000015532')">
+<br>
+Oil Pressure gauge attachment
+<div>
+ 07NAJ-P070100
+</div>
+</a>
+<a href="javascript:parent.Prt('ZOOM000000000015533')">
+<br>
+Low pressure gauge
+<div>
+ 07406-0070002
+</div>
+</a>
+<a href="javascript:parent.Prt('ZOOM000000000015534')">
+<br>
+Oil pressure hose
+<div>
+ 07ZAJ-S5A0200
+</div>
+</a>
+<div>
+NOTE:
+</div>
+<ul type="disc">
+<li>
+<div>
+If the misfire is frequent enough to trigger detection of increased emissions during 2 consecutive driving cycles, the MIL will come on, and DTC P0300 (and some combination of P0301 through P0304) will be stored.
+</div>
+</li>
+<li>
+<div>
+If the misfire is frequent enough to damage the catalyst, the MIL will blink whenever the misfire occurs, and DTC P0300 (and some combination of P0301 through P0304) will be stored. When the misfire stops, the MIL will remain on.
+</div>
+</li>
+<li>
+<div>
+Troubleshoot the following DTCs first if any of them were stored along with the random misfire DTC(s):
+</div>
+</li>
+</ul>
+<div>
+P0107, P0108: Manifold absolute pressure (MAP) sensor
+</div>
+<div>
+P0171, P0172: Fuel system
+</div>
+<div>
+P0335, P0339: Crankshaft position (CKP) sensor
+</div>
+<div>
+P0365, P0369: Camshaft position (CMP) sensor
+</div>
+<div>
+P0511: Idle air control (IAC) valve
+</div>
+<div>
+P0404, P2413: EGR valve
+</div>
+<a name="i010">
+</a>
+<ol>
+<li value="1">
+<div>
+Note this freeze data:
+</div>
+<ul type="disc">
+<li>
+<div>
+Engine speed
+</div>
+</li>
+<li>
+<div>
+Vehicle speed
+</div>
+</li>
+<li>
+<div>
+Throttle position
+</div>
+</li>
+<li>
+<div>
+CLV
+</div>
+</li>
+</ul>
+</li>
+</ol>
+<a name="i020">
+</a>
+<ol>
+<li value="2">
+<div>
+Clear the DTC with the HDS.
+</div>
+</li>
+</ol>
+<a name="i030">
+</a>
+<ol>
+<li value="3">
+<div>
+Start the engine without load (in Park or neutral), then let it idle.
+</div>
+</li>
+</ol>
+<a name="i040">
+</a>
+<ol>
+<li value="4">
+<div>
+Monitor the OBD STATUS for DTC P0301, P0302 P0303, or P0304 in the DTCs MENU with the HDS.
+</div>
+</li>
+</ol>
+<div style="text-indent:40px;">
+<i>
+Does the screen indicate FAILED?
+</i>
+</div>
+<table class="Viewer" frame="void" style="margin-left:50px;">
+<tr>
+<td width="30" class="ViewerTD">
+<b>
+YES
+</b>
+</td>
+<td width="10" class="ViewerTD" align="center">-
+</td>
+<td class="ViewerTD">
+<div>
+Go to 
+<a href="javascript:parent.Jmp('i090')">Step 9
+</a>
+.
+</div>
+</td>
+</tr>
+<tr>
+<td width="30" class="ViewerTD">
+<b>
+NO
+</b>
+</td>
+<td width="10" class="ViewerTD" align="center">-
+</td>
+<td class="ViewerTD">
+<div>
+If the screen indicates PASSED, go to 
+<a href="javascript:parent.Jmp('i050')">Step 5
+</a>
+. If the screen indicates EXECUTING, keep the driving condition continually until a result comes on. If the screen indicates OUT OF CONDITION, wait for several minutes, and recheck.
+</div>
+</td>
+</tr>
+</table>
+<a name="i050">
+</a>
+<ol>
+<li value="5">
+<div>
+Check the CYL1 MISFIRE, CYL2 MISFIRE, CYL3 MISFIRE and/or CYL4 MISFIRE in the DATA LIST for 10 minutes with the HDS.
+</div>
+</li>
+</ol>
+<div style="text-indent:40px;">
+<i>
+Does CYL1 MISFIRE, CYL2 MISFIRE, CYL3 MISFIRE and/or CYL4 MISFIRE show misfire counts?
+</i>
+</div>
+<table class="Viewer" frame="void" style="margin-left:50px;">
+<tr>
+<td width="30" class="ViewerTD">
+<b>
+YES
+</b>
+</td>
+<td width="10" class="ViewerTD" align="center">-
+</td>
+<td class="ViewerTD">
+<div>
+Go to 
+<a href="javascript:parent.Jmp('i090')">Step 9
+</a>
+.
+</div>
+</td>
+</tr>
+<tr>
+<td width="30" class="ViewerTD">
+<b>
+NO
+</b>
+</td>
+<td width="10" class="ViewerTD" align="center">-
+</td>
+<td class="ViewerTD">
+<div>
+Go to 
+<a href="javascript:parent.Jmp('i060')">Step 6
+</a>
+.
+</div>
+</td>
+</tr>
+</table>
+<a name="i060">
+</a>
+<ol>
+<li value="6">
+<div>
+Test-drive the vehicle for several minutes in the range of the recorded freeze data.
+</div>
+</li>
+</ol>
+<a name="i070">
+</a>
+<ol>
+<li value="7">
+<div>
+Monitor the OBD STATUS for DTC P0301, P0302 P0303, or P0304 in the DTCs MENU with the HDS.
+</div>
+</li>
+</ol>
+<div style="text-indent:40px;">
+<i>
+Does the screen indicate FAILED?
+</i>
+</div>
+<table class="Viewer" frame="void" style="margin-left:50px;">
+<tr>
+<td width="30" class="ViewerTD">
+<b>
+YES
+</b>
+</td>
+<td width="10" class="ViewerTD" align="center">-
+</td>
+<td class="ViewerTD">
+<div>
+Go to 
+<a href="javascript:parent.Jmp('i090')">Step 9
+</a>
+.
+</div>
+</td>
+</tr>
+<tr>
+<td width="30" class="ViewerTD">
+<b>
+NO
+</b>
+</td>
+<td width="10" class="ViewerTD" align="center">-
+</td>
+<td class="ViewerTD">
+<div>
+If the screen indicates PASSED, go to 
+<a href="javascript:parent.Jmp('i080')">Step 8
+</a>
+. If the screen indicates EXECUTING, keep the driving condition continually until a result comes on. If the screen indicates OUT OF CONDITION, go to 
+<a href="javascript:parent.Jmp('i060')">Step 6
+</a>
+ and recheck.
+</div>
+</td>
+</tr>
+</table>
+<a name="i080">
+</a>
+<ol>
+<li value="8">
+<div>
+Check the CYL1 MISFIRE, CYL2 MISFIRE, CYL3 MISFIRE and/or CYL4 MISFIRE in the DATA LIST for 10 minutes with the HDS.
+</div>
+</li>
+</ol>
+<div style="text-indent:40px;">
+<i>
+Does CYL1 MISFIRE, CYL2 MISFIRE, CYL3 MISFIRE and/or CYL4 MISFIRE show misfire counts?
+</i>
+</div>
+<table class="Viewer" frame="void" style="margin-left:50px;">
+<tr>
+<td width="30" class="ViewerTD">
+<b>
+YES
+</b>
+</td>
+<td width="10" class="ViewerTD" align="center">-
+</td>
+<td class="ViewerTD">
+<div>
+Go to 
+<a href="javascript:parent.Jmp('i090')">Step 9
+</a>
+.
+</div>
+</td>
+</tr>
+<tr>
+<td width="30" class="ViewerTD">
+<b>
+NO
+</b>
+</td>
+<td width="10" class="ViewerTD" align="center">-
+</td>
+<td class="ViewerTD">
+<div>
+Intermittent failure, system is OK at this time.■
+</div>
+</td>
+</tr>
+</table>
+<a name="i090">
+</a>
+<ol>
+<li value="9">
+<div>
+Turn the ignition switch OFF.
+</div>
+</li>
+</ol>
+<a name="i100">
+</a>
+<ol>
+<li value="10">
+<div>
+Check fuel quality.
+</div>
+</li>
+</ol>
+<div style="text-indent:40px;">
+<i>
+Is the quality good?
+</i>
+</div>
+<table class="Viewer" frame="void" style="margin-left:50px;">
+<tr>
+<td width="30" class="ViewerTD">
+<b>
+YES
+</b>
+</td>
+<td width="10" class="ViewerTD" align="center">-
+</td>
+<td class="ViewerTD">
+<div>
+Go to 
+<a href="javascript:parent.Jmp('i110')">Step 11
+</a>
+.
+</div>
+</td>
+</tr>
+<tr>
+<td width="30" class="ViewerTD">
+<b>
+NO
+</b>
+</td>
+<td width="10" class="ViewerTD" align="center">-
+</td>
+<td class="ViewerTD">
+<div>
+<a href="javascript:parent.Cts('000000000000579','i000')">
+Drain the fuel from the fuel tank,
+</a>
+ and fill with known-good fuel, then go to 
+<a href="javascript:parent.Jmp('i200')">Step 20
+</a>
+.
+</div>
+</td>
+</tr>
+</table>
+<a name="i110">
+</a>
+<ol>
+<li value="11">
+<div>
+Clean the all spark plugs:
+</div>
+<ul type="disc">
+<li>
+<div>
+<a href="javascript:parent.Cts('000000000002681','i000')">
+K20A6 engine
+</a>
+</div>
+</li>
+<li>
+<div>
+<a href="javascript:parent.Cts('000000000000481','i000')">
+K24A3 engine
+</a>
+</div>
+</li>
+</ul>
+</li>
+</ol>
+<a name="i120">
+</a>
+<ol>
+<li value="12">
+<div>
+Test-drive the vehicle for several minutes in the range of the recorded freeze data.
+</div>
+</li>
+</ol>
+<a name="i130">
+</a>
+<ol>
+<li value="13">
+<div>
+Check the CYL1 MISFIRE, CYL2 MISFIRE, CYL3 MISFIRE and/or CYL4 MISFIRE in the DATA LIST for 10 minutes with the HDS.
+</div>
+</li>
+</ol>
+<div style="text-indent:40px;">
+<i>
+Does CYL1 MISFIRE, CYL2 MISFIRE, CYL3 MISFIRE and/or CYL4 MISFIRE show misfire counts?
+</i>
+</div>
+<table class="Viewer" frame="void" style="margin-left:50px;">
+<tr>
+<td width="30" class="ViewerTD">
+<b>
+YES
+</b>
+</td>
+<td width="10" class="ViewerTD" align="center">-
+</td>
+<td class="ViewerTD">
+<div>
+Go to 
+<a href="javascript:parent.Jmp('i140')">Step 14
+</a>
+.
+</div>
+</td>
+</tr>
+<tr>
+<td width="30" class="ViewerTD">
+<b>
+NO
+</b>
+</td>
+<td width="10" class="ViewerTD" align="center">-
+</td>
+<td class="ViewerTD">
+<div>
+Go to 
+<a href="javascript:parent.Jmp('i200')">Step 20
+</a>
+.
+</div>
+</td>
+</tr>
+</table>
+<a name="i140">
+</a>
+<ol>
+<li value="14">
+<div>
+<a href="javascript:parent.Cts('000000000000576','i000')">
+Check the fuel pressure.
+</a>
+</div>
+</li>
+</ol>
+<div style="text-indent:40px;">
+<i>
+Is the fuel pressure OK?
+</i>
+</div>
+<table class="Viewer" frame="void" style="margin-left:50px;">
+<tr>
+<td width="30" class="ViewerTD">
+<b>
+YES
+</b>
+</td>
+<td width="10" class="ViewerTD" align="center">-
+</td>
+<td class="ViewerTD">
+<div>
+Go to 
+<a href="javascript:parent.Jmp('i150')">Step 15
+</a>
+.
+</div>
+</td>
+</tr>
+<tr>
+<td width="30" class="ViewerTD">
+<b>
+NO
+</b>
+</td>
+<td width="10" class="ViewerTD" align="center">-
+</td>
+<td class="ViewerTD">
+<ul type="disc">
+<li>
+<div>
+If the pressure is too high, 
+<a href="javascript:parent.Cts('000000000001151','i000')">
+replace the fuel pressure regulator,
+</a>
+ then go to 
+<a href="javascript:parent.Jmp('i200')">Step 20
+</a>
+.
+</div>
+</li>
+<li>
+<div>
+If the pressure is too low, check the fuel pump, the fuel feed pipe, and the fuel filter. If they are OK, 
+<a href="javascript:parent.Cts('000000000001151','i000')">
+replace the fuel pressure regulator,
+</a>
+ then go to 
+<a href="javascript:parent.Jmp('i200')">Step 20
+</a>
+.
+</div>
+</li>
+</ul>
+</td>
+</tr>
+</table>
+<a name="i150">
+</a>
+<ol>
+<li value="15">
+<div>
+Turn the ignition switch OFF.
+</div>
+</li>
+</ol>
+<a name="i160">
+</a>
+<ol>
+<li value="16">
+<div>
+Remove the VTEC oil pressure switch (A) or the belt and install the special tools as shown, then install the VTEC oil pressure switch or the belt in the pressure gauge adapter (B).
+</div>
+<div>
+NOTE: Install the part in the reverse order of removal with a new O-ring.
+</div>
+</li>
+</ol>
+<a name="i170">
+</a>
+<ol>
+<li value="17">
+<div>
+Reconnect the VTEC oil pressure switch 2P connector.
+</div>
+</li>
+</ol>
+<a name="i180">
+</a>
+<ol>
+<li value="18">
+<div>
+Start the engine. Hold the engine speed at 3,000 rpm (min
+<sup>
+−1
+</sup>
+) without load (in Park or neutral) until the radiator fan comes on.
+</div>
+</li>
+</ol>
+<a name="i190">
+</a>
+<ol>
+<li value="19">
+<div>
+Check the oil pressure at engine speeds of 1,000 and 2,000 rpm (min
+<sup>
+−1
+</sup>
+). Keep the test time as short as possible (less than 1 minute) because the engine is running without load.
+</div>
+</li>
+</ol>
+<div style="text-indent:40px;">
+<i>
+Is the oil pressure below 49 kPa (0.5 kgf/cm
+<sup>
+2
+</sup>
+, 7psi)?
+</i>
+</div>
+<table class="Viewer" frame="void" style="margin-left:50px;">
+<tr>
+<td width="30" class="ViewerTD">
+<b>
+YES
+</b>
+</td>
+<td width="10" class="ViewerTD" align="center">-
+</td>
+<td class="ViewerTD">
+<div>
+<a href="javascript:parent.Cts('000000000001150','i000')">
+Check for air in the fuel line,
+</a>
+ then go to 
+<a href="javascript:parent.Jmp('i200')">Step 20
+</a>
+.
+</div>
+</td>
+</tr>
+<tr>
+<td width="30" class="ViewerTD">
+<b>
+NO
+</b>
+</td>
+<td width="10" class="ViewerTD" align="center">-
+</td>
+<td class="ViewerTD">
+<div>
+Inspect the VTEC system oil line, then, go to 
+<a href="javascript:parent.Jmp('i200')">Step 20
+</a>
+.
+</div>
+</td>
+</tr>
+</table>
+<a name="i200">
+</a>
+<ol>
+<li value="20">
+<div>
+Turn the ignition switch ON (II).
+</div>
+</li>
+</ol>
+<a name="i210">
+</a>
+<ol>
+<li value="21">
+<div>
+Reset the ECM/PCM with the HDS.
+</div>
+</li>
+</ol>
+<a name="i220">
+</a>
+<ol>
+<li value="22">
+<div>
+Clear the CKP pattern with the HDS.
+</div>
+</li>
+</ol>
+<a name="i230">
+</a>
+<ol>
+<li value="23">
+<div>
+<a href="javascript:parent.Cts('000000000000757','i000')">
+Do the ECM/PCM idle learn procedure.
+</a>
+</div>
+</li>
+</ol>
+<a name="i240">
+</a>
+<ol>
+<li value="24">
+<div>
+<a href="javascript:parent.Cts('000000000001619','iG07')">
+Do the CKP pattern learn procedure.
+</a>
+</div>
+</li>
+</ol>
+<a name="i250">
+</a>
+<ol>
+<li value="25">
+<div>
+Test-drive the vehicle for several minutes in the range of the recorded freeze data.
+</div>
+</li>
+</ol>
+<a name="i260">
+</a>
+<ol>
+<li value="26">
+<div>
+Check for Temporary DTCs or DTCs in the DTCs MENU with the HDS.
+</div>
+</li>
+</ol>
+<div style="text-indent:40px;">
+<i>
+Are any Temporary DTCs or DTCs indicated?
+</i>
+</div>
+<table class="Viewer" frame="void" style="margin-left:50px;">
+<tr>
+<td width="30" class="ViewerTD">
+<b>
+YES
+</b>
+</td>
+<td width="10" class="ViewerTD" align="center">-
+</td>
+<td class="ViewerTD">
+<div>
+If DTC P0300, P0301, P0302, P0303 or P0304 are indicated, check for poor connections or loose terminals at the ignition coil, the injector, and the ECM/PCM, then 
+<a href="javascript:parent.Cts('000000000000809','i000')">
+go to troubleshooting DTC P0301, P0302, P0303 or P0304.
+</a>
+ If any other Temporary DTCs or DTCs are indicated, go to the indicated DTC's troubleshooting.
+</div>
+</td>
+</tr>
+<tr>
+<td width="30" class="ViewerTD">
+<b>
+NO
+</b>
+</td>
+<td width="10" class="ViewerTD" align="center">-
+</td>
+<td class="ViewerTD">
+<div>
+Go to 
+<a href="javascript:parent.Jmp('i270')">Step 27
+</a>
+.
+</div>
+</td>
+</tr>
+</table>
+<a name="i270">
+</a>
+<ol>
+<li value="27">
+<div>
+Monitor the OBD STATUS for DTC P0301, P0302, P0303 or P0304 in the DTCs MENU with the HDS.
+</div>
+</li>
+</ol>
+<div style="text-indent:40px;">
+<i>
+Does the screen indicate PASSED?
+</i>
+</div>
+<table class="Viewer" frame="void" style="margin-left:50px;">
+<tr>
+<td width="30" class="ViewerTD">
+<b>
+YES
+</b>
+</td>
+<td width="10" class="ViewerTD" align="center">-
+</td>
+<td class="ViewerTD">
+<div>
+Troubleshooting is complete.■
+</div>
+</td>
+</tr>
+<tr>
+<td width="30" class="ViewerTD">
+<b>
+NO
+</b>
+</td>
+<td width="10" class="ViewerTD" align="center">-
+</td>
+<td class="ViewerTD">
+<div>
+If the screen indicates FAILED, then go to 
+<a href="javascript:parent.Jmp('i010')">Step 1
+</a>
+ and recheck. If the screen indicates EXECUTING, keep the driving condition continually until a result comes on. If the screen indicates OUT OF CONDITION, go to 
+<a href="javascript:parent.Jmp('i250')">Step 25
+</a>
+ and recheck.
+</div>
+</td>
+</tr>
+</table>
+</td>
+<td width="20%" class="ViewerTD" id="graphTd" valign="top">
+<span style="display:none" id="imgId1">
+<div style="page-break-after:always;">
+</div>
+</span>
+<div>
+<a href="javascript:parent.Prt('ZOOM000000000002105','1');">
+<img src="../tn/SEA5E1DK72100090300FAAD01.png">
+</a>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

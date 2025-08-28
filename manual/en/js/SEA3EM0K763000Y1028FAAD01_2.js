@@ -1,0 +1,31 @@
+with(document) {
+write("<v:group id=\"group1\" class=\"drag\" style=\"position:relative; width:475px; height:433px;\" coordsize=\"475,433\">");
+write("<v:rect id=\"rect1\"class=\"drag\"  style=\"width:475px;height:433px;\">");
+write("<img id=\"img1\" src=\"../img/SEA3EM0K763000Y1028FAAD01.PNG\" border=\"1\" class=\"drag\" style=\"position:absolute;left:0px;top:0px;width:475px;height:433px;border-color:#ffffff\">");
+write("<p id=\"p1_1\" class=\"drag\" style=\"position:absolute;left:147px;top:68px;font-weight:normal;font-size:9.2pt;\">");
+write("<nobr><b>LT GRN<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_2\" class=\"drag\" style=\"position:absolute;left:3px;top:201px;font-weight:normal;font-size:9.2pt;\">");
+write("<nobr><b>REAR WINDOW WIPER MOTOR<br>4P CONNECTOR<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_3\" class=\"drag\" style=\"position:absolute;left:265px;top:176px;font-weight:normal;font-size:9.2pt;\">");
+write("<nobr><b>REAR WINDOW WIPER<br>MOTOR RELAY<br>5P CONNECTOR<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_4\" class=\"drag\" style=\"position:absolute;left:113px;top:344px;font-weight:normal;font-size:9.2pt;\">");
+write("<nobr><b>BLK<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_5\" class=\"drag\" style=\"position:absolute;left:337px;top:370px;font-weight:normal;font-size:9.2pt;\">");
+write("<nobr><b></b>Wire side of<br>female terminals<br></nobr>");
+write("</p>");
+write("<p id=\"p1_6\" class=\"drag\" style=\"position:absolute;left:23px;top:373px;font-weight:normal;font-size:9.2pt;\">");
+write("<nobr><b></b>Wire side of<br>female terminals<br></nobr>");
+write("</p>");
+write("<p id=\"p1_7\" class=\"drag\" style=\"position:absolute;left:56px;top:32px;font-weight:normal;font-size:9.2pt;\">");
+write("<nobr><b>UNDER-DASH FUSE/RELAY BOX CONNECTOR Q (14P)<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_8\" class=\"drag\" style=\"position:absolute;left:341px;top:340px;font-weight:normal;font-size:9.2pt;\">");
+write("<nobr><b>LT GRN/BLK<br></b></nobr>");
+write("</p>");
+write("</v:rect>");
+write("</v:group>");
+}

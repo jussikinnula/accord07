@@ -1,0 +1,486 @@
+<html lang="en" xmlns:v="urn:schemas-microsoft-com:vml">
+<head>
+<meta name="author" content="HONDA MOTOR Co.,Ltd.">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<title>SEA6EJ4J34600000000FAAT01</title>
+<link href="../css/ViewerStyle.css" rel="stylesheet">
+<style>
+	v\:*	{ behavior: url(#default#VML); }
+	.drag	{ position: relative; cursor:   hand; }
+</style>
+</head>
+<script>
+<!--
+-->
+</script>
+<body onload="javascript:parent.Old(this)" style="font-family:sans-serif;">
+<div xmlns:v="urn:schemas-microsoft-com:vml">
+<div class="top_title">
+MICS Troubleshooting - Test Mode A
+</div>
+<hr width="100%" size="2" color="gray">
+<table width="100%" class="Viewer">
+<tr>
+<td width="80%" class="ViewerTD" id="textTd" valign="top">
+<div class="test_procedure_title">
+<b>
+B-CAN System Diagnosis Test Mode A
+</b>
+</div>
+<div>
+NOTE:
+</div>
+<ul type="disc">
+<li>
+<div>
+Perform this diagnosis first if the symptom is related to the B-CAN system.
+</div>
+</li>
+<li>
+<div>
+Because several different Tester's can be used to troubleshoot, there might be differences in what is shown on the screen and what is shown in the DTC troubleshooting flow charts in the Service Manual.
+</div>
+</li>
+<li>
+<div>
+Always cycle the ignition switch within 3 seconds when prompted in the DTC troubleshooting procedures in this system.
+</div>
+</li>
+</ul>
+<a name="i010">
+</a>
+<ol>
+<li value="1">
+<div>
+Make sure the system is related to B-CAN.
+</div>
+<ul type="disc">
+<li>
+<div>
+Gauge control module
+</div>
+</li>
+<li>
+<div>
+Exterior lights
+</div>
+</li>
+<li>
+<div>
+Turn signals
+</div>
+</li>
+<li>
+<div>
+Entry light control
+</div>
+</li>
+<li>
+<div>
+Interior lights
+</div>
+</li>
+<li>
+<div>
+Safety indicators
+</div>
+</li>
+<li>
+<div>
+Rear window defogger (climate control)
+</div>
+</li>
+<li>
+<div>
+Horns (security)
+</div>
+</li>
+<li>
+<div>
+Chimes (key and lights ON)
+</div>
+</li>
+<li>
+<div>
+Power windows
+</div>
+</li>
+<li>
+<div>
+Wiper/washer
+</div>
+</li>
+<li>
+<div>
+Security
+</div>
+</li>
+<li>
+<div>
+Keyless entry
+</div>
+</li>
+<li>
+<div>
+Power door locks
+</div>
+</li>
+<li>
+<div>
+Climate control
+</div>
+</li>
+<li>
+<div>
+Key interlock
+</div>
+</li>
+<li>
+<div>
+Dash light brightness
+</div>
+</li>
+<li>
+<div>
+Hands free telephone
+</div>
+</li>
+</ul>
+</li>
+</ol>
+<div style="text-indent:40px;">
+<i>
+Is the symptom related to the B-CAN system?
+</i>
+</div>
+<table class="Viewer" frame="void" style="margin-left:50px;">
+<tr>
+<td width="30" class="ViewerTD">
+<b>
+YES
+</b>
+</td>
+<td width="10" class="ViewerTD" align="center">-
+</td>
+<td class="ViewerTD">
+<div>
+Go to 
+<a href="javascript:parent.Jmp('i020')">Step 2
+</a>
+.
+</div>
+</td>
+</tr>
+<tr>
+<td width="30" class="ViewerTD">
+<b>
+NO
+</b>
+</td>
+<td width="10" class="ViewerTD" align="center">-
+</td>
+<td class="ViewerTD">
+<div>
+Go to the system troubleshooting for the system with the symptom.■
+</div>
+</td>
+</tr>
+</table>
+<a name="i020">
+</a>
+<ol>
+<li value="2">
+<div>
+Connect the Honda Diagnostic System (HDS).
+</div>
+</li>
+</ol>
+<a name="i030">
+</a>
+<ol>
+<li value="3">
+<div>
+From BODY ELECTRICAL MENU, select connected units INFORMATION MENU, and then select CONNECTED UNIT.
+</div>
+<ul type="disc">
+<li>
+<div>
+Multiplex integrated control unit (MICU)
+</div>
+</li>
+<li>
+<div>
+Door multiplex control unit
+</div>
+</li>
+<li>
+<div>
+Gauge control module
+</div>
+</li>
+<li>
+<div>
+Combination switch control unit
+</div>
+</li>
+<li>
+<div>
+Relay control module
+</div>
+</li>
+<li>
+<div>
+Climate control unit
+</div>
+</li>
+<li>
+<div>
+Hands free telephone
+</div>
+</li>
+</ul>
+<div>
+NOTE:
+</div>
+<ul type="disc">
+<li>
+<div>
+If the unit is communicating with the HDS, DETECT will be displayed.
+</div>
+</li>
+<li>
+<div>
+If the unit is not communicating, N/A will be displayed.
+</div>
+</li>
+</ul>
+</li>
+</ol>
+<div style="text-indent:40px;">
+<i>
+Are all control units communicating with the HDS?
+</i>
+</div>
+<table class="Viewer" frame="void" style="margin-left:50px;">
+<tr>
+<td width="30" class="ViewerTD">
+<b>
+YES
+</b>
+</td>
+<td width="10" class="ViewerTD" align="center">-
+</td>
+<td class="ViewerTD">
+<div>
+Go to 
+<a href="javascript:parent.Jmp('i040')">Step 4
+</a>
+.
+</div>
+</td>
+</tr>
+<tr>
+<td width="30" class="ViewerTD">
+<b>
+NO
+</b>
+</td>
+<td width="10" class="ViewerTD" align="center">-
+</td>
+<td class="ViewerTD">
+<div>
+If any of them are not communicating, go to B-CAN System Diagnosis Test B. If all units are not communicating, 
+<a href="javascript:parent.Cts('000000000000366','i000')">
+go to DTC B1000 troubleshooting.
+</a>
+■
+</div>
+</td>
+</tr>
+</table>
+<a name="i040">
+</a>
+<ol>
+<li value="4">
+<div>
+Select the system that has the problem from the BODY ELECTRICAL MENU, then select DTCs.
+</div>
+</li>
+</ol>
+<div style="text-indent:40px;">
+<i>
+Are any DTCs indicated?
+</i>
+</div>
+<table class="Viewer" frame="void" style="margin-left:50px;">
+<tr>
+<td width="30" class="ViewerTD">
+<b>
+YES
+</b>
+</td>
+<td width="10" class="ViewerTD" align="center">-
+</td>
+<td class="ViewerTD">
+<div>
+Go to 
+<a href="javascript:parent.Jmp('i050')">Step 5
+</a>
+.
+</div>
+</td>
+</tr>
+<tr>
+<td width="30" class="ViewerTD">
+<b>
+NO
+</b>
+</td>
+<td width="10" class="ViewerTD" align="center">-
+</td>
+<td class="ViewerTD">
+<div>
+<a href="javascript:parent.Cts('000000000003884','i000')">
+If the problem is related to the following, go to B-CAN system diagnosis test mode C.
+</a>
+</div>
+<ul type="disc">
+<li>
+<div>
+Exterior lights
+</div>
+</li>
+<li>
+<div>
+Turn signals
+</div>
+</li>
+<li>
+<div>
+Entry light control
+</div>
+</li>
+<li>
+<div>
+Interior lights
+</div>
+</li>
+<li>
+<div>
+Rear window defogger (climate control)
+</div>
+</li>
+<li>
+<div>
+Horns (security)
+</div>
+</li>
+<li>
+<div>
+Power windows
+</div>
+</li>
+<li>
+<div>
+Wiper/washer
+</div>
+</li>
+<li>
+<div>
+Power door locks
+</div>
+</li>
+</ul>
+<div>
+If the problem is related to the following items, go to the troubleshooting for the individual system.■
+</div>
+<ul type="disc">
+<li>
+<div>
+Gauge control module
+</div>
+</li>
+<li>
+<div>
+Safety indicators
+</div>
+</li>
+<li>
+<div>
+Chimes (key and lights ON)
+</div>
+</li>
+<li>
+<div>
+Security
+</div>
+</li>
+<li>
+<div>
+Keyless entry
+</div>
+</li>
+<li>
+<div>
+Climate control
+</div>
+</li>
+<li>
+<div>
+Key interlock
+</div>
+</li>
+<li>
+<div>
+Dash lights brightness
+</div>
+</li>
+<li>
+<div>
+Hands free telephone
+</div>
+</li>
+</ul>
+</td>
+</tr>
+</table>
+<a name="i050">
+</a>
+<ol>
+<li value="5">
+<div>
+Record all DTCs and sort them by DTC type using the DTC troubleshooting.
+</div>
+</li>
+</ol>
+<a name="i060">
+</a>
+<ol>
+<li value="6">
+<div>
+Troubleshoot the DTC (s) in the following order:
+</div>
+<ul type="disc">
+<li>
+<div>
+Internal error DTCs.
+</div>
+</li>
+<li>
+<div>
+Loss of communication DTCs. Begin troubleshooting with the lowest number first (Example: if DTC B1006 and B1058 are retrieved, begin by troubleshooting B1006).
+</div>
+</li>
+</ul>
+</li>
+</ol>
+</td>
+<td width="20%" class="ViewerTD" id="graphTd" valign="top">
+</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

@@ -1,0 +1,37 @@
+with(document) {
+write("<v:group id=\"group1\" class=\"drag\" style=\"position:relative; width:950px; height:863px;\" coordsize=\"950,863\">");
+write("<v:rect id=\"rect1\"class=\"drag\"  style=\"width:950px;height:863px;\">");
+write("<img id=\"img1\" src=\"../img/SEA5E43J18533232001DAAD01.PNG\" border=\"1\" class=\"drag\" style=\"position:absolute;left:0px;top:0px;width:950px;height:863px;border-color:#ffffff\">");
+write("<p id=\"p1_1\" class=\"drag\" style=\"position:absolute;left:266px;top:644px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>HOOD RELEASE HANDLE<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_2\" class=\"drag\" style=\"position:absolute;left:362px;top:17px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>HOOD OPENER CABLE<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_3\" class=\"drag\" style=\"position:absolute;left:675px;top:40px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>TAILGATE HANDLE<br>(With power tailgate)<br><a href=\"javascript:parent.Cts('000000000001779','iR02')\"></b>Replacement,</a><br></nobr>");
+write("</p>");
+write("<p id=\"p1_4\" class=\"drag\" style=\"position:absolute;left:717px;top:96px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>TAILGATE LATCH<br>(With power tailgate)<br><a href=\"javascript:parent.Cts('000000000001780','iR01')\"></b>Replacement,</a><br></nobr>");
+write("</p>");
+write("<p id=\"p1_5\" class=\"drag\" style=\"position:absolute;left:718px;top:410px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>FUEL FILL DOOR LATCH<br><a href=\"javascript:parent.Cts('000000000001760','i040')\"></</a><br></nobr>");
+write("</p>");
+write("<p id=\"p1_6\" class=\"drag\" style=\"position:absolute;left:425px;top:561px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>FUEL FILL DOOR OPENER<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_7\" class=\"drag\" style=\"position:absolute;left:587px;top:485px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>FUEL FILL DOOR OPENER CABLE<br><a href=\"javascript:parent.Cts('000000000001760','i000')\"></b>Replacement,</a><br></nobr>");
+write("</p>");
+write("<p id=\"p1_8\" class=\"drag\" style=\"position:absolute;left:18px;top:592px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>HOOD LATCH<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_9\" class=\"drag\" style=\"position:absolute;left:413px;top:730px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>TAILGATE HANDLE<br>(Without power tailgate)<br><a href=\"javascript:parent.Cts('000000000001779','iR01')\"></b>Replacement,</a><br></nobr>");
+write("</p>");
+write("<p id=\"p1_10\" class=\"drag\" style=\"position:absolute;left:507px;top:803px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>TAILGATE LATCH<br>(Without power tailgate)<br><a href=\"javascript:parent.Cts('000000000001780','iR02')\"></b>Replacement,</a><br></nobr>");
+write("</p>");
+write("</v:rect>");
+write("</v:group>");
+}

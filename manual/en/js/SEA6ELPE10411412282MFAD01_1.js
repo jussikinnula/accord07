@@ -1,0 +1,37 @@
+with(document) {
+write("<v:group id=\"group1\" class=\"drag\" style=\"position:relative; width:950px; height:1039px;\" coordsize=\"950,1039\">");
+write("<v:rect id=\"rect1\"class=\"drag\"  style=\"width:950px;height:1039px;\">");
+write("<img id=\"img1\" src=\"../img/SEA6ELPE10411412282MFAD01.PNG\" border=\"1\" class=\"drag\" style=\"position:absolute;left:0px;top:0px;width:950px;height:1039px;border-color:#ffffff\">");
+write("<p id=\"p1_1\" class=\"drag\" style=\"position:absolute;left:664px;top:32px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>SHIFT LEVER KNOB<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_2\" class=\"drag\" style=\"position:absolute;left:257px;top:231px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>SCREW<br>3 N·m<br>(0.3 kgf·m, 2 lbf·ft)<br></b>Apply non-hardening<br>thread lock sealant.<br></nobr>");
+write("</p>");
+write("<p id=\"p1_3\" class=\"drag\" style=\"position:absolute;left:666px;top:505px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>A/T GEAR POSITION<br>INDICATOR PANEL<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_4\" class=\"drag\" style=\"position:absolute;left:276px;top:1012px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>SHIFT LOCK STOP<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_5\" class=\"drag\" style=\"position:absolute;left:83px;top:491px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>SHIFT LOCK RELEASE LEVER<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_6\" class=\"drag\" style=\"position:absolute;left:453px;top:994px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>SHIFT LOCK<br>SOLENOID PLUNGER<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_7\" class=\"drag\" style=\"position:absolute;left:205px;top:965px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>PLUNGER<br>SPRING<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_8\" class=\"drag\" style=\"position:absolute;left:606px;top:957px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>SHIFT LEVER BRACKET BASE<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_9\" class=\"drag\" style=\"position:absolute;left:109px;top:923px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>SHIFT LOCK<br>SOLENOID<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_10\" class=\"drag\" style=\"position:absolute;left:645px;top:636px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>SHIFT LEVER<br></b></nobr>");
+write("</p>");
+write("</v:rect>");
+write("</v:group>");
+}

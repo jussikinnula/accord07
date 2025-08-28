@@ -1,0 +1,37 @@
+with(document) {
+write("<v:group id=\"group1\" class=\"drag\" style=\"position:relative; width:950px; height:607px;\" coordsize=\"950,607\">");
+write("<v:rect id=\"rect1\"class=\"drag\"  style=\"width:950px;height:607px;\">");
+write("<img id=\"img1\" src=\"../img/SEA6EJ4A20323500000CAAD02.PNG\" border=\"1\" class=\"drag\" style=\"position:absolute;left:0px;top:0px;width:950px;height:607px;border-color:#ffffff\">");
+write("<p id=\"p1_1\" class=\"drag\" style=\"position:absolute;left:827px;top:17px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>To PGM-FI<br>MAIN RELAY<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_2\" class=\"drag\" style=\"position:absolute;left:810px;top:117px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>VARIOUS<br>SENSORS<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_3\" class=\"drag\" style=\"position:absolute;left:693px;top:123px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>ECM<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_4\" class=\"drag\" style=\"position:absolute;left:410px;top:577px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>EGR VALVE<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_5\" class=\"drag\" style=\"position:absolute;left:563px;top:494px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>EGR CONTROL<br>SOLENOID VALVE<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_6\" class=\"drag\" style=\"position:absolute;left:650px;top:438px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>WHT<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_7\" class=\"drag\" style=\"position:absolute;left:713px;top:286px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>PNK<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_8\" class=\"drag\" style=\"position:absolute;left:791px;top:204px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>BLK<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_9\" class=\"drag\" style=\"position:absolute;left:674px;top:24px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>YEL/BLK<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_10\" class=\"drag\" style=\"position:absolute;left:309px;top:298px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>To<br>VACUUM<br>PUMP<br></b></nobr>");
+write("</p>");
+write("</v:rect>");
+write("</v:group>");
+}

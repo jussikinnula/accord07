@@ -1,0 +1,374 @@
+<html lang="en" xmlns:v="urn:schemas-microsoft-com:vml">
+<head>
+<meta name="author" content="HONDA MOTOR Co.,Ltd.">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<title>SEA6EL9K72200000000BBAT00</title>
+<link href="../css/ViewerStyle.css" rel="stylesheet">
+<style>
+	v\:*	{ behavior: url(#default#VML); }
+	.drag	{ position: relative; cursor:   hand; }
+</style>
+</head>
+<script>
+<!--
+-->
+</script>
+<body onload="javascript:parent.Old(this)" style="font-family:sans-serif;">
+<div xmlns:v="urn:schemas-microsoft-com:vml">
+<div class="top_title">
+How to Troubleshoot EPS
+</div>
+<div>
+</div>
+<hr width="100%" size="2" color="gray">
+<table width="100%" class="Viewer">
+<tr>
+<td width="80%" class="ViewerTD" id="textTd" valign="top">
+<a name="iS01">
+</a>
+<div class="servinfosub_title">
+<b>
+EPS Indicator
+</b>
+</div>
+<div>
+Under normal conditions, the EPS indicator comes on when the ignition switch is turned to the ON (II) position, then goes off after the engine is started. This indicates that the LED and its circuit are operating correctly.
+</div>
+<div>
+If there is any trouble in the system after the engine is started, the EPS indicator will stay on, and the power assist is turned off.
+</div>
+<div>
+When EPS indicator comes on, the control unit memorizes the DTC. In this case, the control unit will not activate the EPS system after the engine starts again, but it keeps the EPS indicator on.
+</div>
+<div>
+When DTC 11, 12 or 13 is stored in the control unit, the EPS indicator will stay on until the DTC is erased when a problem is detected and the EPS indicator comes on, there are cases when the indicator stays on until the ignition switch is turned OFF, and cases when the indicator goes off automatically when the system returns to normal. Even though the system is operating normally, the EPS indicator will come on under the following conditions:
+</div>
+<ul type="disc">
+<li>
+<div>
+The vehicle speed decreases abruptly from 20 km/h (12 mph) or more (by applying brake), and it is less than 1 km/h (1 mph) and engine speed is 2,000 rpm (min
+<sup>
+−1
+</sup>
+) or above for 5 seconds (continuously) after the abrupt deceleration.
+</div>
+</li>
+<li>
+<div>
+With the wheel of the vehicle being steered, the vehicle speed is 1 km/h (1 mph) or stopped for 20 seconds when the engine speed is 2,000 rpm (min
+<sup>
+−1
+</sup>
+) or above. And, the accumulated time period in which this status is detected is for at least 10 seconds.
+</div>
+</li>
+<li>
+<div>
+When the engine speed is 500 rpm (min
+<sup>
+−1
+</sup>
+) or less, and the vehicle is travelling at a speed of 10 km/h (6 mph) or more for about 3 seconds.
+</div>
+</li>
+</ul>
+<div>
+To determine the actual cause of the problem, question the customer about the conditions during which the problem occured, taking the above conditions into consideration.
+</div>
+</td>
+<td width="20%" class="ViewerTD" id="graphTd" valign="top">
+</td>
+</tr>
+</table>
+<hr width="100%" size="2" color="gray">
+<table width="100%" class="Viewer">
+<tr>
+<td width="80%" class="ViewerTD" id="textTd" valign="top">
+<a name="iS02">
+</a>
+<div class="servinfosub_title">
+<b>
+Diagnostic Trouble Code (DTC)
+</b>
+</div>
+<ul type="disc">
+<li>
+<div>
+If the CPU cannot be activated, or it fails, the EPS indicator comes on, but the DTC is not memorized.
+</div>
+</li>
+<li>
+<div>
+The memory can hold any number of DTCs. However, when the same DTC is detected more than once, the most recent DTC is written over the prior DTC, therefore only one occurance is memorized.
+</div>
+</li>
+<li>
+<div>
+The lowest DTC is indicated first. The DTCs are indicated in ascending order, not in the order that they occurred.
+</div>
+</li>
+<li>
+<div>
+The DTCs are memorized in the EEPROM therefore the memorized DTCs cannot be erased by disconnecting the battery. Perform the specified procedures to clear DTCs.
+</div>
+</li>
+</ul>
+</td>
+<td width="20%" class="ViewerTD" id="graphTd" valign="top">
+</td>
+</tr>
+</table>
+<hr width="100%" size="2" color="gray">
+<table width="100%" class="Viewer">
+<tr>
+<td width="80%" class="ViewerTD" id="textTd" valign="top">
+<a name="iS03">
+</a>
+<div class="servinfosub_title">
+<b>
+Self-diagnosis
+</b>
+</div>
+<div>
+The auto cruise control system (ACC) is added the lane keep assist system (LKAS) on the EPS system. If the EPS control is failed, while the LKAS control is activated. LKAS control, it makes EPS indicator or ACC indicator come on and it detectivated the LKAS control. When detecting LKAS relation's malfunction is occured in LKAS control, the EPS indicator does not come on, it makes an ACC indicator come on and it detectivated the LKAS control. In this case, after the LKAS detectivated, it assists by usual EPS control but depending on the detected malfunction, it stops is assist. If the EPS indicator come on, troubleshoot the EPS DTCs. If ACC indicator come on, troubleshoot the ACC DTCs.
+</div>
+<div>
+It is sending and receiving a signal data with the line, between the EPS control unit and the LKAS control unit (EPSTXD/LKASRXD and EPSRXD/LKASTXD) of the multiplex-communication system which used CAN. The EPSTXD/LKASRXD become sending to the EPS, and become receiving the LKAS. The EPSRXD/LKASTXD become sending to the LKAS, and become receiving the EPS.
+</div>
+<div>
+When you output the DTC for ACC, first output the LKAS DTCs. If the EPS malfunction is detected from the LKAS DTCs, output EPS DTCs, and troubleshoot the EPS.
+</div>
+<ul type="disc">
+<li>
+<div>
+When DTC 23 (a problem with the circuit for engine speed signal) is detected, the power assist will return to normal when the vehicle speed is 10 km/h (6 mph) or above.
+</div>
+</li>
+<li>
+<div>
+For DTCs 21, 22 and 23 the EPS indicator will go off automatically, and the system returns to normal.
+</div>
+</li>
+</ul>
+</td>
+<td width="20%" class="ViewerTD" id="graphTd" valign="top">
+</td>
+</tr>
+</table>
+<hr width="100%" size="2" color="gray">
+<table width="100%" class="Viewer">
+<tr>
+<td width="80%" class="ViewerTD" id="textTd" valign="top">
+<a name="iS04">
+</a>
+<div class="servinfosub_title">
+<b>
+Restriction on Power Assist Operation
+</b>
+</div>
+<div>
+Repeated extreme steering force, such as turning the steering wheel continuously back-and-forth with the vehicle stopped, causes an increase of power consumption in the EPS motor. The increase of electric current causes the motor to heat up. Because this heat adversely affects the system, the control unit monitors the electric current of the motor.
+</div>
+<div>
+When the control unit detects heat build-up in the motor, it reduces the electric current to the motor gradually to protect the system, and it restricts the power assist operation. The EPS indicator does not come on during this function.
+</div>
+<div>
+When steering torque is not applied to the steering wheel, or when the ignition is turned off and the motor cools, the control unit will restore the power assist gradually until it's fully restored (after about 8 minutes).
+</div>
+</td>
+<td width="20%" class="ViewerTD" id="graphTd" valign="top">
+</td>
+</tr>
+</table>
+<hr width="100%" size="2" color="gray">
+<table width="100%" class="Viewer">
+<tr>
+<td width="80%" class="ViewerTD" id="textTd" valign="top">
+<a name="iS05">
+</a>
+<div class="servinfosub_title">
+<b>
+Torque Sensor Neutral Position
+</b>
+</div>
+<div>
+The EPS control unit stores the torque sensor neutral position in the EEPROM. Memorize the torque sensor neutral position whenever the gearbox is removed and installed, or when the torque sensor or EPS control unit is replaced.
+</div>
+<div>
+NOTE: The torque sensor neutral position is not effected when erasing the DTCs.
+</div>
+</td>
+<td width="20%" class="ViewerTD" id="graphTd" valign="top">
+</td>
+</tr>
+</table>
+<hr width="100%" size="2" color="gray">
+<table width="100%" class="Viewer">
+<tr>
+<td width="80%" class="ViewerTD" id="textTd" valign="top">
+<a name="iS06">
+</a>
+<div class="servinfosub_title">
+<b>
+How to Troubleshoot DTCs
+</b>
+</div>
+<div>
+The troubleshooting flowchart procedures assume that the cause of the problem is still present and the EPS indicator is still on. Following the flowchart when the EPS indicator does not come on can result in incorrect diagnosis.
+</div>
+<div>
+The connector illustrations show the female terminal connectors with a single outline and the male terminal connectors with a double outline.
+</div>
+<a name="i010">
+</a>
+<ol>
+<li value="1">
+<div>
+Question the customer about the conditions when the problem occured, and try to reproduce the same conditions for troubleshooting. Find out when the EPS indicator came on, such as during EPS control, after EPS control, when the vehicle was at a certain speed, etc.
+</div>
+</li>
+</ol>
+<a name="i020">
+</a>
+<ol>
+<li value="2">
+<div>
+When the EPS indicator does not come on during the test drive, but troubleshooting is done based on the DTC, check for loose connectors, poor terminal contact, etc., in the affected circuit before you start troubleshooting.
+</div>
+</li>
+</ol>
+<a name="i030">
+</a>
+<ol>
+<li value="3">
+<div>
+After troubleshooting, clear the DTC and test-drive the vehicle. Be sure the EPS indicator does not come on.
+</div>
+</li>
+</ol>
+</td>
+<td width="20%" class="ViewerTD" id="graphTd" valign="top">
+</td>
+</tr>
+</table>
+<hr width="100%" size="2" color="gray">
+<table width="100%" class="Viewer">
+<tr>
+<td width="80%" class="ViewerTD" id="textTd" valign="top">
+<a name="iS07">
+</a>
+<div class="servinfosub_title">
+<b>
+How to Retrieve DTCs
+</b>
+</div>
+<a name="i210">
+</a>
+<ol>
+<li value="1">
+<div>
+Center the steering wheel spokes.
+</div>
+</li>
+</ol>
+<a name="i220">
+</a>
+<ol>
+<li value="2">
+<div>
+With the ignition switch OFF, connect the HDS (Honda diagnostic system) to the 16P data link connector (DLC) (A) located under the dash on the driver's side of the vehicle.
+</div>
+</li>
+</ol>
+<a name="i230">
+</a>
+<ol>
+<li value="3">
+<div>
+Turn the ignition ON (II), and follow the prompts on the HDS to display the DTC(s) on the screen. After determining the DTC, go to the DTC Troubleshooting.
+</div>
+<div>
+NOTE:
+</div>
+<ul type="disc">
+<li>
+<div>
+See the HDS Help menu for specific instructions.
+</div>
+</li>
+<li>
+<div>
+When you output the DTC for ACC, first output the LKAS DTCs, then check the LKAS DTCs. If LKAS DTC is stored, diagnosis the LKAS DTCs. If the EPS malfunction is detected from the LKAS DTCs, output EPS DTCs, and troubleshoot the EPS.
+</div>
+</li>
+</ul>
+</li>
+</ol>
+</td>
+<td width="20%" class="ViewerTD" id="graphTd" valign="top">
+<span style="display:none" id="imgId1">
+<div style="page-break-after:always;">
+</div>
+</span>
+<div>
+<a href="javascript:parent.Prt('ZOOM000000000012829','1');">
+<img src="../tn/SEA6EL9K72200000000BBAD01.png">
+</a>
+</div>
+</td>
+</tr>
+</table>
+<hr width="100%" size="2" color="gray">
+<table width="100%" class="Viewer">
+<tr>
+<td width="80%" class="ViewerTD" id="textTd" valign="top">
+<a name="iS08">
+</a>
+<div class="servinfosub_title">
+<b>
+How to Clear DTCs
+</b>
+</div>
+<div>
+Center the steering wheel spokes.
+</div>
+<a name="i420">
+</a>
+<ol>
+<li value="1">
+<div>
+With the ignition switch OFF, connect the HDS to the 16P data link connector (DLC) (A) located under the dash on the driver's side of the vehicle.
+</div>
+</li>
+</ol>
+<a name="i430">
+</a>
+<ol>
+<li value="2">
+<div>
+Turn the ignition switch ON (II), and clear the DTC(s) by following the screen prompts on the HDS.
+</div>
+<div>
+NOTE: See the HDS Help menu for specific instructions.
+</div>
+</li>
+</ol>
+</td>
+<td width="20%" class="ViewerTD" id="graphTd" valign="top">
+<span style="display:none" id="imgId1">
+<div style="page-break-after:always;">
+</div>
+</span>
+<div>
+<a href="javascript:parent.Prt('ZOOM000000000012830','1');">
+<img src="../tn/SEA6EL9K72200000000BBAD02.png">
+</a>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

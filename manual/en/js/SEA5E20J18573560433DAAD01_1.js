@@ -1,0 +1,37 @@
+with(document) {
+write("<v:group id=\"group1\" class=\"drag\" style=\"position:relative; width:950px; height:751px;\" coordsize=\"950,751\">");
+write("<v:rect id=\"rect1\"class=\"drag\"  style=\"width:950px;height:751px;\">");
+write("<img id=\"img1\" src=\"../img/SEA5E20J18573560433DAAD01.PNG\" border=\"1\" class=\"drag\" style=\"position:absolute;left:0px;top:0px;width:950px;height:751px;border-color:#ffffff\">");
+write("<p id=\"p1_1\" class=\"drag\" style=\"position:absolute;left:241px;top:654px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>HOOD OPENER CABLE<br><a href=\"javascript:parent.Cts('000000000002604','i000')\"></b>Replacement,</a><br></nobr>");
+write("</p>");
+write("<p id=\"p1_2\" class=\"drag\" style=\"position:absolute;left:777px;top:89px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>TRUNK LID LATCH<br><a href=\"javascript:parent.Cts('000000000001048','i000')\"></b>Replacement,<br></a><br></nobr>");
+write("</p>");
+write("<p id=\"p1_3\" class=\"drag\" style=\"position:absolute;left:753px;top:16px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>TRUNK LID OPEN SWITCH<br><a href=\"javascript:parent.Cts('000000000001054','i000')\"></b>Replacement,<br></a><br></nobr>");
+write("</p>");
+write("<p id=\"p1_4\" class=\"drag\" style=\"position:absolute;left:607px;top:600px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>TRUNK LID OPENER/<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_5\" class=\"drag\" style=\"position:absolute;left:523px;top:694px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>HOOD RELEASE HANDLE<br><a href=\"javascript:parent.Cts('000000000000158','i000')\"></b>Replacement,</a><br></nobr>");
+write("</p>");
+write("<p id=\"p1_6\" class=\"drag\" style=\"position:absolute;left:22px;top:567px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>HOOD LATCH<br><a href=\"javascript:parent.Cts('000000000002603','i000')\"></b>Replacement,</a><br></nobr>");
+write("</p>");
+write("<p id=\"p1_7\" class=\"drag\" style=\"position:absolute;left:681px;top:513px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>TRUNK LID OPENER/<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_8\" class=\"drag\" style=\"position:absolute;left:761px;top:448px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>FUEL FILL DOOR LATCH<br><a href=\"javascript:parent.Cts('000000000001050','i050')\"></</a><br></nobr>");
+write("</p>");
+write("<p id=\"p1_9\" class=\"drag\" style=\"position:absolute;left:681px;top:528px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>FUEL FILL DOOR OPENER CABLE<br><a href=\"javascript:parent.Cts('000000000001050','i000')\"></b>Replacement,</a><br></nobr>");
+write("</p>");
+write("<p id=\"p1_10\" class=\"drag\" style=\"position:absolute;left:607px;top:615px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>FUEL FILL DOOR OPENER<br><a href=\"javascript:parent.Cts('000000000001049','i000')\"></b>Replacement,</a><br></nobr>");
+write("</p>");
+write("</v:rect>");
+write("</v:group>");
+}

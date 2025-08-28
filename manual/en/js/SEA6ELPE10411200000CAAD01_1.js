@@ -1,0 +1,37 @@
+with(document) {
+write("<v:group id=\"group1\" class=\"drag\" style=\"position:relative; width:950px; height:767px;\" coordsize=\"950,767\">");
+write("<v:rect id=\"rect1\"class=\"drag\"  style=\"width:950px;height:767px;\">");
+write("<img id=\"img1\" src=\"../img/SEA6ELPE10411200000CAAD01.PNG\" border=\"1\" class=\"drag\" style=\"position:absolute;left:0px;top:0px;width:950px;height:767px;border-color:#ffffff\">");
+write("<p id=\"p1_1\" class=\"drag\" style=\"position:absolute;left:834px;top:25px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>TORQUE <br>CONVERTER<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_2\" class=\"drag\" style=\"position:absolute;left:313px;top:24px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>MAINSHAFT<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_3\" class=\"drag\" style=\"position:absolute;left:752px;top:444px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>COUNTERSHAFT<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_4\" class=\"drag\" style=\"position:absolute;left:813px;top:230px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>FINAL DRIVE <br>GEAR<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_5\" class=\"drag\" style=\"position:absolute;left:71px;top:53px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>MAINSHAFT <br>IDLER GEAR<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_6\" class=\"drag\" style=\"position:absolute;left:166px;top:598px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>SECONDARY SHAFT<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_7\" class=\"drag\" style=\"position:absolute;left:59px;top:531px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>SECONDARY SHAFT <br>IDLER GEAR<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_8\" class=\"drag\" style=\"position:absolute;left:24px;top:454px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>IDLER SHAFT <br>IDLER GEAR<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_9\" class=\"drag\" style=\"position:absolute;left:442px;top:68px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>REVERSE<br>SELECTOR HUB<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_10\" class=\"drag\" style=\"position:absolute;left:430px;top:562px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>REVERSE<br>SELECTOR <br></b></nobr>");
+write("</p>");
+write("</v:rect>");
+write("</v:group>");
+}

@@ -1,0 +1,161 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN"
+                      "http://www.w3.org/TR/html4/frameset.dtd">
+<html lang="en">
+<head>
+<meta name="author" content="HONDA MOTOR Co.,Ltd.">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<script>
+<!--
+var tDT     = new Array;
+var trOpen  = null;
+var trSel   = null;
+function SearchTreeItem(level, strSitq, strSct, strSc, strSys, strComp, strSupp, strName)
+{
+  var data    = new Array;
+  data.Level  = level;
+  data.Sitq   = strSitq;
+  data.Sct    = strSct;
+  data.Sc     = strSc;
+  data.Sys    = strSys;
+  data.Comp   = strComp;
+  data.Supp   = strSupp;
+  data.Name   = strName;
+  return(data);
+}
+function SearchTreeList()
+{
+  var i=0;
+  var j;
+  tDT[i++]=SearchTreeItem(0,"","R","111","","","","General Information");
+  tDT[i++]=SearchTreeItem(0,"","R","211","","","","Paint Information");
+  tDT[i++]=SearchTreeItem(0,"","R","311","","","","Replacement");
+  tDT[i++]=SearchTreeItem(0,"","R","411","","","","Body Dimensional Drawings");
+  tDT[i++]=SearchTreeItem(0,"","R","511","","","","Rust Prevention");
+  tDT[i++]=SearchTreeItem(0,"","R","000","","","","Others");
+}
+function CreateTree()
+{
+  var nNest = 1;
+  var strEventExpand,strEventClick, strIMG;
+  var i, j, k, n;
+  if (typeof(SearchTreeList) != "function") {
+    return;
+  }
+  tDT.length = 0;
+  SearchTreeList();
+  for (i=0; i < tDT.length; ++i) {
+      if ((i < (tDT.length - 1)) && (tDT[i+1].Level > tDT[i].Level)) {
+        strIMG = "TR_PLUS";
+      }
+      else {
+        strIMG = "TR_ITEM";
+      }
+      strEventExpand = "TreeExpand('" + i + "');";
+      strEventClick = "TreeClick('" + i + "');";
+      with (document) {
+        write("<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\"><tr>" +
+            "<td valign=\"top\">");
+        for (n=0; n < tDT[i].Level; ++n) {
+          write("<img src=\"../img/TR_ITEM.PNG\">");
+        }
+        write("<img id=\"I" + i + "\" src=\"../img/" + strIMG + ".PNG\" onclick=\"" + strEventExpand +
+            "\" ondblclick=\"" + strEventExpand + "\" style=\"cursor:hand;\">" +
+            "<img id=\"F" + i + "\" src=\"../img/TR_CLOSE.PNG\" onclick=\"" + strEventClick +
+            "\" ondblclick=\"" + strEventClick + "\" style=\"cursor:hand;\">" +
+            "</td><td valign=\"top\">" +
+            "<span id=\"T" + i + "\" onclick=\"" + strEventClick + "\" ondblclick=\"" +
+            strEventClick + "\" style=\"font-size:small;cursor:hand;\">" + tDT[i].Name + "</span>" +
+            "</td></tr></table>");
+      }
+    with (document) {
+      if (i < (tDT.length - 1)) {
+        if (tDT[i+1].Level > tDT[i].Level) {
+          write("<div id=\"C" + i + "\" style=\"display:none;\">");
+          nNest = tDT[i+1].Level;
+        }
+        else if (tDT[i+1].Level < tDT[i].Level) {
+          while (tDT[i+1].Level < nNest) {
+            write("</div>");
+            --nNest;
+          }
+        }
+      }
+      else {
+        while (0 < nNest) {
+          write("</div>");
+          --nNest;
+        }
+      }
+    }
+  }
+}
+function TreeExpand(strID)
+{
+  var objTre = document.all["I" + strID];
+  var objFld = document.all["F" + strID];
+  var objChd = document.all["C" + strID];
+  if (objChd != null) {
+    if (trSel != null) {
+      trSel.style.backgroundColor = "#FFFFFF";
+      trSel = null;
+      if (trOpen != null) {
+        trOpen.src = "../img/TR_CLOSE.PNG";
+        trOpen = null;
+        parent.Tsl('','','','','','');
+      }
+    }
+    with (objChd.style) {
+      if ((display == "none") || (display.length == 0)) {
+        display = "block";
+        objTre.src = "../img/TR_MINUS.PNG";
+      }
+      else {
+        display = "none";
+        objTre.src = "../img/TR_PLUS.PNG";
+      }
+    }
+  }
+}
+function TreeClick(strID)
+{
+  var  htmlName;
+  var objFld  = document.all["F" + strID];
+  var objTtl  = document.all["T" + strID];
+  if (trSel == objTtl) {
+    trSel.style.backgroundColor = "#FFFFFF";
+    trSel = null;
+    trOpen.src = "../img/TR_CLOSE.PNG";
+    trOpen = null;
+    parent.Tsl('','','','','','');
+  }
+  else {
+    if (trSel != null) {
+      trSel.style.backgroundColor = "#FFFFFF";
+      trSel = null;
+    }
+    objTtl.style.backgroundColor = "#FFCC99";
+    trSel = objTtl;
+    if (trOpen != null) {
+      trOpen.src = "../img/TR_CLOSE.PNG";
+      trOpen = null;
+    }
+    objFld.src = "../img/TR_OPEN.PNG";
+    trOpen = objFld;
+    var strKey = tDT[strID].Supp;
+    var strSct = tDT[strID].Sct;
+    var strSc = tDT[strID].Sc;
+    var strSys = tDT[strID].Sys;
+    var strComp = tDT[strID].Comp;
+    var strSitq = tDT[strID].Sitq;
+    parent.Tsl(strKey,strSct,strSc,strSys,strComp,strSitq);
+  }
+}
+//-->
+</script>
+</head>
+<body id="TreeBody" topmargin="10" onLoad="javascript:parent.Old(this)">
+  <div><script>CreateTree();</script></div>
+</body>
+</html>

@@ -1,0 +1,1727 @@
+<html lang="en" xmlns:v="urn:schemas-microsoft-com:vml">
+<head>
+<meta name="author" content="HONDA MOTOR Co.,Ltd.">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<title>SEA6EJ8H10900036861MBAT00</title>
+<link href="../css/ViewerStyle.css" rel="stylesheet">
+<style>
+	v\:*	{ behavior: url(#default#VML); }
+	.drag	{ position: relative; cursor:   hand; }
+</style>
+</head>
+<script>
+<!--
+-->
+</script>
+<body onload="javascript:parent.Old(this)" style="font-family:sans-serif;">
+<div xmlns:v="urn:schemas-microsoft-com:vml">
+<div class="top_title">
+LKAS Camera Adjustment (Aiming)
+</div>
+<hr width="100%" size="2" color="gray">
+<table width="100%" class="Viewer">
+<tr>
+<td width="80%" class="ViewerTD" id="textTd" valign="top">
+<div>
+NOTE: When the LKAS camera is replaced or removed and attached, be sure to perform re-aiming of the LKAS camera. When the aiming is not completed, an adaptive cruise control (ACC)/LKAS indicator will appear and the DTC will be stored.
+</div>
+<div>
+There are Static Aiming and Dynamic Aiming procedures, and they need to be done in that order.
+</div>
+<a name="iR01">
+</a>
+<div class="procedure_sub_title">
+<b>
+Cautions for the Working Environment
+</b>
+</div>
+<ul type="disc">
+<li>
+<div>
+Use the radar aimer set.
+</div>
+</li>
+<li>
+<div>
+Use a copy of the designated target pattern.
+</div>
+</li>
+<li>
+<div>
+Perform the aiming in a proper place where you can obtain the specified distance, between a target pattern and the vehicle. There are four target patterns (1,500 mm, 2,000 mm, 2,500 mm and 3,000 mm) for the different scale of inspection lines.
+</div>
+</li>
+<li>
+<div>
+Make sure that there are no bright objects (sunlight, window, lights, or reflectors, etc.) or any objects which have a similar pattern.
+</div>
+</li>
+<li>
+<div>
+Perform the aiming in a well-lighted area.
+</div>
+</li>
+</ul>
+</td>
+<td width="20%" class="ViewerTD" id="graphTd" valign="top">
+</td>
+</tr>
+</table>
+<hr width="100%" size="2" color="gray">
+<table width="100%" class="Viewer">
+<tr>
+<td width="80%" class="ViewerTD" id="textTd" valign="top">
+<a name="iR02">
+</a>
+<div class="procedure_sub_title">
+<b>
+Cautions for the Vehicle
+</b>
+</div>
+<ul type="disc">
+<li>
+<div>
+All wheels of the vehicle should touch the ground.
+</div>
+</li>
+<li>
+<div>
+Make sure that the suspensions are not modified.
+</div>
+</li>
+<li>
+<div>
+Check the air pressure of all the tyres. If the pressures are uneven, inflate the tyres to the specified value.
+</div>
+</li>
+<li>
+<div>
+Do not place the wheels of the vehicle on a steel plate or a roller when performing the aiming.
+</div>
+</li>
+<li>
+<div>
+The vehicle should be empty and not be loaded when performing the aiming.
+</div>
+</li>
+</ul>
+<div>
+NOTE: Empty vehicle: A full fuel tank, tools and a spare tyre are present. Unload any baggage other than and the spare tyre.
+</div>
+<ul type="disc">
+<li>
+<div>
+Make sure that all doors are closed when performing the aiming.
+</div>
+</li>
+<li>
+<div>
+Do not put any objects on the instrument panel.
+</div>
+</li>
+<li>
+<div>
+Make sure that there are no stains on the lens of the LKAS camera, and the interior and exterior surface of the front glass of the lens parts.
+</div>
+</li>
+<li>
+<div>
+Set the steering wheel in the straight ahead position.
+</div>
+</li>
+<li>
+<div>
+Do not operate the steering wheel after the vehicle is set in the aiming position.
+</div>
+</li>
+<li>
+<div>
+Shift the lever to the P position and apply the parking brake.
+</div>
+</li>
+<li>
+<div>
+If you are towing a trailer, unhitch the trailer.
+</div>
+</li>
+</ul>
+</td>
+<td width="20%" class="ViewerTD" id="graphTd" valign="top">
+</td>
+</tr>
+</table>
+<hr width="100%" size="2" color="gray">
+<table width="100%" class="Viewer">
+<tr>
+<td width="80%" class="ViewerTD" id="textTd" valign="top">
+<a name="iR03">
+</a>
+<div class="procedure_sub_title">
+<b>
+Preparation
+</b>
+</div>
+<div>
+Prepare the following:
+</div>
+<ul type="disc">
+<li>
+<div>
+Radar aimer set 07AJ-SDA0100
+</div>
+</li>
+<li>
+<div>
+HDS
+</div>
+</li>
+<li>
+<div>
+Measuring tape and scale
+</div>
+</li>
+<li>
+<div>
+Target pattern (original dimension)
+</div>
+</li>
+<li>
+<div>
+Gummed tape, ballpoint pen, string (approx. 10 m), strings with weight
+</div>
+</li>
+</ul>
+</td>
+<td width="20%" class="ViewerTD" id="graphTd" valign="top">
+</td>
+</tr>
+</table>
+<hr width="100%" size="2" color="gray">
+<table width="100%" class="Viewer">
+<tr>
+<td width="80%" class="ViewerTD" id="textTd" valign="top">
+<a name="iR04">
+</a>
+<div class="procedure_sub_title">
+<b>
+Precaution for the Static Camera Aiming
+</b>
+</div>
+<div>
+To complete the aiming, it is necessary to succeed all of three targets' (center, passenger's side, driver's side) detections. If the detection for any one of targets failed or aborted on the way, the condition will be the aiming uncompleted.
+</div>
+<div>
+When the static camera aiming was failure for some reason, aiming failure code is displayed on the HDS. In this case, 
+<a href="javascript:parent.Cts('000000000004119','i000')">
+troubleshoot the indicated failure code with the HDS.
+</a>
+</div>
+<a name="iT01">
+</a>
+<div class="procedure_topic_title">
+<b>
+Vehicle preparation
+</b>
+</div>
+<a name="i010">
+</a>
+<ol>
+<li value="1">
+<div>
+Turn the ignition switch ON (II).
+</div>
+</li>
+</ol>
+<a name="i020">
+</a>
+<ol>
+<li value="2">
+<div>
+Make sure that the adaptive cruise control (ACC)/LKAS indicator goes out.
+</div>
+<div>
+NOTE: If the indicator remains on, check the DTC with HDS. When the LKAS camera is replaced, removed and attached or failing the aiming process,the DTC 10 of LKAS camera failure diagnosis (unfinished aiming of the LKAS) is stored and the adaptive cruise control (ACC)/LKAS indicator, but the LKAS camera aiming can be performed. If the other DTC is displayed, perform the DTC failure diagnosis.
+</div>
+<div>
+If the source of failure in not found, the LKAS camera aiming can not be performed.
+</div>
+</li>
+</ol>
+<a name="i030">
+</a>
+<ol>
+<li value="3">
+<div>
+Choose the possible prescribed distance A from the following list.
+</div>
+<div>
+<br>
+<div class="table_title">
+<b>
+Prescribed distance X
+</b>
+</div>
+<br>
+<table width="90%" class="Viewer" frame="border" style="table-layout:fixed;">
+<col width="25%">
+<col width="25%">
+<col width="25%">
+<col width="25%">
+<tbody>
+<tr>
+<td class="ViewerTD" style="border-left-style:none;border-right-style:solid;border-bottom-style:solid;border-top-style:none;" align="center">
+<div>
+1,500 mm (59.1 in.)
+</div>
+</td>
+<td class="ViewerTD" style="border-left-style:none;border-right-style:solid;border-bottom-style:solid;border-top-style:none;" align="center">
+<div>
+2,000 mm (78.7 in.)
+</div>
+</td>
+<td class="ViewerTD" style="border-left-style:none;border-right-style:solid;border-bottom-style:solid;border-top-style:none;" align="center">
+<div>
+2,500 mm (98.4 in.)
+</div>
+</td>
+<td class="ViewerTD" style="border-left-style:none;border-right-style:solid;border-bottom-style:solid;border-top-style:none;" align="center">
+<div>
+3,000 mm (118 in.)
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<br>
+<div>
+NOTE: A prescribed distance is the distance between the target pattern surface and vehicle (the center of the front wheel hub). Use only the numerical value which corresponds to the chosen prescribed distance in the following work operation.
+</div>
+</li>
+</ol>
+</td>
+<td width="20%" class="ViewerTD" id="graphTd" valign="top">
+</td>
+</tr>
+</table>
+<hr width="100%" size="2" color="gray">
+<table width="100%" class="Viewer">
+<tr>
+<td width="80%" class="ViewerTD" id="textTd" valign="top">
+<a name="iR04">
+</a>
+<a name="iT02">
+</a>
+<div class="procedure_topic_title">
+<b>
+Target pattern preparation
+</b>
+</div>
+<a name="i040">
+</a>
+<ol>
+<li value="4">
+<div>
+Attach a target pattern sheet (A) on a flat surface such as a corrugated board (B), then attach the board with gummed tape to the tansponder of the rader aimer set.
+</div>
+<div>
+NOTE:
+</div>
+<ul type="disc">
+<li>
+<div>
+Choose a proper target pattern according to the specified distance.
+</div>
+</li>
+<li>
+<div>
+Attach the sheet so that it doesn't get wrinkled.
+</div>
+</li>
+</ul>
+</li>
+</ol>
+</td>
+<td width="20%" class="ViewerTD" id="graphTd" valign="top">
+<span style="display:none" id="imgId1">
+<div style="page-break-after:always;">
+</div>
+</span>
+<div>
+<a href="javascript:parent.Prt('ZOOM000000000010440','1');">
+<img src="../tn/SEA6EJ8H10900036861MBAD01.png">
+</a>
+</div>
+</td>
+</tr>
+</table>
+<hr width="100%" size="2" color="gray">
+<table width="100%" class="Viewer">
+<tr>
+<td width="80%" class="ViewerTD" id="textTd" valign="top">
+<a name="iR04">
+</a>
+<a name="iT03">
+</a>
+<div class="procedure_topic_title">
+<b>
+Distance setting between the target pattern and vehicle
+</b>
+</div>
+<a name="i050">
+</a>
+<ol>
+<li value="5">
+<div>
+Dangle a string with a weight (A) from the center of the target, then dangle the strings (B) and (C) with a weight on both ends of the target. The three strings with the weights, should be able to move parallel on the string described in 
+<a href="javascript:parent.Jmp('i100')">Step 10
+</a>
+.
+</div>
+</li>
+</ol>
+<a name="i060">
+</a>
+<ol>
+<li value="6">
+<div>
+Remove the right and left wheel, and then remove both hubcaps.
+</div>
+</li>
+</ol>
+<a name="i070">
+</a>
+<ol>
+<li value="7">
+<div>
+Move the vehicle back and forth. The steering wheel is put into the straight ahead position then stop the engine.
+</div>
+</li>
+</ol>
+</td>
+<td width="20%" class="ViewerTD" id="graphTd" valign="top">
+<span style="display:none" id="imgId1">
+<div style="page-break-after:always;">
+</div>
+</span>
+<div>
+<a href="javascript:parent.Prt('ZOOM000000000010441','1');">
+<img src="../tn/SEA6EJ8H10900036861MBAD02.png">
+</a>
+</div>
+</td>
+</tr>
+</table>
+<hr width="100%" size="2" color="gray">
+<table width="100%" class="Viewer">
+<tr>
+<td width="80%" class="ViewerTD" id="textTd" valign="top">
+<a name="iR04">
+</a>
+<a name="iT03">
+</a>
+<a name="i080">
+</a>
+<ol>
+<li value="8">
+<div>
+Dangle a string with the weight (A) from the mark-off line (B) on the front center of the jack-up point (C), and put a mark (D) on the tape where the front of the weight touches the floor.
+</div>
+<div>
+NOTE: When marking on the floor, stick a gummed tape to the floor and mark precisely on the tape with a ballpoint pen.
+</div>
+</li>
+</ol>
+</td>
+<td width="20%" class="ViewerTD" id="graphTd" valign="top">
+<span style="display:none" id="imgId1">
+<div style="page-break-after:always;">
+</div>
+</span>
+<div>
+<a href="javascript:parent.Prt('ZOOM000000000010442','1');">
+<img src="../tn/SEA6EJ8H10900036861MBAD03.png">
+</a>
+</div>
+</td>
+</tr>
+</table>
+<hr width="100%" size="2" color="gray">
+<table width="100%" class="Viewer">
+<tr>
+<td width="80%" class="ViewerTD" id="textTd" valign="top">
+<a name="iR04">
+</a>
+<a name="iT03">
+</a>
+<a name="i090">
+</a>
+<ol>
+<li value="9">
+<div>
+Dangle a string with the weight (A) from the dented part (B) on the rear center of the jack-up point (C), and put a mark (E) on the tape where the front of the weight touches the floor.
+</div>
+<div>
+NOTE: When marking on the floor, stick a gummed tape to the floor and mark precisely on the tape with a ballpoint pen.
+</div>
+</li>
+</ol>
+</td>
+<td width="20%" class="ViewerTD" id="graphTd" valign="top">
+<span style="display:none" id="imgId1">
+<div style="page-break-after:always;">
+</div>
+</span>
+<div>
+<a href="javascript:parent.Prt('ZOOM000000000010443','1');">
+<img src="../tn/SEA6EJ8H10900036861MBAD04.png">
+</a>
+</div>
+</td>
+</tr>
+</table>
+<hr width="100%" size="2" color="gray">
+<table width="100%" class="Viewer">
+<tr>
+<td width="80%" class="ViewerTD" id="textTd" valign="top">
+<a name="iR04">
+</a>
+<a name="iT03">
+</a>
+<a name="i100">
+</a>
+<ol>
+<li value="10">
+<div>
+Stretch the line F going through mark (D) and (E) on the floor (which is the center line of the vehicle).
+</div>
+</li>
+</ol>
+</td>
+<td width="20%" class="ViewerTD" id="graphTd" valign="top">
+<span style="display:none" id="imgId1">
+<div style="page-break-after:always;">
+</div>
+</span>
+<div>
+<a href="javascript:parent.Prt('ZOOM000000000010444','1');">
+<img src="../tn/SEA6EJ8H10900036861MBAD05.png">
+</a>
+</div>
+</td>
+</tr>
+</table>
+<hr width="100%" size="2" color="gray">
+<table width="100%" class="Viewer">
+<tr>
+<td width="80%" class="ViewerTD" id="textTd" valign="top">
+<a name="iR04">
+</a>
+<a name="iT03">
+</a>
+<a name="i110">
+</a>
+<ol>
+<li value="11">
+<div>
+Insert a drill bit of 6 mm in a drive shaft center hole.
+</div>
+</li>
+</ol>
+</td>
+<td width="20%" class="ViewerTD" id="graphTd" valign="top">
+<span style="display:none" id="imgId1">
+<div style="page-break-after:always;">
+</div>
+</span>
+<div>
+<a href="javascript:parent.Prt('ZOOM000000000010445','1');">
+<img src="../tn/SEA6EJ8H10900036861MBAD17.png">
+</a>
+</div>
+</td>
+</tr>
+</table>
+<hr width="100%" size="2" color="gray">
+<table width="100%" class="Viewer">
+<tr>
+<td width="80%" class="ViewerTD" id="textTd" valign="top">
+<a name="iR04">
+</a>
+<a name="iT03">
+</a>
+<a name="i120">
+</a>
+<ol>
+<li value="12">
+<div>
+Hang the weight/spindle down from the point of the drill, and then apply a mark to the tape.
+</div>
+</li>
+</ol>
+<a name="i130">
+</a>
+<ol>
+<li value="13">
+<div>
+Apply the mark to the distance X which was selected in 
+<a href="javascript:parent.Jmp('i030')">Step 3
+</a>
+ from the marked position.
+</div>
+</li>
+</ol>
+</td>
+<td width="20%" class="ViewerTD" id="graphTd" valign="top">
+<span style="display:none" id="imgId1">
+<div style="page-break-after:always;">
+</div>
+</span>
+<div>
+<a href="javascript:parent.Prt('ZOOM000000000010446','1');">
+<img src="../tn/SEA6EJ8H10900036861MBAD18.png">
+</a>
+</div>
+</td>
+</tr>
+</table>
+<hr width="100%" size="2" color="gray">
+<table width="100%" class="Viewer">
+<tr>
+<td width="80%" class="ViewerTD" id="textTd" valign="top">
+<a name="iR04">
+</a>
+<a name="iT03">
+</a>
+<a name="i140">
+</a>
+<ol>
+<li value="14">
+<div>
+Draw a line at the Stretch line (F) in parallel, and apply the mark to the Distance X and mark (M).
+</div>
+</li>
+</ol>
+<a name="i150">
+</a>
+<ol>
+<li value="15">
+<div>
+Strech a string K going through marks (G) and (H) on the floor.
+</div>
+</li>
+</ol>
+</td>
+<td width="20%" class="ViewerTD" id="graphTd" valign="top">
+<span style="display:none" id="imgId1">
+<div style="page-break-after:always;">
+</div>
+</span>
+<div>
+<a href="javascript:parent.Prt('ZOOM000000000010447','1');">
+<img src="../tn/SEA6EJ8H10900036861MBAD19.png">
+</a>
+</div>
+</td>
+</tr>
+</table>
+<hr width="100%" size="2" color="gray">
+<table width="100%" class="Viewer">
+<tr>
+<td width="80%" class="ViewerTD" id="textTd" valign="top">
+<a name="iR04">
+</a>
+<a name="iT04">
+</a>
+<div class="procedure_topic_title">
+<b>
+Marking of the central target position
+</b>
+</div>
+<a name="i160">
+</a>
+<ol>
+<li value="16">
+<div>
+Put the mark (N) on the floor where it is 46 mm (1.81 in.) to the driver's side from the mark (M) described in 
+<a href="javascript:parent.Jmp('i140')">Step 14
+</a>
+.
+</div>
+<div>
+NOTE:The lens of the LKAS camera is attached to the position which is 46 mm (1.81 in.) to the driver's side from the center of the vehicle.
+</div>
+</li>
+</ol>
+</td>
+<td width="20%" class="ViewerTD" id="graphTd" valign="top">
+<span style="display:none" id="imgId1">
+<div style="page-break-after:always;">
+</div>
+</span>
+<div>
+<a href="javascript:parent.Prt('ZOOM000000000010448','1');">
+<img src="../tn/SEA6EJ8H10900036861MBAD06.png">
+</a>
+</div>
+</td>
+</tr>
+</table>
+<hr width="100%" size="2" color="gray">
+<table width="100%" class="Viewer">
+<tr>
+<td width="80%" class="ViewerTD" id="textTd" valign="top">
+<a name="iR04">
+</a>
+<a name="iT05">
+</a>
+<div class="procedure_topic_title">
+<b>
+Marking the target position of the driver's side
+</b>
+</div>
+<a name="i170">
+</a>
+<ol>
+<li value="17">
+<div>
+Measuring distance XX mm from the mark (N) described is put in 
+<a href="javascript:parent.Jmp('i160')">Step 16
+</a>
+ to the driver's side, and it put the mark (O) on the floor.
+</div>
+<div>
+<table width="90%" class="Viewer" frame="border" style="table-layout:fixed;">
+<col width="47%">
+<col width="52%">
+<tbody>
+<tr>
+<td class="ViewerTD" style="border-left-style:none;border-right-style:solid;border-bottom-style:solid;border-top-style:none;" align="center">
+<div>
+Prescribed distance
+</div>
+</td>
+<td class="ViewerTD" style="border-left-style:none;border-right-style:solid;border-bottom-style:solid;border-top-style:none;" align="center">
+<div>
+Offset distance XX
+</div>
+</td>
+</tr>
+<tr>
+<td class="ViewerTD" style="border-left-style:none;border-right-style:solid;border-bottom-style:solid;border-top-style:none;" align="center">
+<div>
+1,500 mm (59.055 in.)
+</div>
+</td>
+<td class="ViewerTD" style="border-left-style:none;border-right-style:solid;border-bottom-style:solid;border-top-style:none;" align="center">
+<div>
+436 mm (17.165 in.)
+</div>
+</td>
+</tr>
+<tr>
+<td class="ViewerTD" style="border-left-style:none;border-right-style:solid;border-bottom-style:solid;border-top-style:none;" align="center">
+<div>
+2,000 mm (78.74 in.)
+</div>
+</td>
+<td class="ViewerTD" style="border-left-style:none;border-right-style:solid;border-bottom-style:solid;border-top-style:none;" align="center">
+<div>
+524 mm (20.629 in.)
+</div>
+</td>
+</tr>
+<tr>
+<td class="ViewerTD" style="border-left-style:none;border-right-style:solid;border-bottom-style:solid;border-top-style:none;" align="center">
+<div>
+2,500 mm (98.425 in.)
+</div>
+</td>
+<td class="ViewerTD" style="border-left-style:none;border-right-style:solid;border-bottom-style:solid;border-top-style:none;" align="center">
+<div>
+612 mm (24.094 in.)
+</div>
+</td>
+</tr>
+<tr>
+<td class="ViewerTD" style="border-left-style:none;border-right-style:solid;border-bottom-style:solid;border-top-style:none;" align="center">
+<div>
+3,000 mm (118.11 in.)
+</div>
+</td>
+<td class="ViewerTD" style="border-left-style:none;border-right-style:solid;border-bottom-style:solid;border-top-style:none;" align="center">
+<div>
+700 mm (27.559 in.)
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<br>
+<div>
+NOTE: The distance XX depends on the prescribed distance X which is chosen in 
+<a href="javascript:parent.Jmp('i030')">Step 3
+</a>
+.
+</div>
+<div>
+Choose the offset distance XX which corresponds to the chosen prescribed distance.
+</div>
+</li>
+</ol>
+</td>
+<td width="20%" class="ViewerTD" id="graphTd" valign="top">
+<span style="display:none" id="imgId1">
+<div style="page-break-after:always;">
+</div>
+</span>
+<div>
+<a href="javascript:parent.Prt('ZOOM000000000010449','1');">
+<img src="../tn/SEA6EJ8H10900036861MBAD07.png">
+</a>
+</div>
+</td>
+</tr>
+</table>
+<hr width="100%" size="2" color="gray">
+<table width="100%" class="Viewer">
+<tr>
+<td width="80%" class="ViewerTD" id="textTd" valign="top">
+<a name="iR04">
+</a>
+<a name="iT06">
+</a>
+<div class="procedure_topic_title">
+<b>
+Marking the target position of the passenger's side
+</b>
+</div>
+<a name="i180">
+</a>
+<ol>
+<li value="18">
+<div>
+Measuring distance YY mm from the mark (N) described in 
+<a href="javascript:parent.Jmp('i160')">Step 16
+</a>
+ to the passenger's side, and it put the mark (P) on the floor.
+</div>
+<div>
+<table width="90%" class="Viewer" frame="border" style="table-layout:fixed;">
+<col width="47%">
+<col width="52%">
+<tbody>
+<tr>
+<td class="ViewerTD" style="border-left-style:none;border-right-style:solid;border-bottom-style:solid;border-top-style:none;" align="center">
+<div>
+Prescribed distance
+</div>
+</td>
+<td class="ViewerTD" style="border-left-style:none;border-right-style:solid;border-bottom-style:solid;border-top-style:none;" align="center">
+<div>
+Offset distance YY
+</div>
+</td>
+</tr>
+<tr>
+<td class="ViewerTD" style="border-left-style:none;border-right-style:solid;border-bottom-style:solid;border-top-style:none;" align="center">
+<div>
+1,500 mm (59.055 in.)
+</div>
+</td>
+<td class="ViewerTD" style="border-left-style:none;border-right-style:solid;border-bottom-style:solid;border-top-style:none;" align="center">
+<div>
+436 mm (17.165 in.)
+</div>
+</td>
+</tr>
+<tr>
+<td class="ViewerTD" style="border-left-style:none;border-right-style:solid;border-bottom-style:solid;border-top-style:none;" align="center">
+<div>
+2,000 mm (78.74 in.)
+</div>
+</td>
+<td class="ViewerTD" style="border-left-style:none;border-right-style:solid;border-bottom-style:solid;border-top-style:none;" align="center">
+<div>
+524 mm (20.629 in.)
+</div>
+</td>
+</tr>
+<tr>
+<td class="ViewerTD" style="border-left-style:none;border-right-style:solid;border-bottom-style:solid;border-top-style:none;" align="center">
+<div>
+2,500 mm (98.425 in.)
+</div>
+</td>
+<td class="ViewerTD" style="border-left-style:none;border-right-style:solid;border-bottom-style:solid;border-top-style:none;" align="center">
+<div>
+612 mm (24.094 in.)
+</div>
+</td>
+</tr>
+<tr>
+<td class="ViewerTD" style="border-left-style:none;border-right-style:solid;border-bottom-style:solid;border-top-style:none;" align="center">
+<div>
+3,000 mm (118.11 in.)
+</div>
+</td>
+<td class="ViewerTD" style="border-left-style:none;border-right-style:solid;border-bottom-style:solid;border-top-style:none;" align="center">
+<div>
+700 mm (27.559 in.)
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<br>
+<div>
+NOTE: The distance YY depends on the prescribed distance X which is chosen in 
+<a href="javascript:parent.Jmp('i030')">Step 3
+</a>
+.
+</div>
+<div>
+Choose the offset distance XX which corresponds to the chosen prescribed distance.
+</div>
+</li>
+</ol>
+</td>
+<td width="20%" class="ViewerTD" id="graphTd" valign="top">
+<span style="display:none" id="imgId1">
+<div style="page-break-after:always;">
+</div>
+</span>
+<div>
+<a href="javascript:parent.Prt('ZOOM000000000010450','1');">
+<img src="../tn/SEA6EJ8H10900036861MBAD08.png">
+</a>
+</div>
+</td>
+</tr>
+</table>
+<hr width="100%" size="2" color="gray">
+<table width="100%" class="Viewer">
+<tr>
+<td width="80%" class="ViewerTD" id="textTd" valign="top">
+<a name="iR04">
+</a>
+<a name="iT07">
+</a>
+<div class="procedure_topic_title">
+<b>
+Choose the setting value of the LKAS camera height
+</b>
+</div>
+<a name="i190">
+</a>
+<ol>
+<li value="19">
+<div>
+Measure the right and left wheel arch height (A).
+</div>
+</li>
+</ol>
+<a name="i200">
+</a>
+<ol>
+<li value="20">
+<div>
+Obtain the average (X) of the front wheel arch height from the right and left measured value.
+</div>
+</li>
+</ol>
+<a name="i210">
+</a>
+<ol>
+<li value="21">
+<div>
+Calculate the difference between the average (X) of the front wheel arch height and the reference value: 686 mm (27.0 in.), and obtain the plus or minus value (Y) from the reference value.
+</div>
+</li>
+</ol>
+<a name="i220">
+</a>
+<ol>
+<li value="22">
+<div>
+Choose the setting value number (the camera height setting value of the HDS) which corresponds to the calculated value (Y) from the following chart.
+</div>
+<div>
+<br>
+<div class="table_title">
+<b>
+The LKAS camera height setting value of the HDS
+</b>
+</div>
+<br>
+<table width="90%" class="Viewer" frame="border" style="table-layout:fixed;">
+<col width="23%">
+<col width="76%">
+<thead>
+<tr>
+<th class="ViewerTH" style="border-left-style:none;border-right-style:solid;border-bottom-style:solid;border-top-style:none;" align="center">
+<div>
+Setting value number
+</div>
+</th>
+<th class="ViewerTH" style="border-left-style:none;border-right-style:solid;border-bottom-style:solid;border-top-style:none;" align="left">
+<div>
+Plus or minus value (Y) from the reference number (mm)
+</div>
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="ViewerTD" style="border-left-style:none;border-right-style:solid;border-bottom-style:solid;border-top-style:none;" align="center">
+<div>
+(1)
+</div>
+</td>
+<td class="ViewerTD" style="border-left-style:none;border-right-style:solid;border-bottom-style:solid;border-top-style:none;" align="left">
+<div>
++5 and over − +15 and over
+</div>
+</td>
+</tr>
+<tr>
+<td class="ViewerTD" style="border-left-style:none;border-right-style:solid;border-bottom-style:solid;border-top-style:none;" align="center">
+<div>
+(2)
+</div>
+</td>
+<td class="ViewerTD" style="border-left-style:none;border-right-style:solid;border-bottom-style:solid;border-top-style:none;" align="left">
+<div>
+−5 and over − less than +5
+</div>
+</td>
+</tr>
+<tr>
+<td class="ViewerTD" style="border-left-style:none;border-right-style:solid;border-bottom-style:solid;border-top-style:none;" align="center">
+<div>
+(3)
+</div>
+</td>
+<td class="ViewerTD" style="border-left-style:none;border-right-style:solid;border-bottom-style:solid;border-top-style:none;" align="left">
+<div>
+−15 and over − less than −5
+</div>
+</td>
+</tr>
+<tr>
+<td class="ViewerTD" style="border-left-style:none;border-right-style:solid;border-bottom-style:solid;border-top-style:none;" align="center">
+<div>
+(4)
+</div>
+</td>
+<td class="ViewerTD" style="border-left-style:none;border-right-style:solid;border-bottom-style:solid;border-top-style:none;" align="left">
+<div>
+−25 and over − less than −15
+</div>
+</td>
+</tr>
+<tr>
+<td class="ViewerTD" style="border-left-style:none;border-right-style:solid;border-bottom-style:solid;border-top-style:none;" align="center">
+<div>
+(5)
+</div>
+</td>
+<td class="ViewerTD" style="border-left-style:none;border-right-style:solid;border-bottom-style:solid;border-top-style:none;" align="left">
+<div>
+−35 and over − less than −25
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<br>
+<div>
+NOTE: This number is used when choosing the camera height setting value of the HDS while performing the aiming.
+</div>
+<div>
+<table width="90%" class="Viewer" frame="void" style="table-layout:fixed;">
+<col width="4%">
+<col width="20%">
+<col width="75%">
+<tbody>
+<tr>
+<td class="ViewerTD" colspan="3" style="border-left-style:none;border-right-style:none;border-bottom-style:none;border-top-style:none;" align="left">
+<div>
+<b>
+Example
+</b>
+</div>
+</td>
+</tr>
+<tr>
+<td class="ViewerTD" colspan="3" style="border-left-style:none;border-right-style:none;border-bottom-style:none;border-top-style:none;" align="left">
+<div>
+Measured value (A) of the front wheel arch height:
+</div>
+</td>
+</tr>
+<tr>
+<td class="ViewerTD" style="border-left-style:none;border-right-style:none;border-bottom-style:none;border-top-style:none;" align="left">
+</td>
+<td class="ViewerTD" style="border-left-style:none;border-right-style:none;border-bottom-style:none;border-top-style:none;" align="left">
+<div>
+Right side
+</div>
+</td>
+<td class="ViewerTD" style="border-left-style:none;border-right-style:none;border-bottom-style:none;border-top-style:none;" align="left">
+<div>
+687 mm (27.0 in.)
+</div>
+</td>
+</tr>
+<tr>
+<td class="ViewerTD" style="border-left-style:none;border-right-style:none;border-bottom-style:none;border-top-style:none;" align="left">
+</td>
+<td class="ViewerTD" style="border-left-style:none;border-right-style:none;border-bottom-style:none;border-top-style:none;" align="left">
+<div>
+Left side
+</div>
+</td>
+<td class="ViewerTD" style="border-left-style:none;border-right-style:none;border-bottom-style:none;border-top-style:none;" align="left">
+<div>
+692 mm (27.2 in.)
+</div>
+</td>
+</tr>
+<tr>
+<td class="ViewerTD" colspan="3" style="border-left-style:none;border-right-style:none;border-bottom-style:none;border-top-style:none;" align="left">
+<div>
+Average (X) of the front wheel arch height:
+</div>
+</td>
+</tr>
+<tr>
+<td class="ViewerTD" style="border-left-style:none;border-right-style:none;border-bottom-style:none;border-top-style:none;" align="center">
+</td>
+<td class="ViewerTD" colspan="2" style="border-left-style:none;border-right-style:none;border-bottom-style:none;border-top-style:none;" align="left">
+<div>
+689.5 mm (27.1 in.)
+</div>
+</td>
+</tr>
+<tr>
+<td class="ViewerTD" colspan="3" style="border-left-style:none;border-right-style:none;border-bottom-style:none;border-top-style:none;" align="left">
+<div>
+Difference (Y) from the reference value:
+</div>
+</td>
+</tr>
+<tr>
+<td class="ViewerTD" style="border-left-style:none;border-right-style:none;border-bottom-style:none;border-top-style:none;" align="left">
+</td>
+<td class="ViewerTD" colspan="2" style="border-left-style:none;border-right-style:none;border-bottom-style:none;border-top-style:none;" align="left">
+<div>
+689.5 (mm)−686 (mm) (standard value)=+3.5 (mm)
+</div>
+</td>
+</tr>
+<tr>
+<td class="ViewerTD" colspan="3" style="border-left-style:none;border-right-style:none;border-bottom-style:none;border-top-style:none;" align="left">
+<div>
+Setting value number corresponding to the value: (2)
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<br>
+<div>
+NOTE: If the difference (Y) is over +15 (mm) or −35 (mm), the LKAS camera aiming can not be performed. There are suspensions of frame or suspension deformation, or setting of the spring etc. Inspect the vehicle.
+</div>
+</li>
+</ol>
+</td>
+<td width="20%" class="ViewerTD" id="graphTd" valign="top">
+<span style="display:none" id="imgId1">
+<div style="page-break-after:always;">
+</div>
+</span>
+<div>
+<a href="javascript:parent.Prt('ZOOM000000000010451','1');">
+<img src="../tn/SEA6EJ8H10900036861MBAD10.png">
+</a>
+</div>
+</td>
+</tr>
+</table>
+<hr width="100%" size="2" color="gray">
+<table width="100%" class="Viewer">
+<tr>
+<td width="80%" class="ViewerTD" id="textTd" valign="top">
+<a name="iR04">
+</a>
+<a name="iT08">
+</a>
+<div class="procedure_topic_title">
+<b>
+Target pattern surface height adjustment
+</b>
+</div>
+<a name="i230">
+</a>
+<ol>
+<li value="23">
+<div>
+Move the radar aimer set to the front of the vehicle so that the target pattern faces the vehicle.
+</div>
+</li>
+</ol>
+<a name="i240">
+</a>
+<ol>
+<li value="24">
+<div>
+Measure and adjust the height between the center of the target pattern of the radar aimer set to the specified height value Z.
+</div>
+<div>
+<table width="90%" class="Viewer" frame="border" style="table-layout:fixed;">
+<col width="33%">
+<col width="16%">
+<col width="16%">
+<col width="16%">
+<col width="16%">
+<tbody>
+<tr>
+<td class="ViewerTD" style="border-left-style:none;border-right-style:solid;border-bottom-style:solid;border-top-style:none;" rowspan="2" align="left">
+<div>
+LKAS camera height setting value number
+</div>
+</td>
+<td class="ViewerTD" colspan="4" style="border-left-style:none;border-right-style:solid;border-bottom-style:solid;border-top-style:none;" align="center">
+<div>
+Prescribed distance X (mm)
+</div>
+</td>
+</tr>
+<tr>
+<td class="ViewerTD" style="border-left-style:none;border-right-style:solid;border-bottom-style:solid;border-top-style:none;" align="center">
+<div>
+1,500
+</div>
+</td>
+<td class="ViewerTD" style="border-left-style:none;border-right-style:solid;border-bottom-style:solid;border-top-style:none;" align="center">
+<div>
+2,000
+</div>
+</td>
+<td class="ViewerTD" style="border-left-style:none;border-right-style:solid;border-bottom-style:solid;border-top-style:none;" align="center">
+<div>
+2,500
+</div>
+</td>
+<td class="ViewerTD" style="border-left-style:none;border-right-style:solid;border-bottom-style:solid;border-top-style:none;" align="center">
+<div>
+3,000
+</div>
+</td>
+</tr>
+<tr>
+<td class="ViewerTD" style="border-left-style:none;border-right-style:solid;border-bottom-style:solid;border-top-style:none;" align="center">
+<div>
+(1)
+</div>
+</td>
+<td class="ViewerTD" style="border-left-style:none;border-right-style:solid;border-bottom-style:solid;border-top-style:none;" align="center">
+<div>
+1,178
+</div>
+</td>
+<td class="ViewerTD" style="border-left-style:none;border-right-style:solid;border-bottom-style:solid;border-top-style:none;" align="center">
+<div>
+1,152
+</div>
+</td>
+<td class="ViewerTD" style="border-left-style:none;border-right-style:solid;border-bottom-style:solid;border-top-style:none;" align="center">
+<div>
+1,126
+</div>
+</td>
+<td class="ViewerTD" style="border-left-style:none;border-right-style:solid;border-bottom-style:solid;border-top-style:none;" align="center">
+<div>
+1,100
+</div>
+</td>
+</tr>
+<tr>
+<td class="ViewerTD" style="border-left-style:none;border-right-style:solid;border-bottom-style:solid;border-top-style:none;" align="center">
+<div>
+(2)
+</div>
+</td>
+<td class="ViewerTD" style="border-left-style:none;border-right-style:solid;border-bottom-style:solid;border-top-style:none;" align="center">
+<div>
+1,174
+</div>
+</td>
+<td class="ViewerTD" style="border-left-style:none;border-right-style:solid;border-bottom-style:solid;border-top-style:none;" align="center">
+<div>
+1,149
+</div>
+</td>
+<td class="ViewerTD" style="border-left-style:none;border-right-style:solid;border-bottom-style:solid;border-top-style:none;" align="center">
+<div>
+1,125
+</div>
+</td>
+<td class="ViewerTD" style="border-left-style:none;border-right-style:solid;border-bottom-style:solid;border-top-style:none;" align="center">
+<div>
+1,100
+</div>
+</td>
+</tr>
+<tr>
+<td class="ViewerTD" style="border-left-style:none;border-right-style:solid;border-bottom-style:solid;border-top-style:none;" align="center">
+<div>
+(3)
+</div>
+</td>
+<td class="ViewerTD" style="border-left-style:none;border-right-style:solid;border-bottom-style:solid;border-top-style:none;" align="center">
+<div>
+1,170
+</div>
+</td>
+<td class="ViewerTD" style="border-left-style:none;border-right-style:solid;border-bottom-style:solid;border-top-style:none;" align="center">
+<div>
+1,147
+</div>
+</td>
+<td class="ViewerTD" style="border-left-style:none;border-right-style:solid;border-bottom-style:solid;border-top-style:none;" align="center">
+<div>
+1,123
+</div>
+</td>
+<td class="ViewerTD" style="border-left-style:none;border-right-style:solid;border-bottom-style:solid;border-top-style:none;" align="center">
+<div>
+1,100
+</div>
+</td>
+</tr>
+<tr>
+<td class="ViewerTD" style="border-left-style:none;border-right-style:solid;border-bottom-style:solid;border-top-style:none;" align="center">
+<div>
+(4)
+</div>
+</td>
+<td class="ViewerTD" style="border-left-style:none;border-right-style:solid;border-bottom-style:solid;border-top-style:none;" align="center">
+<div>
+1,166
+</div>
+</td>
+<td class="ViewerTD" style="border-left-style:none;border-right-style:solid;border-bottom-style:solid;border-top-style:none;" align="center">
+<div>
+1,144
+</div>
+</td>
+<td class="ViewerTD" style="border-left-style:none;border-right-style:solid;border-bottom-style:solid;border-top-style:none;" align="center">
+<div>
+1,122
+</div>
+</td>
+<td class="ViewerTD" style="border-left-style:none;border-right-style:solid;border-bottom-style:solid;border-top-style:none;" align="center">
+<div>
+1,100
+</div>
+</td>
+</tr>
+<tr>
+<td class="ViewerTD" style="border-left-style:none;border-right-style:solid;border-bottom-style:solid;border-top-style:none;" align="center">
+<div>
+(5)
+</div>
+</td>
+<td class="ViewerTD" style="border-left-style:none;border-right-style:solid;border-bottom-style:solid;border-top-style:none;" align="center">
+<div>
+1,163
+</div>
+</td>
+<td class="ViewerTD" style="border-left-style:none;border-right-style:solid;border-bottom-style:solid;border-top-style:none;" align="center">
+<div>
+1,142
+</div>
+</td>
+<td class="ViewerTD" style="border-left-style:none;border-right-style:solid;border-bottom-style:solid;border-top-style:none;" align="center">
+<div>
+1,121
+</div>
+</td>
+<td class="ViewerTD" style="border-left-style:none;border-right-style:solid;border-bottom-style:solid;border-top-style:none;" align="center">
+<div>
+1,100
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<br>
+<div>
+NOTE:
+</div>
+<ul type="disc">
+<li>
+<div>
+The specified height value Z is different according to the prescribed distance X described in 
+<a href="javascript:parent.Jmp('i030')">Step 3
+</a>
+ and the camera height setting value described in 
+<a href="javascript:parent.Jmp('i200')">Step 20
+</a>
+. Choose and use the height value Z which corresponds to the selected distance and the camera height setting number.
+</div>
+</li>
+<li>
+<div>
+Measure the height precisely using a scale. Do not use the height graduation on the radar aimer set as a guide.
+</div>
+</li>
+</ul>
+</li>
+</ol>
+</td>
+<td width="20%" class="ViewerTD" id="graphTd" valign="top">
+<span style="display:none" id="imgId1">
+<div style="page-break-after:always;">
+</div>
+</span>
+<div>
+<a href="javascript:parent.Prt('ZOOM000000000010452','1');">
+<img src="../tn/SEA6EJ8H10900036861MBAD11.png">
+</a>
+</div>
+</td>
+</tr>
+</table>
+<hr width="100%" size="2" color="gray">
+<table width="100%" class="Viewer">
+<tr>
+<td width="80%" class="ViewerTD" id="textTd" valign="top">
+<a name="iR04">
+</a>
+<a name="iT09">
+</a>
+<div class="procedure_topic_title">
+<b>
+Implementation of the Static Camera Aiming
+</b>
+</div>
+<a name="i250">
+</a>
+<ol>
+<li value="25">
+<div>
+Connect the HDS to the data link connector (DLC).
+</div>
+</li>
+</ol>
+<a name="i260">
+</a>
+<ol>
+<li value="26">
+<div>
+Start the engine.
+</div>
+</li>
+</ol>
+<a name="i270">
+</a>
+<ol>
+<li value="27">
+<div>
+Select the LKAS camera aiming from the HDS. At this time, the adaptive cruise control (ACC)/LKAS indicator comes on and ‘‘CAMERA'' is displayed at the multi-information display (MID).
+</div>
+</li>
+</ol>
+<a name="i280">
+</a>
+<ol>
+<li value="28">
+<div>
+Set the LKAS camera height to the HDS.
+</div>
+<div>
+NOTE: Choose the ‘‘ LKAS camera height setting value number'' which was recorded in 
+<a href="javascript:parent.Jmp('i220')">Step 22
+</a>
+ of the preparation for the aiming.
+</div>
+</li>
+</ol>
+<a name="i290">
+</a>
+<ol>
+<li value="29">
+<div>
+Position the central point of the target pattern aligning with the central target position (F) on the floor.
+</div>
+<div>
+NOTE: For precise positioning, dangle the thread with the weight through the central point of the target pattern, and move the radar aimer set so that the front edge of the weight aligns with the mark. After positioning, remove the thread and the weight from the target pattern surface.
+</div>
+</li>
+</ol>
+<a name="i300">
+</a>
+<ol>
+<li value="30">
+<div>
+Command ‘‘the central target detection'' from the HDS and the ‘‘CAMERA'' on the multi-information display begins to blink.
+</div>
+<div>
+NOTE: ‘‘CAMERA'' on the multi-information display continues to blink until the aiming is completed and goes off when the aiming is completed.
+</div>
+</li>
+</ol>
+<a name="i310">
+</a>
+<ol>
+<li value="31">
+<div>
+Check that ‘‘the central target detection'' is succeeded on the HDS.
+</div>
+</li>
+</ol>
+<a name="i320">
+</a>
+<ol>
+<li value="32">
+<div>
+Position the central point of the target pattern aligning with the target position (H) of the passenger's side on the floor.
+</div>
+</li>
+</ol>
+<a name="i330">
+</a>
+<ol>
+<li value="33">
+<div>
+Command ‘‘the passenger's side target detection'' from the HDS.
+</div>
+</li>
+</ol>
+<a name="i340">
+</a>
+<ol>
+<li value="34">
+<div>
+Check that ‘‘the passenger's side target detection'' is succeeded on the HDS.
+</div>
+</li>
+</ol>
+<a name="i350">
+</a>
+<ol>
+<li value="35">
+<div>
+Position the central point of the target pattern aligning with the target position (G) of the driver's side on the floor.
+</div>
+</li>
+</ol>
+<a name="i360">
+</a>
+<ol>
+<li value="36">
+<div>
+Command ‘‘the driver's side target detection'' from the HDS.
+</div>
+</li>
+</ol>
+<a name="i370">
+</a>
+<ol>
+<li value="37">
+<div>
+Check that ‘‘the driver's side target detection'' is succeeded on the HDS.
+</div>
+</li>
+</ol>
+<a name="i380">
+</a>
+<ol>
+<li value="38">
+<div>
+Stop the engine.
+</div>
+</li>
+</ol>
+<a name="i390">
+</a>
+<ol>
+<li value="39">
+<div>
+Turn the ignition switch ON (II), and make sure that the adaptive cruise control (ACC)/LKAS indicator goes off. If there is any aiming defect, the adaptive cruise control (ACC)/LKAS indicator comes on and stores the DTC.
+</div>
+<div>
+NOTE: If the aiming fails or is aborted during of operation for any reason, reattempt the aiming procedure from the beginning.
+</div>
+</li>
+</ol>
+<a name="i400">
+</a>
+<ol>
+<li value="40">
+<div>
+Clear the DTC with the HDS, then turn the ignition switch OFF. The static camera aiming process is now completed. Go to the next step for the dynamic camera aiming procedure.
+</div>
+</li>
+</ol>
+</td>
+<td width="20%" class="ViewerTD" id="graphTd" valign="top">
+<span style="display:none" id="imgId1">
+<div style="page-break-after:always;">
+</div>
+</span>
+<div>
+<a href="javascript:parent.Prt('ZOOM000000000010453','1');">
+<img src="../tn/SEA6EJ8H10900036861MBAD12.png">
+</a>
+</div>
+</td>
+</tr>
+</table>
+<hr width="100%" size="2" color="gray">
+<table width="100%" class="Viewer">
+<tr>
+<td width="80%" class="ViewerTD" id="textTd" valign="top">
+<a name="iR05">
+</a>
+<div class="procedure_sub_title">
+<b>
+Precaution for the Dynamic Camera Aiming
+</b>
+</div>
+<div>
+Perform the dynamic camera aiming on a road that runs parallel and horizontal to adjacent lanes and that allows the vehicle to drive between 72−112 km/h (45−70 mph) for 10 minutes or more. The aiming fails to unless it is completed, within 30 minutes.
+</div>
+<div>
+The dynamic camera aiming may not be completed in bad weather such as rain, fog, or snow. The white (yellow) lines on the road are not clearly visible because of the reflecting wet road surface.
+</div>
+<div>
+When you perform the dynamic camera aiming in the dark, turn the light on. In this case, adjust the vehicle's optical axis properly and check that the vehicle's headlights and the windshield have not adhesion of dirt.
+</div>
+<div>
+When the dynamic camera aiming has failed for some reason, an aiming failure code is displayed on the HDS. In this case, 
+<a href="javascript:parent.Cts('000000000004119','i000')">
+troubleshoot the indicated failure code with the HDS.
+</a>
+</div>
+</td>
+<td width="20%" class="ViewerTD" id="graphTd" valign="top">
+</td>
+</tr>
+</table>
+<hr width="100%" size="2" color="gray">
+<table width="100%" class="Viewer">
+<tr>
+<td width="80%" class="ViewerTD" id="textTd" valign="top">
+<a name="iR06">
+</a>
+<div class="procedure_sub_title">
+<b>
+Implementation of the Dynamic Camera Aiming
+</b>
+</div>
+<a name="i510">
+</a>
+<ol>
+<li value="1">
+<div>
+Turn the ignition switch ON (II) and make sure that only the DTC 11 is indicated with the HDS.
+</div>
+</li>
+</ol>
+<a name="i520">
+</a>
+<ol>
+<li value="2">
+<div>
+Select ‘‘LKAS camera'' from the ‘‘DRIVING SUPPORT'' menu, then select ‘‘Dynamic Camera Aiming'' from ‘‘Miscellaneous Tests''.
+</div>
+</li>
+</ol>
+<a name="i530">
+</a>
+<ol>
+<li value="3">
+<div>
+Drive the vehicle at between 72−112 km/h (45−70 mph).
+</div>
+</li>
+</ol>
+<a name="i540">
+</a>
+<ol>
+<li value="4">
+<div>
+Perform the aiming according to the instruction of the HDS screen. When the dynamic camera aiming has failed for some reason, an aiming failure code is displayed on the HDS. In this case, troubleshoot the indicated failure code with the HDS and retry the aiming procedure first.
+</div>
+</li>
+</ol>
+<a name="i550">
+</a>
+<ol>
+<li value="5">
+<div>
+Stop the vehicle and ignition switch OFF after confirming that the aiming completed, with CAMERA OFF and INDICATOR OFF, then turn the ignition switch ON (II) and make sure that the adaptive cruise control (ACC)/LKAS indicator does not come on. If any DTCs are indicated, troubleshoot the indicated DTCs.
+</div>
+</li>
+</ol>
+<a name="i560">
+</a>
+<ol>
+<li value="6">
+<div>
+Turn the ignition switch OFF and disconnect the HDS from the data link connector (DLC).
+</div>
+<div>
+NOTE:
+</div>
+<ul type="disc">
+<li>
+<div>
+While aiming, drive in the center of the lane and do not activate the wiper and turn signal.
+</div>
+</li>
+<li>
+<div>
+The dynamic camera aiming status can be confirmed in the MID and adaptive cruise control (ACC)/LKAS indicator as follows.
+</div>
+</li>
+</ul>
+</li>
+</ol>
+</td>
+<td width="20%" class="ViewerTD" id="graphTd" valign="top">
+<span style="display:none" id="imgId1">
+<div style="page-break-after:always;">
+</div>
+</span>
+<div>
+<a href="javascript:parent.Prt('ZOOM000000000010455','1');">
+<img src="../tn/SEA6EJ8H10900036861MBAD15.png">
+</a>
+</div>
+<span style="display:none" id="imgId2">
+<div style="page-break-after:always;">
+</div>
+</span>
+<div>
+<a href="javascript:parent.Prt('ZOOM000000000010455','2');">
+<img src="../tn/SEA6EJ8H10900036861MBAD16.png">
+</a>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

@@ -1,0 +1,17 @@
+{
+  "name": "accord07",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "analyze": "node analyze.mjs ./manual ./audit-out",
+    "build": "node build.mjs ./manual ./build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cheerio": "^1.1.2",
+    "iconv-lite": "^0.7.0"
+  }
+}

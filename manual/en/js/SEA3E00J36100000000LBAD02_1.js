@@ -1,0 +1,34 @@
+with(document) {
+write("<v:group id=\"group1\" class=\"drag\" style=\"position:relative; width:475px; height:320px;\" coordsize=\"475,320\">");
+write("<v:rect id=\"rect1\"class=\"drag\"  style=\"width:475px;height:320px;\">");
+write("<img id=\"img1\" src=\"../img/SEA3E00J36100000000LBAD02.PNG\" border=\"1\" class=\"drag\" style=\"position:absolute;left:0px;top:0px;width:475px;height:320px;border-color:#ffffff\">");
+write("<p id=\"p1_1\" class=\"drag\" style=\"position:absolute;left:344px;top:58px;font-weight:normal;font-size:10.9pt;\">");
+write("<nobr><b>Return<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_2\" class=\"drag\" style=\"position:absolute;left:38px;top:58px;font-weight:normal;font-size:10.9pt;\">");
+write("<nobr><b>System Links <br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_3\" class=\"drag\" style=\"position:absolute;left:117px;top:134px;font-weight:normal;font-size:10.9pt;\">");
+write("<nobr><b>Aircon<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_4\" class=\"drag\" style=\"position:absolute;left:257px;top:190px;font-weight:normal;font-size:10.9pt;\">");
+write("<nobr><b>Navi ECU<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_5\" class=\"drag\" style=\"position:absolute;left:129px;top:162px;font-weight:normal;font-size:10.9pt;\">");
+write("<nobr><b>Disp<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_6\" class=\"drag\" style=\"position:absolute;left:120px;top:189px;font-weight:normal;font-size:10.9pt;\">");
+write("<nobr><b>Audio<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_7\" class=\"drag\" style=\"position:absolute;left:292px;top:119px;font-weight:normal;font-size:10.9pt;\">");
+write("<nobr><b>ANT<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_8\" class=\"drag\" style=\"position:absolute;left:293px;top:162px;font-weight:normal;font-size:10.9pt;\">");
+write("<nobr><b>GPS<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_9\" class=\"drag\" style=\"position:absolute;left:248px;top:58px;font-weight:normal;font-size:10.9pt;\">");
+write("<nobr><b>OK<br></b></nobr>");
+write("</p>");
+write("</v:rect>");
+write("</v:group>");
+}

@@ -1,0 +1,31 @@
+with(document) {
+write("<v:group id=\"group2\" class=\"drag\" style=\"position:relative; width:950px; height:559px;\" coordsize=\"950,559\">");
+write("<v:rect id=\"rect2\"class=\"drag\"  style=\"width:950px;height:559px;\">");
+write("<img id=\"img2\" src=\"../img/SEA5E00J54300000000DAAD02.PNG\" border=\"1\" class=\"drag\" style=\"position:absolute;left:0px;top:0px;width:950px;height:559px;border-color:#ffffff\">");
+write("<p id=\"p2_1\" class=\"drag\" style=\"position:absolute;left:693px;top:385px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>HEADLIGHTS WASHER NOZZLE<br><a href=\"javascript:parent.Cts('000000000000298','i000')\"></b>Replacement,<br></a><br></nobr>");
+write("</p>");
+write("<p id=\"p2_2\" class=\"drag\" style=\"position:absolute;left:137px;top:468px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>WASHER TUBES<br><a href=\"javascript:parent.Cts('000000000000297','i000')\"></b>Replacement,</a><br></nobr>");
+write("</p>");
+write("<p id=\"p2_3\" class=\"drag\" style=\"position:absolute;left:608px;top:88px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>WASHER RESERVOIR<br><a href=\"javascript:parent.Cts('000000000000294','i000')\"></b>Replacement,</a><br></nobr>");
+write("</p>");
+write("<p id=\"p2_4\" class=\"drag\" style=\"position:absolute;left:666px;top:168px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>WINDSHIELD WASHER MOTOR<br><a href=\"javascript:parent.Cts('000000000000295','i000')\"></b>Test,</a><br><a href=\"javascript:parent.Cts('000000000000294','i000')\">Replacement,</a> <br></nobr>");
+write("</p>");
+write("<p id=\"p2_5\" class=\"drag\" style=\"position:absolute;left:610px;top:486px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>HEADLIGHTS WASHER MOTOR<br><a href=\"javascript:parent.Cts('000000000000296','i000')\"></b>Test,</a><br></nobr>");
+write("</p>");
+write("<p id=\"p2_6\" class=\"drag\" style=\"position:absolute;left:483px;top:16px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>WINDSHIELD WIPER NOZZLE<br></b></nobr>");
+write("</p>");
+write("<p id=\"p2_7\" class=\"drag\" style=\"position:absolute;left:16px;top:349px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>RAIN SENSOR<br><a href=\"javascript:parent.Cts('000000000000292','i000')\"></b>Input Test,</a><br><a href=\"javascript:parent.Cts('000000000000293','i000')\">Replacement,<br></a> <br></nobr>");
+write("</p>");
+write("<p id=\"p2_8\" class=\"drag\" style=\"position:absolute;left:0px;top:530px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b></b>LHD type is shown, RHD type is similar.<br></nobr>");
+write("</p>");
+write("</v:rect>");
+write("</v:group>");
+}

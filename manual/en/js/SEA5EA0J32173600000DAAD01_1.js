@@ -1,0 +1,34 @@
+with(document) {
+write("<v:group id=\"group1\" class=\"drag\" style=\"position:relative; width:950px; height:1103px;\" coordsize=\"950,1103\">");
+write("<v:rect id=\"rect1\"class=\"drag\"  style=\"width:950px;height:1103px;\">");
+write("<img id=\"img1\" src=\"../img/SEA5EA0J32173600000DAAD01.PNG\" border=\"1\" class=\"drag\" style=\"position:absolute;left:0px;top:0px;width:950px;height:1103px;border-color:#ffffff\">");
+write("<p id=\"p1_1\" class=\"drag\" style=\"position:absolute;left:360px;top:59px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>TURN SIGNAL INDICATORS<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_2\" class=\"drag\" style=\"position:absolute;left:491px;top:1031px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>UNDER-DASH FUSE/RELAY BOX<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_3\" class=\"drag\" style=\"position:absolute;left:521px;top:894px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>TURN SIGNAL/HAZARD RELAY<br><a href=\"javascript:parent.Cts('000000000000207','i000')\"></b>Input Test,</a><br></nobr>");
+write("</p>");
+write("<p id=\"p1_4\" class=\"drag\" style=\"position:absolute;left:511px;top:90px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>COMBINATION SWITCH CONTROL UNIT<br>(built into the wiper/washer switch)<br><a href=\"javascript:parent.Cts('000000000002482','i000')\"></b>Input Test,</a><br></nobr>");
+write("</p>");
+write("<p id=\"p1_5\" class=\"drag\" style=\"position:absolute;left:314px;top:16px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>COMBINATION LIGHT/TURN SIGNAL SWITCH<br><a href=\"javascript:parent.Cts('000000000003543','i000')\"></b>Test,</a><br></nobr>");
+write("</p>");
+write("<p id=\"p1_6\" class=\"drag\" style=\"position:absolute;left:536px;top:163px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>HAZARD WARNING SWITCH<br><a href=\"javascript:parent.Cts('000000000002614','i000')\"></b>Test,</a><br></nobr>");
+write("</p>");
+write("<p id=\"p1_7\" class=\"drag\" style=\"position:absolute;left:529px;top:691px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>LEFT HAZARD WARNING LIGHT RELAY<br></b>Wire colors: WHT/BLK, RED/BLU,<br>WHT and WHT/BLK<br><a href=\"javascript:parent.Cts('000000000002908','i000')\">Test,</a><br></nobr>");
+write("</p>");
+write("<p id=\"p1_8\" class=\"drag\" style=\"position:absolute;left:529px;top:754px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>RIGHT HAZARD WARNING LIGHT RELAY<br></b>Wire colors: WHT/BLK, BRN,<br>WHT and WHT/BLK<br><a href=\"javascript:parent.Cts('000000000002908','i000')\">Test,</a><br></nobr>");
+write("</p>");
+write("<p id=\"p1_9\" class=\"drag\" style=\"position:absolute;left:0px;top:1073px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b></b>LHD type is shown, RHD type is similar.<br></nobr>");
+write("</p>");
+write("</v:rect>");
+write("</v:group>");
+}

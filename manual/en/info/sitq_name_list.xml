@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sitq_name_list>
+<sitq_name code="00" name="Not applicable"/>
+<sitq_name code="AA" name="General Safety Information"/>
+<sitq_name code="AB" name="General Safety Information for Book"/>
+<sitq_name code="BA" name="General Information"/>
+<sitq_name code="BB" name="How-to Information"/>
+<sitq_name code="BC" name="General Information for Book"/>
+<sitq_name code="CA" name="Description"/>
+<sitq_name code="CB" name="Fuse-to-components Index"/>
+<sitq_name code="CC" name="Ground-to-components Index"/>
+<sitq_name code="CD" name="Connector View"/>
+<sitq_name code="CE" name="Circuit Description"/>
+<sitq_name code="CF" name="Connector Circuit Identification"/>
+<sitq_name code="DA" name="Component Location Index"/>
+<sitq_name code="DB" name="Connector and Harness Locations"/>
+<sitq_name code="DC" name="Fuse/Relay Box Connector Locations"/>
+<sitq_name code="DD" name="Component Location Photograph"/>
+<sitq_name code="DE" name="Relay and Control Unit Locations"/>
+<sitq_name code="DF" name="In-line Connector Index"/>
+<sitq_name code="DG" name="Connector Locations"/>
+<sitq_name code="EA" name="Circuit Diagram"/>
+<sitq_name code="EB" name="Electrical Schematic"/>
+<sitq_name code="FA" name="Troubleshooting"/>
+<sitq_name code="FB" name="Advanced Diagnostics"/>
+<sitq_name code="FC" name="Input Test"/>
+<sitq_name code="FD" name="Input Test/Replacement"/>
+<sitq_name code="FE" name="Test"/>
+<sitq_name code="FF" name="Test/Repair"/>
+<sitq_name code="FG" name="Test/Inspection"/>
+<sitq_name code="FH" name="Test/Replacement"/>
+<sitq_name code="FJ" name="Test/Removal/Installation"/>
+<sitq_name code="GA" name="DTC Troubleshooting Index"/>
+<sitq_name code="HA" name="Symptom Troubleshooting Index for Viewer"/>
+<sitq_name code="HB" name="Symptom Troubleshooting Index"/>
+<sitq_name code="JA" name="Maintenance"/>
+<sitq_name code="JB" name="Maintenance Table"/>
+<sitq_name code="JC" name="Maintenance Information"/>
+<sitq_name code="JD" name="Maintenance Repair"/>
+<sitq_name code="KA" name="Removal"/>
+<sitq_name code="KB" name="Replacement"/>
+<sitq_name code="KC" name="Installation"/>
+<sitq_name code="KD" name="Removal/Installation"/>
+<sitq_name code="KE" name="Removal/Inspection"/>
+<sitq_name code="KF" name="Removal/Inspection/Installation"/>
+<sitq_name code="KG" name="Removal/Inspection/Adjustment"/>
+<sitq_name code="LA" name="Overhaul"/>
+<sitq_name code="LB" name="Repair"/>
+<sitq_name code="LC" name="Disassembly"/>
+<sitq_name code="LD" name="Resassembly"/>
+<sitq_name code="LE" name="Repair Chart"/>
+<sitq_name code="MA" name="Inspection"/>
+<sitq_name code="MB" name="Adjustment"/>
+<sitq_name code="MC" name="Inspection/Adjustment"/>
+<sitq_name code="MD" name="Inspection/Replacement"/>
+<sitq_name code="ME" name="Disassembly/Inspection/Reassembly"/>
+<sitq_name code="MF" name="Disassembly/Reassembly"/>
+<sitq_name code="MG" name="Inspection/Reassembly"/>
+<sitq_name code="MH" name="Inspection/Replacement/Disassembly"/>
+<sitq_name code="MJ" name="Disassembly/Inspection"/>
+<sitq_name code="MK" name="Inspection/Adjustment/Installation"/>
+<sitq_name code="ML" name="Inspection/Removal/Disassembly"/>
+<sitq_name code="MM" name="Inspection/Installation"/>
+<sitq_name code="NA" name="Specifications"/>
+<sitq_name code="NB" name="Design Specifications"/>
+<sitq_name code="NC" name="Body Dimensions"/>
+<sitq_name code="ND" name="Specifications for Book"/>
+<sitq_name code="PA" name="Special Tools"/>
+<sitq_name code="QA" name="Safety Recall Campaign Bulletin"/>
+<sitq_name code="QB" name="Emissions Recall Campaign Bulletin"/>
+<sitq_name code="QC" name="Product Update Campaign Bulletin"/>
+<sitq_name code="QD" name="Product Improvement Campaign Bulletin"/>
+<sitq_name code="QE" name="MVSS Non-compliance Campaign Bulletin"/>
+<sitq_name code="QF" name="In-warranty Exchange Bulletin"/>
+<sitq_name code="QG" name="Warranty Extension Bulletin"/>
+<sitq_name code="QH" name="Warranty Administration Bulletin"/>
+<sitq_name code="QJ" name="Generic Campaign Bulletin"/>
+<sitq_name code="QK" name="Generic Non-campaign Bulletin"/>
+<sitq_name code="QL" name="Manual Update Bulletin"/>
+<sitq_name code="QM" name="Product Diagnostic and Repair Bulletin"/>
+<sitq_name code="QN" name="General Information Bulletin"/>
+<sitq_name code="QP" name="Special Tools Bulletin"/>
+<sitq_name code="QQ" name="PDI/TQI Bulletin"/>
+<sitq_name code="QR" name="DTC Related Diagnostic and Repair Service Bulletin"/>
+<sitq_name code="RA" name="Safety Recall Campaign ServiceNews Article"/>
+<sitq_name code="RB" name="Emissions Recall Campaign ServiceNews Article"/>
+<sitq_name code="RC" name="Product Update Campaign ServiceNews Article"/>
+<sitq_name code="RD" name="Product Improvement Campaign ServiceNews Article"/>
+<sitq_name code="RE" name="MVSS Non-compliance Campaign ServiceNews Article"/>
+<sitq_name code="RF" name="In-warranty Exchange ServiceNews Article"/>
+<sitq_name code="RG" name="Warranty Extension ServiceNews Article"/>
+<sitq_name code="RH" name="Warranty Administration ServiceNews Article"/>
+<sitq_name code="RJ" name="Generic Campaign ServiceNews Article"/>
+<sitq_name code="RK" name="Generic non-campaign ServiceNews Article"/>
+<sitq_name code="RL" name="Manual Update ServiceNews Article"/>
+<sitq_name code="RM" name="Product Diagnostic and Repair ServiceNews Article"/>
+<sitq_name code="RN" name="General Information ServiceNews Article"/>
+<sitq_name code="RP" name="Special Tools ServiceNews Article"/>
+<sitq_name code="RQ" name="PDI/TQI ServiceNews Article"/>
+<sitq_name code="RR" name="DTC Related Diagnostic and Repair ServiceNews Article"/>
+<sitq_name code="SA" name="Maintenance Checklist"/>
+<sitq_name code="YA" name="Body Repair Outline"/>
+<sitq_name code="YB" name="Paint Repair Outline"/>
+<sitq_name code="YC" name="Body Repair Information"/>
+<sitq_name code="YD" name="Body Repair"/>
+<sitq_name code="YE" name="Installation for BRM"/>
+<sitq_name code="YF" name="Repair Chart for BRM"/>
+<sitq_name code="YG" name="Prevention"/>
+<sitq_name code="ZA" name="Dummy"/>
+<sitq_name code="ZB" name="Service Manual Index"/>
+<sitq_name code="ZC" name="Table of Contents"/>
+<sitq_name code="ZD" name="Circuit Index"/>
+<sitq_name code="ZE" name="Table of Contents for ETM"/>
+</sitq_name_list>

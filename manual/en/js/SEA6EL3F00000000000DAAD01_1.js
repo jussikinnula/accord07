@@ -1,0 +1,31 @@
+with(document) {
+write("<v:group id=\"group1\" class=\"drag\" style=\"position:relative; width:950px; height:719px;\" coordsize=\"950,719\">");
+write("<v:rect id=\"rect1\"class=\"drag\"  style=\"width:950px;height:719px;\">");
+write("<img id=\"img1\" src=\"../img/SEA6EL3F00000000000DAAD01.PNG\" border=\"1\" class=\"drag\" style=\"position:absolute;left:0px;top:0px;width:950px;height:719px;border-color:#ffffff\">");
+write("<p id=\"p1_1\" class=\"drag\" style=\"position:absolute;left:663px;top:458px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>EPS CONTROL UNIT<br><a href=\"javascript:parent.Cts('000000000000067','i000')\"></b>EPS Control Unit Removal/Installation, <br></a><br> in the Shop Manual, P/N 62SEA02B<br></nobr>");
+write("</p>");
+write("<p id=\"p1_2\" class=\"drag\" style=\"position:absolute;left:410px;top:569px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>STEERING GEARBOX<br></b>Steering Gearbox Removal<br><a href=\"javascript:parent.Cts('000000000004434','i000')\"> and Installation,</a><br><a href=\"javascript:parent.Cts('000000000000066','i000')\">Rack End Removal and Installation,</a><br> in the Shop Manual, P/N 62SEA02B<br><a href=\"javascript:parent.Cts('000000000000063','i000')\">Gearbox Mount Cushion Replacement,</a><br> in the Shop Manual, P/N 62SEA02B<br><a href=\"javascript:parent.Cts('000000000000067','i000')\">Rack Guide Removal/Installation,</a><br> in the Shop Manual, P/N 62SEA02B<br></nobr>");
+write("</p>");
+write("<p id=\"p1_3\" class=\"drag\" style=\"position:absolute;left:588px;top:541px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>BATTERY<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_4\" class=\"drag\" style=\"position:absolute;left:172px;top:52px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>DATA LINK<br>CONNECTOR (16P)<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_5\" class=\"drag\" style=\"position:absolute;left:235px;top:16px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>GAUGE CONTROL MODULE<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_6\" class=\"drag\" style=\"position:absolute;left:611px;top:103px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>UNDER-HOOD <br>FUSE/RELAY BOX<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_7\" class=\"drag\" style=\"position:absolute;left:96px;top:103px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>UNDER-DASH <br>FUSE/RELAY BOX<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_8\" class=\"drag\" style=\"position:absolute;left:109px;top:540px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>TORQUE SENSOR<br></b>Torque Sensor<br><a href=\"javascript:parent.Cts('000000000000078','i000')\"> Replacement,</a><br> in the Shop Manual, P/N 62SEA02B<br></nobr>");
+write("</p>");
+write("</v:rect>");
+write("</v:group>");
+}

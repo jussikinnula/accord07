@@ -1,0 +1,37 @@
+with(document) {
+write("<v:group id=\"group1\" class=\"drag\" style=\"position:relative; width:950px; height:956px;\" coordsize=\"950,956\">");
+write("<v:rect id=\"rect1\"class=\"drag\"  style=\"width:950px;height:956px;\">");
+write("<img id=\"img1\" src=\"../img/SEA3E00R31100000000YDAD35.PNG\" border=\"1\" class=\"drag\" style=\"position:absolute;left:0px;top:0px;width:950px;height:956px;border-color:#ffffff\">");
+write("<p id=\"p1_1\" class=\"drag\" style=\"position:absolute;left:531px;top:101px;font-weight:normal;font-size:8.7pt;\">");
+write("<nobr><b>WHEELHOUSE<br>UPPER MEMBER<br></b>(reused.)<br></nobr>");
+write("</p>");
+write("<p id=\"p1_2\" class=\"drag\" style=\"position:absolute;left:402px;top:307px;font-weight:normal;font-size:8.7pt;\">");
+write("<nobr><b>FRONT PILLAR<br>LOWER STIFFENER<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_3\" class=\"drag\" style=\"position:absolute;left:551px;top:214px;font-weight:normal;font-size:8.7pt;\">");
+write("<nobr><b>FRONT PILLAR<br>UPPER STIFFENER<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_4\" class=\"drag\" style=\"position:absolute;left:301px;top:522px;font-weight:normal;font-size:8.7pt;\">");
+write("<nobr><b>FRONT PILLAR<br>SEPARATOR<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_5\" class=\"drag\" style=\"position:absolute;left:453px;top:909px;font-weight:normal;font-size:8.7pt;\">");
+write("<nobr><b>REINFORCEMENT<br>FRONT EXTENSION<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_6\" class=\"drag\" style=\"position:absolute;left:571px;top:761px;font-weight:normal;font-size:8.7pt;\">");
+write("<nobr><b>SIDE SILL<br>REINFORCEMENT<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_7\" class=\"drag\" style=\"position:absolute;left:560px;top:861px;font-weight:normal;font-size:8.7pt;\">");
+write("<nobr><b>FRONT PILLAR<br>LOWER STIFFENER<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_8\" class=\"drag\" style=\"position:absolute;left:773px;top:788px;font-weight:normal;font-size:8.7pt;\">");
+write("<nobr><b>OUTER PANEL<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_9\" class=\"drag\" style=\"position:absolute;left:136px;top:564px;font-weight:normal;font-size:8.7pt;\">");
+write("<nobr><b>WHEELHOUSE UPPER<br>MEMBER EXTENSION<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_10\" class=\"drag\" style=\"position:absolute;left:96px;top:279px;font-weight:normal;font-size:8.7pt;\">");
+write("<nobr><b>WHEELHOUSE UPPER<br>MEMBER SEPARATOR<br></b></nobr>");
+write("</p>");
+write("</v:rect>");
+write("</v:group>");
+}

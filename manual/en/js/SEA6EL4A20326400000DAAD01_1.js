@@ -1,0 +1,34 @@
+with(document) {
+write("<v:group id=\"group1\" class=\"drag\" style=\"position:relative; width:950px; height:799px;\" coordsize=\"950,799\">");
+write("<v:rect id=\"rect1\"class=\"drag\"  style=\"width:950px;height:799px;\">");
+write("<img id=\"img1\" src=\"../img/SEA6EL4A20326400000DAAD01.PNG\" border=\"1\" class=\"drag\" style=\"position:absolute;left:0px;top:0px;width:950px;height:799px;border-color:#ffffff\">");
+write("<p id=\"p1_1\" class=\"drag\" style=\"position:absolute;left:2px;top:728px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>FUEL RAIL<br><a href=\"javascript:parent.Cts('000000000002030','i000')\"></b>Replacement,<br></a><br> in the Shop Manual Supplement, P/N 62SEA05<br></nobr>");
+write("</p>");
+write("<p id=\"p1_2\" class=\"drag\" style=\"position:absolute;left:265px;top:712px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>FUEL RETURN LINE<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_3\" class=\"drag\" style=\"position:absolute;left:81px;top:681px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>FUEL RAIL PRESSURE<br>(FRP) SENSOR<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_4\" class=\"drag\" style=\"position:absolute;left:438px;top:712px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>FUEL FEED LINE<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_5\" class=\"drag\" style=\"position:absolute;left:665px;top:537px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>QUICK-CONNECT FITTING<br><a href=\"javascript:parent.Cts('000000000002024','i000')\"></b>Precaution,</a><br> in the Shop Manual<br> Supplement, P/N 62SEA05<br><a href=\"javascript:parent.Cts('000000000002025','i000')\">Removal,</a><br> in the Shop Manual<br> Supplement, P/N 62SEA05<br><a href=\"javascript:parent.Cts('000000000002026','i000')\">Installation,</a><br> in the Shop Manual<br> Supplement, P/N 62SEA05<br></nobr>");
+write("</p>");
+write("<p id=\"p1_6\" class=\"drag\" style=\"position:absolute;left:27px;top:253px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>FUEL RETURN HOSE<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_7\" class=\"drag\" style=\"position:absolute;left:83px;top:203px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>HIGH PRESSURE PIPES<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_8\" class=\"drag\" style=\"position:absolute;left:824px;top:365px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>FUEL FILL CAP<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_9\" class=\"drag\" style=\"position:absolute;left:712px;top:16px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>FUEL TANK<br><a href=\"javascript:parent.Cts('000000000002032','i000')\"></b>Draining,</a><br> in the Shop Manual<br> Supplement, P/N 62SEA05<br><a href=\"javascript:parent.Cts('000000000002031','i000')\">Replacement,</a><br> in the Shop Manual<br> Supplement, P/N 62SEA05<br></nobr>");
+write("</p>");
+write("</v:rect>");
+write("</v:group>");
+}

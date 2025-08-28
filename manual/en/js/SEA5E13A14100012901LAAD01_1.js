@@ -1,0 +1,37 @@
+with(document) {
+write("<v:group id=\"group1\" class=\"drag\" style=\"position:relative; width:950px; height:831px;\" coordsize=\"950,831\">");
+write("<v:rect id=\"rect1\"class=\"drag\"  style=\"width:950px;height:831px;\">");
+write("<img id=\"img1\" src=\"../img/SEA5E13A14100012901LAAD01.PNG\" border=\"1\" class=\"drag\" style=\"position:absolute;left:0px;top:0px;width:950px;height:831px;border-color:#ffffff\">");
+write("<p id=\"p1_1\" class=\"drag\" style=\"position:absolute;left:421px;top:16px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>ROTOR<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_2\" class=\"drag\" style=\"position:absolute;left:518px;top:68px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>BEARING<br>RETAINER<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_3\" class=\"drag\" style=\"position:absolute;left:643px;top:118px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>FRONT BEARING<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_4\" class=\"drag\" style=\"position:absolute;left:769px;top:181px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>DRIVE-END<br>HOUSING<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_5\" class=\"drag\" style=\"position:absolute;left:815px;top:270px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>PULLEY<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_6\" class=\"drag\" style=\"position:absolute;left:858px;top:326px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>PULLEY<br>LOCKNUT<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_7\" class=\"drag\" style=\"position:absolute;left:46px;top:493px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>TERMINAL<br>INSULATOR<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_8\" class=\"drag\" style=\"position:absolute;left:177px;top:684px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>BRUSH HOLDER<br>ASSEMBLY<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_9\" class=\"drag\" style=\"position:absolute;left:398px;top:789px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>REAR HOUSING<br>ASSEMBLY<br></b></nobr>");
+write("</p>");
+write("<p id=\"p1_10\" class=\"drag\" style=\"position:absolute;left:122px;top:594px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>END COVER<br></b></nobr>");
+write("</p>");
+write("</v:rect>");
+write("</v:group>");
+}

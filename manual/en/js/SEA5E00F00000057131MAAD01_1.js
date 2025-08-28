@@ -1,0 +1,31 @@
+with(document) {
+write("<v:group id=\"group1\" class=\"drag\" style=\"position:relative; width:950px; height:991px;\" coordsize=\"950,991\">");
+write("<v:rect id=\"rect1\"class=\"drag\"  style=\"width:950px;height:991px;\">");
+write("<img id=\"img1\" src=\"../img/SEA5E00F00000057131MAAD01.PNG\" border=\"1\" class=\"drag\" style=\"position:absolute;left:0px;top:0px;width:950px;height:991px;border-color:#ffffff\">");
+write("<p id=\"p1_1\" class=\"drag\" style=\"position:absolute;left:469px;top:885px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>BALL JOINT BOOT<br></b>Inspect for damage<br>and deterioration.<br></nobr>");
+write("</p>");
+write("<p id=\"p1_2\" class=\"drag\" style=\"position:absolute;left:323px;top:830px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>TIE-ROD LOCKNUT<br></b>Check for loose locknut.<br></nobr>");
+write("</p>");
+write("<p id=\"p1_3\" class=\"drag\" style=\"position:absolute;left:243px;top:310px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>BOOT<br></b>Inspect for damage and deterioration.<br></nobr>");
+write("</p>");
+write("<p id=\"p1_4\" class=\"drag\" style=\"position:absolute;left:64px;top:728px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>STEERING GEARBOX<br></b>Inspect for loose mounting hardware.<br></nobr>");
+write("</p>");
+write("<p id=\"p1_5\" class=\"drag\" style=\"position:absolute;left:706px;top:917px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>TIE-ROD END BALL JOINT<br></b>Inspect for faulty movement <br>and damage.<br></nobr>");
+write("</p>");
+write("<p id=\"p1_6\" class=\"drag\" style=\"position:absolute;left:681px;top:418px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>STEERING COLUMN<br></b>Inspect for loose<br>mounting hardware.<br></nobr>");
+write("</p>");
+write("<p id=\"p1_7\" class=\"drag\" style=\"position:absolute;left:695px;top:624px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>STEERING JOINT<br></b>Check for a loose joint bolt, or<br>faulty movement.<br></nobr>");
+write("</p>");
+write("<p id=\"p1_8\" class=\"drag\" style=\"position:absolute;left:64px;top:759px;font-weight:normal;font-size:8.6pt;\">");
+write("<nobr><b>GEARBOX MOUNT CUSHION<br></b>Inspect for deterioration.<br></nobr>");
+write("</p>");
+write("</v:rect>");
+write("</v:group>");
+}
